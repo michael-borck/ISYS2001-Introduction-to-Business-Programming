@@ -49,6 +49,9 @@ Thumbs.db
 *.mp3
 *.mp4
 *.zip
+*.png
+*.jpg
+*.webm
 
 
 # ...with the following exceptions:
