@@ -1,0 +1,168 @@
+---
+title: Business Simulations
+subtitle: ISYS2001 Introduction to Business Programming
+format:
+    pdf:
+      toc: false
+      colorlinks: true
+    docx:
+      toc: true
+      highlight-style: github
+    html:
+      toc: true
+      toc-expand: 1
+      embed-resources: true
+---
+
+**Due Date:  Friday 24 May 23:59**
+
+## Overview
+
+In this assignment, you will utilise the [Simulacra python package](https://github.com/teaching-repositories/simulacra) to conduct
+simulations across various business scenarios. You will select a simulation
+type, set parameters to model realistic situations, visualise outcomes, analyse
+the effects of parameter changes, and extract insights to support
+decision-making processes. Your work will be compiled in a Google Colab Notebook
+and saved to a dedicated GitHub repository.
+
+## Objectives
+
+- Understand and apply simulation techniques in business contexts.
+- Analyse the impact of different variables in simulation models.
+- Develop skills in data visualisation and interpretation.
+
+## Assignment Tasks
+
+#### 1. Setup:
+   - Create a new **PRIVATE** GitHub repository specifically for this assignment.
+   - Clone the repository in your Google Colab environment to ensure all changes
+     are version-controlled.
+   - Install the Simulacra package from our class GitHub repository. Follow the
+     provided setup instructions to prepare your environment for running
+     simulations.
+
+#### 2. Choose Your Simulation:
+   - Decide which simulation you want to explore, Choose **one** simulation:
+     - Stock Market Simulation
+     - Resource Fluctuations Simulation
+     - Product Popularity Simulation
+
+#### 3. Familiarise Yourself with the Simulation:
+   - Read the detailed documentation for your selected simulation type within
+     the Simulacra package. Run the related [starter notebook](https://github.com/teaching-repositories/simulacra-starters/tree/main) Understand the role and typical range of each
+     parameter.
+
+#### 4. Execute the Simulation:
+   - Instantiate your chosen simulation class with initial parameters reflecting
+     a realistic scenario.
+   - Execute the simulation by calling the `run_simulation()` method and collect
+     the output data.
+
+#### 5. Visualise the Simulation Data:
+   - Use various plotting techniques (e.g., line plots, bar charts) to visualise
+     key trends and dynamics within the data.
+   - Highlight any significant effects due to specific events or interventions,
+     if relevant.
+
+#### 6. Analytical Experimentation:
+   - Modify parameters to explore how changes influence simulation outcomes.
+   - Analyse key metrics derived from the data (like peak values, averages,
+     variability).
+   - Model potential strategies or interventions and assess their impact.
+
+#### 7. Compile and Report Your Findings:
+   - Assemble your work into a Jupyter Notebook that includes:
+     - Code implementations along with detailed comments.
+     - Visualisations with captions explaining each figure.
+     - A comprehensive analysis section discussing parameter choices, observed
+       results, and their implications.
+     - A reflection on the simulation's limitations and suggestions for improvement.
+   - Commit regularly to your GitHub repository to maintain a log of your
+     progress.
+   - Submit a zip of your GitHub repository to capture all logs for analysis of
+     your commit frequency and development progress.
+
+## Starter Notebooks
+
+Here is the [Simulacra starter notebooks GitHub repository](https://github.com/teaching-repositories/simulacra-starters/tree/main).  You have three possible starter notebooks to choose from: the [Product Popularity Simulator](https://github.com/teaching-repositories/simulacra-starters/blob/main/product_popularity_simulation_starter.ipynb), the [Stock Market Simulator](https://github.com/teaching-repositories/simulacra-starters/blob/main/stock_market_simulation_starter.ipynb), and the [Resource Fluctuations Simulator](https://github.com/teaching-repositories/simulacra-starters/blob/main/resource_flucuations_simulation_starter.ipynb). Below is a general overview of how to utilize these notebooks effectively:
+
+**Getting Started**:
+
+1. **Select Your Simulation**: Choose the notebook corresponding to the simulation you want to explore: Product Popularity, Stock Market, or Resource Fluctuations.
+
+2. **Run the Simulation**: Each notebook contains classes or functions to run the simulation. Follow the instructions provided to generate simulated data and explore various scenarios.
+
+3. **Visualize the Results**: Utilize the plotting functions within each notebook to graph and analyze the simulated data. These visualizations help you understand trends and patterns in the simulated scenarios.
+
+**Objectives**:
+
+- Analyze different aspects of the chosen simulation, such as consumer behavior, market trends, or resource management.
+- Develop skills in data analysis and interpretation within specific domains.
+- Enhance your programming proficiency, especially in utilizing Python libraries for simulation and visualization.
+
+**Using Google Colab**:
+
+- These notebooks are designed to be run on Google Colab, a cloud-based platform for executing Python code. You can work on these notebooks without any specific setups on your local machine.
+- Remember to save a copy of the notebook in your Aasignment GitHub rep[ository to preserve your work and data.
+
+**Preparation**:
+
+- Familiarize yourself with the notebook's user interface and features, especially if you're new to Google Colab.
+- Review the provided code snippets and accompanying explanatory texts within the notebook to understand how the simulation and plotting functions work.
+
+
+
+## Submission Instructions
+
+- Complete all sections of the assessment.
+- The report and code are required to be a notebook that can execute in a Google Colab environemnt.
+- Download a zip of your private repository and submit via the submission link on the units Blacklboard site.
+- Submit your completed assessment via the designated upload links by 23:59 Friday 24th May 2024.
+
+
+
+## Evaluation Criteria
+
+- **Functionality and Code Clarity:** Clear, efficient, and well-documented
+  code.
+- **Visualisation Quality:** Accurate and insightful visual representations of
+  the data.
+- **Depth of Analysis:** Thorough exploration and nuanced understanding of how
+  parameter variations affect outcomes.
+- **Reflective Discussion:** Insightful discussion on the real-world
+  applicability and limitations of the models.
+- **Overall Presentation:** Coherence, logical structure, and professionalism in
+  the presentation of the report.
+
+| Criteria                            | Fail (Unsatisfactory)                                                                                      | Pass (Satisfactory)                                                                                       | Credit (Good)                                                                                                        | Distinction (Very Good)                                                                                                               | High Distinction (Excellent)                                                                                                                      |
+|-------------------------------------|------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Functionality and Code Clarity**  | Code does not execute, contains multiple errors, and lacks comments.                                        | Code executes with minor issues, meets basic requirements, and has minimal comments.                      | Code is mostly correct, with some advanced elements; well-commented to explain the functionality.                    | Code runs perfectly, includes advanced features, and is clearly commented to explain complex logic.                                   | Code not only runs flawlessly but also displays innovative approaches, exceptional efficiency, and is exemplary in clarity and structure. |
+| **Visualisation Quality**            | Visualisations are incorrect or missing.                                                                   | Visualisations are correct but basic and lack clarity or detail.                                          | Visualisations are correct, clear, and provide useful insights into the data.                                        | Visualisations are detailed, very clear, and enhance understanding of the simulation outcomes with thoughtful layouts.                 | Visualisations are outstanding, providing deep insights and are professionally presented with exceptional attention to detail.               |
+| **Depth of Analysis**                | Analysis is missing or incorrect. Demonstrates a lack of understanding.                                    | Analysis is correct but superficial. Shows basic understanding without significant insight.                | Good analysis that correctly interprets data and explores effects of parameter changes with some depth.               | Very thorough analysis, showing a deep understanding of simulation dynamics and thoughtful exploration of parameter impacts.           | Exceptional analysis that offers profound insights, linking simulation results to real-world implications and theoretical concepts.       |
+| **Reflective Discussion**            | Lacks reflection; no consideration of the limitations or applicability of the simulations.                  | Limited reflection on the limitations and real-world applicability of the simulations.                     | Reflects on limitations and applicability, making reasonable suggestions for improvement.                            | In-depth reflection on limitations and applicability; offers well-considered improvements and shows understanding of broader context. | Extensive and insightful reflection, critically assessing all aspects of the simulations and suggesting innovative improvements.         |
+| **Overall Presentation and Engagement** | Work is disorganised, poorly presented, and lacks evidence of version control engagement.                    | Work is organised with minor errors in presentation and basic use of GitHub with infrequent commits.        | Work is well-organised, clear, presented in a logically structured manner with regular commits and clear GitHub usage. | Work is very well-organised, presented with high professionalism, excellent use of GitHub including branch management.                  | Work is exceptionally presented, showcasing outstanding professionalism, narrative, and exemplary GitHub practices including regular commits and branches. |
+
+
+## Additional Guidelines
+
+- **Collaboration Policy:** Collaboration among students is encouraged to foster
+  peer learning, however, all submitted work must be independently created.
+- **Exploratory Approach:** You are encouraged to explore deeper into any specific
+  aspects of the simulations that pique your interest. Investigate additional
+  questions or scenarios beyond the basic assignment requirements.
+
+{{< pagebreak >}}
+
+## Appendix A: Resource Fluctuations Simulation
+
+{{< embed resource_fluctuations_simulation.qmd >}}
+{{< pagebreak >}}
+
+## Appendix B: Stock Market Simulation
+
+{{< embed stock_market_simulation.qmd >}}
+{{< pagebreak >}}
+
+## Appendix C: Product Popularity Simulation
+
+{{< embed product_popularity_simulation.qmd >}}

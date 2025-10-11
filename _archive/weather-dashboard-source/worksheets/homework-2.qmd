@@ -1,0 +1,74 @@
+---
+title: "Understanding the Weather Dashboard Project: WeatherVista"
+subtitle: "Clear Skies Ahead: Understanding the Weather Dashboard Project"
+author: "Michael Borck"
+format:
+  pdf:
+    toc: false
+    number-sections: false
+    colorlinks: true
+    encoding: "UTF-8"
+  docx:
+    toc: false
+    number-sections: false
+    highlight-style: github
+  html:
+    toc: true
+    toc-expand: 2
+    embed-resources: true
+---
+
+## Introduction
+
+Welcome to the Weather Dashboard Project: WeatherVista! In this project, you will design and develop a web-based application that provides users with current weather conditions and temperature trends for a selected location. The Weather Dashboard will utilize the OpenWeatherMap API to fetch real-time weather data and display it in a user-friendly format.
+
+The purpose of this worksheet is to help you understand the project objectives, target audience, technical requirements, and deliverables. By completing this worksheet, you will gain a deeper understanding of the project's requirements and be able to break down the project into manageable tasks.
+
+**Worksheet: Weather Dashboard Project: WeatherVista**
+
+**Objective:** To understand the project objectives, target audience, technical requirements, and deliverables of the Weather Dashboard project.
+
+**Instructions:** Complete the following sections to demonstrate your understanding of the project.
+
+**Note:** This worksheet is designed to help you prepare for the project and ensure that you have a clear understanding of the requirements and objectives.
+
+# Introduction
+
+This worksheet is designed to help students understand the Weather Dashboard project and its objectives, target audience, technical requirements, and deliverables. It also includes additional questions to encourage critical thinking and problem-solving.
+
+### Part 1: Project Overview
+
+1. What is the main goal of the Weather Dashboard project?
+2. What is the purpose of the Weather Dashboard application?
+
+### Part 2: Project Objectives
+
+1. What are the main objectives of the Weather Dashboard project?
+2. List the main features of the Weather Dashboard application:
+3. What are the technical requirements for building the Weather Dashboard?
+
+## Part 3: Target Audience
+1. Who is the target audience for the Weather Dashboard application?
+2. How will the Weather Dashboard benefit each of the target audience groups?
+
+## Part 4: Technical Requirements
+
+1. What programming language will be used to build the Weather Dashboard?
+2. What GUI framework will be used to build the Weather Dashboard?
+3. What API will be used to fetch weather data for the Weather Dashboard?
+
+## Part 5: Deliverables
+
+1. What are the deliverables for the Weather Dashboard project?
+2. What is the purpose of the written report and presentation?
+
+## Part 6: Breaking Down the Project
+
+1. What are the steps to break down the Weather Dashboard project into manageable tasks?
+2. What are the key functionalities that need to be included in the Weather Dashboard?
+
+## Additional Questions
+
+1. What are some potential challenges that may arise during the development of the Weather Dashboard?
+2. How can you ensure that the Weather Dashboard meets the needs of the target audience?
+

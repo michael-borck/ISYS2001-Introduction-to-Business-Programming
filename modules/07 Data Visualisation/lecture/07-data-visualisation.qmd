@@ -1,0 +1,684 @@
+---
+title: "Data Handling and Visualisation"
+subtitle: "Weather Adventures in Python Land"
+author: "Michael Borck"
+execute:
+  echo: false
+jupyter: python3
+format: 
+  pptx:
+    reference-doc: ../../../_assets/template.pptx
+  pdf:
+      toc: false
+      colorlinks: true
+  docx:
+      toc: false
+      highlight-style: github
+  html:
+      toc: true
+      toc-expand: 2
+      embed-resources: true
+---
+# Copyright Information
+
+![](../../../_assets/curtin-copy-right.png)
+
+# Acknowledge of Country
+I acknowledge the traditional custodians of the land on which I work and live,
+and recognise their continuing connection to land, water and community. I pay
+respect to elders past, present and emerging.
+
+![](../../../_assets/ack_country.png)
+
+# What is Data visualisation?
+
+Data visualisation is the graphical representation of data and information.
+
+- It transforms raw data into visual formats like charts, graphs, and maps
+- Helps in understanding patterns, trends, and relationships in data
+- Makes complex information more accessible and easier to understand
+- Essential tool in data analysis, decision making, and communication
+
+::: {.notes}
+**Aim**
+The aim of this slide is to provide an overview of what data visualisation is and why it is important.
+
+**Context**
+This slide forms the foundation for the rest of the presentation by introducing the concept of data visualisation. Subsequent slides will delve into specific tools and techniques for data visualisation in Python, such as using Pandas for data manipulation and Matplotlib for creating various types of plots.
+
+**It transforms raw data into visual formats like charts, graphs, and maps**
+Data visualisation involves taking raw data, which can be numerical or categorical, and presenting it in a visual format. This transformation allows for a clearer and more intuitive understanding of the data. Common visual formats include charts (e.g., bar charts, pie charts), graphs (e.g., line graphs, scatter plots), and maps (e.g., heat maps, choropleth maps). By representing data visually, patterns, trends, and outliers become more apparent and easier to identify.
+
+**Helps in understanding patterns, trends, and relationships in data**
+One of the primary benefits of data visualisation is its ability to reveal patterns, trends, and relationships within the data that may not be immediately evident from raw numbers or tables. By presenting data in a visual format, it becomes easier to spot correlations, compare values, and identify outliers. This insight can lead to a deeper understanding of the data and help in making more informed decisions based on the identified patterns and trends.
+
+**Makes complex information more accessible and easier to understand**
+Data visualisation is a powerful tool for making complex information more accessible to a wider audience. By presenting data in a visual format, it becomes easier for people to grasp the key points and insights without needing to have a deep understanding of the underlying data or statistical concepts. Well-designed visualisations can break down complex ideas into more digestible pieces, making the information more engaging and easier to understand for both technical and non-technical audiences.
+
+**Essential tool in data analysis, decision making, and communication**
+Data visualisation plays a crucial role in various aspects of working with data. In data analysis, visualisations help analysts explore and make sense of the data, identifying patterns and relationships that can guide further investigation. When it comes to decision making, visualisations provide a clear and persuasive way to present findings and support recommendations. Finally, in communication, data visualisations are an effective tool for conveying complex information to stakeholders, team members, and the general public in a way that is both engaging and easy to understand.
+:::
+
+# Tools for Data visualisation in Python
+
+- Pandas: Data manipulation and analysis
+- Matplotlib: Creating static, animated, and interactive visualisations
+- Focus of this presentation: Pandas for data handling, Matplotlib for plotting
+
+::: {.notes}
+**Aim**
+This slide aims to introduce the key Python libraries for data visualisation that will be covered in the presentation: Pandas for data manipulation and Matplotlib for creating visualisations.
+
+**Context**
+After introducing the concept of data visualisation and its importance, this slide focuses on the specific tools in Python that will be used throughout the presentation. The following slides will dive deeper into each library, starting with an introduction to Pandas and its data structures, followed by an exploration of Matplotlib and its various plot types.
+
+**Pandas: Data manipulation and analysis**
+Pandas is a powerful Python library for data manipulation and analysis. It provides data structures, such as DataFrames and Series, which allow for efficient handling and processing of structured data. With Pandas, you can easily read data from various sources, clean and transform data, and perform a wide range of data operations, including filtering, sorting, grouping, and aggregating.
+
+**Matplotlib: Creating static, animated, and interactive visualisations**
+Matplotlib is a fundamental plotting library in Python, offering a wide range of functionalities for creating static, animated, and interactive visualisations. It provides a MATLAB-like interface for creating plots, including line plots, scatter plots, bar plots, histograms, and more. Matplotlib allows for fine-grained control over plot elements, such as lines, markers, labels, titles, and axes, enabling users to create customised and publication-quality figures.
+
+**Focus of this presentation: Pandas for data handling, Matplotlib for plotting**
+This presentation will primarily focus on using Pandas for data manipulation and Matplotlib for creating visualisations. The combination of these two libraries forms a powerful toolset for data analysis and visualisation in Python. Throughout the presentation, we will explore the key features and functionalities of Pandas and Matplotlib, providing examples and practical demonstrations to help you understand how to effectively use these libraries in your own data analysis and visualisation projects.
+:::
+
+# Introduction to Pandas
+
+Pandas is a powerful Python library for data manipulation and analysis.
+
+- Provides data structures for efficiently storing and manipulating large datasets
+- Offers tools for reading and writing data in various formats (CSV, Excel, SQL databases)
+- Enables data cleaning, transformation, merging, and aggregation
+- Integrates well with other scientific Python libraries
+
+```python
+import pandas as pd
+```
+
+```{python}
+import pandas as pd
+```
+
+::: {.notes}
+**Aim**
+This slide aims to introduce Pandas, a powerful Python library for data manipulation and analysis, and highlight its key features and capabilities.
+
+**Context**
+After discussing data visualisation and its importance, the presentation moves on to introduce Pandas, a fundamental tool for data manipulation in Python. The slide sets the stage for subsequent slides that delve into specific aspects of Pandas, such as DataFrames, data exploration, and reading/writing data.
+
+**Provides data structures for efficiently storing and manipulating large datasets**
+Pandas offers two primary data structures: Series (1-dimensional) and DataFrame (2-dimensional), which are optimised for fast and efficient data manipulation. These structures can handle large datasets with millions of rows and columns, making Pandas an essential tool for working with big data in Python.
+
+**Offers tools for reading and writing data in various formats (CSV, Excel, SQL databases)**
+Pandas provides functions for seamlessly reading data from and writing data to various file formats and databases. With just a few lines of code, you can load data from CSV files, Excel spreadsheets, SQL databases, and more. This flexibility allows you to work with data from diverse sources and integrate Pandas into your existing data pipelines.
+
+**Enables data cleaning, transformation, merging, and aggregation**
+Pandas offers a wide range of functions and methods for cleaning, transforming, and reshaping data. You can easily handle missing values, filter rows based on conditions, apply custom functions to columns, merge datasets based on common columns, and perform complex data aggregations. These capabilities make Pandas a powerful tool for data preprocessing and wrangling.
+
+**Integrates well with other scientific Python libraries**
+Pandas seamlessly integrates with other popular Python libraries for scientific computing and data visualisation, such as NumPy for numerical operations and Matplotlib for creating plots and charts. This interoperability allows you to leverage the strengths of multiple libraries in your data analysis workflows, creating a cohesive and efficient Python data science ecosystem.
+:::
+
+# Understanding DataFrames
+
+A DataFrame is the primary data structure in Pandas.
+
+- Two-dimensional labeled data structure
+- Similar to a spreadsheet or SQL table
+- Consists of rows and columns
+- Each column can have a different data type (numeric, string, datetime, etc.)
+
+::: {.notes}
+**Aim**
+This slide aims to introduce the concept of DataFrames in Pandas and explain their structure and characteristics.
+
+**Context**
+After an introduction to Pandas, this slide focuses on DataFrames as a fundamental data structure in Pandas. It is followed by an example of creating a DataFrame and a review of data structures before moving on to data exploration and reading/writing data with Pandas.
+
+**Two-dimensional labeled data structure** DataFrames are two-dimensional data structures in Pandas, meaning they have both rows and columns. Each row represents an observational unit, such as a person or a transaction, while each column represents a variable or feature associated with those observations. The rows and columns are labeled, allowing for easy identification and access to specific data points.
+
+**Similar to a spreadsheet or SQL table** DataFrames can be thought of as similar to spreadsheets or SQL tables. They have a tabular structure with rows and columns, making them intuitive for users familiar with these common data formats. However, DataFrames offer more flexibility and built-in functionality for data manipulation and analysis compared to traditional spreadsheets or SQL tables.
+
+**Consists of rows and columns** A DataFrame is composed of rows and columns, forming a rectangular grid of data. Each row is identified by a unique label called an index, which can be either an integer or a custom label. The columns are also labeled with column names, allowing for easy reference to specific variables or features within the DataFrame.
+
+**Each column can have a different data type (numeric, string, datetime, etc.)** One of the key features of DataFrames is their ability to handle different data types within the same structure. Each column in a DataFrame can have its own data type, such as numeric (integer or float), string, boolean, datetime, or even more complex types like lists or dictionaries. This flexibility allows for the efficient storage and manipulation of diverse data sets.
+:::
+
+# Example: Creating a DataFrame
+
+```python
+data = {
+    'date': ['2024-01-01', '2024-01-02', '2024-01-03', '2024-01-04', '2024-01-05'],
+    'temperature': [5, 7, 6, 5, 8],
+    'precipitation': [0.1, 0.0, 0.3, 0.4, 0.2]
+}
+df = pd.DataFrame(data)
+print(df)
+```
+```{python}
+data = {
+    'date': ['2024-01-01', '2024-01-02', '2024-01-03', '2024-01-04', '2024-01-05'],
+    'temperature': [5, 7, 6, 5, 8],
+    'precipitation': [0.1, 0.0, 0.3, 0.4, 0.2]
+}
+df = pd.DataFrame(data)
+```
+
+::: {.notes}
+**Aim**
+To provide a concrete example of creating a DataFrame using Pandas, illustrating the process and syntax.
+
+**Context**
+Following an introduction to Pandas and an explanation of DataFrames, this slide demonstrates how to create a DataFrame in practice. It builds upon the theoretical foundation and prepares the audience for upcoming slides on data exploration and manipulation using Pandas.
+:::
+
+# Review - Data Structures
+```python
+# Related data
+date = ['2024-01-01', '2024-01-02', '2024-01-03', '2024-01-04', '2024-01-05'],
+temperature = [5, 7, 6],
+precipitation = [0.1, 0.0, 0.3]
+
+# Combine for a cohesive, accessible, and efficient data structure
+data = {
+    'date': ['2024-01-01', '2024-01-02', '2024-01-03', '2024-01-04', '2024-01-05'],
+    'temperature': [5, 7, 6],
+    'precipitation': [0.1, 0.0, 0.3]
+}
+```
+
+::: {.notes}
+**Aim**
+Review the key data structures covered in the presentation so far.
+
+**Context**
+This slide serves as a recap of the data structures introduced in the previous slides, including DataFrames. It bridges the content covered so far with the upcoming topics on data exploration and manipulation using Pandas and data visualisation with Matplotlib.
+:::
+
+# Pandas Data exploration
+
+```python
+# Basic data exploration
+print(df.describe())
+print(df.info())
+
+# Accessing specific columns
+print(df['temperature'].mean())
+print(df['precipitation'].max())
+```
+
+::: {.notes}
+**Aim**
+This slide aims to introduce and explain data exploration using the Pandas library in Python.
+
+**Context**
+The slide follows an introduction to Pandas and DataFrames, providing a natural progression into exploring data with Pandas. It precedes slides on reading and writing data with Pandas and an introduction to Matplotlib for data visualisation.
+:::
+
+# Reading and Writing Data with Pandas
+
+- Working with CSV files:
+  ```python
+  df = pd.read_csv('filename.csv')
+  ```
+
+- Handling Excel files:
+  ```python
+  df = pd.read_excel('filename.xlsx')
+  ```
+
+- Writing data to files:
+  ```python
+  df.to_csv('output.csv', index=False)
+  ```
+
+- Fetching data from web sources (next lecture)
+
+::: {.notes}
+**Aim**
+This slide aims to introduce the various methods for reading and writing data using the Pandas library in Python.
+
+**Context**
+Having covered the basics of Pandas and DataFrames in the previous slides, this slide focuses on the practical application of loading and saving data using Pandas. The next slide will introduce fetching data from web sources, further expanding on data acquisition methods.
+
+**Working with CSV files:**
+Comma-Separated Values (CSV) files are a common format for storing tabular data. Pandas provides the `read_csv()` function to read CSV files into a DataFrame. You can specify various parameters such as the file path, delimiter, header row, and data types. Similarly, the `to_csv()` function allows you to write a DataFrame to a CSV file, giving you control over the file path, delimiter, and other options.
+
+**Handling Excel files:**
+Excel files (`.xls` and `.xlsx`) are widely used for storing and sharing data. Pandas offers the `read_excel()` function to read Excel files into a DataFrame. You can specify the file path, sheet name, and other parameters to customise the data loading process. To write a DataFrame to an Excel file, use the `to_excel()` function, which allows you to specify the file path, sheet name, and additional options for formatting and styling.
+
+**Writing data to files:**
+In addition to CSV and Excel files, Pandas supports writing data to various other file formats. The `to_json()` function allows you to write a DataFrame to a JSON file, while the `to_html()` function generates an HTML representation of the DataFrame. You can also write to other formats like HDF5 (`to_hdf()`), Feather (`to_feather()`), and Parquet (`to_parquet()`), depending on your specific requirements and the libraries you have installed.
+:::
+
+# Introduction to Matplotlib
+
+Matplotlib is a comprehensive library for creating static, animated, and interactive visualisations in Python.
+
+- Provides a MATLAB-like interface for creating plots
+- Offers fine-grained control over every aspect of a plot
+- Can create a wide variety of plot types (line plots, scatter plots, bar charts, etc.)
+- Integrates well with Pandas for visualising DataFrames
+
+::: {.notes}
+**Aim**
+This slide aims to introduce Matplotlib, a powerful Python library for creating visualisations, and highlight its key features and capabilities.
+
+**Context**
+Having discussed data visualisation, its importance, and introduced Pandas for data manipulation, the presentation now shifts focus to Matplotlib. This library builds upon the data structures provided by Pandas, enabling users to create a wide range of plots and charts to effectively visualise their data.
+
+**Provides a MATLAB-like interface for creating plots**
+Matplotlib's interface is designed to be familiar to users of MATLAB, a popular numerical computing environment. This similarity makes it easier for users with MATLAB experience to transition to using Matplotlib in Python. The library provides a set of functions and methods that closely mirror MATLAB's plotting commands, allowing users to create plots with minimal code.
+
+**Offers fine-grained control over every aspect of a plot**
+One of Matplotlib's strengths is its ability to provide precise control over every element of a plot. Users can customise the plot's appearance, including line styles, colours, markers, labels, titles, and axes properties. This level of control enables users to create highly personalised and publication-quality visualisations that effectively communicate their data.
+
+**Can create a wide variety of plot types (line plots, scatter plots, bar charts, etc.)**
+Matplotlib supports a broad range of plot types, catering to various data visualisation needs. Users can create line plots to show trends over time, scatter plots to visualise relationships between variables, and bar charts to compare categorical data. The library also supports more advanced plot types, such as histograms, box plots, and heatmaps, providing flexibility in visualising different types of data.
+
+**Integrates well with Pandas for visualising DataFrames**
+Matplotlib seamlessly integrates with Pandas, allowing users to create plots directly from Pandas DataFrames. This integration simplifies the process of visualising data stored in DataFrames, as users can access the plotting functions directly through the DataFrame object. By leveraging the powerful data manipulation capabilities of Pandas and the visualisation tools provided by Matplotlib, users can efficiently explore and present their data.
+:::
+
+# First Plot
+```python
+import matplotlib.pyplot as plt
+
+# Basic plot structure
+plt.figure(figsize=(10, 6))
+plt.title('My First Plot')
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.show()
+```
+
+
+::: {.notes}
+**Aim**
+The aim of this slide is to introduce the basic components and structure of a typical plot using Matplotlib.
+
+**Context**
+This slide builds upon the previous introduction to Matplotlib and creating a first plot. It sets the stage for subsequent slides that will cover styling, formatting, and creating different types of plots.
+
+**[Bullet Point 1]** The first bullet point could explain the basic components of a Matplotlib plot, such as the figure, axes, title, labels, and legend. It should briefly describe the purpose and role of each component in creating a clear and informative visualisation.
+
+**[Bullet Point 2]** The second bullet point could outline the typical steps involved in creating a basic plot using Matplotlib. This might include creating a figure and axes, plotting the data, adding a title and labels, and optionally including a legend. A brief code snippet demonstrating these steps could be provided.
+
+**[Bullet Point 3]** The third bullet point could discuss the importance of choosing appropriate plot elements and styling to effectively communicate the data and insights. This might touch on considerations such as selecting a suitable plot type, using clear and readable fonts, picking a colour scheme that is both aesthetically pleasing and accessible, and ensuring the plot is not overly cluttered.
+:::
+
+
+# First Plot Output
+```{python}
+import matplotlib.pyplot as plt
+
+# Basic plot structure
+plt.figure(figsize=(10, 6))
+plt.title('My First Plot')
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.show()
+```
+
+# Add a line
+```python
+import matplotlib.pyplot as plt
+
+# Example: Creating a simple line plot
+plt.plot([1, 2, 3, 4], [1, 4, 2, 3])
+plt.title('Simple Line Plot')
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.show()
+```
+
+
+# Add a line Output
+```{python}
+import matplotlib.pyplot as plt
+
+# Example: Creating a simple line plot
+plt.plot([1, 2, 3, 4], [1, 4, 2, 3])
+plt.title('Simple Line Plot')
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.show()
+```
+
+# Styling and Formatting
+- Setting plot aesthetics
+- Adding titles, labels, and legends
+- Adjusting axes and scales
+- Using color palettes effectively
+
+::: {.notes}
+**Aim**
+The aim of this slide is to provide an overview of the key aspects of styling and formatting plots in Python using Matplotlib.
+
+**Context**
+This slide builds upon the previous introduction to Matplotlib and basic plot creation. It delves into the specifics of customising plots to make them more visually appealing and informative before moving on to discuss different plot types and their use cases.
+
+**Setting plot aesthetics** Matplotlib provides a wide range of options for customising the appearance of plots. This includes setting the figure size, adjusting the font family and size, and controlling the line styles, markers, and colours used in the plot. By modifying these aesthetic elements, you can create plots that are visually appealing and align with your desired style or branding.
+
+**Adding titles, labels, and legends** To enhance the clarity and readability of your plots, it is essential to add informative titles, labels, and legends. Titles provide an overall description of the plot, while axis labels clearly define what each axis represents. Legends are crucial when plotting multiple data series, as they help distinguish between different lines or markers. Matplotlib offers functions like `title()`, `xlabel()`, `ylabel()`, and `legend()` to easily add these elements to your plots.
+
+**Adjusting axes and scales** Depending on your data and the story you want to convey, you may need to adjust the axes and scales of your plots. This can involve setting the limits of the x and y axes using `xlim()` and `ylim()`, modifying the tick locations and labels with `xticks()` and `yticks()`, and choosing appropriate scales (linear, logarithmic, etc.) based on the nature of your data. By fine-tuning the axes and scales, you can ensure that your plots effectively showcase the relevant information.
+
+**Using color palettes effectively** Colour plays a significant role in creating visually appealing and meaningful plots. Matplotlib provides various built-in colour maps and palettes that can be used to assign colours to plot elements. When selecting colours, consider factors such as the nature of the data, the purpose of the plot, and the target audience. Effective use of colour can help highlight important patterns, distinguish between categories, and guide the viewer's attention to key insights. It's important to choose colour palettes that are aesthetically pleasing, accessible to individuals with colour vision deficiencies, and suitable for the intended medium (e.g., screen display or print).
+:::
+
+# Choosing the Right Plot Type
+- Line plots: For trends over time or continuous data
+- Scatter plots: For relationships between two variables
+- Bar plots: For comparing quantities across categories
+- Histograms: For distribution of a single variable
+- Box plots: For showing data distribution and outliers
+
+::: {.notes}
+**Aim**
+This slide aims to provide guidance on selecting the most appropriate plot type based on the characteristics of the data and the relationships or patterns to be visualised.
+
+**Context**
+Having covered the basics of creating plots using Matplotlib, this slide transitions into discussing various plot types suitable for different data visualisation scenarios. The following slides will provide examples and code for creating specific plot types mentioned here.
+
+**Line plots: For trends over time or continuous data**
+Line plots are best used when visualising data that changes continuously over time or when the variable on the x-axis is continuous. They effectively show trends, patterns, and fluctuations in the data. For example, a line plot could be used to display daily stock prices or temperature variations throughout the year.
+
+**Scatter plots: For relationships between two variables**
+Scatter plots are ideal for exploring the relationship between two quantitative variables. Each data point is represented by a dot on the plot, with its position determined by its values for the two variables. Scatter plots can reveal patterns, correlations, or clusters in the data. An example would be plotting a person's height against their weight to see if there is a correlation.
+
+**Bar plots: For comparing quantities across categories**
+Bar plots are useful for comparing values across different categories or groups. The height of each bar represents the quantity or magnitude of the variable being measured for that category. Bar plots are effective for displaying data such as sales figures for different products or survey results showing preferences among various options.
+
+**Histograms: For distribution of a single variable**
+Histograms display the distribution of a single quantitative variable by dividing the data into bins and showing the frequency or count of data points falling into each bin. They provide insights into the shape of the data distribution, such as whether it is symmetric, skewed, or bimodal. Histograms are often used to visualise data like exam scores or the ages of a population.
+
+**Box plots: For showing data distribution and outliers**
+Box plots, also known as box-and-whisker plots, summarise the distribution of a quantitative variable by displaying key statistical measures such as the median, quartiles, and outliers. They provide a compact way to compare distributions across different groups or categories. Box plots are particularly useful for identifying outliers and comparing the spread and central tendency of data sets.
+:::
+
+# Creating a Line Plot
+
+```python
+plt.figure(figsize=(10, 6))
+plt.plot(df['date'], df['temperature'])
+plt.title('Temperature Over Time')
+plt.xlabel('Date')
+plt.ylabel('Temperature (°C)')
+plt.show()
+```
+
+
+# Creating a Line Plot - Output
+
+```{python}
+plt.figure(figsize=(10, 6))
+plt.plot(df['date'], df['temperature'])
+plt.title('Temperature Over Time')
+plt.xlabel('Date')
+plt.ylabel('Temperature (°C)')
+plt.show()
+```
+
+
+# Customising Line Plots
+
+```python
+plt.figure(figsize=(10, 6))
+plt.plot(df['date'], df['temperature'], color='red', linestyle='--', marker='o')
+plt.title('Temperature Over Time', fontsize=16)
+plt.xlabel('Date', fontsize=12)
+plt.ylabel('Temperature (°C)', fontsize=12)
+plt.grid(True)
+plt.show()
+```
+
+
+# Customising Line Plots - Output
+
+```{python}
+plt.figure(figsize=(10, 6))
+plt.plot(df['date'], df['temperature'], color='red', linestyle='--', marker='o')
+plt.title('Temperature Over Time', fontsize=16)
+plt.xlabel('Date', fontsize=12)
+plt.ylabel('Temperature (°C)', fontsize=12)
+plt.grid(True)
+plt.show()
+```
+
+
+# Creating a Scatter Plot
+
+```python
+plt.figure(figsize=(10, 6))
+plt.scatter(df['temperature'], df['precipitation'])
+plt.title('Temperature vs Precipitation')
+plt.xlabel('Temperature (°C)')
+plt.ylabel('Precipitation (mm)')
+plt.show()
+```
+
+
+# Creating a Scatter Plot - Output
+
+```{python}
+plt.figure(figsize=(10, 6))
+plt.scatter(df['temperature'], df['precipitation'])
+plt.title('Temperature vs Precipitation')
+plt.xlabel('Temperature (°C)')
+plt.ylabel('Precipitation (mm)')
+plt.show()
+```
+
+
+# Bar Plots
+
+```python
+plt.figure(figsize=(10, 6))
+plt.bar(df['date'], df['precipitation'])
+plt.title('Daily Precipitation')
+plt.xlabel('Date')
+plt.ylabel('Precipitation (mm)')
+plt.xticks(rotation=45)
+plt.show()
+```
+
+
+# Bar Plots - Output
+
+```{python}
+plt.figure(figsize=(10, 6))
+plt.bar(df['date'], df['precipitation'])
+plt.title('Daily Precipitation')
+plt.xlabel('Date')
+plt.ylabel('Precipitation (mm)')
+plt.xticks(rotation=45)
+plt.show()
+```
+
+
+# Multiple Lines on One Plot
+
+```python
+plt.figure(figsize=(10, 6))
+plt.plot(df['date'], df['temperature'], label='Temperature')
+plt.plot(df['date'], df['precipitation'], label='Precipitation')
+plt.title('Temperature and Precipitation Over Time')
+plt.xlabel('Date')
+plt.ylabel('Value')
+plt.legend()
+plt.show()
+```
+
+
+# Multiple Lines on One Plot - Output
+
+```{python}
+plt.figure(figsize=(10, 6))
+plt.plot(df['date'], df['temperature'], label='Temperature')
+plt.plot(df['date'], df['precipitation'], label='Precipitation')
+plt.title('Temperature and Precipitation Over Time')
+plt.xlabel('Date')
+plt.ylabel('Value')
+plt.legend()
+plt.show()
+```
+
+
+# Introduction to Subplots
+
+```python
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 10))
+
+ax1.plot(df['date'], df['temperature'])
+ax1.set_title('Temperature')
+
+ax2.bar(df['date'], df['precipitation'])
+ax2.set_title('Precipitation')
+
+plt.tight_layout()
+plt.show()
+```
+
+
+# Introduction to Subplots - Output
+
+```{python}
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 10))
+
+ax1.plot(df['date'], df['temperature'])
+ax1.set_title('Temperature')
+
+ax2.bar(df['date'], df['precipitation'])
+ax2.set_title('Precipitation')
+
+plt.tight_layout()
+plt.show()
+```
+
+
+# Saving Plots
+
+```python
+plt.figure(figsize=(10, 6))
+plt.plot(df['date'], df['temperature'])
+plt.title('Temperature Over Time')
+plt.xlabel('Date')
+plt.ylabel('Temperature (°C)')
+
+plt.savefig('temperature_plot.png', dpi=300, bbox_inches='tight')
+
+plt.show()
+```
+
+::: {.notes}
+**Aim**
+The aim of this slide is to demonstrate how to save plots created using Matplotlib to various file formats.
+
+**Context**
+After learning how to create various types of plots, customise their appearance, and arrange them using subplots, the next logical step is to learn how to save these visualisations for use in reports, presentations, or other documents. This slide builds upon the previous content and prepares the audience for the best practices and advanced topics to follow.
+
+**Saving Plots to Different File Formats**
+Matplotlib allows you to save your plots to a variety of file formats, such as PNG, JPEG, PDF, and SVG. To save a plot, use the `savefig()` function and specify the desired file name and format. For example, to save a plot as a PNG file named "myplot.png", you would use `plt.savefig('myplot.png')`. The file format is automatically determined from the file extension.
+
+**Adjusting the Resolution and Size of Saved Plots**
+When saving plots, you can control the resolution and size of the output file. The `dpi` parameter in the `savefig()` function sets the dots per inch (DPI) of the saved plot, which affects the resolution. For example, `plt.savefig('myplot.png', dpi=300)` saves the plot with a resolution of 300 DPI. You can also set the figure size using the `figsize` parameter when creating the figure, e.g., `fig = plt.figure(figsize=(8, 6))`.
+
+**Saving Plots with Transparency**
+If you want to save a plot with a transparent background, you can use the `transparent` parameter in the `savefig()` function. Set `transparent=True` to remove the background colour and make it transparent. This is particularly useful when overlaying plots on other images or backgrounds. For example, `plt.savefig('myplot.png', transparent=True)` saves the plot with a transparent background.
+:::
+
+# Best Practices
+
+- Choose appropriate plot types for your data
+- Use clear and informative titles and labels
+- Apply consistent color schemes
+- Consider your audience when designing visualisations
+- Avoid cluttering your plots with unnecessary information
+
+::: {.notes}
+**Aim**
+This slide aims to provide guidance on creating effective and visually appealing data visualisations using best practices.
+
+**Context**
+Having covered the basics of data visualisation, including tools, data structures, and various plot types, this slide focuses on best practices to ensure clear and impactful visualisations. The following slides will briefly introduce advanced topics and conclude the presentation with additional resources.
+
+**Choose appropriate plot types for your data**
+Selecting the right plot type is critical for effectively communicating your data. Consider the nature of your data (e.g., categorical, continuous, time series) and the relationship or comparison you want to highlight. Line plots are suitable for showing trends over time, while scatter plots can reveal relationships between variables. Bar plots are effective for comparing categories or groups.
+
+**Use clear and informative titles and labels**
+Titles and labels are essential for providing context and making your visualisations self-explanatory. Use concise and descriptive titles that accurately represent the content of your plot. Label your axes clearly, including units of measurement where applicable. Consider using a legend to identify different data series or categories.
+
+**Apply consistent colour schemes**
+Colour plays a significant role in the readability and aesthetic appeal of your visualisations. Choose a colour scheme that is appropriate for your data and the message you want to convey. Use contrasting colours to distinguish between different data series or categories. Be mindful of colour-blind accessibility and consider using colour-blind-friendly palettes.
+
+**Consider your audience when designing visualisations**
+Tailor your visualisations to your target audience. Consider their level of expertise and familiarity with the subject matter. Use appropriate terminology and provide sufficient context for your audience to understand the data. If presenting to a general audience, avoid using overly technical jargon and focus on the key insights you want to communicate.
+
+**Avoid cluttering your plots with unnecessary information**
+Simplicity is key to effective data visualisation. Avoid including unnecessary elements that can distract from the main message. Remove gridlines, borders, or tick marks that do not add value to the plot. Use whitespace strategically to improve readability and draw attention to the important aspects of your visualisation.
+:::
+
+# Advanced Topics (Brief Introduction)
+
+- Time series analysis with Pandas
+- Geographic plotting with libraries like Cartopy
+- Interactive visualisations with libraries like Plotly
+- Dashboards with libraries like Dash
+- Animated plots with Matplotlib's animation module
+
+::: {.notes}
+**Aim**
+The aim of this slide is to briefly introduce more advanced data visualisation topics that can be explored further using Python libraries.
+
+**Context**
+Having covered the fundamentals of data visualisation in Python using Pandas and Matplotlib, this slide serves as a glimpse into more specialised and advanced visualisation techniques. The topics introduced here build upon the basic concepts and showcase the versatility of Python for creating dynamic, interactive, and specialised visualisations.
+
+**Time series analysis with Pandas**
+Pandas provides powerful tools for working with time series data, allowing for seamless handling of date and time information. With Pandas, you can easily resample, filter, and analyse time series data, create rolling statistics, and handle missing values. This enables the creation of insightful visualisations to understand trends, patterns, and seasonality in time-dependent data.
+
+**Geographic plotting with libraries like Cartopy**
+Cartopy is a library that enables the creation of maps and geographic plots in Python. It provides a simple interface for generating visualisations with geographic projections, allowing for the plotting of data on maps. With Cartopy, you can create choropleth maps, display geographic features, and overlay data points or paths on top of maps, making it valuable for geospatial analysis and visualisation.
+
+**Interactive visualisations with libraries like Plotly**
+Plotly is a popular library for creating interactive and dynamic visualisations in Python. It allows for the creation of a wide range of chart types, including line plots, scatter plots, bar charts, heatmaps, and 3D plots. Plotly visualisations are highly customisable and enable user interaction, such as zooming, panning, and hovering over data points for additional information.
+
+**Dashboards with libraries like Dash**
+Dash is a framework for building analytical web applications and dashboards using Python. It combines the power of Plotly for creating interactive visualisations with the flexibility of web technologies like HTML, CSS, and JavaScript. With Dash, you can create multi-page dashboards that allow users to explore and interact with data, making it ideal for presenting insights and facilitating data-driven decision making.
+
+**Animated plots with Matplotlib's animation module** 
+Matplotlib's animation module enables the creation of animated visualisations in Python. It allows you to create dynamic plots that change over time or in response to user input. With the animation module, you can animate line plots, scatter plots, bar charts, and more. Animated visualisations are particularly useful for showcasing temporal changes, demonstrating algorithmic processes, or presenting data in an engaging and dynamic manner.
+:::
+
+# Conclusion and Resources
+
+- Recap of key concepts
+- Importance of practice in mastering data visualisation
+- Recommended resources for further learning:
+  - Pandas and Matplotlib official documentation
+  - The Python Graph Gallery
+  - Online tutorials and courses
+  - Weather data sources (e.g., NOAA, Met Office)
+
+::: {.notes}
+**Aim**
+The aim of this slide is to summarise the key takeaways from the presentation and provide resources for further learning and practice.
+
+**Context**
+As the final slide in the presentation, "Conclusion and Resources" ties together the concepts covered throughout the session, from the introduction to data visualisation and tools like Pandas and Matplotlib, to advanced topics. It also offers guidance on how attendees can continue their learning journey beyond the presentation.
+
+**Recap of key concepts** Throughout this presentation, we've explored the fundamentals of data visualisation using Python, focusing on the powerful libraries Pandas and Matplotlib. We've learned how to create and manipulate DataFrames, read and write data, and create various types of plots, including line plots, scatter plots, and bar plots. We've also touched on styling and formatting techniques to make our visualisations more effective and engaging.
+
+**Importance of practice in mastering data visualisation** To truly master data visualisation with Python, regular practice is essential. By applying the concepts learned in this presentation to real-world datasets, such as weather data, you'll develop a deeper understanding of how to effectively communicate insights through visual representations. Experiment with different plot types, customisations, and layouts to find the best approach for your specific data and audience.
+
+**Recommended resources for further learning:** To support your ongoing learning journey, several valuable resources are available:
+
+**Pandas and Matplotlib official documentation** The official documentation for Pandas and Matplotlib provides comprehensive guides, tutorials, and examples to help you explore the full capabilities of these libraries. Refer to these resources for detailed information on functions, parameters, and best practices.
+
+**The Python Graph Gallery** The Python Graph Gallery is an extensive collection of visualisation examples created using various Python libraries, including Pandas and Matplotlib. Browse through the gallery to find inspiration for your own projects and learn from the code snippets provided.
+
+**Online tutorials and courses** Numerous online platforms, such as Coursera, DataCamp, and Udemy, offer tutorials and courses focused on data visualisation with Python. These resources can provide structured learning paths, hands-on exercises, and projects to help reinforce your understanding of the concepts covered in this presentation.
+
+**Weather data sources (e.g., NOAA, Met Office)** To practice your data visualisation skills, consider using real-world weather datasets from reliable sources like the National Oceanic and Atmospheric Administration (NOAA) in the United States or the Met Office in the United Kingdom. These datasets offer a wealth of information to explore and visualise, enabling you to apply the techniques learned in this presentation to practical scenarios.
+:::
+

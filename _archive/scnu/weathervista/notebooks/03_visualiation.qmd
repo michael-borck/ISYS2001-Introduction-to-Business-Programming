@@ -1,0 +1,114 @@
+# WeatherVista Project - Session 3: Basic Data Visualization with Matplotlib and Pandas
+
+## Objectives
+- Learn how to visualize weather data using Matplotlib.
+- Understand how to create basic plots to represent weather data.
+- Customize plots to enhance readability and presentation.
+
+## 1. Introduction to Matplotlib
+Matplotlib is a widely used Python library for creating static, animated, and interactive visualizations.
+
+### Import Required Libraries
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+```
+
+## 2. Reading Data
+We'll start by reading the processed weather data from the CSV file created in the previous session.
+
+```python
+df = pd.read_csv('data/processed/processed_weather_data.csv')
+df
+```
+
+## 3. Creating Basic Plots
+We'll create basic plots to visualize different aspects of the weather data.
+
+### Line Plot for Temperature
+We'll create a line plot to visualize the temperature data.
+
+```python
+plt.figure(figsize=(10, 6))
+plt.plot(df['Location'], df['Temperature (C)'], marker='o')
+plt.title('Temperature by Location')
+plt.xlabel('Location')
+plt.ylabel('Temperature (°C)')
+plt.xticks(rotation=45)
+plt.grid(True)
+plt.show()
+```
+
+### Bar Plot for Humidity
+We'll create a bar plot to visualize the humidity data.
+
+```python
+plt.figure(figsize=(10, 6))
+plt.bar(df['Location'], df['Humidity (%)'], color='skyblue')
+plt.title('Humidity by Location')
+plt.xlabel('Location')
+plt.ylabel('Humidity (%)')
+plt.xticks(rotation=45)
+plt.show()
+```
+
+### Pie Chart for Weather Description
+We'll create a pie chart to visualize the distribution of weather descriptions.
+
+```python
+weather_counts = df['Weather'].value_counts()
+plt.figure(figsize=(8, 8))
+plt.pie(weather_counts, labels=weather_counts.index, autopct='%1.1f%%', startangle=140)
+plt.title('Weather Description Distribution')
+plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+plt.show()
+```
+
+## 4. Customizing Plots
+Customizing plots can make them more informative and visually appealing.
+
+### Adding Annotations
+We'll add annotations to highlight specific data points.
+
+```python
+plt.figure(figsize=(10, 6))
+plt.plot(df['Location'], df['Temperature (C)'], marker='o')
+plt.title('Temperature by Location')
+plt.xlabel('Location')
+plt.ylabel('Temperature (°C)')
+plt.xticks(rotation=45)
+plt.grid(True)
+
+# Annotate the highest temperature
+max_temp = df['Temperature (C)'].max()
+max_temp_location = df.loc[df['Temperature (C)'] == max_temp, 'Location'].iloc[0]
+plt.annotate(f'Max Temp: {max_temp:.2f}°C', xy=(max_temp_location, max_temp), 
+             xytext=(max_temp_location, max_temp+2), 
+             arrowprops=dict(facecolor='black', shrink=0.05))
+
+plt.show()
+```
+
+### Customizing Colors and Styles
+We'll customize the colors and styles of the plots.
+
+```python
+plt.figure(figsize=(10, 6))
+plt.plot(df['Location'], df['Temperature (C)'], marker='o', linestyle='--', color='b')
+plt.title('Temperature by Location', fontsize=14, fontweight='bold')
+plt.xlabel('Location', fontsize=12)
+plt.ylabel('Temperature (°C)', fontsize=12)
+plt.xticks(rotation=45)
+plt.grid(True, linestyle='--', linewidth=0.5)
+
+plt.show()
+```
+
+## Homework
+- Create additional plots to visualize other aspects of the weather data (e.g., wind speed, pressure).
+- Experiment with different types of plots and customizations to enhance the visualizations.
+
+## Summary
+In this session, we learned how to visualize weather data using Matplotlib. We created basic plots such as line plots, bar plots, and pie charts, and we customized these plots to improve readability and presentation.
+
+Next session, we will focus on advanced data visualization techniques using subplots and grids.

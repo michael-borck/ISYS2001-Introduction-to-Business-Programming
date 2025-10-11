@@ -1,0 +1,72 @@
+---
+title: "Weather Dashboard Project: WeatherVista (天气景观 - Tiānqì jǐngguān)"
+subtitle: "Stay Ahead of the Weather: Your Personalised Forecast at a Glance"
+author: "Michael Borck"
+format:
+  pdf:
+    toc: false
+    number-sections: false
+    colorlinks: true
+    encoding: "UTF-8"
+  docx:
+    toc: false
+    number-sections: false
+    highlight-style: github
+  html:
+    toc: true
+    toc-expand: 2
+    embed-resources: true
+---
+
+### Project Overview
+
+The Weather Dashboard project is designed to create a web application that displays current weather conditions and temperature trends for a chosen location. This application will use the OpenWeatherMap API to fetch real-time weather data, ensuring users have access to up-to-date information presented in an easy-to-understand format.  This project aims to create a web-based application that provides users with current weather conditions and temperature trends for a selected location, utilising the OpenWeatherMap API to fetch weather data and display it in a user-friendly format.
+
+
+### Project Objectives
+
+The main goals of the Weather Dashboard project are to design and develop a dashboard that:
+
+1. **Displays Current Weather Conditions**: Shows the temperature, humidity, wind speed, and cloud cover for the selected location.
+2. **Provides Temperature Trends**: Displays temperature trends for the current day and the next five days.
+3. **Offers a 3 and 5-Day Forecast**: Includes date, time, and a brief weather description for the upcoming five days.
+4. **Location Selection**: Allows users to choose a location from a list of cities or enter a custom location.
+5. **Unit Switching**: Provides options to switch between Celsius and Fahrenheit units.
+6. **Error Handling**: Manages API errors by displaying a relevant message if the API request fails.
+
+### Target Audience
+
+The Weather Dashboard is intended for anyone who wants to stay informed about the weather in their area, including:
+
+- **Commuters**: Individuals planning their daily routes based on weather conditions.
+- **Outdoor Enthusiasts**: People organising outdoor activities depending on the weather forecast.
+- **Travelers**: Individuals needing to know what weather to expect at their destination.
+- **Homeowners**: Residents wanting to stay aware of local weather conditions.
+
+### Technical Requirements
+
+To build the Weather Dashboard, the project will use the following technical requirements:
+
+- **Programming Language**: Python
+- **GUI Framework**: Tkinter (Tk)
+- **API Integration**: OpenWeatherMap API
+
+### Deliverables
+
+The project will produce:
+
+- **Fully Functional Weather Dashboard**: A web application that meets both functional and non-functional requirements.
+- **Written Report**: Documentation detailing the design and implementation decisions made during the project.
+- **Presentation**: A summary presentation highlighting the project and its outcomes.
+
+
+### Breaking Down the Project into Steps
+
+1. **Understand the Objectives**: Clearly define what the weather dashboard needs to accomplish.
+2. **Identify Key Functionalities**: List out the main features the application should have (e.g., displaying weather conditions, providing forecasts, location selection, unit switching, error handling).
+3. **Determine the Technical Requirements**: Choose the appropriate programming language, GUI framework, and API.
+4. **Define the Target Audience**: Understand who will be using the application and tailor the functionalities to meet their needs.
+5. **Plan Deliverables**: Outline what needs to be delivered by the end of the project (functional dashboard, report, presentation).
+6. **Set a Timeline**: Establish a timeline with milestones to ensure steady progress.
+
+By following these steps, you can break down the Weather Dashboard project into manageable tasks, ensuring you cover all necessary functionalities and deliver a complete and functional application.

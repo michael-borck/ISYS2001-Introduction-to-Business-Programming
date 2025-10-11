@@ -1,0 +1,109 @@
+---
+title: "WeatherVista Project - Session 5: Web Scraping and Using Additional APIs"
+execute: 
+  enabled: false
+---
+
+## Objectives
+- Learn the basics of web scraping using BeautifulSoup.
+- Understand ethical considerations and legal aspects of web scraping.
+- Explore and use additional APIs to gather more weather-related data.
+
+## 1. Introduction to Web Scraping
+Web scraping involves extracting data from websites. It is important to adhere to ethical guidelines and terms of service of websites.
+
+### Import Required Libraries
+```{python}
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+```
+
+## 2. Basic Web Scraping with BeautifulSoup
+We'll scrape weather-related data from a sample website.
+
+### Fetching the HTML Content
+```{python}
+url = 'https://www.example.com/weather'
+response = requests.get(url)
+html_content = response.content
+```
+
+### Parsing the HTML Content
+```{python}
+soup = BeautifulSoup(html_content, 'html.parser')
+print(soup.prettify())  # Print the formatted HTML content
+```
+
+### Extracting Specific Data
+Assuming the website has a table with weather data, we'll extract the table content.
+
+```{python}
+table = soup.find('table', {'class': 'weather_table'})
+rows = table.find_all('tr')
+
+weather_data = []
+for row in rows[1:]:  # Skip the header row
+    cols = row.find_all('td')
+    data = {
+        'Date': cols[0].text,
+        'Temperature': cols[1].text,
+        'Humidity': cols[2].text,
+        'Condition': cols[3].text
+    }
+    weather_data.append(data)
+
+weather_df = pd.DataFrame(weather_data)
+weather_df
+```
+
+## 3. Using Additional APIs
+We'll explore additional APIs to fetch more weather-related data, such as air quality or UV index.
+
+### Air Quality API Example
+We'll use the AirNow API to fetch air quality data.
+
+### Import Required Libraries
+```{python}
+import requests
+import pandas as pd
+```
+
+### Fetching Air Quality Data
+```{python}
+api_key = 'your_airnow_api_key'
+url = f"http://www.airnowapi.org/aq/observation/zipCode/current?format=application/json&zipCode=90210&distance=25&API_KEY={api_key}"
+
+response = requests.get(url)
+if response.status_code == 200:
+    air_quality_data = response.json()
+    air_quality_data
+else:
+    print(f"Failed to fetch data: {response.status_code}")
+```
+
+### Parsing Air Quality Data
+We'll parse the JSON response and create a DataFrame.
+
+```{python}
+air_quality_df = pd.DataFrame(air_quality_data)
+air_quality_df
+```
+
+## 4. Combining Web Scraping and API Data
+We'll combine the scraped weather data and the data fetched from additional APIs.
+
+### Merging DataFrames
+```{python}
+combined_df = pd.merge(weather_df, air_quality_df, left_on='Date', right_on='Date', how='inner')
+combined_df
+```
+
+## Homework
+- Explore other weather-related websites and practice web scraping to gather data.
+- Experiment with additional APIs to fetch various types of weather data.
+
+## Summary
+In this session, we learned the basics of web scraping using BeautifulSoup and explored additional APIs to fetch more weather-related data. We also combined the data from web scraping and APIs to create a comprehensive dataset.
+
+Next session, we will focus on creating a GUI for the WeatherVista project using Tkinter or Jupyter Widgets.

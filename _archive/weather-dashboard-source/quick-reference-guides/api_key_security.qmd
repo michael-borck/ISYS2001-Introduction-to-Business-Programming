@@ -1,0 +1,65 @@
+---
+title: "API Key Security: Protecting Your Credentials"
+subtitle: "Secure your API keys with environment variables and keep them out of your codebase"
+author: "Michael Borck"
+format:
+  pdf:
+    toc: false
+    number-sections: false
+    colorlinks: true
+    encoding: "UTF-8"
+  docx:
+    toc: false
+    number-sections: false
+    highlight-style: github
+  html:
+    toc: true
+    toc-expand: 2
+    embed-resources: true
+---
+
+## Introduction
+
+In today's world of interconnected services and cloud-based applications, APIs (Application Programming Interfaces) are crucial for enabling communication between different systems. Many of these APIs require an API key for authentication, providing access to their services. However, handling these API keys securely is vital to prevent unauthorized access and potential misuse.
+
+Storing API keys directly in your codebase or sharing them publicly on platforms like GitHub can expose your application to significant security risks. A better practice is to use environment variables to store API keys securely. This method ensures that sensitive information is kept out of your codebase and is not accidentally exposed.
+
+This guide provides a quick reference on how to handle API keys securely by using environment variables. You will learn how to set up environment variables on different operating systems and how to access these variables in your Python code. By following these best practices, you can protect your credentials and maintain the security of your applications.
+
+### Steps to Handle the API Key Securely:
+
+1. **Set Up Environment Variables**: Store the API key in an environment variable on your local machine or server.
+2. **Read Environment Variables in Your Code**: Use Python's `os` module to read the environment variable.
+
+### Example Setup
+
+#### 1. Setting Up Environment Variables
+
+- **Windows**:
+  - Open Command Prompt and run:
+    ```cmd
+    setx OPENWEATHER_API_KEY "your_api_key_here"
+    ```
+
+- **Mac/Linux**:
+  - Open Terminal and add the following line to your shell configuration file (e.g., `.bashrc`, `.zshrc`):
+    ```sh
+    export OPENWEATHER_API_KEY="your_api_key_here"
+    ```
+  - Then, source the configuration file to apply the changes:
+    ```sh
+    source ~/.bashrc  # or source ~/.zshrc
+    ```
+
+#### 2. Reading Environment Variables in Python
+
+Can we read the API key from the environment variable:
+
+```python
+import os
+
+# Read API key from environment variable
+API_KEY = os.getenv('OPENWEATHER_API_KEY')
+if not API_KEY:
+    print("No API key found. Please set the OPENWEATHER_API_KEY environment variable.")
+```

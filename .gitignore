@@ -1,0 +1,38 @@
+# ----------------------------------------------------------------
+# General Quarto, Python, and R cruft to ignore
+# ----------------------------------------------------------------
+# Quarto specific
+_quarto/
+_freeze/
+*_files/
+
+# Python specific
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# R specific
+.Rproj.user/
+.Rhistory
+.RData
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# ----------------------------------------------------------------
+# Project-specific output files to ignore
+# ----------------------------------------------------------------
+# This ignores these file types everywhere...
+*.pptx
+*.docx
+*.pdf
+*.html
+*.wav
+*.mp3
+*.mp3
+
+# ...EXCEPT for the 'resources' folder and its contents.
+# The '!' negates the ignore rule for this specific directory.
+!resources/

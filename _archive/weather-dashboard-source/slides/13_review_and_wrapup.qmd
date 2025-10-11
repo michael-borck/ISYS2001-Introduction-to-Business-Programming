@@ -1,0 +1,958 @@
+---
+title: "Python Essentials Unwrapped: Six Steps to Success!"
+subtitle: "Journey Through Python Essentials and Problem-Solving Mastery"
+author: "Michael Borck"
+format:
+    pptx:
+      reference-doc: ../template.pptx
+    pdf:
+      toc: true
+      colorlinks: true
+    docx:
+      toc: true
+      highlight-style: github
+    html:
+      toc: true
+      toc-expand: 2
+      embed-resources: true
+---
+
+# Introduction
+
+- Overview of Python Programming
+
+- Importance of Understanding Fundamental Concepts
+
+::: {.notes}
+This slide sets the stage by providing a high-level overview of Python's significance and the foundational importance of mastering its fundamental concepts. It prepares the audience for a structured exploration of Python's core operations and problem-solving frameworks throughout the presentation.
+
+- **Overview of Python Programming:**
+  - Python is a versatile and powerful programming language known for its simplicity and readability.
+  - Widely used in various domains including web development, data analysis, artificial intelligence, and scientific computing.
+  - Emphasise Python's popularity and relevance in the tech industry today.
+
+- **Importance of Understanding Fundamental Concepts:**
+  - **Fundamental Concepts as Building Blocks:** Introduce the analogy of fundamental programming operations (input, output, calculation, etc.) as building blocks that form the foundation of all Python programs.
+  - **Versatility and Creativity:** Understanding these basics enables students to creatively combine these building blocks to solve complex problems.
+  - **Adaptability Across Languages:** Emphasise that while Python syntax may evolve, the fundamental concepts remain constant, allowing programmers to adapt to new languages and technologies effectively.
+  - **Problem-Solving Skills:** Highlight how mastery of fundamentals fosters strong problem-solving skills, essential in programming and beyond.
+
+:::
+
+# Fundamentals of Programming
+
+- Importance of Sequential Execution
+- Introduction to Six Fundamental Operations:
+  1. Input
+  2. Output
+  3. Calculation
+  4. Store Things (assignment)
+  5. Make Decisions (If/Then)
+  6. Going Loopy (for, while)
+
+::: {.notes}
+This slide provides a foundational understanding of the essential operations in Python programming, setting the stage for deeper exploration into each concept throughout the presentation.
+
+- **Importance of Sequential Execution:**
+  - **Sequential Flow:** Programming languages execute instructions in sequence, one after another.
+  - **Logical Order:** Emphasise that understanding and controlling sequential execution is fundamental to programming logic.
+  - **Control Flow:** Introduce the concept of control flow and how it dictates the order in which instructions are executed.
+  - Sequential execution ensures that instructions are carried out in the intended order, laying the foundation for logical flow within a program.
+  - Understanding sequential execution helps programmers predict and debug program behavior effectively.
+
+- **Introduction to Six Fundamental Operations:**
+  - Each operation represents a fundamental capability that forms the basis of all computer programs.
+  - **1. Input:** Gathering data into the program.
+    - Example: Using `input()` function to receive user input.
+  - **2. Output:** Displaying results or information.
+    - Example: Using `print()` function to output data to the console.
+  - **3. Calculation:** Performing mathematical operations.
+    - Example: Basic arithmetic operations (+, -, *, /).
+  - **4. Store Things (Assignment):** Storing data in variables.
+    - Example: Assigning values to variables (`x = 10`).
+  - **5. Make Decisions (If/Then):** Executing different actions based on conditions.
+    - Example: Using `if`, `else`, and `elif` statements to control program flow.
+  - **6. Going Loopy (for, while):** Repeating tasks iteratively.
+    - Example: Implementing `for` loops to iterate over lists or `while` loops to repeat until a condition is met.
+
+:::
+
+# Input Operations
+
+- Import from console `input()`
+- Import from File
+- Input from Database
+
+```python
+input("Enter today's temperature in Celsius: ")
+```
+
+
+# Output Operations
+
+- Output to console `print()`
+- Output to File
+- Output to Database
+- Output to plot/chart (screen/file)
+
+```python
+print("Today's temperature in Celsius is 27.8")
+```
+
+# Data Representation and Types
+
+- Computers store and process data using binary digits (0s and 1s).
+- Binary representation forms the basis for all data manipulation and storage in computers.
+- **Data Types:** Define the kind of data stored (e.g., integers, floats, strings).
+- **Interpretation:** Determines how the computer interprets and manipulates binary data.
+- **Foundation:** Essential for understanding how variables store and interact with data.
+- **Operations:** Different data types support different operations (e.g., arithmetic, string manipulation).
+- **Integer:** Represents whole numbers (`5`, `-10`).
+- **String:** Represents sequences of characters (`"Hello"`, `'Python'`).
+- **Universal Concept:** Applies across all programming languages.
+- **Adaptability:** Understanding data types aids in adapting to different languages and environments.
+
+
+# Calculation Operations
+- Basic Arithmetic Operations
+  - `+, -, *, /. //, %`
+- Combine for complex calculations
+- Boolean (True/False) operators
+  - Relational Operators:  `<, >, <=, >=`
+  - Logical Operators: `and, or, not`
+
+# Store/Assignment
+- Variables: Values and Types
+- Assignment/Update operator: `=`
+  
+```python
+temperature = input("Enter today's temperature in Celsius: ")
+print(f"Today's temperature is {temperature}")
+temperature = input("Enter tomorrows's temperature in Celsius: ")
+```
+
+# Converting Input
+- All keyboard input is a string
+- Convert to number
+
+```python
+temperature = input("Enter today's temperature in Celsius: ")
+temperature = float(temperature)  # Convert input to float
+```
+
+# Validate input
+- try/catch
+- test positive/negative
+- assert statements
+- Lib/Package: PyInputPlus
+
+```python
+try:
+    temperature = float(temperature)  # Convert input to float
+except ValueError:
+    print("Invalid input. Please enter a valid number.")
+```
+
+
+# Decision Making (If/Then Structures)
+- Boolean Expressions
+-  Relational Operators:  `<, >, <=, >=`
+-  Logical Operators: `and, or, not`
+- Simple `if`, `if-else`, `if-elif-else` Statements
+
+
+# Decision Example
+
+```python
+temperature = input("Enter today's temperature in Celsius: ")
+temperature = float(temperature)  # Convert input to float
+
+if temperature > 30:
+    print("It's a hot day!")
+elif temperature < 10:
+    print("It's a cold day.")
+else:
+    print("It's a moderate day.")
+```
+
+
+# Repetition (Loops)
+- `for` Loops
+- `while` Loops
+- list/dictionary comprehension
+- Nested Loops (Conceptual)
+- recursion
+
+
+# `for` Loops
+
+`for` loops are used to iterate over a sequence (such as a list, tuple, or string) or other iterable objects. The basic syntax is:
+```python
+for variable in iterable:
+    # code to be executed
+```
+Here, `variable` takes on the value of each element in the `iterable` object, and the code inside the loop is executed for each iteration.
+
+# `for` Loop Example:
+```python
+fruits = ['apple', 'banana', 'cherry']
+for fruit in fruits:
+    print(fruit)
+```
+Output:
+```
+apple
+banana
+cherry
+```
+
+#  `while` Loops
+
+`while` loops are used to execute a block of code as long as a certain condition is true. The basic syntax is:
+```python
+while condition:
+    # code to be executed
+```
+Here, the code inside the loop is executed as long as the `condition` is true.
+
+# `while` Loop Example:
+```python
+i = 0
+while i < 3:
+    print(i)
+    i += 1
+```
+Output:
+```
+0
+1
+2
+```
+#  List/Dictionary Comprehension
+
+List and dictionary comprehensions are concise ways to create new lists or dictionaries from existing iterables. The basic syntax is:
+```python
+new_list = [expression for element in iterable]
+new_dict = {key: value for element in iterable}
+```
+Here, `expression` is evaluated for each element in the `iterable`, and the results are collected in a new list or dictionary.
+
+# Comprehension Example:
+```python
+numbers = [1, 2, 3, 4, 5]
+squared_numbers = [x**2 for x in numbers]
+print(squared_numbers)  # [1, 4, 9, 16, 25]
+```
+
+# Nested Loops
+```python
+for i in range(3):
+    for j in range(2):
+        print(f"i: {i}, j: {j}")
+```
+Output:
+```
+i: 0, j: 0
+i: 0, j: 1
+i: 1, j: 0
+i: 1, j: 1
+i: 2, j: 0
+i: 2, j: 1
+```
+
+# Recursion
+Recursion is a programming technique where a function calls itself repeatedly until a base case is reached. The basic syntax is:
+```python
+def function(arg):
+    if base_case:
+        return result
+    else:
+        return function(arg)
+```
+Here, the function calls itself with a new argument until the base case is reached, at which point the function returns a result.
+
+# Recursion Example
+```python
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n-1)
+print(factorial(5))  # 120
+```
+
+
+# Managing Complexity with Functions
+1. **Code Reusability**: You can write a function once and use it multiple times throughout your program, reducing code duplication.
+2. **Modularity**: Functions help organise your code into smaller, independent units that are easier to understand and maintain.
+3. **Abstraction**: Functions can hide complex logic and implementation details, making it easier to use them without worrying about the inner workings.
+
+# Function Components and Syntax
+
+1. **Function Name**: A unique name given to the function, which is used to call it.
+2. **Parameters**: Optional values that are passed to the function when it's called. Parameters are used to customise the function's behavior.
+3. **Return Statement**: An optional statement that returns a value from the function.
+4. **Function Body**: The code that's executed when the function is called.
+
+# Function example
+```python
+def greet(name) {
+  print(f'Hello, {name}!')
+}
+
+greet("John") # Output: Hello, John!
+```
+
+# Best Practices for Writing Functions
+
+1. **Keep it Simple**: Functions should perform a single, well-defined task.
+2. **Use Meaningful Names**: Choose function names that clearly indicate what the function does.
+3. **Use Parameters**: Pass parameters to customise the function's behavior.
+4. **Return Values**: Use return statements to provide useful values to the caller.
+5. **Test Thoroughly**: Write tests to ensure your functions work correctly and handle edge cases.
+
+
+# Data Structures: Tuples, Lists, Dictionaries and Sets
+- Tuples: storing immutable values
+- Lists: Storing Sequences of Values
+- Dictionaries: Key-Value Pairs for Data Organisation
+- Sets: Storing unique values
+
+
+# Tuples: Storing Immutable Values
+
+```python
+my_tuple = (1, 2, 3, 4, 5)
+print(my_tuple)  # Output: (1, 2, 3, 4, 5)
+
+# Trying to modify the tuple will raise a TypeError
+my_tuple[0] = 10  # Raises TypeError: 'tuple' object does not support item assignment
+```
+# Lists: Storing Sequences of Values
+
+```python
+my_list = [1, 2, 3, 4, 5]
+print(my_list)  # Output: [1, 2, 3, 4, 5]
+
+# Modifying the list is allowed
+my_list.append(6)
+print(my_list)  # Output: [1, 2, 3, 4, 5, 6]
+```
+
+# Dictionaries: Key-Value Pairs for Data Organisation
+
+```python
+my_dict = {"name": "John", "age": 30, "city": "New York"}
+print(my_dict)  # Output: {'name': 'John', 'age': 30, 'city': 'New York'}
+
+# Accessing values using keys
+print(my_dict["name"])  # Output: John
+print(my_dict["age"])  # Output: 30
+
+# Modifying values is allowed
+my_dict["age"] = 31
+print(my_dict)  # Output: {'name': 'John', 'age': 31, 'city': 'New York'}
+```
+
+# Sets: Storing Unique Values
+
+```python
+my_set = {1, 2, 3, 4, 5}
+print(my_set)  # Output: {1, 2, 3, 4, 5}
+
+# Adding a duplicate value will not change the set
+my_set.add(5)
+print(my_set)  # Output: {1, 2, 3, 4, 5}
+
+# Removing a value is allowed
+my_set.remove(3)
+print(my_set)  # Output: {1, 2, 4, 5}
+```
+
+
+# Common List operations
+
+A List in Python is a collection of items that can be of any data type, including strings, integers, floats, and other lists. Lists are denoted by square brackets `[]` and are ordered, meaning that the order of items matters.
+
+* **Indexing**: Allows accessing specific elements using their position in the data structure. Only lists support indexing.
+* **Slicing**: Allows extracting a subset of elements from a list. Only lists support slicing.
+* **Append**: Adds new elements to the end of a list. Only lists support appending.
+* **Insert**: Inserts new elements at a specific position in a list. Only lists support inserting.
+* **Remove**: Removes elements from a list. Only lists support removing.
+
+# Examples
+* Indexing: `my_list[0]` returns the first element of the list.
+* Slicing: `my_list[1:3]` returns the elements at indices 1 and 2.
+* Append: `my_list.append("new element")` adds a new element to the end of the list.
+* Insert: `my_list.insert(1, "new element")` inserts a new element at index 1.
+* Remove: `my_list.remove("old element")` removes the first occurrence of the element "old element" from the list.
+
+`Note that tuples, dictionaries, and sets do not support these operations. Tuples are immutable, dictionaries are key-value pairs, and sets are unordered collections of unique elements.`
+
+# Modules and Packages
+- Functions: Group of statement
+- Class: Group of functions and data
+- Modules: Grouping Functions (or classes)
+- Packages: Collections of Modules
+
+# Problem Solving Framework
+- Understand the problem
+- Identify input/output
+- Work the problem by hand (early test cases)
+- Write pseudo code and convert to python
+- Test with variety of data
+
+# **Understand the Problem**
+- Read and re-read the problem statement to ensure you understand what is being asked.
+- Identify the key elements of the problem, including:
+    - Inputs: What data will the program need to solve the problem?
+    - Outputs: What results should the program produce?
+    - Constraints: Are there any limitations or rules that the program must follow?
+
+#  **Identify Input/Output**
+- Determine the types and formats of the input data.
+- Identify the expected output format and any specific requirements (e.g., precision, formatting).
+
+#  **Work the Problem by Hand (Early Test Cases)**
+- Choose a few simple test cases to work through by hand.
+- Verify that your manual calculations produce the expected output.
+  - This step helps you understand the problem better and identify any potential issues.
+
+#  **Write Pseudo Code and Convert to Python**
+- Write pseudo code to describe the steps your program will take to solve the problem.
+- Convert the pseudo code to Python, using a top-down approach to structure your code.
+- Focus on one component at a time, and make sure each part is working correctly before moving on to the next.
+
+# **Test with Variety of Data**
+- Write test cases to verify that your program produces the expected output for a variety of input data.
+- Use a range of inputs, including edge cases and unusual data, to ensure your program is robust and reliable.
+- Test your program in different environments and configurations to ensure it works as expected.
+
+
+# **Step 1 - Understand the Problem**
+
+Let's go through each step to develop a simple program to convert temperature from Kelvin to Celsius.
+
+- Define the Problem: Kelvin to Celsius Conversion
+
+The problem is to write a program that takes a temperature in Kelvin as input and returns the equivalent temperature in Celsius.  This is simple, but in real life probably interview the client, do some independent research, chat to experts, read research papers, study existing programs etc.
+
+# **Step 2 - Define Inputs and Outputs**
+
+- Input: Kelvin Temperature (a single number, e.g., 273.15)
+- Output: Celsius Temperature (a single number, e.g., 0.15)
+
+# **Step 3 - Work the Problem by Hand**
+
+> Let's convert 273.15 Kelvin to Celsius. We know that the conversion formula is:
+>
+> Celsius = Kelvin - 273.15
+>
+> So, we subtract 273.15 from 273.15 to get:
+> 
+> Celsius = 0.15
+
+This manual calculation shows that the program should subtract 273.15 from the input Kelvin temperature to get the equivalent Celsius temperature.
+
+# **Step 4 - Write Pseudo Code**
+
+This pseudo code defines the algorithm for the conversion. It takes the input Kelvin temperature, subtracts 273.15, and prints the result.
+
+```
+input_kelvin = get kelvin temperature
+celsius = input_kelvin - 273.15
+print celsius
+```
+
+```python
+input_kelvin = input("Please input temperature in Kelvin")
+celsius = input_kelvin - 273.15
+print(celsius)
+```
+
+
+# **Step 5 - Test with Data**
+
+- Test Cases: Valid and Invalid Inputs
+- Valid Inputs:
+    - 273.15 Kelvin -> 0.15 Celsius
+    - 0 Kelvin -> -273.15 Celsius
+  - 500 Kelvin -> 226.85 Celsius
+- Invalid Inputs:
+    - Negative Kelvin (e.g., -273.15) -> Error handling needed
+    - Non-numeric input (e.g., "abc") -> Error handling needed
+- Handling Edge Cases (Negative Kelvin):
+  - We'll add error handling to handle negative Kelvin inputs. For example, we could print an error message and return an error code.
+
+
+# Final Python program:
+```python
+def kelvin_to_celsius(kelvin):
+    if kelvin < 0:
+        print("Error: Negative Kelvin temperature")
+        return None
+    celsius = kelvin - 273.15
+    return celsius
+
+# Test cases
+print(kelvin_to_celsius(273.15))  # 0.15
+print(kelvin_to_celsius(0))  # -273.15
+print(kelvin_to_celsius(500))  # 226.85
+
+# Invalid inputs
+print(kelvin_to_celsius(-273.15))  # Error: Negative Kelvin temperature
+print(kelvin_to_celsius("abc"))  # Error: Non-numeric input
+```
+
+# Using Jupyter Notebooks for Prototyping
+- Rapid Prototyping
+- Interactive Development Environment
+- Collaboration
+- Data Exploration
+- Immediate feedback
+- Reproducible
+
+
+::: {.notes}
+
+**Benefits of Jupyter Notebooks:**
+
+1. **Rapid Prototyping**: Jupyter Notebooks allow you to quickly write and execute code, making it an ideal tool for rapid prototyping. You can test and iterate on your ideas quickly, without having to worry about setting up a full-fledged development environment.
+2. **Interactive Development**: Jupyter Notebooks provide an interactive development environment, where you can write code, execute it, and see the results immediately. This interactive nature of the environment makes it easier to debug and refine your code.
+3. **Collaboration**: Jupyter Notebooks are designed for collaboration. You can share your notebooks with others, and they can easily run and modify your code. This makes it an excellent tool for collaborative projects.
+4. **Data Exploration**: Jupyter Notebooks provide an excellent environment for data exploration. You can load and manipulate data, visualise it, and perform statistical analysis, all within the notebook.
+5. **Documentation**: Jupyter Notebooks can serve as a documentation tool. You can write notes, explanations, and comments within the notebook, making it easier to understand and maintain your code.
+
+**Interactive Development Environment:**
+
+1. **Code Execution**: Jupyter Notebooks allow you to execute code cells individually or in batches. This means you can write a few lines of code, execute them, and then modify and refine your code without having to restart the entire environment.
+2. **Immediate Feedback**: Jupyter Notebooks provide immediate feedback on your code. You can see the results of your code execution immediately, which makes it easier to debug and refine your code.
+3. **Visualisation**: Jupyter Notebooks support various visualisation libraries, such as Matplotlib, Seaborn, and Plotly. This allows you to visualise your data and results, making it easier to understand and communicate your findings.
+4. **Interactive Visualisations**: Jupyter Notebooks also support interactive visualisations, such as interactive plots and dashboards. This allows you to create interactive visualisations that can be used to explore and analyse data.
+5. **Reproducibility**: Jupyter Notebooks provide a reproducible environment. You can save your notebooks and share them with others, who can run them on their own machines, without having to worry about setting up a specific environment.
+
+Overall, Jupyter Notebooks provide an excellent interactive development environment for prototyping, data exploration, and collaboration. Its benefits make it an ideal tool for data scientists, analysts, and developers who need to quickly test and refine their ideas.
+:::
+
+
+# Transition to Python Scripts
+- Final Program Development
+  - refine and optimise code
+  - organise code
+  - add documentation
+- Packaging and Deployment
+  - write main function
+  - use build system
+  - create distribution
+  - deploy to server
+
+::: {.notes}
+**Transition to Python Scripts:**
+
+1. **Refine and Optimise Code**: Once you've prototyped and tested your code in a Jupyter Notebook, you can refine and optimise it for production use. This involves removing unnecessary code, improving performance, and adding error handling.
+2. **Organise Code**: You can organise your code into separate files and directories, making it easier to maintain and update. This is especially important for larger projects or projects with multiple contributors.
+3. **Use a Consistent Coding Style**: You can use a consistent coding style throughout your code, making it easier to read and maintain. This includes using consistent indentation, naming conventions, and commenting.
+4. **Add Documentation**: You can add documentation to your code, including comments, docstrings, and README files. This makes it easier for others to understand and use your code.
+
+**Final Program Development:**
+
+1. **Write a Main Function**: You can write a main function that serves as the entry point for your program. This function can call other functions and modules, and handle command-line arguments and input/output.
+2. **Use a Build System**: You can use a build system like Setuptools or Pip to manage your dependencies and build your program. This makes it easier to install and run your program.
+3. **Test and Debug**: You can test and debug your program using tools like unittest, pytest, or pdb. This helps you catch and fix errors before deploying your program.
+4. **Profile and Optimise**: You can profile and optimise your program using tools like cProfile or line_profiler. This helps you identify performance bottlenecks and improve your program's efficiency.
+
+**Packaging and Deployment:**
+
+1. **Create a Distribution**: You can create a distribution package for your program using tools like Setuptools or PyInstaller. This package can include your program's code, dependencies, and metadata.
+2. **Upload to a Repository**: You can upload your distribution package to a repository like PyPI or GitHub. This makes it easy for others to install and use your program.
+3. **Deploy to a Server**: You can deploy your program to a server or cloud platform like AWS or Google Cloud. This makes it available to a wider audience and allows you to scale your program as needed.
+4. **Monitor and Maintain**: You can monitor and maintain your program's performance and security using tools like logging, monitoring, and security scanning. This helps you identify and fix issues before they become critical.
+
+Some popular tools and frameworks for packaging and deployment include:
+
+- Setuptools: A Python package manager that helps you create and distribute packages.
+- PyInstaller: A tool that converts Python scripts into standalone executables.
+- pip: A package installer for Python that makes it easy to install and manage dependencies.
+- Docker: A containerisation platform that allows you to package and deploy applications in a consistent and portable way.
+- Kubernetes: A container orchestration platform that helps you deploy and manage applications in a scalable and fault-tolerant way.
+
+By following these steps, you can transition from Jupyter Notebooks to Python scripts for final program development, packaging, and deployment. This helps you create a robust, maintainable, and scalable program that can be used by others.
+
+:::
+
+
+# Introduction to Version Control with GitHub
+
+- Keeps track of changes made
+- Allows for easy collaboration
+- Provides a backup of code
+- Helps resolve conflicts
+- Improves code quality
+- Git:  local command line version control
+- GitHub: Web-based platform for version control
+
+
+# File Input/Output Operations
+
+File input/output operations allow your program to read and write data to files on the file system.
+
+Python has several built-in functions for working with files, including:
+
+* `open()` to open a file
+* `read()` to read the contents of a file
+* `write()` to write data to a file
+* `close()` to close a file
+
+# File I/O Example
+```python
+with open("example.txt", "w") as file:
+    file.write("Hello, world!")
+
+with open("example.txt", "r") as file:
+    print(file.read())
+```
+
+Note: The `with` statement is used to ensure that the file is properly closed, even if an exception is thrown.
+
+
+# Introduction to Databases**
+
+A database is a collection of organised data that can be easily accessed, managed, and updated. In programming, databases are used to store and retrieve data efficiently.
+
+Python has several libraries for working with databases, including:
+
+- `sqlite3` for SQLite databases
+- `psycopg2` for PostgreSQL databases
+- `mysql-connector-python` for MySQL databases
+
+# Database Example
+```python
+import sqlite3
+
+# Create a connection to the database
+conn = sqlite3.connect("example.db")
+
+# Create a cursor object
+cursor = conn.cursor()
+
+# Create a table
+cursor.execute("""
+    CREATE TABLE users (
+        id INTEGER PRIMARY KEY,
+        name TEXT,
+        email TEXT
+    );
+""")
+
+# Insert some data
+cursor.execute("INSERT INTO users (name, email) VALUES ('John Doe', 'johndoe@example.com')")
+
+# Commit the changes
+conn.commit()
+
+# Close the connection
+conn.close()
+```
+
+
+# Data Visualisation**
+
+1. **Data**: The raw information being visualised.
+2. **Visualisation**: The graphical representation of the data.
+3. **Chart type**: The specific type of visualisation used, such as bar charts, line charts, or scatter plots.
+4. **Aesthetics**: The visual elements used to enhance the visualisation, such as colors, fonts, and layouts.
+5. **Interactivity**: The ability to interact with the visualisation, such as sooming, hovering, or clicking.
+
+# Matplotlib
+
+```python
+import matplotlib.pyplot as plt
+
+# Sample data
+x = [1, 2, 3, 4, 5]
+y = [2, 4, 6, 8, 10]
+
+# Create the figure and axis
+fig, ax = plt.subplots()
+
+# Plot the data
+ax.plot(x, y)
+
+# Set the title and labels
+ax.set_title('Simple Line Chart')
+ax.set_xlabel('X Axis')
+ax.set_ylabel('Y Axis')
+
+# Show the plot
+plt.show()
+```
+
+#  Web Scraping
+
+Web scraping is the process of automatically extracting data from websites. It involves sending an HTTP request to a website, receiving the HTML response, and then parsing the HTML to extract the desired data. Web scraping is useful for data mining, data analysis, and automation.
+
+
+# Simple Web Scrape Example
+```python
+import requests
+from bs4 import BeautifulSoup
+
+# Send an HTTP request to the website
+url = "https://www.example.com"
+response = requests.get(url)
+
+# Parse the HTML response using BeautifulSoup
+soup = BeautifulSoup(response.content, "html.parser")
+
+# Find all the links on the webpage
+links = soup.find_all("a")
+for link in links:
+    print(link.get("href"))
+```
+
+# Web Scraping Tips
+
+* Always check the website's terms of use and robots.txt file to make sure web scraping is allowed.
+* Be respectful of the website and don't overload it with requests.
+* Handle errors and exceptions properly.
+* Use a user agent to identify yourself and avoid being blocked.
+* Consider using a proxy server to hide your IP address.
+
+
+
+# API - Application Programming Interface
+
+APIs are a set of defined rules that enables different applications, services, or systems to communicate with each other. It allows data to be shared, processed, and used by different systems, making it a crucial part of modern software development.
+
+# Basics of APIs**
+
+- **API Type**: There are several types of APIs, including:
+    - **Web API**: A web API is an API that is accessed over the web, typically using HTTP requests and responses.
+    - **RESTful API**: A RESTful API is a type of web API that follows the REST (Representational State of Resource) architecture.
+    - **SOAP API**: A SOAP API is a type of web API that uses the SOAP (Simple Object Access Protocol) protocol.
+- **API Endpoint**: An API endpoint is a specific URL that is used to access a particular resource or functionality.
+- **API Request**: An API request is a request sent to an API endpoint to retrieve or modify data.
+- **API Response**: An API response is the data returned by the API in response to an API request.
+- **API Key**: An API key is a unique string of characters that is used to authenticate and authorise API requests.
+
+# Web API Example
+
+**API Endpoint**: `https://jsonplaceholder.typicode.com/todos/1`
+**API Request**: `GET https://jsonplaceholder.typicode.com/todos/1`
+**API Response**:
+```json
+{
+  "userId": 1,
+  "id": 1,
+  "title": "delectus aut autem",
+  "completed": false
+}
+```
+
+# Web API Python Code
+```python
+import requests
+
+# Send a GET request to the API endpoint
+response = requests.get("https://jsonplaceholder.typicode.com/todos/1")
+
+# Check if the response was successful
+if response.status_code == 200:
+    # Parse the JSON response
+    data = response.json()
+    print(data)
+else:
+    print("Error:", response.status_code)
+```
+
+# API Tips
+
+- Always check the API documentation to understand the available endpoints, request methods, and response formats.
+- Use the correct API key or authentication method to access the API.
+- Handle errors and exceptions properly.
+- Use a library like `requests` to simplify API requests and responses.
+
+
+# GUIs with Tkinter**
+
+A Graphical User Interface (GUI) is a type of user interface that allows users to interact with a computer program using visual elements such as windows, buttons, and menus. GUIs are designed to be more intuitive and user-friendly than command-line interfaces.
+
+Tkinter is a Python binding to the Tk GUI toolkit. It is the standard Python interface to Tk and is bundled with most standard Python distributions.
+
+# Basics of Graphical User Interfaces**
+
+- **Widgets**: A widget is a basic building block of a GUI. Examples of widgets include buttons, labels, text boxes, and menus.
+- **Layout**: The layout of a GUI refers to the arrangement of widgets on the screen. This can be done using various layout managers such as grid, pack, and place.
+- **Events**: Events are actions that occur when a user interacts with a GUI, such as clicking a button or typing in a text box. GUIs use event handlers to respond to these events.
+
+# GUI Example**
+
+```python
+import tkinter as tk
+
+def create_widgets(master):
+    # Button to display "Hello World" and print a message on click
+    hi_there = tk.Button(master, text="Hello World\n(click me)", command=say_hi)
+    hi_there.pack(side="top")
+    
+    # Button to quit the application
+    quit_button = tk.Button(master, text="QUIT", fg="red", command=master.destroy)
+    quit_button.pack(side="bottom")
+
+def say_hi():
+    print("hi there, everyone!")
+
+# Create the main window
+root = tk.Tk()
+
+# Call the function to create widgets
+create_widgets(root)
+
+# Start the main event loop
+root.mainloop()
+```
+
+# GUI Tips
+
+- Always use a consistent layout and design for your GUI.
+- Use meaningful and descriptive names for your widgets and variables.
+- Handle events and errors properly.
+- Use a GUI builder or IDE to simplify the process of building GUIs.
+
+
+# Conclusion - Recap of Learning Points
+
+- **Data Representation and Types** Computers store and interpret data as binary sequences (0s and 1s), with data types defining how these sequences are understood and manipulated (e.g., as numbers, text, or multimedia).
+- **Six Fundamental Operations:** Mastering these operations provides the foundation for all programming tasks, enabling you to gather, process, and present data effectively.
+- **Problem-Solving Framework:** This structured approach helps break down complex problems into manageable steps, ensuring a systematic and thorough solution.
+
+Understanding data representation and types is fundamental to all aspects of programming. It underpins how input is processed, calculations are performed, decisions are made, and output is generated. Mastery of data types ensures that solutions are robust, efficient, and correct, seamlessly integrating with the six fundamental operations and the structured problem-solving framework.
+
+::: {.notes}
+
+#### 1. Summary of Six Fundamental Operations
+
+- **Input:**
+  - Gathering data into the program from various sources such as user input, files, databases, and APIs.
+  - Example: Using `input()` to read user input, reading from a CSV file, fetching data from an online API.
+
+- **Output:**
+  - Displaying results or information to the user, saving data to files, or creating visualisations.
+  - Example: Using `print()` to output text, writing to a file, creating plots with Matplotlib.
+
+- **Calculation:**
+  - Performing mathematical operations to process and analyse data.
+  - Example: Arithmetic operations like addition and multiplication, statistical calculations using NumPy or pandas.
+
+- **Store/Assignment:**
+  - Storing data in variables for later use and updating these variables as needed.
+  - Example: Assigning values to variables, updating variable values based on calculations or user input.
+
+- **Make Decisions (If/Then):**
+  - Using conditional statements to execute different actions based on specific conditions.
+  - Example: Using `if`, `else`, and `elif` statements to handle different temperature ranges.
+
+- **Going Loopy (for, while):**
+  - Repeating tasks iteratively using loops to process collections of data or perform repeated actions.
+  - Example: Using `for` loops to iterate over a list of temperatures, using `while` loops for continuous data processing.
+
+#### 2. Importance of Problem-Solving Framework
+
+- **Understanding the Problem:**
+  - Clearly defining the problem to be solved and identifying the key requirements.
+  - Example: Determining the need to convert temperatures from Fahrenheit to Celsius.
+
+- **Define Inputs and Outputs:**
+  - Identifying what data is needed as input and what the expected output should be.
+  - Example: Input is the temperature in Fahrenheit, and the output is the temperature in Celsius.
+
+- **Work the Problem by Hand:**
+  - Manually solving the problem with sample data to understand the steps involved.
+  - Example: Converting a sample temperature from Fahrenheit to Celsius manually.
+
+- **Write Pseudo Code:**
+  - Creating a high-level outline of the steps needed to solve the problem in a programming language.
+  - Example: Writing pseudo code for the temperature conversion algorithm.
+
+- **Convert to Python Code:**
+  - Translating the pseudo code into actual Python code, ensuring the logic is correctly implemented.
+  - Example: Implementing the temperature conversion in Python using functions.
+
+- **Test with Data:**
+  - Testing the Python code with various inputs to ensure it works correctly and handles edge cases.
+  - Example: Testing the temperature conversion function with different temperature values.
+
+
+### Data Representation and Types
+
+**Elaboration:**
+
+Computers fundamentally store and process data as sequences of binary digits (0s and 1s). These binary sequences form the basis for all types of data a computer can handle. The concept of data types is crucial because it tells the computer how to interpret these binary sequences, whether as numbers, text, images, sound, or more complex structures like documents and videos. Here's a deeper look at how data representation and types are foundational and their relationship to the six fundamental operations and the problem-solving framework:
+
+#### How Data Representation and Types Relate to the Six Fundamental Operations:
+
+1. **Input:**
+   - **Relevance:** When inputting data into a program, knowing the data type is essential for correctly interpreting and processing the input. For instance, user inputs are often strings that may need conversion to other types (e.g., integers or floats) for calculations.
+   - **Example:** Reading a temperature input as a string and converting it to a float for further processing.
+
+2. **Output:**
+   - **Relevance:** When outputting data, the format and type must be considered to ensure the information is presented correctly. Different data types may require different formatting techniques.
+   - **Example:** Displaying a temperature value with appropriate units (°C or °F) and ensuring it's correctly formatted as a number.
+
+3. **Calculation:**
+   - **Relevance:** Calculations require an understanding of numeric data types (integers, floats) to perform arithmetic operations accurately.
+   - **Example:** Converting temperatures between different scales involves arithmetic operations on float values.
+
+4. **Store/Assignment:**
+   - **Relevance:** Storing data in variables requires assigning appropriate types to ensure correct manipulation and retrieval. Data types dictate the operations that can be performed on the stored data.
+   - **Example:** Assigning a temperature reading to a float variable and later updating it based on new input.
+
+5. **Make Decisions (If/Then):**
+   - **Relevance:** Decision-making relies on Boolean expressions that often compare values of specific types. The result of these comparisons dictates the program’s flow.
+   - **Example:** Checking if a temperature value exceeds a certain threshold to determine whether it's hot or cold.
+
+6. **Going Loopy (for, while):**
+   - **Relevance:** Iterating over collections of data (like lists or arrays) requires understanding the data type of elements being processed to apply appropriate operations.
+   - **Example:** Looping through a list of temperature readings to find the highest value.
+
+#### How Data Representation and Types Relate to the Problem-Solving Framework:
+
+1. **Understanding the Problem:**
+   - **Importance:** Identifying the types of data involved is crucial for defining the problem accurately. This step sets the stage for deciding how data will be handled throughout the solution.
+   - **Example:** Recognising that temperatures need to be processed as floats for accurate conversion between scales.
+
+2. **Define Inputs and Outputs:**
+   - **Importance:** Clearly defining data types for inputs and outputs ensures that the solution will handle data correctly and predictably.
+   - **Example:** Specifying that input temperatures will be floats and output temperatures will be formatted strings.
+
+3. **Work the Problem by Hand:**
+   - **Importance:** Manually solving the problem with known data types helps in understanding the operations required and ensures the logical correctness of the approach.
+   - **Example:** Manually converting a temperature from Fahrenheit to Celsius, noting the arithmetic operations involved.
+
+4. **Write Pseudo Code:**
+   - **Importance:** Pseudo code helps in abstracting the problem and specifying data types without worrying about syntax, ensuring the logical flow is sound.
+   - **Example:** Outlining steps for temperature conversion, including type conversion operations.
+
+5. **Convert to Python Code:**
+   - **Importance:** Translating pseudo code to Python involves explicitly defining and using data types correctly to implement the solution.
+   - **Example:** Implementing the conversion algorithm with correct type handling in Python.
+
+6. **Test with Data:**
+   - **Importance:** Testing the program with various data types ensures that all edge cases and typical scenarios are handled correctly, confirming the robustness of the solution.
+   - **Example:** Testing the temperature conversion function with a range of input values, ensuring accurate outputs.
+
+
+### Conclusion:
+
+Understanding data representation and types is fundamental to all aspects of programming. It underpins how input is processed, calculations are performed, decisions are made, and output is generated. Mastery of data types ensures that solutions are robust, efficient, and correct, seamlessly integrating with the six fundamental operations and the structured problem-solving framework.
+
+By understanding and applying, data representation, the six fundamental operations and the problem-solving framework, you are equipped with the essential tools to tackle a wide range of programming challenges. These skills form the backbone of effective programming, empowering you to develop robust and efficient solutions.
+
+:::
+
+# Final Thoughts
+
+> "You are braver than you believe, stronger than you seem, and smarter than you think."  
+> — A.A. Milne, *Winnie the Pooh*
+
+**Thank you for your hard work and dedication. Remember, you have the strength and intelligence to tackle any challenge that comes your way. Keep pushing forward, and believe in yourself!**

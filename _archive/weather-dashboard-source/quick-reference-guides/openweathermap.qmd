@@ -1,0 +1,110 @@
+---
+title: "A Guide to the OpenWeatherMap API"
+subtitle: Weather the storm and conquer the OpenWeatherMap API
+author: "Michael Borck"
+format:
+  pdf:
+    toc: false
+    number-sections: false
+    colorlinks: true
+    encoding: "UTF-8"
+  docx:
+    toc: false
+    number-sections: false
+    highlight-style: github
+  html:
+    toc: true
+    toc-expand: 2
+    embed-resources: true
+---
+
+## Welcome to the OpenWeatherMap API quick reference guide
+
+As a developer, you're likely no stranger to the world of APIs. But when it comes to the OpenWeatherMap API, it can be overwhelming to navigate the vast array of endpoints, parameters, and responses. That's where this quick reference guide comes in.
+
+In this comprehensive guide, we'll take you on a journey through the OpenWeatherMap API, covering everything from the basics of authentication to the intricacies of weather forecasting. Whether you're a seasoned developer or just starting out, this quick reference guide is designed to help you master the OpenWeatherMap API and unlock the secrets of the weather.
+
+### What's Inside
+
+This quick reference guide covers the following topics:
+
+* API Endpoints: Learn about the different endpoints available in the OpenWeatherMap API, including current weather conditions, 5-day forecasts, and more.
+* API Parameters: Discover the various parameters you can use to customize your API requests, such as units of measurement, language, and more.
+* API Responses: Get a breakdown of the different response formats and data structures you can expect from the OpenWeatherMap API.
+* Error Handling: Learn how to handle common errors and exceptions when working with the OpenWeatherMap API.
+* Tips and Tricks: Get insider tips and tricks for optimizing your API requests and working with the OpenWeatherMap API.
+
+## Who is this quick reference guide For?
+
+This quick reference guide is designed for anyone who wants to get the most out of the OpenWeatherMap API. Whether you're a:
+
+* Developer looking to integrate weather data into your app or website
+* Researcher seeking to analyze weather patterns and trends
+* Weather enthusiast curious about the inner workings of the OpenWeatherMap API
+
+This quick reference guide is for you.
+
+So, let's get started and dive into the world of OpenWeatherMap API!
+
+
+## API Endpoints
+
+* `api.openweathermap.org/data/2.5/weather`: Current weather conditions
+* `api.openweathermap.org/data/2.5/forecast`: 5-day forecast
+* `api.openweathermap.org/data/2.5/onecall`: Current weather conditions and 5-day forecast
+
+## API Parameters
+
+* `q`: City name or zip code (required)
+* `units`: Units of measurement (imperial or metric)
+* `lang`: Language for weather descriptions (en, fr, es, etc.)
+* `appid`: Your OpenWeatherMap API key (required)
+
+## API Requests
+
+* `GET /weather`: Retrieve current weather conditions
+	+ Example: `https://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_API_KEY`
+* `GET /forecast`: Retrieve 5-day forecast
+	+ Example: `https://api.openweathermap.org/data/2.5/forecast?q=London&appid=YOUR_API_KEY`
+* `GET /onecall`: Retrieve current weather conditions and 5-day forecast
+	+ Example: `https://api.openweathermap.org/data/2.5/onecall?q=London&appid=YOUR_API_KEY`
+
+## API Response
+
+* `weather`: Current weather conditions
+	+ `main`: Weather condition (e.g. "Clouds")
+	+ `description`: Weather description (e.g. "overcast clouds")
+	+ `icon`: Weather icon (e.g. "04d")
+* `forecast`: 5-day forecast
+	+ `list`: Array of forecast data
+		- `dt`: Timestamp (Unix epoch)
+		- `main`: Weather condition (e.g. "Clouds")
+		- `description`: Weather description (e.g. "overcast clouds")
+		- `icon`: Weather icon (e.g. "04d")
+* `current`: Current weather conditions
+	+ `temp`: Temperature (in Kelvin)
+	+ `humidity`: Humidity (percentage)
+	+ `wind_speed`: Wind speed (m/s)
+	+ `wind_deg`: Wind direction (degrees)
+
+## Error Handling
+
+* `HTTP 404`: City not found
+* `HTTP 401`: Invalid API key
+* `HTTP 500`: Internal server error
+
+## Tips and Tricks
+
+* Use the `appid` parameter to authenticate your API requests
+* Use the `units` parameter to specify the units of measurement (imperial or metric)
+* Use the `lang` parameter to specify the language for weather descriptions
+* Use the `q` parameter to specify the city name or zip code
+* Use the `forecast` endpoint to retrieve a 5-day forecast
+* Use the `onecall` endpoint to retrieve current weather conditions and 5-day forecast
+
+## API Key
+
+* Sign up for a free API key on the OpenWeatherMap website
+* Use your API key in the `appid` parameter of your API requests
+
+I hope this quick reference guide helps you get started with the OpenWeatherMap API!

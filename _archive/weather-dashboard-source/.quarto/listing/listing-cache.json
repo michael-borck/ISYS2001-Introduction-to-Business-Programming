@@ -1,0 +1,22 @@
+{
+  "listingMap": {
+    "index.qmd": [
+      "slides.qmd",
+      "notebooks.qmd",
+      "worksheets.qmd",
+      "quick-reference-guides.qmd"
+    ],
+    "notebooks.qmd": [
+      "notebooks"
+    ],
+    "quick-reference-guides.qmd": [
+      "quick-reference-guides"
+    ],
+    "worksheets.qmd": [
+      "worksheets"
+    ],
+    "slides.qmd": [
+      "slides"
+    ]
+  }
+}

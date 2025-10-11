@@ -1,0 +1,150 @@
+---
+title: "WeatherVista Project - Session 6b: Creating a GUI with Tkinter"
+execute: 
+  enabled: false
+---
+
+## Objectives
+- Learn how to create a graphical user interface (GUI) for the WeatherVista project.
+- Understand the basics of Tkinter for building desktop applications.
+- Explore using Tkinter Widgets for interactive elements in a GUI.
+
+## 1. Introduction to Tkinter
+Tkinter is a standard Python library for creating desktop GUIs. It provides various widgets to build interactive applications.
+
+### Import Required Libraries
+```{python}
+import tkinter as tk
+from tkinter import ttk
+import pandas as pd
+```
+
+## 2. Creating a Basic Tkinter Window
+We'll start by creating a basic Tkinter window.
+
+```{python}
+def create_window():
+    window = tk.Tk()
+    window.title("WeatherVista Dashboard")
+    window.geometry("600x400")
+    
+    # Add a label
+    label = ttk.Label(window, text="WeatherVista Dashboard", font=("Arial", 16))
+    label.pack(pady=20)
+    
+    window.mainloop()
+
+create_window()
+```
+
+## 3. Adding Widgets to the Tkinter Window
+We'll add various widgets such as labels, buttons, and entry fields to the Tkinter window.
+
+### Adding Entry Fields and Buttons
+```{python}
+def create_window():
+    def fetch_weather():
+        location = location_entry.get()
+        # Fetch and display weather data for the entered location
+        # This is a placeholder function, replace with actual data fetching logic
+        weather_data_label.config(text=f"Weather data for {location}")
+
+    window = tk.Tk()
+    window.title("WeatherVista Dashboard")
+    window.geometry("600x400")
+    
+    # Add a label
+    label = ttk.Label(window, text="WeatherVista Dashboard", font=("Arial", 16))
+    label.pack(pady=20)
+    
+    # Add entry field for location
+    location_label = ttk.Label(window, text="Enter Location:")
+    location_label.pack(pady=5)
+    location_entry = ttk.Entry(window)
+    location_entry.pack(pady=5)
+    
+    # Add a button to fetch weather data
+    fetch_button = ttk.Button(window, text="Fetch Weather", command=fetch_weather)
+    fetch_button.pack(pady=10)
+    
+    # Add a label to display weather data
+    weather_data_label = ttk.Label(window, text="", font=("Arial", 12))
+    weather_data_label.pack(pady=20)
+    
+    window.mainloop()
+
+create_window()
+```
+
+## 4. Displaying Data in Tkinter
+We'll fetch and display weather data in the Tkinter window.
+
+### Fetching and Displaying Weather Data
+```{python}
+import requests
+
+def fetch_weather_data(api_key, location):
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={api_key}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        weather_info = {
+            "Location": data["name"],
+            "Temperature (C)": data["main"]["temp"] - 273.15,
+            "Humidity (%)": data["main"]["humidity"],
+            "Weather": data["weather"][0]["description"]
+        }
+        return weather_info
+    else:
+        return None
+
+def create_window():
+    def fetch_weather():
+        location = location_entry.get()
+        weather_data = fetch_weather_data(api_key, location)
+        if weather_data:
+            weather_info = f"Location: {weather_data['Location']}\n"
+            weather_info += f"Temperature: {weather_data['Temperature (C)']:.2f} °C\n"
+            weather_info += f"Humidity: {weather_data['Humidity (%)']}%\n"
+            weather_info += f"Weather: {weather_data['Weather']}"
+            weather_data_label.config(text=weather_info)
+        else:
+            weather_data_label.config(text="Failed to fetch data")
+
+    window = tk.Tk()
+    window.title("WeatherVista Dashboard")
+    window.geometry("600x400")
+    
+    api_key = 'your_api_key_here'
+    
+    # Add a label
+    label = ttk.Label(window, text="WeatherVista Dashboard", font=("Arial", 16))
+    label.pack(pady=20)
+    
+    # Add entry field for location
+    location_label = ttk.Label(window, text="Enter Location:")
+    location_label.pack(pady=5)
+    location_entry = ttk.Entry(window)
+    location_entry.pack(pady=5)
+    
+    # Add a button to fetch weather data
+    fetch_button = ttk.Button(window, text="Fetch Weather", command=fetch_weather)
+    fetch_button.pack(pady=10)
+    
+    # Add a label to display weather data
+    weather_data_label = ttk.Label(window, text="", font=("Arial", 12))
+    weather_data_label.pack(pady=20)
+    
+    window.mainloop()
+
+create_window()
+```
+
+## Homework
+- Experiment with adding more widgets and interactivity to the Tkinter or Jupyter Widgets dashboard.
+- Customise the layout and design of the GUI to improve user experience.
+
+## Summary
+In this session, we learned how to create a graphical user interface (GUI) for the WeatherVista project using Tkinter and Jupyter Widgets. We created interactive elements to fetch and display weather data, providing a more engaging user experience.
+
+Next session, we will focus on writing and running tests with pytest and doctest.

@@ -1,0 +1,11 @@
+---
+listing:
+  contents: 
+    - slides.qmd
+    - notebooks.qmd
+    - worksheets.qmd
+    - quick-reference-guides.qmd
+  sort: "manual"
+  type: grid
+  image-height: "0"
+---

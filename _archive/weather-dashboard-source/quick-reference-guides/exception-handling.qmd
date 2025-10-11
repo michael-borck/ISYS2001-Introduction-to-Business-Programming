@@ -1,0 +1,135 @@
+---
+title: "Exception Handling in Python: A Comprehensive Guide"
+subtitle: Catch those exceptions before they crash your code!
+author: "Michael Borck"
+format:
+  pdf:
+    toc: false
+    number-sections: false
+    colorlinks: true
+    encoding: "UTF-8"
+  docx:
+    toc: false
+    number-sections: false
+    highlight-style: github
+  html:
+    toc: true
+    toc-expand: 2
+    embed-resources: true
+---
+
+## Introduction
+
+Exception handling is an essential part of writing robust and reliable Python code. When an error occurs, Python's exception handling mechanism allows you to catch and handle the exception, providing a way to recover from the error and continue executing your code. In this quick reference guide, we'll explore the basics of exception handling in Python, including how to write try-except blocks, handle different types of exceptions, and log errors for debugging purposes.
+
+Whether you're a beginner or an experienced Python developer, mastering exception handling is crucial for writing robust and maintainable code. With this quick reference guide, you'll learn how to:
+
+* Write try-except blocks to catch and handle exceptions
+* Handle different types of exceptions, such as ValueError, TypeError, and IOError
+* Log errors for debugging purposes
+* Use finally blocks to execute code regardless of whether an exception is thrown
+* Rethrow exceptions to propagate them up the call stack
+
+By the end of this quick reference guide, you'll be well-equipped to handle exceptions in your Python code and write more robust and reliable software.
+
+Here is a Python error handling quick reference guide:
+
+**Error Handling Basics**
+
+* `try`: Used to enclose a block of code where errors might occur.
+* `except`: Used to catch and handle errors.
+* `finally`: Used to execute code regardless of whether an exception was thrown or not.
+
+**Try-Except Blocks**
+
+* `try`-`except` block:
+```python
+try:
+    # code that might raise an error
+except ExceptionType:
+    # code to handle the error
+```
+* `try`-`except`-`else` block:
+```python
+try:
+    # code that might raise an error
+except ExceptionType:
+    # code to handle the error
+else:
+    # code to execute if no error occurs
+```
+* `try`-`except`-`finally` block:
+```python
+try:
+    # code that might raise an error
+except ExceptionType:
+    # code to handle the error
+finally:
+    # code to execute regardless of whether an error occurred
+```
+**Error Types**
+
+* `Exception`: The base class for all exceptions in Python.
+* `ValueError`: Raised when a function receives an invalid argument.
+* `TypeError`: Raised when a function receives an argument of the wrong type.
+* `IOError`: Raised when there is a problem with input/output operations.
+* `RuntimeError`: Raised when a runtime error occurs.
+
+**Raising Errors**
+
+* `raise`: Used to raise an exception.
+```python
+raise ExceptionType("error message")
+```
+* `raise` with an argument:
+```python
+raise ExceptionType("error message", arg1, arg2)
+```
+* `raise` with a value:
+```python
+raise ValueError("Invalid input")
+```
+* `raise` with a message and a value:
+```python
+raise ValueError("Invalid input", 42)
+```
+**Error Handling Best Practices**
+
+* Catch specific exceptions instead of catching the general `Exception` class.
+* Log errors instead of ignoring them.
+* Provide a meaningful error message.
+* Handle errors in a central location (e.g., in a `try`-`except` block) instead of spreading them throughout the code.
+
+**Common Error Handling Scenarios**
+
+* Handling a specific exception:
+```python
+try:
+    # code that might raise an exception
+except ValueError:
+    # handle the ValueError
+```
+* Handling multiple exceptions:
+```python
+try:
+    # code that might raise multiple exceptions
+except (ValueError, TypeError):
+    # handle the exceptions
+```
+* Handling an exception and re-raising it:
+```python
+try:
+    # code that might raise an exception
+except ExceptionType:
+    # handle the exception
+    raise
+```
+* Handling an exception and logging it:
+```python
+try:
+    # code that might raise an exception
+except ExceptionType:
+    # handle the exception
+    logging.error("Error occurred")
+```
+I hope this helps! Let me know if you have any questions or need further clarification.

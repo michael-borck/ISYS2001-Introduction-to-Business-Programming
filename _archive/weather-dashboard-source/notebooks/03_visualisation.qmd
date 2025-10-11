@@ -1,0 +1,123 @@
+---
+title: "WeatherVista Project - Session 3: Basic Data Visualisation with Matplotlib and Pandas"
+execute: 
+  enabled: false
+---
+
+## Objectives
+- Learn how to visualise weather data using Matplotlib.
+- Understand how to create basic plots to represent weather data.
+- Customise plots to enhance readability and presentation.
+
+## 1. Introduction to Basic Visualization
+Basic visualizations help in understanding data by providing a graphical representation.
+
+### Import Required Libraries
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+```
+
+## 2. Reading Data
+We’ll start by reading the processed weather data from the CSV file.
+
+```{python}
+df = pd.read_csv('processed_weather_data.csv')
+df['Datetime'] = pd.to_datetime(df['Datetime'])
+df.head()
+```
+
+## 3. Creating Basic Plots
+
+### Line Plot for Temperature Over Time
+```{python}
+# Select every 6th datetime value for x-ticks
+x_ticks = df['Datetime'][::6]
+
+plt.figure(figsize=(10, 6))
+plt.plot(df['Datetime'], df['Temperature (C)'], marker='o')
+plt.title('Temperature over Time')
+plt.xlabel('Datetime')
+plt.ylabel('Temperature (°C)')
+plt.xticks(ticks=x_ticks, rotation=45)
+plt.grid(True)
+plt.show()
+```
+
+### Bar Plot for Humidity Over Time
+```{python}
+plt.figure(figsize=(10, 6))
+plt.bar(df['Datetime'], df['Humidity (%)'], color='skyblue')
+plt.title('Humidity over Time')
+plt.xlabel('Datetime')
+plt.ylabel('Humidity (%)')
+plt.xticks(ticks=x_ticks, rotation=45)
+plt.show()
+```
+
+### Pie Chart for Weather Description Distribution
+```{python}
+weather_counts = df['Weather'].value_counts()
+
+plt.figure(figsize=(8, 8))
+plt.pie(weather_counts, labels=weather_counts.index, autopct='%1.1f%%', startangle=140)
+plt.title('Weather Description Distribution')
+plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+plt.show()
+```
+
+### Scatter Plot for Temperature vs. Wind Speed
+```{python}
+plt.figure(figsize=(10, 6))
+plt.scatter(df['Temperature (C)'], df['Wind Speed (m/s)'], c='g', marker='o')
+plt.title('Temperature vs. Wind Speed')
+plt.xlabel('Temperature (°C)')
+plt.ylabel('Wind Speed (m/s)')
+plt.grid(True)
+plt.show()
+```
+
+## 4. Customizing Plots
+Customizing plots can make them more informative and visually appealing.
+
+### Adding Annotations
+```{python}
+plt.figure(figsize=(10, 6))
+plt.plot(df['Datetime'], df['Temperature (C)'], marker='o')
+plt.title('Temperature over Time')
+plt.xlabel('Datetime')
+plt.ylabel('Temperature (°C)')
+plt.xticks(ticks=x_ticks, rotation=45)
+plt.grid(True)
+
+# Annotate the highest temperature
+max_temp = df['Temperature (C)'].max()
+max_temp_time = df.loc[df['Temperature (C)'] == max_temp, 'Datetime'].iloc[0]
+plt.annotate(f'Max Temp: {max_temp:.2f}°C', xy=(max_temp_time, max_temp), 
+             xytext=(max_temp_time, max_temp+2), 
+             arrowprops=dict(facecolor='black', shrink=0.05))
+
+plt.show()
+```
+
+### Customizing Colors and Styles
+```{python}
+plt.figure(figsize=(10, 6))
+plt.plot(df['Datetime'], df['Temperature (C)'], marker='o', linestyle='--', color='b')
+plt.title('Temperature over Time', fontsize=14, fontweight='bold')
+plt.xlabel('Datetime', fontsize=12)
+plt.ylabel('Temperature (°C)', fontsize=12)
+plt.xticks(ticks=x_ticks, rotation=45)
+plt.grid(True, linestyle='--', linewidth=0.5)
+
+plt.show()
+```
+
+## Homework
+- Create additional plots to visualize other aspects of the weather data (e.g., wind speed, pressure).
+- Experiment with different types of plots and customizations to enhance the visualizations.
+
+## Summary
+In this session, we learned how to visualize weather data using Matplotlib. We created basic plots such as line plots, bar plots, pie charts, and scatter plots, and we customized these plots to improve readability and presentation.
+
+Next session, we will focus on advanced data visualization techniques using subplots and grids.

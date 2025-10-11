@@ -1,0 +1,157 @@
+---
+title: "Python Essentials"
+subtitle: "Overview and Setup"
+author: "Michael Borck"
+format: 
+  pptx:
+    reference-doc: ../../course-documents/custom-reference-doc.pptx
+  pdf:
+      toc: false
+      colorlinks: true
+  docx:
+      toc: false
+      highlight-style: github
+  html:
+      toc: true
+      toc-expand: 2
+      embed-resources: true
+---
+
+# 
+![](../images/curtin-copy-right.png)
+
+
+# Acknowledge of Country
+I acknowledge the traditional custodians of the land on which I work and live,
+and recognise their continuing connection to land, water and community. I pay
+respect to elders past, present and emerging.
+
+![](../images/ack_country_small.png)
+
+# Today
+
+* Break a problems down into simple actions
+* Actions carry out simple tasks
+* A set of actions is called an algorithm
+* Algorithms expressed as Pseudocode
+* Coding is translating an algorithm to a program
+* Six operations a computer can do
+
+# Problem Solving
+“The biggest mistake I see new programmers make is focusing on learning syntax instead of learning how to solve problems\.”
+
+— V\. Anton Spraul\, Think Like a Programmer: An Introduction to Creative Problem solving
+
+
+# Problem Solving Methodology
+
+* State the problem clearly
+* Describe the input and output
+* Work a simple example by hand
+* Develop and algorithm
+* Convert to Python (or some other languagE)
+* Test solution with a variety of data
+
+# State the Problem Clearly
+“If you can’t explain something in simple terms\, you don’t understand it\.”
+
+— Richard Feynman
+
+![](img/02_Python_Objects1.png)
+
+# Rubber Duck
+
+![](img/02_Python_Objects2.png)
+
+
+# Psuedocode
+
+* List the steps
+* Use short phrases \(make it easier to convert\)
+* No Syntax or rules
+* Not a language  \(not compiled or executed\)
+* Communication tool
+* Logic of the solution
+* Translate into a programming language
+
+
+# Psuedocode Example
+
+```text
+Pick up dictionary
+Open to middle of dictionary
+Look at page
+If word is on page
+   Read definition
+Else if word is earlier in book
+   Open to middle of left half of book
+   Go back to line 3
+Else if word is later in book
+   Open to middle of right half of book
+   Go back to line 3
+Else
+   Quit
+```
+
+# Only Six  Operations
+
+* Receive Information
+* Output Information
+* Perform Arithmetic
+* Assign a value to a variable
+* Compare to variables
+* Repeat a group of actions.
+
+
+# Computer can…
+
+* Store Values
+* Perform Operations
+
+# What are values?
+
+* Single Value
+  * Integer
+  * Float
+  * Character
+  * Boolean
+
+![](img/02_Python_Objects3.png)
+
+# Variables
+
+A  _variable_  is the name given to a part of the computers memory\, designed to store a particular data item\.
+
+![](img/02_Python_Objects4.png)
+
+
+# Variable Names
+
+* Rules
+  * Only letters\, numbers\, and the underscore character \(\_\)
+  * No spaces
+  * No quotes
+  * Can’t start with a number
+  * Can't be a keyword import
+* Conventions
+  * variable names should be meaningful
+  * separate words with underscores  \(snake\_case\)
+
+
+# Operators
+
+![](img/02_Python_Objects5.png)
+
+
+# Relational Operators
+![](img/02_Python_Objects6.png)
+
+
+# Can you
+
+* Break a problems down into simple actions
+* Actions carry out simple tasks
+* A set of actions is called an algorithm
+* Algorithms expressed as Pseudocode
+* Coding is translating an algorithm to a program
+* Six operations a computer can do

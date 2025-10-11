@@ -1,0 +1,589 @@
+---
+title: "Mastering Web Scraping and APIs in Python"
+subtitle: "Unlock the Power of Data Extraction and Integration"
+author: "Michael Borck"
+format:
+    pptx:
+      reference-doc: ../template.pptx
+    pdf:
+      toc: true
+      colorlinks: true
+    docx:
+      toc: true
+      highlight-style: github
+    html:
+      toc: true
+      toc-expand: 2
+      embed-resources: true
+---
+
+# What is Web Scraping?
+
+Web scraping is an automated method used to extract large amounts of data from websites.
+It involves fetching the web page and extracting specific information according to the user's needs.
+How Does It Work?
+
+Web scraping tools (like BeautifulSoup, Scrapy) parse the HTML of web pages.
+They identify and extract the data elements based on HTML tags, attributes, or other patterns.
+Common Uses of Web Scraping:
+
+Web scraping is a powerful tool for extracting data from websites, enabling a wide range of applications from market analysis to sentiment analysis. Understanding its definition and common uses will help you identify potential use cases for your projects.
+
+# Data Collection for ....
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- Research Data: Collecting data on climate patterns from weather websites for environmental research.
+- Use Case: Researchers can gather data from multiple sources to analyze trends and make predictions.
+
+- Price Monitoring: Scraping e-commerce sites to track product prices.
+- Use Case: Businesses and consumers can monitor price changes and market trends to make informed decisions.
+
+- Market Analysis: Extracting customer reviews and ratings from review websites.
+- Use Case: Companies can analyze feedback to improve products and services.
+
+- Content Aggregation: Collecting news articles from various news websites.
+- Use Case: News aggregators can compile articles from different sources to provide a comprehensive news feed.
+:::
+
+::: {.column width="50%"}
+- Lead Generation Example: Scraping contact information from business directories.
+- Use Case: Sales and marketing teams can build lists of potential clients for outreach.
+
+- Job Listings: Extracting job postings from job boards.
+- Use Case: Job seekers can use aggregated job listings to find employment opportunities more efficiently.
+
+- Sentiment Analysis: Collecting social media posts or comments for sentiment analysis.
+- Use Case: Businesses can gauge public opinion and sentiment towards their brand or products.
+:::
+
+> Have you ever needed data from a website that wasn't available for download? How would web scraping help in that situation?
+
+::::
+
+
+
+# What is an API?
+
+An Application Programming Interface (API) is a set of rules and protocols for building and interacting with software applications.
+APIs define methods and data formats that applications use to communicate with each other.
+
+APIs are fundamental to modern software development, enabling seamless integration and communication between different software systems. Understanding APIs' definition and common uses will help you leverage them effectively in your projects.
+
+# Key Characteristics of APIs:
+
+- Interoperability: APIs enable different software systems to work together.
+- Abstraction: APIs provide a layer of abstraction, allowing developers to use functionality without needing to understand the underlying code.
+- Reusability: APIs allow developers to reuse existing functionalities, speeding up development and promoting consistency.
+
+
+# Common Uses of APIs:
+
+
+:::: {.columns}
+
+::: {.column width="40%"}
+- Web APIs: Using the OpenWeatherMap API to get weather data.
+- Use Case: Integrating real-time weather updates into an application.
+
+- Social Media APIs: Twitter API, Facebook Graph API.
+- Use Case: Posting updates to social media platforms, retrieving user data, or accessing social media analytics.
+
+- Payment Gateway APIs: PayPal API, Stripe API.
+- Use Case: Facilitating online payments, managing transactions, and integrating payment solutions into e-commerce websites.
+:::
+
+::: {.column width="60%"}
+- Maps and Geolocation APIs: Google Maps API, Mapbox API.
+- Use Case: Embedding maps into websites or apps, providing directions, and geocoding addresses.
+
+- Data Access APIs: Public APIs from government agencies or open data sources.
+- Use Case: Accessing datasets for research, analytics, or application development.
+
+- Communication APIs: Twilio API.
+- Use Case: Sending SMS, making phone calls, or managing video calls programmatically.
+contents...
+:::
+
+> Can you think of any applications or services you use daily that might be powered by APIs?
+
+::::
+
+
+
+
+# Webscraping vs APIs
+
+  | Feature            | Web Scraping                           | APIs                                      |
+  |--------------------|----------------------------------------|-------------------------------------------|
+  | Method of Access   | Extracts HTML content from web pages   | Sends requests to a server for structured data |
+  | Data Structure     | Often unstructured or semi-structured  | Well-structured (JSON/XML)                |
+  | Reliability        | Less reliable, can break if HTML changes | More stable, with documented endpoints   |
+  | Ease of Use        | More complex setup, especially for dynamic content | Easier with documentation and SDKs  |
+
+> Can you think of a scenario where web scraping might be more beneficial than using an API, and vice versa?
+
+# Legal Aspects and Compliance:
+
+1. **Terms of Service:**
+   - **Adherence:** Always review and adhere to the terms of service (ToS) of the websites and APIs you are accessing. Violating ToS can lead to legal action.
+   - **Example:** Some sites explicitly prohibit scraping in their ToS.
+2. **Intellectual Property:**
+   - **Respect:** Do not scrape content that is protected by copyright without permission. This includes images, articles, and other copyrighted materials.
+   - **Fair Use:** Understand the limitations and rights under the fair use doctrine.
+3. **Data Protection Laws:**
+   - **Regulations:** Comply with data protection laws such as GDPR (General Data Protection Regulation) in the EU, and CCPA (California Consumer Privacy Act) in the USA.
+   - **User Rights:** Ensure that any personal data collected is handled according to the rights of the data subjects, including the right to access and delete their data.
+4. **APIs Compliance:**
+   - **Rate Limits:** Abide by the rate limits and usage policies set by API providers to avoid getting banned.
+   - **Attribution:** Provide proper attribution if required by the API provider.
+
+# Ethical Considerations:
+
+1. **Respect for Website Owners:**
+   - **Permission:** Always check if the website allows scraping. Look for a `robots.txt` file to understand the site's policy.
+   - **Respect Load:** Avoid placing excessive load on a website by making too many requests in a short period. Use delays and rate limiting.
+2. **Data Privacy:**
+   - **Sensitive Data:** Be cautious when scraping personal or sensitive information. Ensure compliance with data protection regulations.
+   - **User Consent:** If scraping user-generated content, consider the privacy and consent of the individuals who created the content.
+3. **Transparency:**
+   - **Disclosure:** Be transparent about your data collection methods if asked. Avoid deceptive practices like masking the scraper as a regular user.
+
+> Can you think of an example where web scraping could potentially be unethical or illegal? What steps would you take to ensure compliance?
+
+
+# Tools for Using APIs
+
+**What is the Requests Library?**
+
+ - **Definition:** Requests is a simple and elegant HTTP library for Python, designed to make HTTP requests easy and more human-friendly.
+ - **Installation:** Can be easily installed using `pip install requests`.
+
+**Key Features:**
+
+ - **Ease of Use:** Simple syntax for making HTTP requests, such as GET, POST, PUT, DELETE, etc.
+ - **Robustness:** Handles various complexities like sessions, cookies, and headers seamlessly.
+ - **Extensibility:** Supports adding custom authentication and handling redirects.
+
+# Basic Example of Using Requests:**
+
+```python
+import requests
+
+response = requests.get('https://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_API_KEY')
+print(response.status_code)  # Outputs: 200 (if successful)
+print(response.text)  # Outputs the response content as a string
+```
+
+# JSON
+
+JSON (JavaScript Object Notation) is a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.
+
+Commonly used format for API responses because of its simplicity and readability.
+
+# Parsing JSON Responses:
+  
+```python
+data = response.json()  # Converts response content to a Python dictionary
+print(data)
+```
+
+# Extracting Specific Data:
+
+```python
+# Extracting temperature information from the JSON response
+temperature = data['main']['temp']
+print(f"The temperature in London is {temperature}K")
+```
+
+
+# Live Coding: **Introduction to BeautifulSoup:**
+
+BeautifulSoup is a Python library used for parsing HTML and XML documents. It creates a parse tree for parsed pages that can be used to extract data easily.
+
+```python
+pip install beautifulsoup4
+pip install requests
+```
+
+# Live Coding: **Setting Up the Environment:**
+
+- **Import Necessary Libraries:**
+
+```python
+import requests
+from bs4 import BeautifulSoup
+```
+
+# Live Coding: **Fetching a Web Page:**
+
+```python
+url = 'http://example.com'
+response = requests.get(url)
+html_content = response.content
+```
+
+# Live Coding: **Creating a BeautifulSoup Object:**
+
+```python
+soup = BeautifulSoup(html_content, 'html.parser')
+```
+
+# Live Coding: **Understanding HTML Structure:**
+
+```html
+<html>
+<head>
+    <title>Example Domain</title>
+</head>
+<body>
+    <h1>Example Domain</h1>
+    <p>This domain is for use in illustrative examples in documents.</p>
+    <a href="https://www.iana.org/domains/example">More information...</a>
+</body>
+</html>
+```
+
+# Live Coding: **Extracting Data:**
+   - **Finding Elements by Tag Name:**
+
+     ```python
+     title = soup.title
+     print(title.text)  # Outputs: Example Domain
+     ```
+
+   - **Finding Elements by CSS Class:**
+
+     ```python
+     paragraph = soup.find('p')
+     print(paragraph.text)  # Outputs: This domain is for use in illustrative examples in documents.
+     ```
+
+   - **Finding Elements by Attributes:**
+
+     ```python
+     link = soup.find('a', href=True)
+     print(link['href'])  # Outputs: https://www.iana.org/domains/example
+     ```
+
+# Live Coding: **Navigating the Parse Tree:**
+
+```python
+body = soup.body
+print(body.h1.text)  # Outputs: Example Domain
+print(body.p.text)   # Outputs: This domain is for use in illustrative examples in documents.
+```
+
+> What challenges might you face when scraping data from more complex web pages?
+
+
+# Recap of Web Scraping
+
+Web scraping is the automated process of extracting data from websites. It involves fetching the HTML of a web page and parsing it to extract the desired information.
+
+- **Requests Library:** Used to send HTTP requests to retrieve the HTML content of web pages.
+ - **Key Functions:** `requests.get(url)`, handling response status codes, and accessing response content.
+- **BeautifulSoup Library:** Used to parse HTML and XML documents, making it easier to navigate and extract data.
+ - **Key Functions:** `BeautifulSoup(html_content, 'html.parser')`, finding elements (`find`, `find_all`), and navigating the parse tree.
+
+- **Fetching Web Page Content:**
+ ```python
+ import requests
+ response = requests.get('http://example.com')
+ html_content = response.content
+ ```
+- **Parsing HTML Content:**
+ ```python
+ from bs4 import BeautifulSoup
+ soup = BeautifulSoup(html_content, 'html.parser')
+ ```
+- **Extracting Data:**
+ ```python
+ title = soup.title.text
+ print(title)  # Outputs: Example Domain
+ ```
+
+# **Quick Quiz:**
+   - **Question 1:** What is the main purpose of the Requests library in web scraping?
+
+   - **Question 2:** How do you parse HTML content using BeautifulSoup?
+
+   - **Question 3:** What method would you use to find all paragraph (`<p>`) tags in a web page using BeautifulSoup?
+
+# **Quick Quiz:**
+   - **Question 1:** What is the main purpose of the Requests library in web scraping?
+     - **Answer:** To send HTTP requests and retrieve HTML content of web pages.
+   - **Question 2:** How do you parse HTML content using BeautifulSoup?
+     - **Answer:** By creating a BeautifulSoup object with the HTML content and specifying a parser (`html.parser`).
+   - **Question 3:** What method would you use to find all paragraph (`<p>`) tags in a web page using BeautifulSoup?
+     - **Answer:** `soup.find_all('p')`
+
+# Recap of Using APIs
+
+An API (Application Programming Interface) is a set of rules and protocols that allows different software applications to communicate with each other. APIs facilitate the exchange of data and functionality between systems.
+
+- **Requests Library:**
+ - **Purpose:** Used to send HTTP requests to interact with APIs and retrieve data.
+ - **Key Functions:** `requests.get(url)`, `requests.post(url, data)`, handling response status codes, and accessing response content.
+- **JSON Module:**
+ - **Purpose:** Used to parse and manipulate JSON data, which is a common format for API responses.
+ - **Key Functions:** `response.json()`, `json.loads()`, and `json.dumps()`.
+
+1. **Key Steps in Using APIs:**
+   - **Sending HTTP Requests:**
+
+     ```python
+     import requests
+     response = requests.get('https://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_API_KEY')
+     print(response.status_code)  # Outputs: 200 (if successful)
+     print(response.text)  # Outputs the response content as a string
+     ```
+   - **Handling JSON Responses:**
+
+     ```python
+     data = response.json()  # Converts response content to a Python dictionary
+     print(data)
+     ```
+   - **Extracting Specific Data:**
+
+     ```python
+     temperature = data['main']['temp']
+     print(f"The temperature in London is {temperature}K")
+     ```
+
+# **Quick Quiz:**
+
+   - **Question 1:** What is the main purpose of the Requests library when working with APIs?
+
+   - **Question 2:** How do you parse a JSON response from an API using the Requests library?
+
+   - **Question 3:** How would you extract a specific value from a JSON response, such as the temperature in a weather API response?
+
+
+# **Quick Quiz:**
+   - **Question 1:** What is the main purpose of the Requests library when working with APIs?
+     - **Answer:** To send HTTP requests and retrieve data from APIs.
+   - **Question 2:** How do you parse a JSON response from an API using the Requests library?
+     - **Answer:** By using the `response.json()` method to convert the JSON response to a Python dictionary.
+   - **Question 3:** How would you extract a specific value from a JSON response, such as the temperature in a weather API response?
+     - **Answer:** By accessing the relevant key in the dictionary, e.g., `data['main']['temp']`.
+
+
+# Advanced Web Scraping: **Scrapy:**
+   - **What is Scrapy?**
+     - Scrapy is a powerful and fast web scraping and web crawling framework for Python.
+     - It is designed for large-scale web scraping projects, providing a robust set of features for extracting data from websites.
+   - **Key Features:**
+     - **Spider Framework:** Allows the creation of spiders that define how a site should be scraped, including following links and extracting data.
+     - **Item Pipeline:** Provides a way to process the extracted data, such as cleaning or storing it.
+     - **Built-in Support for Handling Requests and Responses:** Makes it easy to manage requests, handle responses, and follow links.
+
+# Scrapy Example:
+
+```python
+import scrapy
+
+class QuotesSpider(scrapy.Spider):
+    name = "quotes"
+    start_urls = [
+        'http://quotes.toscrape.com/page/1/',
+    ]
+
+    def parse(self, response):
+        for quote in response.css('div.quote'):
+            yield {
+                'text': quote.css('span.text::text').get(),
+                'author': quote.css('span small::text').get(),
+                'tags': quote.css('div.tags a.tag::text').getall(),
+            }
+```
+
+# Advanced Web Scraping: **Selenium:**
+
+Selenium is a web testing framework that can be used for automating browser actions. It is particularly useful for scraping dynamic content that requires interaction with the web page.
+
+   - **Key Features:**
+     - **Browser Automation:** Allows you to control a web browser programmatically, including clicking buttons, filling forms, and navigating pages.
+     - **Handling JavaScript:** Can execute JavaScript and wait for elements to load, making it ideal for scraping content that loads dynamically.
+
+# Selenium Example:
+```python
+from selenium import webdriver
+
+driver = webdriver.Chrome(executable_path='/path/to/chromedriver')
+driver.get('http://quotes.toscrape.com/js/')
+
+quotes = driver.find_elements_by_class_name('quote')
+for quote in quotes:
+    print(quote.text)
+
+driver.quit()
+```
+
+# **Challenges of Dynamic Content:**
+
+ - **JavaScript-Rendered Pages:** Some web pages load content dynamically using JavaScript, making it difficult to scrape with basic tools like Requests and BeautifulSoup.
+ - **Asynchronous Loading:** Content might load at different times, requiring the scraper to wait for elements to be fully loaded.
+
+# **Solutions: **Using Selenium:**
+Selenium can wait for specific elements to appear before extracting data, ensuring that all dynamic content is fully loaded.
+  
+```python
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+driver.get('http://quotes.toscrape.com/js/')
+try:
+    element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "quote"))
+    )
+    quotes = driver.find_elements_by_class_name('quote')
+    for quote in quotes:
+        print(quote.text)
+finally:
+    driver.quit()
+```
+
+# Solution: **Using Scrapy with Splash:**
+Splash is a headless browser designed for web scraping that can be integrated with Scrapy to render JavaScript content.
+
+```python
+import scrapy
+from scrapy_splash import SplashRequest
+
+class QuotesSpider(scrapy.Spider):
+    name = "quotes"
+    start_urls = [
+        'http://quotes.toscrape.com/js/',
+    ]
+
+    def start_requests(self):
+        for url in self.start_urls:
+            yield SplashRequest(url, self.parse, args={'wait': 1})
+
+    def parse(self, response):
+        for quote in response.css('div.quote'):
+            yield {
+                'text': quote.css('span.text::text').get(),
+                'author': quote.css('span small::text').get(),
+                'tags': quote.css('div.tags a.tag::text').getall(),
+            }
+```
+
+# When to use each:
+
+When would you use Scrapy versus Selenium for a web scraping project? What are the benefits and drawbacks of each?
+
+Use Scrapy for:
+
+- Large-scale web scraping operations with low power consumption and high speed requirements.
+- Scenarios where data pipeline and scalability are crucial.
+
+Use Selenium for:
+
+- Complex web scraping operations with JavaScript-heavy websites.
+- Scenarios where handling multiple data formats is necessary.
+
+
+# Advanced API Usage: **Working with OAuth for Authentication:**
+
+OAuth (Open Authorization) is an open standard for access delegation commonly used as a way to grant websites or applications limited access to a user's information without exposing passwords.
+
+   - **Purpose:** Ensures secure access to APIs by using tokens instead of passwords.
+
+1. **How OAuth Works:**
+   - **Process:**
+     - **Client Registration:** Register your application with the API provider to receive a client ID and client secret.
+     - **Authorization Request:** Redirect the user to the API provider's authorization server to grant permission.
+     - **Authorization Grant:** If the user approves, the authorization server provides an authorization grant to the client.
+     - **Access Token Request:** The client exchanges the authorization grant for an access token.
+     - **Accessing Resources:** Use the access token to access protected resources from the API.
+
+# oAuth Example 
+
+```python
+import requests
+from requests_oauthlib import OAuth2Session
+
+# Client credentials
+client_id = 'YOUR_CLIENT_ID'
+client_secret = 'YOUR_CLIENT_SECRET'
+redirect_uri = 'YOUR_REDIRECT_URI'
+
+# OAuth2 endpoints
+authorization_base_url = 'https://api.provider.com/oauth/authorize'
+token_url = 'https://api.provider.com/oauth/token'
+
+# Step 1: User Authorization
+oauth = OAuth2Session(client_id, redirect_uri=redirect_uri)
+authorization_url, state = oauth.authorization_url(authorization_base_url)
+print(f'Please go to {authorization_url} and authorize access.')
+
+# Step 2: Get the authorization verifier code from the callback url
+redirect_response = input('Paste the full redirect URL here:')
+
+# Step 3: Fetch the access token
+token = oauth.fetch_token(token_url, authorization_response=redirect_response, client_secret=client_secret)
+print(f'Access token: {token}')
+
+# Step 4: Access protected resources
+response = oauth.get('https://api.provider.com/protected/resource')
+print(response.json())
+```
+
+# **Rate Limiting and Pagination:**
+Rate limiting is a technique used by API providers to control the amount of incoming requests from a user or application to prevent abuse and ensure fair usage.
+
+- **Handling Rate Limits:**
+  - **Check Headers:** Most APIs return rate limit information in response headers (e.g., `X-Rate-Limit-Remaining`, `Retry-After`).
+  - **Implement Delays:** Use sleep functions to pause the execution of your code when the limit is reached.
+
+
+# Rate Limit **Example:**
+
+```python
+import time
+
+response = requests.get('https://api.example.com/data')
+if response.status_code == 429:  # Too Many Requests
+    retry_after = int(response.headers.get('Retry-After', 60))
+    print(f'Rate limit exceeded. Retrying after {retry_after} seconds.')
+    time.sleep(retry_after)
+    response = requests.get('https://api.example.com/data')
+```
+
+# **Pagination:**
+
+Pagination is a technique used to divide a large set of results into manageable pages, making it easier to retrieve and process data.
+
+ - **Handling Pagination:**
+   - **API Documentation:** Follow the API's documentation to understand how pagination is implemented (e.g., `page`, `limit`, `offset` parameters).
+   - **Iterate Through Pages:** Implement a loop to fetch all pages until no more data is available.
+
+# Pagination **Example:**
+
+```python
+all_data = []
+page = 1
+while True:
+    response = requests.get(f'https://api.example.com/data?page={page}&limit=100')
+    data = response.json()
+    if not data:
+        break
+    all_data.extend(data)
+    page += 1
+print(f'Total records fetched: {len(all_data)}')
+```
+
+# Test your understanding?
+
+Why is OAuth important for API security? How would you handle rate limits in your projects?
+
+
+# Test your understanding?
+
+OAuth is crucial for API security as it allows secure, delegated access to resources without exposing user credentials. By using OAuth, applications can request access via tokens with limited permissions, reducing the risk of over-privileged access. Tokens are short-lived and revocable, providing a dynamic and secure way to manage access.
+
+To handle rate limits in projects, implement strategies that monitor and control API request frequency. Use exponential backoff for retries and maintain an internal counter to track requests. Employ techniques like the token bucket algorithm to ensure requests are spread out over time, adhering to API rate limits and preventing disruptions.

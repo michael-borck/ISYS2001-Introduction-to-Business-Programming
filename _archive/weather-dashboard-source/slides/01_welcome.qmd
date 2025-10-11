@@ -1,0 +1,56 @@
+---
+title: "Welcome"
+author: "Michael Borck"
+format:
+    pptx:
+      reference-doc: ../template.pptx
+    pdf:
+      toc: true
+      colorlinks: true
+    docx:
+      toc: true
+      highlight-style: github
+    html:
+      toc: true
+      toc-expand: 2
+      embed-resources: true
+---
+
+# 
+![](../images/curtin-copy-right.png)
+
+# Today
+– Introduce the course and project goals.
+– Set up the development environment.
+
+Activities:
+  – Overview of the weather dashboard project.
+  – Install Python, Jupyter, and necessary libraries. 
+  – Basic Git commands: clone, commit, push.
+
+# Introduction to the Course
+- Welcome and course overview
+- Introduction to the WeatherVista project
+
+# Demo of Completed WeatherVista Dashboard (20 minutes) • Show the completed dashboard
+- Highlight key features and functionalities
+
+# Setting Up Development Environment (30 minutes)
+- Walkthrough installation of Python, Jupyter, and necessary libraries 
+- Set up GitHub/GitLab repository
+
+# Introduction to Git
+- Basic Git commands: clone, commit, push
+- Demonstrate cloning the project repository
+
+# Creating Project Directory Structure (20 minutes)
+- Create directories for data, scripts, notebooks, and tests
+- Brief explanation of the purpose of each directory
+  
+# Breakout Room Activity 
+- Students work in small groups to set up their project structure
+- Instructors available for assistance
+
+# Q&A and Wrap-Up
+- Address any questions about setup and project structure
+- Homework: Research the OpenWeatherMap API and sign up for an API key

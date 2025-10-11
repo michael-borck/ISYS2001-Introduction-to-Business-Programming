@@ -1,0 +1,216 @@
+---
+title: "WeatherVista Project - Session 7: Writing and Running Tests with doctest"
+execute: 
+  enabled: false
+---
+
+## Objectives
+- Learn the importance of testing in software development.
+- Explore using `doctest` for inline testing within docstrings.
+
+## 1. Introduction to Testing
+
+Testing is crucial for ensuring the reliability and correctness of your code. In this session, we will focus on writing tests using `doctest`.
+
+## 2. Using `doctest` for Inline Testing
+
+### Example Function: `convert_temp_kelvin_to_celsius`
+
+Let's start with a simple weather-related function and add a `doctest` to it.
+
+```{python}
+def convert_temp_kelvin_to_celsius(kelvin):
+    """
+    Convert temperature from Kelvin to Celsius.
+
+    Args:
+    - kelvin (float): Temperature in Kelvin.
+
+    Returns:
+    - float: Temperature in Celsius.
+
+    Examples:
+    >>> convert_temp_kelvin_to_celsius(273.15)
+    0.0
+    >>> convert_temp_kelvin_to_celsius(0)
+    -273.15
+    >>> convert_temp_kelvin_to_celsius(373.15)
+    100.0
+    """
+    return kelvin - 273.15
+```
+
+### Running `doctest` for `convert_temp_kelvin_to_celsius`
+
+To run `doctest` within the Jupyter notebook, you can use the `doctest` module directly.
+
+**Note**: The `doctest.testmod()` function will only test the functions that have been defined in cells that have already been executed. It does not scan the entire notebook; it only tests the functions and classes that are available in the current Python environment at the time it is called.
+
+```{python}
+import doctest
+
+doctest.testmod()
+```
+
+### More Complex Function: `fetch_weather_data`
+
+Now let's add another function that fetches weather data and includes a `doctest`.
+
+```{python}
+import requests
+
+def fetch_weather_data(api_key, location):
+    """
+    Fetch weather data from the OpenWeatherMap API.
+
+    Args:
+    - api_key (str): The API key for authentication.
+    - location (str): The location for which to fetch weather data.
+
+    Returns:
+    - dict: A dictionary containing weather data.
+
+    Examples:
+    >>> fetch_weather_data('invalid_api_key', 'London') is None
+    True
+    >>> data = fetch_weather_data('your_api_key_here', 'London')
+    >>> data['Location'] == 'London'
+    True
+    """
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={api_key}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        weather_info = {
+            "Location": data["name"],
+            "Temperature (C)": data["main"]["temp"] - 273.15,
+            "Humidity (%)": data["main"]["humidity"],
+            "Weather": data["weather"][0]["description"]
+        }
+        return weather_info
+    else:
+        return None
+```
+
+### Running `doctest` for `fetch_weather_data`
+
+Again, ensure the function is defined in a previously executed cell before running `doctest.testmod()`.
+
+```{python}
+import doctest
+
+doctest.testmod()
+```
+
+### 3. Adding doctests to WeatherVista Functions
+
+Add `doctest` to our functions in the `scripts` directory.
+
+### scripts/fetch_data.py
+
+```python
+def fetch_weather_data(api_key, location):
+    """
+    Fetch weather data from the OpenWeatherMap API.
+
+    Args:
+    - api_key (str): The API key for authentication.
+    - location (str): The location for which to fetch weather data.
+
+    Returns:
+    - dict: A dictionary containing weather data.
+
+    Examples:
+    >>> fetch_weather_data('invalid_api_key', 'London') is None
+    True
+    """
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={api_key}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        weather_info = {
+            "Location": data["name"],
+            "Temperature (C)": data["main"]["temp"] - 273.15,
+            "Humidity (%)": data["main"]["humidity"],
+            "Weather": data["weather"][0]["description"]
+        }
+        return weather_info
+    else:
+        return None
+```
+
+### Running `doctest` for WeatherVista
+
+To run `doctest` for this function, at the command line:
+
+```python
+python -m doctest -v scripts/fetch_data.py
+```
+
+### scripts/process_data.py
+
+```python
+def convert_temp_kelvin_to_celsius(kelvin):
+    """
+    Convert temperature from Kelvin to Celsius.
+
+    Args:
+    - kelvin (float): Temperature in Kelvin.
+
+    Returns:
+    - float: Temperature in Celsius.
+
+    Examples:
+    >>> convert_temp_kelvin_to_celsius(273.15)
+    0.0
+    >>> convert_temp_kelvin_to_celsius(0)
+    -273.15
+    >>> convert_temp_kelvin_to_celsius(373.15)
+    100.0
+    """
+    return kelvin - 273.15
+```
+
+### Running `doctest` for Data Processing Functions
+
+To run `doctest` for this function:
+
+```python
+python -m doctest -v scripts/process_data.py
+```
+
+### 4. Integrating Tests into the Project
+
+Create a script to run all `doctests` in the project.
+
+### run_doctests.py
+
+```python
+import doctest
+import scripts.fetch_data
+import scripts.process_data
+
+def run_all_doctests():
+    doctest.testmod(scripts.fetch_data)
+    doctest.testmod(scripts.process_data)
+
+if __name__ == "__main__":
+    run_all_doctests()
+```
+
+### Running All doctests
+
+To run all doctests in the project:
+
+```python
+python run_doctests.py
+```
+
+## Homework
+- Add more `doctest` cases to cover edge cases and different scenarios.
+- Explore using other testing frameworks and tools to enhance your testing strategy.
+
+## Summary
+In this session, we learned the importance of testing and how to write and run tests using `doctest`. We added tests for our weather fetching and data processing functions to ensure their correctness and reliability.
+
+Next session, we will focus on finalising the project, adding documentation, and discussing distribution methods.

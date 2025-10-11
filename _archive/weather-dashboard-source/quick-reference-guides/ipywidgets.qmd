@@ -1,0 +1,179 @@
+---
+title: "Widget Wisardry: Enhancing Jupyter Notebooks with ipywidgets"
+subtitle: "Enhancing Jupyter Notebooks with Interactive Widgets"
+author: "Michael Borck"
+format:
+  pdf:
+    toc: false
+    number-sections: false
+    colorlinks: true
+    encoding: "UTF-8"
+  docx:
+    toc: false
+    number-sections: false
+    highlight-style: github
+  html:
+    toc: true
+    toc-expand: 2
+    embed-resources: true
+---
+
+### Introduction
+
+This guide is designed to provide you with a practical overview of ipywidgets, a powerful library that brings interactivity to Jupyter Notebooks. ipywidgets enables you to create interactive and dynamic user interfaces within your notebooks, making data exploration and visualisation more engaging and intuitive.
+
+**Why ipywidgets?**
+
+ipywidgets offers a rich set of controls, such as sliders, buttons, and dropdowns, which can be easily integrated into your Jupyter Notebooks. These interactive elements allow you to manipulate data and visualisations in real-time, enhancing your ability to analyse and present information effectively. Whether you're a data scientist, researcher, educator, or student, ipywidgets provides the tools to make your notebooks more interactive and user-friendly.
+
+**What Will You Learn?**
+
+This guide covers the fundamental aspects of using ipywidgets, including:
+- Setting up your ipywidgets environment
+- Utilising commonly used widgets
+- Handling widget events to create interactive behaviors
+- Arranging and styling widgets for better layouts
+- Leveraging the `interact` and `interactive` functions for quick interactivity
+- Creating a simple interactive plot using Matplotlib and ipywidgets
+
+**Getting Started**
+
+We begin with the basics of installing and enabling ipywidgets in your Jupyter environment and progressively move towards building a functional interactive application. By the end of this guide, you will be equipped with the knowledge to create dynamic interfaces that make your data exploration and presentation more effective and enjoyable.
+
+
+### What are ipywidgets?
+- Interactive widgets for Jupyter Notebooks
+- Enhance interactivity and visualisation
+- Built on top of the Jupyter Notebook architecture
+
+### Why ipywidgets?
+- Facilitate interactive data exploration
+- Integrate controls like sliders, buttons, and dropdowns
+- Simplify the creation of dynamic user interfaces within notebooks
+
+## Setting up ipywidgets
+
+### Installation
+```bash
+pip install ipywidgets
+```
+
+### Enabling Widgets Extension
+```bash
+jupyter nbextension install --py widgetsnbextension
+jupyter nbextension enable --py widgetsnbextension
+```
+
+## Basic Widgets
+
+### Commonly Used Widgets
+- **IntSlider**: `ipywidgets.IntSlider()`
+- **FloatSlider**: `ipywidgets.FloatSlider()`
+- **IntRangeSlider**: `ipywidgets.IntRangeSlider()`
+- **FloatRangeSlider**: `ipywidgets.FloatRangeSlider()`
+- **Dropdown**: `ipywidgets.Dropdown(options=['Option 1', 'Option 2'])`
+- **Text**: `ipywidgets.Text()`
+- **Button**: `ipywidgets.Button(description='Click Me')`
+
+### Displaying Widgets
+```python
+import ipywidgets as widgets
+from IPython.display import display
+
+slider = widgets.IntSlider()
+display(slider)
+```
+
+## Widget Events
+
+### Handling Events
+- **Button Click**
+```python
+button = widgets.Button(description='Click Me')
+def on_button_click(b):
+    print("Button clicked!")
+button.on_click(on_button_click)
+display(button)
+```
+
+- **Slider Value Change**
+```python
+slider = widgets.IntSlider()
+def on_value_change(change):
+    print("Slider value:", change['new'])
+slider.observe(on_value_change, names='value')
+display(slider)
+```
+
+## Layout and Styling
+
+### Arranging Widgets
+- **HBox and VBox**
+```python
+hbox = widgets.HBox([widgets.Button(description='Button 1'), widgets.Button(description='Button 2')])
+vbox = widgets.VBox([widgets.IntSlider(), widgets.FloatSlider()])
+display(hbox, vbox)
+```
+
+### Customising Layouts
+```python
+button = widgets.Button(description='Click Me', layout=widgets.Layout(width='200px', height='50px'))
+display(button)
+```
+
+## Interactive Functions
+
+### Using `interact` and `interactive`
+- **interact**
+```python
+from ipywidgets import interact
+
+def f(x):
+    return x
+interact(f, x=10)
+interact(f, x='Hello')
+interact(f, x=['Option 1', 'Option 2'])
+```
+
+- **interactive**
+```python
+from ipywidgets import interactive
+
+def g(a, b):
+    return a + b
+interactive_plot = interactive(g, a=10, b=20)
+display(interactive_plot)
+```
+
+## Example Application
+
+### Creating an Interactive Plot
+```python
+import ipywidgets as widgets
+import matplotlib.pyplot as plt
+import numpy as np
+
+def plot_func(amplitude, frequency):
+    t = np.linspace(0, 1, 1000)
+    y = amplitude * np.sin(2 * np.pi * frequency * t)
+    plt.plot(t, y)
+    plt.show()
+
+widgets.interact(plot_func, amplitude=(0, 10, 0.1), frequency=(1, 10, 0.1))
+```
+
+## Advanced Topics (Optional)
+
+- **Custom Widget Development**
+- **Linking Widgets**
+```python
+slider = widgets.FloatSlider()
+text = widgets.FloatText()
+widgets.jslink((slider, 'value'), (text, 'value'))
+display(slider, text)
+```
+
+## Resources
+
+  - [ipywidgets Documentation](https://ipywidgets.readthedocs.io/en/latest/)
+  - [Jupyter Widgets Examples](https://github.com/jupyter-widgets/ipywidgets/blob/master/docs/source/examples/Index.ipynb)

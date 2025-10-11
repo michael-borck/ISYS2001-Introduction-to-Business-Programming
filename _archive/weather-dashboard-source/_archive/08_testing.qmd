@@ -1,0 +1,206 @@
+Here's a slide deck for the WeatherVista Project - Session 7: Writing and Running Tests with pytest and doctest.
+
+---
+
+### Slide 1: Title Slide
+**Title:** WeatherVista Project - Session 7:
+
+```markdown
+# WeatherVista Project - Session 7: Writing and Running Tests with pytest and doctest
+```
+
+---
+
+### Slide 2: Objectives
+- **Learn the importance of testing in software development.**
+- **Understand how to write and run tests using pytest.**
+- **Explore using doctest for inline testing within docstrings.**
+
+---
+
+### Slide 3: Introduction to Testing
+- **Testing ensures reliability and correctness.**
+- **Focus: Writing tests using pytest and doctest.**
+
+---
+
+### Slide 4: Import Required Libraries
+```python
+import pytest
+import requests
+import pandas as pd
+```
+
+---
+
+### Slide 5: Writing Tests with pytest
+- **pytest** is a popular testing framework.
+- **Easy to write simple and scalable test cases.**
+
+---
+
+### Slide 6: Installing pytest
+```python
+!pip install pytest
+```
+
+---
+
+### Slide 7: Creating a Test File
+- **Create `test_weather.py` to write test cases.**
+
+---
+
+### Slide 8: test_weather.py
+```python
+# test_weather.py
+import pytest
+from scripts.fetch_data import fetch_weather_data
+
+def test_fetch_weather_data_success():
+    api_key = 'your_api_key_here'
+    location = 'London'
+    data = fetch_weather_data(api_key, location)
+    assert data is not None
+    assert 'Location' in data
+    assert 'Temperature (C)' in data
+    assert 'Humidity (%)' in data
+    assert 'Weather' in data
+
+def test_fetch_weather_data_failure():
+    api_key = 'your_api_key_here'
+    location = 'InvalidCity'
+    data = fetch_weather_data(api_key, location)
+    assert data is None
+```
+
+---
+
+### Slide 9: Running Tests with pytest
+- **Navigate to the directory containing the test file.**
+- **Run:**
+```python
+!pytest test_weather.py
+```
+
+---
+
+### Slide 10: Using doctest for Inline Testing
+- **doctest** allows writing tests within docstrings.
+- **Verify code functionality directly in documentation.**
+
+---
+
+### Slide 11: Adding doctests to Functions
+- **Add doctests to `fetch_weather_data` function in `fetch_data.py`.**
+
+---
+
+### Slide 12: fetch_data.py
+```python
+def fetch_weather_data(api_key, location):
+    """
+    Fetch weather data from the OpenWeatherMap API.
+    
+    Args:
+    - api_key (str): The API key for authentication.
+    - location (str): The location for which to fetch weather data.
+    
+    Returns:
+    - dict: A dictionary containing weather data.
+    
+    Examples:
+    >>> fetch_weather_data('invalid_api_key', 'London') is None
+    True
+    """
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={api_key}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        weather_info = {
+            "Location": data["name"],
+            "Temperature (C)": data["main"]["temp"] - 273.15,
+            "Humidity (%)": data["main"]["humidity"],
+            "Weather": data["weather"][0]["description"]
+        }
+        return weather_info
+    else:
+        return None
+```
+
+---
+
+### Slide 13: Running doctests
+- **Run doctests using the following command:**
+```python
+!python -m doctest -v scripts/fetch_data.py
+```
+
+---
+
+### Slide 14: Testing Data Processing Functions
+- **Test data processing functions to ensure correctness.**
+
+---
+
+### Slide 15: Adding Tests for Data Processing
+- **Create `test_process_data.py` to add tests for data processing functions.**
+
+---
+
+### Slide 16: test_process_data.py
+```python
+# test_process_data.py
+import pytest
+from scripts.process_data import convert_temp_kelvin_to_celsius
+
+def test_convert_temp_kelvin_to_celsius():
+    assert convert_temp_kelvin_to_celsius(273.15) == 0
+    assert convert_temp_kelvin_to_celsius(0) == -273.15
+    assert convert_temp_kelvin_to_celsius(373.15) == 100
+```
+
+---
+
+### Slide 17: Running Tests
+- **Navigate to the directory containing the test files.**
+- **Run:**
+```python
+!pytest test_process_data.py
+```
+
+---
+
+### Slide 18: Integrating Tests into the Project
+- **Ensure all tests are organized and can be run together.**
+
+---
+
+### Slide 19: Running All Tests
+- **Run all tests in the project using:**
+```python
+!pytest
+```
+
+---
+
+### Slide 20: Homework
+- **Add more test cases to cover edge cases and different scenarios.**
+- **Explore other testing frameworks and tools.**
+
+---
+
+### Slide 21: Summary
+- **Learned the importance of testing.**
+- **Wrote and ran tests using pytest and doctest.**
+- **Tested weather fetching and data processing functions.**
+
+---
+
+### Slide 22: Next Session
+- **Focus on finalizing the project.**
+- **Add documentation and discuss distribution methods.**
+
+---
+
+This slide deck provides a comprehensive overview of the session on writing and running tests using pytest and doctest.

@@ -1,0 +1,267 @@
+---
+title: Python Programming Fundamentals with Temperature and Weather Themes
+jupyter: python3
+execute: 
+  enabled: false
+---
+
+
+This worksheet will guide you through various programming concepts using Python, focusing on temperature and weather themes. Answer the questions in the provided code cells.
+
+
+
+## Section 1: Basic Concepts
+
+### 1. Python Basics
+Write a Python program that prints "Hello, World!".
+
+```{python}
+# Put your answer here
+```
+
+### 2. Variables and Data Types
+Define a variable `temperature` and assign it a value of 25.5. Print the temperature.
+
+```{python}
+# Put your answer here
+```
+
+
+
+### 3. Input and Output
+Prompt the user to enter today's temperature in Celsius using `input()`. Convert the input to a float and print it.
+
+```{python}
+# Put your answer here
+```
+
+
+
+### 4. Conditional Statements
+Write a program that checks if a temperature (`temp`) is above 30°C and prints "It's a hot day!" if true, otherwise print "Enjoy the weather!".
+
+```{python}
+# Put your answer here
+```
+
+
+### 5. Loops
+Use a loop to print temperatures from 20°C to 25°C.
+
+```{python}
+# Put your answer here
+```
+
+
+## Section 2: Data Handling with pandas and NumPy
+
+### 6. Data Handling
+Create a pandas DataFrame with columns: `Date` and `Temperature`. Add rows for three days with temperatures: [25.5, 28.0, 30.5]. Display the DataFrame.
+
+```{python}
+# Put your answer here
+```
+
+
+### 7. Data Manipulation
+Calculate the average temperature from the DataFrame created in question 6 using pandas.
+
+```{python}
+# Put your answer here
+```
+
+
+### 8. Array Operations
+Use NumPy to create an array `temperatures` with values [23.0, 24.5, 26.0, 27.5]. Print the maximum temperature from this array.
+
+```{python}
+# Put your answer here
+```
+
+
+### 9. DataFrame Filtering
+Filter the DataFrame from question 6 to show days where the temperature was above 28°C.
+
+```{python}
+# Put your answer here
+```
+
+
+## Section 3: Visualization with Matplotlib
+
+### 10. Simple Plotting
+Plot the temperatures from question 8 using Matplotlib. Label the x-axis as "Day" and y-axis as "Temperature (°C)".
+
+```{python}
+# Put your answer here
+```
+
+
+### 11. Customization
+Enhance the plot from question 10 with a title "Weekly Temperature Variation" and grid lines.
+
+```{python}
+# Put your answer here
+```
+
+
+### 12. Multiple Plots
+Create a subplot with two plots: one for temperatures from question 6 and another for temperatures from question 8.
+
+```{python}
+# Put your answer here
+```
+
+
+## Section 4: GUI Development with tkinter
+
+### 13. Basic GUI
+Create a tkinter GUI window that displays a label showing today's temperature.
+
+```{python}
+# Put your answer here
+```
+
+
+### 14. Input and Buttons
+Design a GUI where users can input a temperature in Celsius, convert it to Fahrenheit, and display the result when clicking a button.
+
+```{python}
+# Put your answer here
+```
+
+
+## Section 5: Advanced Applications
+
+### 15. API Integration
+Use a Python library to fetch real-time weather data (temperature, humidity) from an online API and display it.
+
+```{python}
+# Put your answer here
+```
+
+
+### 16. File Handling
+Write a Python program that reads temperature data from a CSV file and calculates the average temperature.
+
+```{python}
+# Put your answer here
+```
+
+
+### 17. Error Handling
+Implement error handling in a program that prompts the user for a temperature input. Ensure the program handles non-numeric inputs gracefully.
+
+```{python}
+# Put your answer here
+```
+
+
+## Section 6: Project Integration with GitHub and JupyterLab
+
+### 18. Version Control
+Describe how GitHub can be used for version control in a programming project like building a weather dashboard.
+
+```{python}
+# Put your answer here
+```
+
+
+### 19. Documentation
+Explain the importance of documentation in programming projects. How would you use JupyterLab and markdown cells for documentation?
+
+```{python}
+# Put your answer here
+```
+
+
+### 20. Collaboration
+Discuss how multiple developers can collaborate on a Python project using GitHub, focusing on branch management and pull requests.
+
+```{python}
+# Put your answer here
+```
+
+
+## Section 7: Review and Synthesis
+
+### 21. Problem-Solving Framework
+Use the 5-step problem-solving framework (understand, inputs/outputs, work by hand, pseudo code, test) to outline a program that converts Fahrenheit to Celsius.
+
+```{python}
+# Put your answer here
+```
+
+
+
+### 22. Integration of Concepts
+Develop a program that reads weather data from a CSV file, filters temperatures above 25°C, and plots the results using Matplotlib.
+
+```{python}
+# Put your answer here
+```
+
+
+### 23. Complex GUI Design
+Design a tkinter-based GUI for a weather dashboard that displays current weather conditions (temperature, humidity) using data fetched from an API.
+
+```{python}
+# Put your answer here
+```
+
+
+
+
+### 24. Data Analysis
+Analyze temperature data collected over a week, calculate the average temperature, and visualize daily fluctuations using pandas and Matplotlib.
+
+```{python}
+# Put your answer here
+```
+
+
+
+## Section 8: Advanced Challenges
+
+### 25. Data Interpolation
+Implement a program that interpolates missing temperature data points in a time series dataset using NumPy or pandas.
+
+```{python}
+# Put your answer here
+```
+
+
+### 26. Statistical Analysis
+Conduct statistical analysis on temperature data collected over a month, including mean, median, and standard deviation calculations.
+
+```{python}
+# Put your answer here
+```
+
+
+
+
+### 27. Dynamic Visualization
+Create a dynamic visualization using Matplotlib that updates in real-time as new temperature data is fetched from an API.
+
+
+```{python}
+# Put your answer here
+```
+
+### 28. Error Analysis
+Develop a program that analyzes temperature data for outliers (extreme values) and suggests corrective actions based on statistical analysis.
+
+```{python}
+# Put your answer here
+```
+
+
+### 29. Project Integration
+Integrate all concepts learned into a comprehensive weather dashboard project using Python, pandas, Matplotlib, tkinter, and GitHub for version control and collaboration.
+
+```{python}
+# Put your answer here
+```
+
+

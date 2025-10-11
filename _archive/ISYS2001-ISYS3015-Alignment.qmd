@@ -1,0 +1,164 @@
+---
+title: Alignment of ISYS2001 and ISYS3015
+format:
+   pdf: default
+execute:
+  enable: false
+--- 
+   
+## Introduction
+
+This document outlines the motivation and outcome of revamping ISYS2001
+Introduction to Business Programming and ISYS3015 Business Development to
+better align the courses.
+
+## Course Integration Strategy
+
+These suggestions aim to create a more coherent learning experience across both
+courses, ensuring that students see a clear progression in their skills and
+knowledge. The weather dashboard project serves as a unifying element, allowing
+students to apply increasingly complex concepts to a familiar problem domain.
+
+1. Continuous Project Development: Extend the weather dashboard project from the
+   introductory course into the advanced course. This provides a seamless
+   transition and allows students to see how their skills progress.
+
+2. Scaffolded Learning: Ensure that concepts introduced in the introductory
+   course are built upon in the advanced course. For example, if students learn
+   basic API usage in the intro course, expand on this with more complex API
+   interactions and RESTful development in the advanced course.
+
+3. Consistent Development Environment: Gradually introduce VSCode in the latter
+   part of the introductory course to ease the transition to the advanced
+   course. This provides continuity in the development environment across both
+   courses.
+
+4. Real-World Applications: Incorporate real-world scenarios and problems
+   throughout both courses. This could involve using actual weather data APIs,
+   collaborating with local meteorological services, or addressing
+   climate-related issues through programming.
+
+5. Collaborative Learning: Implement pair programming or group projects in both
+   courses, with increasing complexity in the advanced course. This mirrors
+   real-world software development practices.
+
+6. Version Control Integration: Emphasise the use of Git and GitHub across both
+   courses, introducing basic concepts in the intro course and more advanced
+   features (like branching strategies and CI/CD) in the advanced course.
+
+7. Code Review Process: Introduce peer code reviews in the introductory course
+   and expand on this practice in the advanced course. This helps students
+   develop critical analysis skills and learn from each other's code.
+
+8. Documentation Practices: Start with basic documentation in the intro course
+   (e.g., comments, basic README files) and progress to more comprehensive
+   documentation in the advanced course (e.g., API documentation, technical
+   specifications).
+
+9. Testing Methodologies: Introduce simple unit tests in the introductory course
+   and expand to more comprehensive testing strategies (integration tests, TDD)
+   in the advanced course.
+
+10. Ethical Considerations: Incorporate discussions on ethical implications of
+    software development in both courses, with more in-depth exploration in the
+    advanced course (e.g., data privacy in weather apps, environmental impact of
+    software).
+
+11. Industry Connection: Consider inviting guest speakers from the software
+    industry or meteorological services to both courses, providing real-world
+    context to the projects.
+
+12. Portfolio Development: Encourage students to start building a portfolio in
+    the introductory course and continue expanding it in the advanced course.
+    This could be hosted on GitHub Pages, showcasing their progress across both
+    courses.
+
+
+## Benefits of Plan
+
+1. Using Git and GitHub throughout provides students with valuable version
+   control skills that are essential in the industry.
+
+2.  Incorporating climate issues into the curriculum is a great way to make the
+    content more relevant and engaging. It also helps students understand the
+    real-world impact of their programming skills.
+
+3.  Peer review assessment idea is innovative. It not only helps students
+    improve their code but also develops their critical thinking and
+    communication skills.
+
+4.  The progression from docstrings in the introductory unit to type hints in
+    the advanced unit introduces students to the concept of code documentation
+    and then builds on it with more advanced practices.
+
+5.  Using mkdocs from the command line in the introductory unit and integrating
+    it with GitHub Actions in the advanced unit teaches both documentation and
+    CI/CD concepts.
+
+6.  Starting with simple test tables and assert statements, moving to doctests,
+    and finally to pytest - provides a smooth learning curve for students.
+
+7.  Integrating AI tools throughout both courses is forward-thinking. It
+    prepares students for the reality of AI-assisted development while
+    emphasising the importance of understanding the underlying concepts.
+
+8.  The idea of learning by osmosis through engagement with the material is
+    powerful, especially for the introductory unit.
+
+The plan effectively bridges the gap between the two courses, providing a
+coherent learning experience. The weather dashboard project serves as an
+excellent thread tying everything together. This approach should give students a
+solid foundation in programming while also exposing them to real-world
+development practices.
+
+## Benefits of using Weather Dashboard
+
+The weather Dashboard is the scaffolded project across the units. Here are some
+of the benefits of this approach.
+
+1. **Universal Appeal and Accessibility**: Weather is a topic that everyone can
+   relate to and understand, regardless of their background or field of study.
+   This universal appeal makes it easier for students to engage with the project
+   and see its real-world relevance.
+
+2. **Business Relevance**: Weather data and forecasting have significant
+   applications across various business sectors. This aligns well with the
+   business school context and demonstrates the practical value of programming
+   skills in business decision-making.
+
+3. **Complexity and Scalability**: A weather dashboard can be as simple or as
+   complex as needed, allowing for flexibility in project requirements. It can
+   start with basic features and be expanded to include more advanced
+   functionalities, catering to different skill levels within the class.
+
+4. **API Integration**: Working with weather APIs provides valuable experience
+   in handling real-world data sources, a crucial skill in modern business
+   applications.
+
+5. **Data Visualisation**: Creating a dashboard involves data visualisation,
+   which is an important skill in business analytics and reporting.
+
+6. **Reusability and Extensibility**: The components of a weather dashboard
+   (like the WeatherAPI and WeatherModel classes) can be easily adapted for
+   various business applications, showcasing the power of object-oriented
+   design.
+
+7. **Avoiding Financial Complexity**: Unlike a stock market dashboard, a weather
+   dashboard doesn't require understanding complex financial concepts, making it
+   more accessible to a broader range of students.
+
+8. **Practical Skills Development**: The project encompasses various programming
+   concepts including API usage, data processing, user interface design, and
+   possibly database integration, providing a comprehensive learning experience.
+
+While it's true that students can access weather information easily on their
+devices, building a weather dashboard themselves offers a deeper understanding
+of how such systems work and how they can be customised for specific business
+needs. This hands-on experience is invaluable in bridging the gap between
+theoretical knowledge and practical application.
+
+The weather dashboard project effectively balances accessibility, business
+relevance, and technical complexity, making it an excellent choice for your
+advanced business programming unit. It provides students with a tangible,
+relatable project that demonstrates the real-world application of their
+programming skills in a business context.

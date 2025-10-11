@@ -1,0 +1,72 @@
+[
+  {
+    "listing": "/slides.html",
+    "items": [
+      "/slides/11_debugging.html",
+      "/slides/12_deploying.html",
+      "/slides/03_managing_data.html",
+      "/slides/04_visualising_data.html",
+      "/slides/13_review_and_wrapup.html",
+      "/slides/10_testing.html",
+      "/slides/01_welcome.html",
+      "/slides/02_fetching_data.html",
+      "/slides/07_dashboards.html",
+      "/slides/06_midpoint_review.html",
+      "/slides/06_web_scraping.html",
+      "/slides/09_documenting.html",
+      "/slides/08_workflow.html",
+      "/slides/05_advanced_visualisations.html"
+    ]
+  },
+  {
+    "listing": "/quick-reference-guides.html",
+    "items": [
+      "/quick-reference-guides/openweathermap.html",
+      "/quick-reference-guides/api_key_security.html",
+      "/quick-reference-guides/exception-handling.html",
+      "/quick-reference-guides/git-basics.html",
+      "/quick-reference-guides/json-quick-reference.html",
+      "/quick-reference-guides/python-basics.html",
+      "/quick-reference-guides/input-validation.html",
+      "/quick-reference-guides/python-project-starter-kit.html",
+      "/quick-reference-guides/tkinter.html",
+      "/quick-reference-guides/weather-dashboard-setup-guide.html",
+      "/quick-reference-guides/weather-dashboard-project-overview.html",
+      "/quick-reference-guides/ipywidgets.html"
+    ]
+  },
+  {
+    "listing": "/notebooks.html",
+    "items": [
+      "/notebooks/09_review.html",
+      "/notebooks/02a_data_review.html",
+      "/notebooks/03a_vis_review.html",
+      "/notebooks/01_fetch_data.html",
+      "/notebooks/02_data_management.html",
+      "/notebooks/03_visualisation.html",
+      "/notebooks/04_advanced_vis.html",
+      "/notebooks/05_webscraping.html",
+      "/notebooks/06a_dashboard_nb.html",
+      "/notebooks/06b_dashboard_gui.html",
+      "/notebooks/06c_final_gui_dashboard.html",
+      "/notebooks/07_testing.html",
+      "/notebooks/08_documentation.html"
+    ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/slides.html",
+      "/notebooks.html",
+      "/worksheets.html",
+      "/quick-reference-guides.html"
+    ]
+  },
+  {
+    "listing": "/worksheets.html",
+    "items": [
+      "/worksheets/homework-1.html",
+      "/worksheets/homework-2.html"
+    ]
+  }
+]

@@ -1,0 +1,92 @@
+---
+title: "Data visualisation with Python and Pandas"
+format: 
+  pdf:
+      toc: false
+      colorlinks: true
+  docx:
+      toc: false
+      highlight-style: github
+  html:
+      toc: true
+      toc-expand: 2
+      embed-resources: true
+---
+
+### Objective
+In this exercise, you will load a weather dataset into a Pandas DataFrame and create various visualisations to explore the data. Your tasks include generating a line plot, scatter plot, and bar plot, and then combining these visualisations into a multi-panel figure using subplots.
+
+### Instructions
+Follow the steps below and answer the questions to complete the exercise.
+
+### Prerequisites
+- Python installed with Pandas, Matplotlib libraries.
+- A CSV file. **mock_weather_data_seasonal.csv** containing weather data (e.g., temperature, humidity, precipitation).  Download this form the unit's blackboard site and *upload* to your Google Colab virtual machine.
+
+### Tasks
+
+#### Task 1: Load the Dataset
+1. Load the weather dataset into a Pandas DataFrame.
+   - Use the appropriate function to read the CSV file.
+   - Display the first 5 rows of the DataFrame.
+
+   **Questions:**
+   - What are the column names in your dataset?
+   - How many rows and columns does the dataset have?
+
+```{python}
+# Put your answer here
+```
+
+#### Task 2: Line Plot for Temperature Trends
+2. Generate a line plot to visualise temperature trends over time.
+   - Choose the appropriate function to plot the data.
+   - Set labels for the x-axis and y-axis.
+   - Include a title for your plot.
+
+   **Questions:**
+   - What trends do you observe in the temperature over time?
+   - Are there any noticeable patterns or anomalies?
+
+```{python}
+# Put your answer here
+```
+
+#### Task 3: Scatter Plot for Temperature vs. Humidity
+3. Create a scatter plot to explore the relationship between temperature and humidity.
+   - Use the correct function to create a scatter plot.
+   - Set labels for the axes and include a title.
+
+   **Questions:**
+   - Describe the relationship between temperature and humidity. Is there a correlation?
+   - How would you describe the strength and direction of this relationship?
+
+```{python}
+# Put your answer here
+```
+
+#### Task 4: Bar Plot for Monthly Precipitation
+4. Design a bar plot to compare monthly precipitation levels.
+   - Group the data by month and calculate the total precipitation for each month.
+   - Create the bar plot and set appropriate labels and a title.
+
+   **Questions:**
+   - Which month has the highest total precipitation?
+   - Are there any months with significantly lower or higher precipitation levels?
+
+```{python}
+# Put your answer here
+```
+
+#### Task 5: Multi-Panel Figure with Subplots
+5. Combine the line plot, scatter plot, and bar plot into a multi-panel figure using subplots.
+   - Arrange the plots in a multi-panel layout.
+   - Ensure the plots are clearly labeled for easy comparison.
+
+   **Questions:**
+   - How do the different visualisations complement each other?
+   - What insights can you draw by comparing these visualisations side by side?
+
+```{python}
+# Put your answer here
+```

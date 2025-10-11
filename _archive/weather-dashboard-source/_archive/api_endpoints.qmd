@@ -1,0 +1,152 @@
+OpenWeatherMap offers several API endpoints under the free plan that provide various types of weather data. Here are some of the main endpoints available:
+
+### Current Weather Data
+- **Endpoint**: `/data/2.5/weather`
+- **Description**: Get current weather data for any location (city name, city ID, geographic coordinates, or ZIP code).
+- **Example**: `http://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_API_KEY`
+
+### 5 Day / 3 Hour Forecast
+- **Endpoint**: `/data/2.5/forecast`
+- **Description**: Get 5-day weather forecast with data every 3 hours for any location (city name, city ID, geographic coordinates, or ZIP code).
+- **Example**: `http://api.openweathermap.org/data/2.5/forecast?q=London&appid=YOUR_API_KEY`
+
+### Air Pollution Data
+- **Endpoint**: `/data/2.5/air_pollution`
+- **Description**: Get air pollution data for a specific location by geographic coordinates.
+- **Example**: `http://api.openweathermap.org/data/2.5/air_pollution?lat=35.6895&lon=139.6917&appid=YOUR_API_KEY`
+
+### UV Index
+- **Endpoint**: `/data/2.5/uvi`
+- **Description**: Get UV index for a specific location by geographic coordinates.
+- **Example**: `http://api.openweathermap.org/data/2.5/uvi?lat=37.75&lon=-122.37&appid=YOUR_API_KEY`
+
+### Historical Weather Data
+- **Endpoint**: `/data/2.5/onecall/timemachine`
+- **Description**: Get historical weather data for the previous 5 days for a specific location by geographic coordinates.
+- **Example**: `http://api.openweathermap.org/data/2.5/onecall/timemachine?lat=37.75&lon=-122.37&dt=1605182400&appid=YOUR_API_KEY`
+
+### One Call API
+- **Endpoint**: `/data/2.5/onecall`
+- **Description**: Get weather data including current weather, minute forecast for 1 hour, hourly forecast for 48 hours, daily forecast for 7 days, and government weather alerts.
+- **Example**: `http://api.openweathermap.org/data/2.5/onecall?lat=37.75&lon=-122.37&exclude=minutely&appid=YOUR_API_KEY`
+
+### Weather Maps (Layers)
+- **Endpoint**: `/data/2.5/weather/layer`
+- **Description**: Get various weather maps layers, including precipitation, wind speed, temperature, and more.
+- **Example**: `http://tile.openweathermap.org/map/{layer}/{z}/{x}/{y}.png?appid=YOUR_API_KEY`
+
+### Find
+- **Endpoint**: `/data/2.5/find`
+- **Description**: Get weather data for cities within a rectangle specified by the geographic coordinates.
+- **Example**: `http://api.openweathermap.org/data/2.5/find?lat=37.75&lon=-122.37&cnt=10&appid=YOUR_API_KEY`
+
+### Weather Stations
+- **Endpoint**: `/data/2.5/station`
+- **Description**: Get data from weather stations.
+- **Example**: `http://api.openweathermap.org/data/2.5/station?id=12345&appid=YOUR_API_KEY`
+
+### Key Points:
+- **API Key**: Replace `YOUR_API_KEY` with your actual OpenWeatherMap API key in all the endpoints.
+- **Parameters**: These endpoints can take various parameters such as `q` for city name, `lat` and `lon` for geographic coordinates, `id` for city ID, `zip` for ZIP code, `cnt` for number of cities, etc.
+- **Units**: You can specify units (metric, imperial, standard) using the `units` parameter, e.g., `units=metric` for Celsius.
+
+These endpoints cover a wide range of weather data that can be fetched and used for different applications and analyses. The examples provided should give you a good starting point for using each of these endpoints.
+
+
+Yes, many of the OpenWeatherMap API endpoints can use either geographic coordinates (latitude and longitude) or city names. Here are examples for using city names with some of the endpoints:
+
+### Current Weather Data
+- **Endpoint**: `/data/2.5/weather`
+- **Example with City Name**: 
+  ```http
+  http://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_API_KEY
+  ```
+- **Example with Geographic Coordinates**:
+  ```http
+  http://api.openweathermap.org/data/2.5/weather?lat=51.5074&lon=-0.1278&appid=YOUR_API_KEY
+  ```
+
+### 5 Day / 3 Hour Forecast
+- **Endpoint**: `/data/2.5/forecast`
+- **Example with City Name**: 
+  ```http
+  http://api.openweathermap.org/data/2.5/forecast?q=London&appid=YOUR_API_KEY
+  ```
+- **Example with Geographic Coordinates**:
+  ```http
+  http://api.openweathermap.org/data/2.5/forecast?lat=51.5074&lon=-0.1278&appid=YOUR_API_KEY
+  ```
+
+### Air Pollution Data
+- **Endpoint**: `/data/2.5/air_pollution`
+- **Note**: This endpoint typically requires geographic coordinates. If you only have the city name, you can first use the current weather endpoint to get the coordinates.
+- **Example Workflow**:
+  1. Get the coordinates:
+     ```http
+     http://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_API_KEY
+     ```
+  2. Use the coordinates to get air pollution data:
+     ```http
+     http://api.openweathermap.org/data/2.5/air_pollution?lat=51.5074&lon=-0.1278&appid=YOUR_API_KEY
+     ```
+
+### UV Index
+- **Endpoint**: `/data/2.5/uvi`
+- **Note**: This endpoint typically requires geographic coordinates. If you only have the city name, use the current weather endpoint to get the coordinates.
+- **Example Workflow**:
+  1. Get the coordinates:
+     ```http
+     http://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_API_KEY
+     ```
+  2. Use the coordinates to get UV index:
+     ```http
+     http://api.openweathermap.org/data/2.5/uvi?lat=51.5074&lon=-0.1278&appid=YOUR_API_KEY
+     ```
+
+### Historical Weather Data
+- **Endpoint**: `/data/2.5/onecall/timemachine`
+- **Note**: This endpoint requires geographic coordinates. Use the current weather endpoint to get the coordinates if you have the city name.
+- **Example Workflow**:
+  1. Get the coordinates:
+     ```http
+     http://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_API_KEY
+     ```
+  2. Use the coordinates to get historical weather data:
+     ```http
+     http://api.openweathermap.org/data/2.5/onecall/timemachine?lat=51.5074&lon=-0.1278&dt=1605182400&appid=YOUR_API_KEY
+     ```
+
+### One Call API
+- **Endpoint**: `/data/2.5/onecall`
+- **Note**: This endpoint requires geographic coordinates. Use the current weather endpoint to get the coordinates if you have the city name.
+- **Example Workflow**:
+  1. Get the coordinates:
+     ```http
+     http://api.openweathermap.org/data/2.5/weather?q=London&appid=YOUR_API_KEY
+     ```
+  2. Use the coordinates to get One Call data:
+     ```http
+     http://api.openweathermap.org/data/2.5/onecall?lat=51.5074&lon=-0.1278&exclude=minutely&appid=YOUR_API_KEY
+     ```
+
+### Weather Maps (Layers)
+- **Endpoint**: `/data/2.5/weather/layer`
+- **Example with City Name**:
+  - **Note**: Typically, this endpoint is used with map tiles and does not directly support city names.
+
+### Find
+- **Endpoint**: `/data/2.5/find`
+- **Example with City Name**:
+  ```http
+  http://api.openweathermap.org/data/2.5/find?q=London&appid=YOUR_API_KEY
+  ```
+- **Example with Geographic Coordinates**:
+  ```http
+  http://api.openweathermap.org/data/2.5/find?lat=51.5074&lon=-0.1278&cnt=10&appid=YOUR_API_KEY
+  ```
+
+### Weather Stations
+- **Endpoint**: `/data/2.5/station`
+- **Example**: This endpoint typically requires a station ID and does not directly support city names.
+
+In summary, many endpoints support both city names and geographic coordinates, while others primarily require coordinates. For endpoints that need coordinates, you can use the current weather endpoint to fetch the necessary latitude and longitude based on the city name.
