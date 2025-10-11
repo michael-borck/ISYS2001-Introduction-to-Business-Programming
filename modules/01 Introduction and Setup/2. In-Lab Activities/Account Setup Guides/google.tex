@@ -1,0 +1,466 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Creating a Google Account and Using Google Colab},
+  pdfauthor={Michael Borck},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Creating a Google Account and Using Google Colab}
+\author{Michael Borck}
+\date{}
+
+\begin{document}
+\maketitle
+
+\subsection{\texorpdfstring{\#
+\href{https://workspace.google.com/intl/en-US/gmail/}{Google
+Workspace}}{\# Google Workspace}}\label{google-workspace}
+
+\subsubsection{1. Click on Create an
+account}\label{click-on-create-an-account}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/60e32f47-4d46-4545-a.png}
+
+}
+
+\caption{Step 1 screenshot}
+
+\end{figure}%
+
+\subsubsection{2. Click on For my personal
+use}\label{click-on-for-my-personal-use}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/78a81256-c7f2-4a42-9.png}
+
+}
+
+\caption{Step 2 screenshot}
+
+\end{figure}%
+
+\subsection{\texorpdfstring{\#
+\href{https://accounts.google.com/lifecycle/steps/signup/name?continue=https://mail.google.com/mail/&ddm=1&dsh=S-1090162785:1740322070569541&ec=asw-gmail-globalnav-create&flowEntry=SignUp&flowName=GlifWebSignIn&service=mail&theme=glif&TL=ADgdZ7Qa5W0h1tXCNUsZcbnrZzmN2uwKRxytYYs7s_lT8EAM_ez81VGJ9gR8xMrl}{Create
+your Google
+Account}}{\# Create your Google Account}}\label{create-your-google-account}
+
+\subsubsection{3. Type First Name \& Last
+Name}\label{type-first-name-last-name}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/fdfd7203-5eda-4fc5-b.png}
+
+}
+
+\caption{Step 3 screenshot}
+
+\end{figure}%
+
+\subsubsection{4. Click on Next}\label{click-on-next}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/9c33494f-2cdc-4996-8.png}
+
+}
+
+\caption{Step 4 screenshot}
+
+\end{figure}%
+
+\subsubsection{5. Type ``BorckPython''}\label{type-borckpython}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/215029b1-2470-4d03-8.png}
+
+}
+
+\caption{Step 5 screenshot}
+
+\end{figure}%
+
+\subsubsection{6. Click on Next}\label{click-on-next-1}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/283fae06-2eef-4021-b.png}
+
+}
+
+\caption{Step 6 screenshot}
+
+\end{figure}%
+
+\subsubsection{7. Enter Date of Birth}\label{enter-date-of-birth}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/2003125e-1f7d-4ff4-a.png}
+
+}
+
+\caption{Step 7 screenshot}
+
+\end{figure}%
+
+\subsubsection{8. Select Male from
+Gender}\label{select-male-from-gender}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/d45d5104-9c59-43d5-b.png}
+
+}
+
+\caption{Step 8 screenshot}
+
+\end{figure}%
+
+\subsubsection{9. Click on Next}\label{click-on-next-2}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/c6ff37e0-fb25-49a6-9.png}
+
+}
+
+\caption{Step 9 screenshot}
+
+\end{figure}%
+
+\subsubsection{10. Select preferred Gmail
+email}\label{select-preferred-gmail-email}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/f2f045a6-6ae6-470d-b.png}
+
+}
+
+\caption{Step 10 screenshot}
+
+\end{figure}%
+
+\subsubsection{11. Click on Next}\label{click-on-next-3}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/c24f118e-1c0b-46a1-9.png}
+
+}
+
+\caption{Step 11 screenshot}
+
+\end{figure}%
+
+\subsubsection{12. Create your password}\label{create-your-password}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/b00768fe-3be0-4f64-9.png}
+
+}
+
+\caption{Step 12 screenshot}
+
+\end{figure}%
+
+\subsubsection{13. Type password}\label{type-password}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/a002d396-62f6-4318-9.png}
+
+}
+
+\caption{Step 13 screenshot}
+
+\end{figure}%
+
+\subsubsection{14. Click on Next}\label{click-on-next-4}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/5e153823-7ace-4174-b.png}
+
+}
+
+\caption{Step 14 screenshot}
+
+\end{figure}%
+
+\subsubsection{15. Type Type phone number}\label{type-type-phone-number}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/1c477aa1-7a9d-4280-8.png}
+
+}
+
+\caption{Step 15 screenshot}
+
+\end{figure}%
+
+\subsubsection{16. Click on Next}\label{click-on-next-5}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/9ad04491-c2b9-4305-a.png}
+
+}
+
+\caption{Step 16 screenshot}
+
+\end{figure}%
+
+\subsubsection{17. Type verification code received on
+phone}\label{type-verification-code-received-on-phone}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/d3121b38-e113-4945-8.png}
+
+}
+
+\caption{Step 17 screenshot}
+
+\end{figure}%
+
+\subsubsection{18. Click on Next}\label{click-on-next-6}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/d65e5287-aca8-4b2f-9.png}
+
+}
+
+\caption{Step 18 screenshot}
+
+\end{figure}%
+
+\subsubsection{19. Type recovery email}\label{type-recovery-email}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/ecdd3412-bdce-4da6-8.png}
+
+}
+
+\caption{Step 19 screenshot}
+
+\end{figure}%
+
+\subsubsection{20. Click on Next}\label{click-on-next-7}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/5ca37222-cf31-40ae-b.png}
+
+}
+
+\caption{Step 20 screenshot}
+
+\end{figure}%
+
+\subsubsection{21. Click on Next}\label{click-on-next-8}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/c56fb416-f16b-4a28-8.png}
+
+}
+
+\caption{Step 21 screenshot}
+
+\end{figure}%
+
+\subsubsection{22. Click on I agree}\label{click-on-i-agree}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/a045950d-a54c-4cc3-9.png}
+
+}
+
+\caption{Step 22 screenshot}
+
+\end{figure}%
+
+\subsection{\texorpdfstring{\#
+\href{https://search.brave.com/search?q=google+colab&source=desktop}{Brave
+Search}}{\# Brave Search}}\label{brave-search}
+
+\subsubsection{23. Check working, visit Google Colab. Search for Google
+Colab}\label{check-working-visit-google-colab.-search-for-google-colab}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/2e6f70c2-e576-4e03-9.png}
+
+}
+
+\caption{Step 23 screenshot}
+
+\end{figure}%
+
+\subsection{\texorpdfstring{\#
+\href{https://colab.research.google.com/}{Welcome To Colab -
+Colab}}{\# Welcome To Colab - Colab}}\label{welcome-to-colab---colab}
+
+\subsubsection{24. Click on highlight}\label{click-on-highlight}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{google_files/mediabag/5ab7819b-1d11-4954-b.png}
+
+}
+
+\caption{Step 24 screenshot}
+
+\end{figure}%
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Created with
+\href{https://tango.ai?utm_source=markdown&utm_medium=markdown&utm_campaign=workflow\%20export\%20links}{Tango.ai}
+
+
+
+\end{document}

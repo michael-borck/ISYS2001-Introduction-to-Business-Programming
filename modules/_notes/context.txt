@@ -1,0 +1,59 @@
+Week 12 of the ISYS2001 Introduction to Business Programming course focuses on "Week 12 of the ISYS2001 Introduction to Business Programming course focuses on "Testing & Debugging" with a lab project titled "Testing the Weather Dashboard."
+During this week, students will learn essential quality assurance skills for software development:
+
+Testing Fundamentals:
+
+Understanding different types of testing (unit testing, integration testing, system testing)
+Learning about test-driven development (TDD) principles
+Working with Python's testing frameworks (likely unittest or pytest)
+Writing effective test cases for their code
+
+
+Debugging Techniques:
+
+Using debugging tools in their IDE (likely Google Colab as mentioned in the course outline)
+Implementing print statements and logging for troubleshooting
+Tracing program execution to identify logical errors
+Common debugging strategies and best practices
+
+
+Application to the Weather Dashboard Project:
+
+Creating comprehensive tests for their Weather Dashboard components
+Ensuring all functionality works as expected through systematic testing
+Finding and fixing bugs in their application
+Preparing their project for final submission
+
+
+
+This week is strategically placed just before the final project implementation and review in Week 13. The timing allows students to thoroughly test and debug their Weather Dashboard application before finalizing it. The skills learned this week are crucial for developing reliable software and will directly contribute to the quality of their final programming project, which is worth 40% of their grade.
+As with previous weeks, students will likely complete a Lab Exit Ticket assessment at the end of the session, continuing their ongoing evaluation worth 20% of their final grade. The focus on testing and debugging ensures that students not only know how to write code but also how to validate and improve it, which is an essential professional skill in programming." with a lab project titled "Testing the Weather Dashboard."
+During this week, students will learn essential quality assurance skills for software development:
+
+Testing Fundamentals:
+
+Understanding different types of testing (unit testing, integration testing, system testing)
+Learning about test-driven development (TDD) principles
+Working with Python's testing frameworks (likely unittest or pytest)
+Writing effective test cases for their code
+
+
+Debugging Techniques:
+
+Using debugging tools in their IDE (likely Google Colab as mentioned in the course outline)
+Implementing print statements and logging for troubleshooting
+Tracing program execution to identify logical errors
+Common debugging strategies and best practices
+
+
+Application to the Weather Dashboard Project:
+
+Creating comprehensive tests for their Weather Dashboard components
+Ensuring all functionality works as expected through systematic testing
+Finding and fixing bugs in their application
+Preparing their project for final submission
+
+
+
+This week is strategically placed just before the final project implementation and review in Week 13. The timing allows students to thoroughly test and debug their Weather Dashboard application before finalizing it. The skills learned this week are crucial for developing reliable software and will directly contribute to the quality of their final programming project, which is worth 40% of their grade.
+As with previous weeks, students will likely complete a Lab Exit Ticket assessment at the end of the session, continuing their ongoing evaluation worth 20% of their final grade. The focus on testing and debugging ensures that students not only know how to write code but also how to validate and improve it, which is an essential professional skill in programming.

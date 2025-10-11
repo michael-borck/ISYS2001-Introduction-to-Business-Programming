@@ -1,0 +1,1 @@
+../../weatherwise-template/resources/sample-prompting-journey.md

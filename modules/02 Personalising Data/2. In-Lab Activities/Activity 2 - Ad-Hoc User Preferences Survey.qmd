@@ -1,0 +1,177 @@
+---
+title: "Activity 2: Ad-Hoc User Preferences Survey"
+subtitle: "Explore and Experiment: Crafting Your Own User Preferences Survey"
+author: "Michael Borck"
+format: 
+  pdf:
+      toc: false
+      colorlinks: true
+  docx:
+      toc: false
+      highlight-style: github
+  html:
+      toc: true
+      toc-expand: 2
+      embed-resources: true
+---
+
+# Activity 2: Ad-Hoc User Preferences Survey
+
+## Learning Outcome
+
+Explore how to gather and display user preferences through an open-ended programming task. This activity encourages experimentation and resourcefulness with the concepts of input and output in Python.
+
+> **Note:** In this activity, I encourage you to experiment freely with your ideas. In the next activity, we follow a more structured approach, so feel free to explore different methods here and see how a systematic workflow can be applied later.
+
+> **Tip:** Remember, using clear and descriptive variable names can make your code easier to understand as your programmes grow.
+
+## Instructions
+
+1. **Write a Python Script:**  
+   Develop a programme that asks the user about their preferences and then presents those preferences back to them.
+
+> **Hint:** Think of your script as a conversation between you and the computer. Ask questions and respond with a summary!
+
+2. **Gather Preferences:**  
+   - Choose at least three different preferences to ask the user about (for example, favourite colour, favourite food, favourite hobby, favourite movie, etc.).
+   - Use the `input()` function to capture the user’s responses.
+   
+> **AI Tip:** If you’re unsure of what to ask, try brainstorming a list of interests and see which ones spark your curiosity.
+
+3. **Present Preferences:**  
+   - Use the `print()` function to display the gathered preferences in a clear and organised manner.
+   - Consider constructing a summary message that incorporates the user’s inputs, for example:  
+     
+     > "Hello, [name]! Your favourite colour is [colour], you love [food], and you enjoy [hobby]."
+     
+> **Advanced Concept:** The `print()` function can take multiple arguments separated by commas, automatically adding a space between them. This is a simple way to format your output without needing to manually insert spaces.
+
+## Step-by-Step Guide
+
+### Step 1: Creating the Survey
+
+Below is an example code cell that gathers several user preferences. Run this cell to see how it works. Feel free to modify the prompts or add new ones as you experiment.
+
+```{python}
+# Sample survey programme
+
+# Ask the user for their preferences
+name = input("What's your name? ")
+favourite_colour = input("What's your favourite colour? ")
+favourite_food = input("What's your favourite food? ")
+favourite_movie = input("What's your favourite movie? ")
+
+# Construct and display a summary message
+print("\nHello, " + name + "!")
+print("Your favourite colour is " + favourite_colour + ", you love " + favourite_food + 
+      ", and your favourite movie is " + favourite_movie + ".")
+```
+
+> **Tip:** Notice how the `+` operator is used to join strings together. This is known as concatenation—combining separate pieces of text to form one continuous message.
+
+### Step 2: Experimentation and Extension
+
+Now it's your turn. Extend the programme by adding more preferences or by reformatting the output. Here are a few ideas to experiment with:
+
+- **Additional Preferences:**  
+  Add another input prompt, such as asking for the user's favourite hobby.
+  
+> **Hint:** More inputs mean more chances to practise variable assignment and string manipulation.
+
+- **Output Formatting:**  
+  Experiment with printing your summary message on multiple lines or using different string methods (e.g., `.upper()` or `.lower()`).
+
+> **Advanced Tip:** Try utilising Python’s f-string formatting for a neater way to embed variables within your text. For example:  
+> `print(f"Hello, {name}! Your favourite colour is {favourite_colour}, you love {favourite_food}, and your favourite movie is {favourite_movie}.")`
+
+Try the following skeleton code to guide your modifications:
+
+```{python}
+# TODO: Add another preference.
+# For example:
+# favourite_hobby = input("What's your favourite hobby? ")
+
+# TODO: Update the summary message to include your new preference.
+# For example:
+# print("Hello, " + name + "!")
+# print("Your favourite colour is " + favourite_colour + 
+#       ", you love " + favourite_food + 
+#       ", your favourite movie is " + favourite_movie + 
+#       ", and you enjoy " + favourite_hobby + ".")
+```
+
+> **AI Tip:** If you ever get stuck or need inspiration on how to organise your output, ask your AI tutor for suggestions on string formatting or creative ways to display information.
+
+## Guidance
+
+- **Approach Freely:**  
+  You are free to design your programme in any way that demonstrates your understanding of the concepts.
+  
+> **Tip:** There is no single correct solution—experimentation is key to learning!
+
+- **Utilise Resources:**  
+  Feel free to explore online tutorials, ask peers, or use reference materials that support your learning.
+
+> **Advanced Concept:** Understanding how functions work (like `input()` and `print()`) is essential. Think of functions as little machines that take inputs (arguments), process them, and then give you an output.
+
+- **Experiment and Explore:**  
+  The goal is to experiment with the concepts you have learned so far. Creativity is encouraged—there is no single correct way to complete this task!
+
+## Mini-Challenges
+
+These mini-challenges are designed to further stimulate your creativity and problem-solving skills:
+
+1. **Starred Preferences:**  
+   Print each preference on a separate line, with a star (`*`) at the beginning of each line.
+
+   ```{python}
+   # TODO: Modify the summary to print each preference on a separate line with a star.
+   # For example, the output could look like:
+   # * Name: John
+   # * Favourite Colour: Blue
+   # * Favourite Food: Pizza
+   # * Favourite Movie: Inception
+   ```
+
+> **Hint:** Use the newline character `\n` to break lines in your string, or print each line separately.
+
+2. **Age Calculator:**  
+   Ask the user for their birth year and calculate how old they will be this year.
+   
+   *Hint: You may use the `datetime` module to get the current year.*
+
+   ```{python}
+   # TODO: Ask the user for their birth year and calculate their age.
+   # For example:
+   # birth_year = int(input("What year were you born? "))
+   # import datetime
+   # current_year = datetime.datetime.now().year
+   # age = current_year - birth_year
+   # print("You are", age, "years old!")
+   ```
+
+> **Tip:** Remember to convert the input to an integer using `int()` before performing arithmetic.
+
+3. **F-String Formatting Challenge:**  
+   Refactor your summary message to use Python's f-string formatting instead of string concatenation.
+
+   ```{python}
+   # TODO: Rewrite your summary message using f-strings.
+   # For example:
+   # print(f"Hello, {name}! Your favourite colour is {favourite_colour}, you love {favourite_food}, and your favourite movie is {favourite_movie}.")
+   ```
+
+> **AI Tip:** F-strings are a modern and efficient way to format strings. If you’re new to them, try asking your AI tutor, “How do I use f-strings in Python?”
+
+## Reflection
+
+After completing your script and mini-challenges, take a few moments to reflect on the following:
+
+- What method did you choose for gathering user preferences?
+- How did you decide which preferences to ask?
+- Were there any challenges in organising your output message? How did you overcome them?
+- How might you further refine or expand your programme?
+
+> **Tip:** Reflecting on your process can help identify areas for improvement and spark ideas for future projects.
+
+Happy coding and enjoy the creative process!

@@ -1,0 +1,1 @@
+../../weatherwise-template/resources/ai-tips-tricks.md

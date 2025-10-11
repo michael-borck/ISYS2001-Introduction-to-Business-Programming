@@ -1,0 +1,1 @@
+../../weatherwise-template/submission/checklist.md

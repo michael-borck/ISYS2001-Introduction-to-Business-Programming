@@ -1,0 +1,236 @@
+---
+title: "Activity 1: Personalized Greeting & User Preferences"  
+subtitle: "From Input to Impact: Crafting Personalized Greetings in Python"  
+author: "Michael Borck"  
+format:  
+  html:  
+    code-fold: true  
+jupyter: python3  
+---
+
+# Activity 1: Personalized Greeting & User Preferences
+
+Welcome to your first hands-on project in Python! In this activity, you will create a program that collects user information, processes it, and displays a personalized message. Along the way, you'll find hints, tips, and even AI suggestions to help you think like a programmer and problem-solver.
+
+---
+
+## Project Goal
+
+Your mission is to build a simple interactive program that:
+- Asks the user for their name and a couple of preferences (like their favorite colour and food).
+- Stores their responses in variables.
+- Outputs a custom message that uses these inputs.
+
+**Tip:** Good variable names help keep your code clear and your intentions obvious.
+
+---
+
+## Instructions
+
+1. **Collect User Input:**  
+  Use the `input()` function to ask for details such as the user's name, favourite colour, and favourite food.  
+   
+  > **Hint:** Think of `input()` as a way to start a conversation with your computer.
+
+2. **Store Responses in Variables:**  
+  Assign each input value to a variable.  
+  
+  > **Tip:** Choose descriptive names for your variables (e.g., `user_name`, `fav_colour`).
+
+3. **Output a Summary Message:**  
+  Use the `print()` function to display a personalized greeting that includes all the user's inputs.
+
+4. **Extend and Experiment:**  
+  Add extra prompts like asking for a favourite hobby or a spirit animal. Experiment with string manipulation methods and see what fun outputs you can create.
+
+5. **AI Assistance:**  
+  If you get stuck, consider asking your AI tutor for hints on string operations or debugging tips.  
+   
+  > **AI Tip:** You can say, “How do I combine strings in Python?” for additional guidance.
+
+---
+
+## Step-by-Step Guide
+
+### Step 1: Collecting User Input
+
+Below is a code snippet to capture user input. Feel free to adjust the prompts as needed.
+
+```{python}
+# Collect basic user inputs
+user_name = input("What is your name? ")
+fav_colour = input("What is your favourite colour? ")
+fav_food = input("What is your favourite food? ")
+
+# Display the captured inputs
+print("Name:", user_name)
+print("Favourite Colour:", fav_colour)
+print("Favourite Food:", fav_food)
+```
+
+> **Concept**: When using `input()`, the string between the quoptes is know as a prompt
+
+> **Tip**  When using `print()`, you can separate multiple items with a comma. This tells Python to output each item with a space between them automatically.  
+
+> **Advanced Concept**  Arguments are passed to functions (like `print()`).  These *arguments* are the values you provide between the parentheses. In this example, each comma-separated value is an argument, and the `print()` function prints them in order.
+
+> **Hint:** After running this cell, check that your inputs are stored correctly by printing the variables.
+
+---
+
+### Step 2: Outputting a Personalized Summary
+
+Now combine your inputs into a friendly greeting using string concatenation.
+
+```{python}
+# Output a summary message combining the inputs
+print("Hello, " + user_name + "! Your favourite colour is " + fav_colour +
+      " and you love " + fav_food + ".")
+```
+
+> **Tip**  The `+` operator is used here to join, or "concatenate," multiple strings together to build up your final message. Think of it as gluing pieces of text into one complete sentence.
+
+> **Advanced Concept:**  Using the `+` operator for strings lets you create new strings by combining literal text with variables. This is one of the fundamental ways to build messages dynamically in Python.
+
+> **Advanced Tip:** Experiment with different ways of joining strings – try using f-strings for cleaner code as you become more comfortable.
+
+---
+
+### Step 3: Your Turn – Extend the Program
+
+It’s time to add an extra input. For instance, ask the user for their favourite hobby and update your greeting message accordingly.
+
+```{python}
+# TODO: Ask the user for their favourite hobby and store it in a variable.
+# For example:
+# fav_hobby = input("What is your favourite hobby? ")
+
+# Then update the summary message to include the hobby.
+# For example:
+# print("Hello, " + user_name + "! Your favourite colour is " + fav_colour +
+#       ", you love " + fav_food + ", and your favourite hobby is " + fav_hobby + ".")
+```
+
+> **AI Tip:** If you’re not sure how to modify the print statement, ask your AI helper, “How do I update a print statement with more variables in Python?”
+
+---
+
+## Experiment with input()
+
+Try a different twist by asking for something unique, like the user’s spirit animal. This is a fun way to practice with `input()`.
+
+```{python}
+spirit_animal = input("What's your spirit animal? ")
+print("Interesting choice! I wonder why a", spirit_animal, "resonates with you.")
+```
+
+> **Hint:** Think about how different input types (like numbers or strings) can change your approach to programming.
+
+---
+
+## Simple String Manipulation
+
+Discover how to change the style of your text. The code below shows your name transformed to all uppercase letters.
+
+```{python}
+print("Your name in all caps is", user_name.upper() + "!")
+```
+
+> **Tip:** String methods like `.upper()`, `.lower()`, and `.title()` are useful for standardizing text input.
+
+---
+
+## Advanced Concept: Understanding Dot-Methods
+
+When you see a dot (.) following a variable in Python—like in `user_name.upper()`—you're using a method that belongs to that variable's type. In this example, `user_name` is a string, and `.upper()` is a method that converts all characters to uppercase.
+
+- **Dot-Methods Explained:**  
+  In Python, many data types have built-in functions (methods) that perform common tasks. When you type a dot after a variable, your IDE (Integrated Development Environment) can display a list of available methods. For instance, type `user_name.` and pause, and you'll see a drop-down list of string methods. This list gets filtered as you type more letters, helping you quickly find the method you need.
+
+- **IDE Autocomplete Tip:**  
+  If you're ever unsure which method to use, try typing a dot after your variable name. Your IDE’s autocomplete feature will suggest options along with a brief description. This is a great way to learn about what methods are available for strings and other objects before diving deeper into object-oriented programming later in the course.
+
+> **AI Tip:** Ask your AI tutor, “What are some common string methods in Python?” for more examples and explanations.
+
+---
+
+## Mini-Challenges
+
+### Challenge 1: Multi-line Greeting  
+Modify your greeting message so it prints on two lines.  
+
+> *Hint:* Insert the newline character `\n` in your string to start a new line.
+
+```{python}
+# TODO: Modify the greeting message to print on two separate lines.
+# For example, consider:
+# print("Hello, " + user_name + "!\nYour favourite colour is " + fav_colour +
+#       " and you love " + fav_food + ".")
+```
+
+> **AI Tip:** If you need a refresher on escape sequences in Python, ask, “What are escape sequences in Python?”
+
+---
+
+### Challenge 2: Age Calculator  
+Ask the user for their birth year and calculate their age for the current year.  
+*Hint:* You might need to import the `datetime` module to obtain the current year.
+
+```{python}
+# TODO: Ask the user for their birth year and calculate their age.
+# For example:
+# birth_year = int(input("What year were you born? "))
+# import datetime
+# current_year = datetime.datetime.now().year
+# age = current_year - birth_year
+# print("You are", age, "years old!")
+```
+
+> **Tip:** Make sure to convert the input from a string to an integer using `int()` before doing arithmetic.
+
+---
+
+## Optional Advanced: Interactive Input with ipywidgets
+
+This section provides a sneak peek into interactive programming techniques. Feel free to explore if you’re curious about more dynamic user interfaces. (Don't worry if this seems advanced—it's an optional bonus!)
+
+```{python}
+# Optional Advanced: Using ipywidgets for interactive input
+# If needed, uncomment the next line to install ipywidgets in Colab
+# !pip install ipywidgets
+
+import ipywidgets as widgets
+from IPython.display import display
+
+def greet(user_name, fav_colour, fav_food):
+    greeting = f"Hello, {user_name}! Your favourite colour is {fav_colour} and you love {fav_food}."
+    print(greeting)
+
+# Create interactive text widgets for input
+name_widget = widgets.Text(placeholder='Enter your name')
+colour_widget = widgets.Text(placeholder='Enter your favourite colour')
+food_widget = widgets.Text(placeholder='Enter your favourite food')
+
+ui = widgets.VBox([name_widget, colour_widget, food_widget])
+out = widgets.interactive_output(greet, {'user_name': name_widget, 'fav_colour': colour_widget, 'fav_food': food_widget})
+display(ui, out)
+```
+
+> **AI Tip:** Use the interactive widgets as a way to see real-time feedback on your code. You can ask your AI tutor for more creative ideas on using ipywidgets.
+
+---
+
+## Summary and Next Steps
+
+- **Experiment:**  
+  Play around with different prompts and string methods. For instance, try converting text to uppercase or adding another personal touch to your greeting.
+
+- **Mini-Challenges:**  
+  Work on the mini-challenges above to further hone your coding skills.
+
+- **Interactive Widgets (Optional):**  
+  Explore the ipywidgets section to learn about interactive programming. Ask your AI helper for extra resources if you're interested!
+
+Remember, programming is about exploring and learning from your experiments. If you get stuck, your Lecturer, Tutor and AI tutor are here to help.
+
+Happy coding!

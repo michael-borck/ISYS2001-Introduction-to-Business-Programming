@@ -1,0 +1,89 @@
+---
+title: "Exploring Code Paradigms: Procedural vs Object-Oriented in Python"
+subtitle: "A Hands-On Approach to Understanding Code Structures"
+format: jupyter-notebook
+jupyter: python3
+---
+
+# Exploring Code Paradigms: Procedural vs Object-Oriented in Python
+*A Hands-On Approach to Understanding Code Structures*
+
+
+## Learning Objectives
+- By the end of this activity, you will be able to distinguish between procedural and object-oriented programming in Python.
+- Understand the basic concepts and applications of classes and objects.
+- Evaluate the appropriateness of using procedural or object-oriented techniques for different programming scenarios.
+
+## Introduction
+Understanding different programming paradigms is crucial not only for developing flexible coding skills but also for appreciating how these paradigms can be applied to solve various problems efficiently. This worksheet will guide you through the foundational concepts of Procedural and Object-Oriented Programming (OOP) in Python, helping you see where each approach might be most effective.
+
+## Using AI Tools Ethically & Effectively
+> **Transparency:** Always disclose your use of AI tools in your work. For instance, note any instances where AI helped you generate ideas or refine your code.
+>
+> **Critical Evaluation:** Remember that AI suggestions may not always be accurate. Always verify the information and refine the AI-generated content to ensure quality and relevance.
+>
+> **Learning Partner:** Use AI tools to deepen your understanding, asking for explanations or examples. For example, you can start with prompts like "Explain encapsulation in simple terms" or "Provide an example of polymorphism in Python."
+
+## Key Concepts
+- **Procedural Programming:** A programming paradigm based on the concept of procedure calls, where statements are structured into procedures (functions).
+- **Object-Oriented Programming (OOP):** A programming paradigm based on the concept of "objects", which can contain data in the form of fields (often known as attributes), and code, in the form of procedures (often known as methods).
+- **Class:** A blueprint for creating objects (a particular data structure), providing initial values for state (member variables), and implementations of behavior (member functions or methods).
+- **Object:** An instance of a class.
+
+## Application Activities
+
+### Activity 1: Identifying Paradigms in Real Code
+*Scenario:* You are given a snippet of Python code. Determine whether it uses a procedural or object-oriented approach and justify your answer.
+
+```{python}
+def calculate_area(base, height):
+    return 0.5 * base * height
+
+area = calculate_area(5, 10)
+print("Area:", area)
+```
+
+*Your response:*
+
+---
+
+### Activity 2: Refactoring to OOP
+*Task:* Refactor the procedural code provided in Activity 1 into an object-oriented format. Define a class `Triangle` with a method to calculate the area.
+
+```{python}
+# Procedural code
+def calculate_area(base, height):
+    return 0.5 * base * height
+
+area = calculate_area(5, 10)
+print("Area:", area)
+
+# Refactor to OOP below
+
+
+```
+
+---
+
+💡 **AI Tip:** Stuck on how to start refactoring? Ask an AI: "How can I convert procedural code into an object-oriented class in Python?" Use its suggestions to guide your initial design, but ensure you understand and can justify each part of the transformed code.
+
+### Extension Task: Enhance the Triangle Class
+Enhance your `Triangle` class by adding more functionalities such as calculating the perimeter, and include input validation. 
+
+*Your response:*
+```{python}
+# Your extension here
+```
+
+---
+
+## Reflection
+- Reflect on how you might use the knowledge of different programming paradigms in your future projects.
+- Discuss how you used AI tools during this activity and evaluate their effectiveness.
+- Describe how you ensured the integrity of your work when using AI suggestions.
+
+*Your response:*
+
+---
+
+This worksheet has introduced you to the fundamental differences and applications of procedural and object-oriented programming in Python. By engaging with the code and refactoring tasks, you gain hands-on experience that helps solidify your understanding of these concepts. Remember, the choice of programming paradigm can significantly influence the design, maintenance, and scalability of software projects.

@@ -1,0 +1,113 @@
+Here’s a set of 16 multiple-choice questions based on your FAQ. The correct answer for each is indicated at the end.
+
+1. **What is the core problem-solving methodology used in this programming introduction?**
+   A. A waterfall approach with analysis, design, implementation, and maintenance
+   B. A six-step approach divided into “Thinking” (steps 1–4) and “Coding” (steps 5–6)
+   C. An agile sprint cycle with planning, development, review, and retrospective
+   D. A top-down decomposition into modules, functions, and classes
+   **Answer: B**
+
+2. **Which of the following is the correct sequence of the six steps?**
+   A. Identify inputs/outputs → Understand problem → Write pseudocode → Test → Convert → Work by hand
+   B. Understand problem → Identify inputs/outputs → Work by hand → Write pseudocode → Convert to program → Test
+   C. Write pseudocode → Understand problem → Identify inputs/outputs → Work by hand → Test → Convert to program
+   D. Test → Understand problem → Identify inputs/outputs → Convert to program → Write pseudocode → Work by hand
+   **Answer: B**
+
+3. **Which of these is *not* a key component of the “Thinking” phase?**
+   A. Restating the problem in your own words
+   B. Identifying the necessary inputs and desired outputs
+   C. Working through a simple example manually
+   D. Converting pseudocode into actual code
+   **Answer: D**
+
+4. **How is pseudocode used in this approach?**
+   A. As a direct input to a code generator that produces final source code
+   B. To compile and optimise algorithms at compile time
+   C. As a bridge between thinking and coding, describing logic with fundamental actions
+   D. As a tool for performance profiling before writing real code
+   **Answer: C**
+
+5. **Which of the following is *not* listed among the fundamental Python concepts covered?**
+   A. Data types and variables
+   B. Operators and expressions
+   C. Conditionals and loops
+   D. Metaclasses and decorators
+   **Answer: D**
+
+6. **Real-world applications like a weather forecaster are used to illustrate which concept?**
+   A. Recursive function calls
+   B. Conditional logic (if-else) applied to data
+   C. Object-oriented inheritance hierarchies
+   D. Event-driven asynchronous programming
+   **Answer: B**
+
+7. **What is the purpose of using Google Colab and GitHub?**
+   A. Colab for cloud-based notebooks; GitHub for version control and collaboration
+   B. Colab for local IDE installation; GitHub for storing large binary files
+   C. Colab for real-time pair programming; GitHub for code review only
+   D. Colab as a project management tool; GitHub as a spreadsheet alternative
+   **Answer: A**
+
+8. **How is AI suggested for use in the learning process?**
+   A. As a replacement for writing any code manually
+   B. As a companion to explain concepts, suggest code, and refine thinking
+   C. As a compiler plugin to automatically optimise Python bytecode
+   D. As a scheduling assistant to plan study sessions
+   **Answer: B**
+
+9. **Why should you continue learning Python beyond the basics?**
+   A. Because Python syntax never changes
+   B. To expand career opportunities, improve problem-solving, and stay current as technology evolves
+   C. Because once you know the basics, you’re done
+   D. To become proficient in unrelated languages like COBOL
+   **Answer: B**
+
+10. **Which of these specialization areas is *not* mentioned as a Python focus?**
+    A. Data Science & Analytics
+    B. Web Development
+    C. Quantum Computing
+    D. Game Development
+    **Answer: C**
+
+11. **Which library is *not* listed under Python’s data science and machine learning ecosystem?**
+    A. pandas
+    B. TensorFlow
+    C. matplotlib
+    D. Express.js
+    **Answer: D**
+
+12. **Which of the following tasks is *not* explicitly mentioned under Python automation?**
+    A. File organisation and data processing (CSV, Excel, JSON)
+    B. Web scraping with Beautiful Soup
+    C. Scheduling tasks and system maintenance
+    D. Mobile app interface design in Swift
+    **Answer: D**
+
+13. **Which language is *not* recommended alongside Python for broadening your toolkit?**
+    A. JavaScript
+    B. SQL
+    C. Rust
+    D. HTML
+    **Answer: D**
+
+14. **Which of these is *not* listed as an essential coding best practice?**
+    A. Using version control (Git)
+    B. Writing unit and integration tests
+    C. Skipping documentation for speed
+    D. Participating in code reviews
+    **Answer: C**
+
+15. **Which activity is *not* part of building a sustainable growth routine?**
+    A. Working on coding projects
+    B. Reading well-written open-source code
+    C. Engaging with developer communities
+    D. Simply memorising algorithms without application
+    **Answer: D**
+
+16. **Which resource is *not* mentioned as available for continuing Python learning?**
+    A. “Automate the Boring Stuff with Python”
+    B. Real Python website
+    C. HackerRank and LeetCode
+    D. Official Microsoft .NET documentation
+    **Answer: D**

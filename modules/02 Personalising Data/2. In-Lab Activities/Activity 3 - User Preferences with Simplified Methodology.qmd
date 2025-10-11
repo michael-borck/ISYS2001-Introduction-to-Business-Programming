@@ -1,0 +1,194 @@
+---
+title: "Activity 3: User Preferences with Simplified Methodology"
+subtitle: "From Blueprint to Code: Building Your User Preferences program Step by Step"
+author: "Michael Borck"
+format: 
+  pdf:
+      toc: false
+      colorlinks: true
+  docx:
+      toc: false
+      highlight-style: github
+  html:
+      toc: true
+      toc-expand: 2
+      embed-resources: true
+---
+
+# Activity 3: User Preferences with Simplified Methodology
+
+## Learning Outcome
+
+Apply a structured problem-solving methodology to design and implement a User Preferences program. In this activity, you will practise computational thinking by breaking down the problem into manageable steps—from planning and pseudocode to coding your final solution—and learn how to use AI tools to support your process.
+
+> **Note:** In this activity, we are focusing on the workflow and process of solving a problem, rather than the problem itself. While the tasks in this notebook are similar to those in Activity 2, the structured methodology presented here is designed to help you observe how a systematic approach can streamline your coding process. Reflect on how the two approaches differ in terms of planning, execution, and problem-solving, and consider which aspects of each workflow can be applied to your future projects.
+
+---
+
+## Step 1 – State the Problem
+
+- **Goal:**  
+  Build a program that collects several user preferences and then displays these preferences in a clear, personalised summary.
+  
+- **Considerations:**  
+  - What information should the program gather?  
+    *(For example: name, favourite colour, favourite food, hobby, etc.)*
+  - How should the program present this information?  
+    *(For example: a greeting message that summarises all responses.)*
+
+> **Tip:** Take a moment to write down in your own words what you want your program to achieve. This reflection helps clarify your objectives before you start coding.
+
+> **AI Tip:** Use an AI tool (like ChatGPT) to help you rephrase your description. For instance, ask:  
+> "Can you restate my description of a user preferences program to ensure I have captured the intent correctly?"  
+> Then, review the response to confirm that it aligns with what you have learned so far—using only `input()`, `print()`, basic primitive datatypes, and variables.
+
+---
+
+## Step 2 – Describe Input and Output
+
+- **Inputs:**  
+  List the information you plan to ask for. For example:
+  - Name
+  - Favourite Colour
+  - Favourite Food
+  - Favourite Hobby
+
+- **Output:**  
+  Decide on the format of your summary message. For instance:
+  > "Hello, [name]! Your favourite colour is [colour], you love [food], and you enjoy [hobby]."
+
+> **Tip:** Mapping your inputs to the expected output helps you visualise the overall flow of your program.
+
+> **AI Tip:** Ask an AI tool for suggestions by saying, "What are some creative ways to format a user preferences summary?" Ensure the answer only uses concepts you’ve learned so far.
+
+---
+
+## Step 3 – Work the Problem by Hand
+
+Before writing any code, simulate the process:
+- **Sample Inputs:**  
+  Imagine a user named "Alice" who selects:
+  - Favourite Colour: Blue
+  - Favourite Food: Pasta
+  - Favourite Hobby: Reading
+
+- **Expected Output:**  
+  Write down the expected result:
+  > "Hello, Alice! Your favourite colour is Blue, you love Pasta, and you enjoy Reading."
+
+> **Tip:** Try a couple of different input scenarios to ensure your plan is clear and robust.
+
+> **AI Tip:** If you're unsure about your expected output, ask an AI tool:  
+> "Does this output message clearly reflect the inputs provided?"  
+> This helps you verify your understanding using only the concepts you have learned.
+
+---
+
+## Step 4 – Develop an Algorithm (Pseudocode)
+
+Outline your approach using pseudocode. This bridges your plan to actual code. For example:
+
+```plain
+# Pseudocode for User Preferences program
+
+1. Start the program.
+2. Prompt the user for their name and store the input.
+3. Prompt the user for their favourite colour and store the input.
+4. Prompt the user for their favourite food and store the input.
+5. Prompt the user for their favourite hobby and store the input.
+6. Construct a summary message using the stored inputs.
+7. Print the summary message.
+8. End the program.
+```
+
+> **Tip:** Your pseudocode doesn’t need to follow Python syntax—it should simply outline the logical steps of your solution.
+
+> **AI Tip:** Ask an AI tool, "Can you check my pseudocode for a user preferences program and suggest any improvements?" Verify that the suggestions remain within the current scope of your learning (i.e., no advanced concepts like functions or f-strings yet).
+
+---
+
+## Step 5 – Write the Code
+
+Now, use your plan to build the actual program. Use the skeleton below to guide you:
+
+```{python}
+# Step 5: Final Implementation of User Preferences program
+
+# Collect user input for various preferences
+name = input("What is your name? ")
+favourite_colour = input("What's your favourite colour? ")
+favourite_food = input("What's your favourite food? ")
+favourite_hobby = input("What's your favourite hobby? ")
+
+# Construct and display a personalised summary message
+print("\nHello, " + name + "!")
+print("Your favourite colour is " + favourite_colour + 
+      ", you love " + favourite_food + 
+      ", and you enjoy " + favourite_hobby + ".")
+```
+
+> **Tip:** Run the cell above to test your program and verify that your inputs are correctly captured and displayed.
+
+> **AI Tip:** If you encounter any errors or have questions about your code, ask follow-up questions like, "How can I improve this code using only input(), print(), and variables?" This will help ensure the solutions align with what you have learned so far.
+
+---
+
+## Mini-Challenges
+
+Enhance your program further by trying these optional challenges:
+
+1. **Starred Preferences:**  
+   Modify your output so each preference is printed on a new line with a star (`*`) at the beginning.  
+   *Example:*
+   ```{python}
+   print("* Name:", name)
+   print("* Favourite Colour:", favourite_colour)
+   print("* Favourite Food:", favourite_food)
+   print("* Favourite Hobby:", favourite_hobby)
+   ```
+
+> **Hint:** Use the newline character `\n` to break lines in your string, or print each line separately.
+
+2. **Age Calculator Challenge:**  
+   Ask the user for their birth year, calculate their age based on the current year, and print it.  
+   *Hint:* You may use the `datetime` module to get the current year—but remember, for now, focus on what you have learned. If this concept is new, you might ask an AI for a simpler explanation or a step-by-step guide.
+   ```{python}
+   import datetime
+   birth_year = int(input("What year were you born? "))
+   current_year = datetime.datetime.now().year
+   age = current_year - birth_year
+   print("You are", age, "years old!")
+   ```
+
+3. **(Optional Advanced) F-String Formatting:**  
+   Refactor your summary message using f-strings for cleaner syntax.  
+   *Note:* This is optional and intended for those ready to explore a more advanced concept. If you're not familiar with f-strings yet, feel free to ask for a beginner-friendly explanation.
+   ```{python}
+   print(f"Hello, {name}! Your favourite colour is {favourite_colour}, you love {favourite_food}, and you enjoy {favourite_hobby}.")
+   ```
+
+> **AI Tip:** For each mini-challenge, ask AI questions like, "Can you explain how to print multiple lines in Python?" or "What is an f-string, and how do I use it?" Always follow up if any part of the explanation is unclear.
+
+---
+
+## Reflection and Next Steps
+
+- **Reflect:**  
+  - What did you find most helpful about planning your program before coding?
+  - Did working through the pseudocode make the coding process easier?
+  - Which mini-challenge did you enjoy the most, and why?
+  - How did using AI tools help clarify the problem and refine your approach?
+
+> **Tip:** Reflecting on your process can help identify areas for improvement and spark ideas for future projects.
+
+- **General AI Usage Tip:**  
+  If you receive any suggestions from an AI tool that include concepts not yet covered (like exceptions, import statements, user-defined functions, or f-strings), ask follow-up questions to have them explained using only the topics you’ve learned so far (input(), print(), basic primitive datatypes, and variables). Critically evaluate the output to ensure it aligns with your current learning.
+
+- **Next Steps:**  
+  - Experiment by adding more preferences or modifying the output format.
+  - Share your approach with peers and discuss any creative solutions you discovered.
+  - Continue using AI tools as a resource, but always ask follow-up questions on anything you don’t understand and ensure that the advice is consistent with your course content.
+
+> **Note:** The focus in this activity is on the systematic approach to problem-solving. Use this structured methodology to streamline your process and build confidence in breaking down and tackling problems.
+
+Happy coding and enjoy the process of turning your blueprint into a working program!

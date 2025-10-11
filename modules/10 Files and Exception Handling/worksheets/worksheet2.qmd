@@ -1,0 +1,197 @@
+---
+title: "Advanced Exception Handling Techniques"
+subtitle: "Creating Resilient Python Programs"
+format: jupyter-notebook
+jupyter: python3
+---
+
+
+# Activity 2: Advanced Exception Handling Techniques
+
+## Learning Objectives
+- Implement multi-level exception handling for different error types
+- Use the complete try-except-else-finally structure
+- Analyze and improve code with robust exception handling
+
+## Key Concepts
+- **Exception Types:** Understanding Python's exception hierarchy
+- **Multiple Except Blocks:** Handling different types of exceptions differently
+- **Exception Chaining:** Using `try-except-else-finally` for complete error management
+- **Custom Error Messages:** Creating informative error messages for users
+
+## Review: Basic Exception Structure
+
+In the previous activity, we looked at simple exception handling:
+
+```{python}
+try:
+    # Code that might raise an exception
+    with open('file.txt', 'r') as file:
+        content = file.read()
+except FileNotFoundError:
+    # Handle the specific error
+    print("File not found!")
+```
+
+## Advanced Exception Handling
+
+### 1. Handling Multiple Exception Types
+
+Different operations can raise different types of exceptions. We can handle them separately:
+
+```{python}
+try:
+    with open('data.txt', 'r') as file:
+        content = file.read()
+        number = int(content.strip())
+        result = 100 / number
+        print(f"Result: {result}")
+except FileNotFoundError:
+    print("Error: The file 'data.txt' does not exist.")
+except ValueError:
+    print("Error: The file does not contain a valid number.")
+except ZeroDivisionError:
+    print("Error: Cannot divide by zero.")
+```
+
+### 2. Using the `else` Clause
+
+The `else` block executes only if no exceptions were raised:
+
+```{python}
+try:
+    with open('data.txt', 'r') as file:
+        content = file.read()
+except FileNotFoundError:
+    print("File not found!")
+else:
+    # This runs only if no exceptions occurred in the try block
+    print(f"Successfully read {len(content)} characters from file.")
+```
+
+### 3. Using the `finally` Clause
+
+The `finally` block always executes, regardless of whether an exception occurred:
+
+```{python}
+try:
+    file = open('data.txt', 'r')
+    content = file.read()
+except FileNotFoundError:
+    print("File not found!")
+finally:
+    # This always runs, even if an exception occurred
+    print("Attempt to read file completed.")
+    # Make sure to close the file if it was opened
+    if 'file' in locals() and not file.closed:
+        file.close()
+```
+
+## Activity: Analyzing and Improving Code
+
+### Task 1: Identify Issues in This Code
+
+Review this function that processes a data file:
+
+```{python}
+def process_data_file(filename):
+    file = open(filename, 'r')
+    lines = file.readlines()
+    numbers = [int(line.strip()) for line in lines]
+    average = sum(numbers) / len(numbers)
+    file.close()
+    return average
+
+# Test the function
+result = process_data_file('data.txt')
+print(f"Average: {result}")
+```
+
+✍️ **List all the potential errors that could occur in this code:**
+
+```
+# Your answer here
+```
+
+### Task 2: Improve the Code with Robust Exception Handling
+
+Rewrite the function to handle all the potential issues you identified:
+
+```{python}
+def improved_process_data_file(filename):
+    """
+    Processes a file containing numbers and returns their average.
+    Handles various potential errors gracefully.
+    
+    Args:
+        filename (str): Name of the file to process
+        
+    Returns:
+        float: Average of numbers in the file, or None if processing failed
+    """
+    # Your improved code here
+    pass
+```
+
+**💡 AI Tip:** Ask an AI to help identify potential errors: "What exceptions might occur in this data processing code?" Then develop your own solution based on that information.
+
+### Task 3: Testing Your Improved Function
+
+Create test cases to verify your function handles errors correctly:
+
+```{python}
+# Test with a file that doesn't exist
+print(improved_process_data_file('nonexistent.txt'))
+
+# Test with a file containing non-numeric data
+# First, create a test file:
+with open('bad_data.txt', 'w') as f:
+    f.write("1\n2\nthree\n4\n")
+print(improved_process_data_file('bad_data.txt'))
+
+# Test with an empty file
+with open('empty.txt', 'w') as f:
+    pass
+print(improved_process_data_file('empty.txt'))
+
+# Test with valid data
+with open('good_data.txt', 'w') as f:
+    f.write("10\n20\n30\n40\n")
+print(improved_process_data_file('good_data.txt'))
+```
+
+## Extension: Advanced Exception Techniques
+
+### Creating a Timeout Handler
+
+In real-world applications, operations sometimes take too long. Implement a function that reads a file but will "time out" if it takes longer than a specified number of seconds:
+
+```{python}
+import signal
+
+def read_file_with_timeout(filename, timeout_seconds=5):
+    """
+    Attempts to read a file but gives up if it takes too long.
+    
+    Args:
+        filename (str): The file to read
+        timeout_seconds (int): Maximum seconds to wait
+        
+    Returns:
+        str: File contents or error message
+    """
+    # Your code here
+    # Hint: Research the 'signal' module in Python
+    pass
+```
+
+## Reflection Questions
+
+1. How does handling specific exceptions (like `FileNotFoundError`) improve your code compared to catching all exceptions with a generic `except:` block?
+2. In what scenarios would you use the `else` clause in a try-except block?
+3. How could the exception handling techniques you've learned help make programs more user-friendly?
+4. How do these practices relate to the upcoming "Safe Utils Module" project?
+
+## Looking Ahead
+
+In the next activity, you'll learn to create reusable "safe" utility functions that encapsulate error handling. This is a key step toward our Week 11 mini-project, where you'll develop a complete module of safe utilities for file operations and data handling.

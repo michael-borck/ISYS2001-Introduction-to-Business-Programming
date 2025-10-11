@@ -1,0 +1,48 @@
+What is the core problem-solving methodology used in this programming introduction?
+The core problem-solving methodology is a six-step approach designed to break down complex problems into manageable stages. It is divided into a "Thinking" phase (steps 1-4) and a "Coding" phase (steps 5-6).
+
+What are the six steps of the problem-solving methodology?
+The six steps are: 1. Understand the problem, 2. Identify the inputs and outputs, 3. Work the problem by hand, 4. Write pseudocode, 5. Convert to Program, and 6. Test with a variety of data.
+
+What are the key components of the "Thinking" phase?
+The "Thinking" phase involves understanding the problem by restating it, identifying the necessary inputs and desired outputs, and working through a simple example of the problem manually to clarify the logic.
+
+How is pseudocode used in this approach?
+Pseudocode acts as a bridge between the thinking and coding phases. It translates the manual steps into a semi-structured description using six fundamental computer actions: Input, Output, Storage, Calculate, Make Decision, and Repeat. This helps to outline the program's logic before writing actual code.
+
+What are some fundamental Python concepts covered?
+The fundamental Python concepts covered include data types, variables, operators, and basic control structures such as conditionals (if/elif/else) and loops (for/while). These form the essential building blocks for creating programs.
+
+How are real-world applications used to illustrate programming concepts?
+Real-world applications, such as a weather forecaster, are used to make abstract programming concepts more tangible. For example, using simple weather conditions and temperature thresholds helps demonstrate how conditional logic (if-else) can be applied to real-world data to produce meaningful outputs.
+
+What is the purpose of using Google Colab and GitHub?
+Google Colab provides a zero-installation, cloud-based environment for writing and running Python code, ideal for learning and prototyping. GitHub is used for version control, storing and managing code files, and enabling collaboration. They provide a modern, accessible workflow.
+
+How is AI suggested for use in the learning process?
+AI is suggested as a programming companion to accelerate the learning journey. It can help explain concepts, syntax, and errors, suggest code examples, and offer alternative approaches. The key emphasis is on using AI to understand and refine one's own thinking, critically evaluating the AI's output rather than just accepting answers.
+
+Why should I continue learning Python beyond the basics?
+Continuing your Python journey is crucial because technology is constantly evolving, with new tools and approaches emerging regularly. Acquiring new skills expands your career opportunities, enhances your problem-solving abilities, and multiplies your creative possibilities. The fundamental skills you've learned are merely the starting point for an ongoing process of growth and development in the dynamic field of programming.
+
+What are the main areas I can specialise in with Python?
+Python is highly versatile and supports various specialisation areas. These include Data Science & Analytics (analysing data, building predictive models), Web Development (creating websites and applications), Automation (building scripts for repetitive tasks), Game Development (designing and implementing games), Machine Learning & AI (training models), Internet of Things (IoT) (connecting physical devices), and Desktop Applications (building software with graphical interfaces). You can focus on one area or explore multiple domains.
+
+How does Python support Data Science and Machine Learning?
+Python is the leading language for Data Science and is central to the AI revolution. For Data Science, essential workflows include data acquisition, cleaning, exploratory analysis, visualisation, and statistical analysis, often using libraries like pandas, numpy, matplotlib, seaborn, and scipy. In Machine Learning, Python is used for data preparation, model training, making predictions, and evaluation, with popular libraries like scikit-learn, TensorFlow, PyTorch, and Keras.
+
+Can I use Python for Web Development and Automation?
+Yes, Python is widely used for both Web Development and Automation. For Web Development, you can build personal websites, web applications, APIs, dashboards, and e-commerce sites using frameworks like Flask, Django, and FastAPI. For Automation, Python allows you to automate tasks such as file organisation, data processing (e.g., transforming between CSV, Excel, JSON), web scraping, scheduled tasks, and system maintenance, utilising libraries like os, shutil, requests, Beautiful Soup, schedule, and PyAutoGUI.
+
+What are some other programming languages worth exploring alongside Python?
+While Python is versatile, learning other languages can broaden your capabilities. Some important languages to consider are JavaScript (for web front-end), SQL (for database management), R (for statistical computing), Java/Kotlin (for Android development), Swift (for iOS development), C/C++ (for performance-critical applications), Rust (for safe systems programming), and Go (for efficient concurrent programming). Learning multiple languages expands your perspective and problem-solving toolkit.
+
+What are some essential coding best practices I should adopt?
+Adopting coding best practices is key to becoming a better programmer. These include using Version Control (like Git) for tracking changes and collaboration, writing Tests (unit and integration tests) for your code, creating clear Documentation, writing Clean Code that is readable and maintainable, participating in Code Reviews to get feedback, Refactoring code to improve its structure, focusing on Performance Optimization, and implementing Security measures to protect applications.
+
+How can I continue my learning journey and build a sustainable growth routine?
+To ensure continuous growth, build a learning routine that includes working on Coding Projects to apply your knowledge, Reading Code from well-written open source projects, engaging with the Community through forums and meetups, Teaching Others to solidify your understanding, following Industry News to stay updated, using Structured Learning resources like tutorials and books, and regular Reflection on what you've learned. Consistent effort over time leads to significant progress.
+
+What resources are available to help me continue learning Python?
+Numerous resources can support your Python learning. Recommended Books include "Fluent Python," "Python Crash Course," "Automate the Boring Stuff with Python," and "Clean Code." Useful Online Resources and Communities are the official Python Documentation, Real Python, PyBites, and Stack Overflow. For Interactive Learning, consider platforms like Exercism, HackerRank, LeetCode, and Codewars. Additionally, YouTube channels like Corey Schafer, sentdex, Tech With Tim, and freeCodeCamp offer valuable video tutorials. Complete code examples for the presentation can be found in the course repository on GitHub.
+

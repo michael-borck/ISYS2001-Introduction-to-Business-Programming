@@ -1,3 +1,0 @@
-* Installing Python
-* Basic Project structure
-* Git, GitHub 

@@ -1,0 +1,88 @@
+---
+title: "Fixing Mistakes in Python"
+execute: false
+---
+
+Welcome to this notebook! 🎉
+
+Making mistakes is a natural part of learning to code. In fact, every programmer—no matter how experienced—runs into errors. The good news? Python is great at telling us when something is wrong. Our job is simply to **read the message carefully and make small corrections** to get the code working.  
+
+In this notebook, you'll practice **fixing common beginner mistakes** like:
+
+- ✅ Using the correct spelling for Python commands
+- ✅ Making sure parentheses and quotation marks are complete
+- ✅ Using the right spacing (indentation)
+- ✅ Paying attention to uppercase and lowercase letters
+
+Each section contains a small mistake in the code. Your task is to **spot the error and fix it** so the program runs correctly!
+
+> 💡 **Advanced Note:** This process of finding and fixing mistakes is called **debugging**. Later in the semester, we’ll explore more advanced techniques to help us do this even faster!
+
+Let's get started! 🚀
+
+
+## Section 6: Fixing Indentation Errors
+
+> Python is **indentation-sensitive**. The following code has an indentation error. Run the code first so you can see the error message, then fix it!
+
+```{python}
+print("Hello")
+     print("Python!")
+```
+
+> 💡 Try to read the error message carefully. Often, you won't understand the full message but only parts of it—use those clues to find the problem.
+> 💡 **AI Tip:** If you're confused about indentation errors, paste your error into AI and ask for an explanation.
+> 💡 **Advanced Note:** The error message in Python is called a *traceback* and identifies the *exception* that occurred. We will learn more about error messages during the semester.
+
+
+# Section 5: Case Sensitivity Matters!
+
+Python treats `print`, `Print`, and `PRINT` as different things! RRun the code first so you can see the error message, then fix the incorrect function call!
+
+```{python}
+PRINT("All caps")
+```
+
+# Section 7: Common Typos
+
+Watch out for typos! Run the code first so you can see the error message, then fix it!
+
+```{python}
+pint("Hello, World!")
+```
+
+> 💡 **AI Tip:** If you struggle with fixing typos, ask AI: *What’s wrong with this Python function call?*
+
+# Section 8: Closing Strings Properly
+
+Make sure all strings have both opening and closing quotation marks! Run the code first so you can see the error message, then fix it!
+
+
+## Task: Fix the missing quote
+```{python}
+print("Python)
+```
+
+# Section 9: Matching Parentheses
+
+Every opening parenthesis `(` must have a closing parenthesis `)`. Fix the error below.
+
+```{python}
+print("I have no end"
+```
+
+> 💡 **AI Tip:** If you don’t understand an AI explanation, ask it to **simplify further**!
+
+# Section 9: Debugging a Beginner's Code
+
+Bob wrote his first Python script, but it has some errors. Can you fix them?
+
+```{python}
+# prinT("Good morning!" 
+# Print("Python is amazing!") 
+#     print("Let's learn Python together!"
+# print("Coding is exciting")
+# print("I have no idea what's going on!"
+```
+
+> 💡 **AI Tip:** If you're unsure about fixing errors, ask AI: *What’s wrong with this code?* Then compare AI's explanation with your understanding.

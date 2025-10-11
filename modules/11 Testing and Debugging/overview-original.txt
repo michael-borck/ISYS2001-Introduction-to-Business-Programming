@@ -1,0 +1,34 @@
+# Introduction to Business Programming - Week 12: Testing & Debugging
+
+## 🎯 This Week's Focus
+- Analyse various testing methodologies to identify the most suitable approach for different programming scenarios.
+- Evaluate debugging tools within IDEs like Google Colab to determine their effectiveness in real-world applications.
+- Apply unit testing principles using Python's unittest or pytest frameworks to basic code segments.
+- Justify the use of systematic testing strategies to ensure the robustness of software applications.
+- Design comprehensive test cases that simulate user interaction with the Weather Dashboard.
+- Critique existing test cases for improvement and enhanced coverage.
+
+## 📖 Before the Lab
+- Module 1: Introduction to Testing Frameworks in Python
+- Module 2: Advanced Debugging Techniques
+- Module 3: Designing Effective Test Cases
+- Module 4: Test-Driven Development (TDD) Principles
+
+## 📝 Assessment
+- Self-Assessment Quiz: Testing Your Understanding of Python Testing Frameworks
+- Peer Review: Evaluate and Provide Feedback on Test Cases Designed by Classmates
+- Analysis Task: Identify Flaws in Given Debugging Strategies
+
+## 🛠 Workshop Activities
+- Activity 1: Implementing Unit Tests for Simple Python Functions (Skill focus: Applying concepts)
+- Activity 2: Debugging Common Errors in Sample Code (Skill focus: Analysing logical errors)
+- Activity 3: Evaluating and Improving Test Coverage (Skill focus: Justifying methodology)
+
+## 🚀 Projects Area
+This week, students will integrate their knowledge of testing and debugging by designing and implementing a comprehensive testing suite for the Weather Dashboard project. This includes writing unit tests, using debugging tools to trace and fix errors, and ensuring all functionality meets the specified requirements.
+- Project Title: Comprehensive Testing of the Weather Dashboard
+
+## 🔗 Additional Resources
+- [Python unittest documentation](https://docs.python.org/3/library/unittest.html)
+- [pytest: Helps You Write Better Programs](https://docs.pytest.org/en/stable/)
+- [Effective Debugging Strategies](https://www.softwaretestinghelp.com/debugging-techniques-in-software-engineering/)

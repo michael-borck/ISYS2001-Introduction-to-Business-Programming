@@ -1,0 +1,37 @@
+```markdown
+# Business Web and Mobile Technologies - Week 8: Web Scraping, APIs & External Data in Python
+
+## 🎯 This Week's Focus
+- Analyse the structure of JSON data returned by web APIs.
+- Evaluate various authentication methods used for securing API access.
+- Apply Python code to fetch and parse data from web APIs.
+- Justify the selection of specific APIs based on data availability and reliability.
+- Critique methods for handling network errors and exceptions in API calls.
+- Design a feature for the Weather Dashboard that utilises real-time weather data.
+
+## 📖 Before the Lab
+- Module 1: Introduction to APIs and Web Scraping
+- Module 2: Working with JSON Data in Python
+- Module 3: Authentication Mechanisms for APIs
+- Module 4: Error Handling in Network Requests
+
+## 📝 Assessment
+- Quiz: Key Concepts in API Usage and Web Scraping
+- Peer Review: Evaluate and Provide Feedback on API Usage Examples
+- Short Analysis Task: Assess the Reliability of Data Sources
+
+## 🛠 Workshop Activities
+- Fetching Weather Data Using Python (Skill focus: Applying concepts)
+- Analysing and Processing API Data (Skill focus: Analysing data structures)
+- Comparing Authentication Methods (Skill focus: Evaluating security practices)
+
+## 🚀 Projects Area
+Develop a component of the Weather Dashboard that integrates real-time weather data fetched from an external API. The feature should display weather data and include error handling to manage any data retrieval issues.
+- Project Title: Real-Time Weather Integration Project
+
+## 🔗 Additional Resources
+- [Python Requests Library Documentation](https://requests.readthedocs.io/en/latest/)
+- [JSON Data in Python: A Practical Introduction](https://realpython.com/python-json/)
+- [Understanding APIs for Beginners](https://www.smashingmagazine.com/2018/01/understanding-using-rest-api/)
+```
+This course page is structured to progressively build higher-order thinking skills, focusing on the analysis, evaluation, and design of real-world API interactions, crucial for developing effective business web and mobile applications.

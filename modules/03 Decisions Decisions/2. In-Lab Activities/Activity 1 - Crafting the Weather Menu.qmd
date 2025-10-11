@@ -1,0 +1,136 @@
+---
+title: "Activity 1: Crafting the Weather Menu"
+subtitle: "Creating a Text-Based Menu for Weather Information"
+format: jupyter-notebook
+jupyter: python3
+---
+
+# Activity 1: Crafting the Weather Menu
+
+## Introduction
+
+A user interface (UI) is the part of a computer program that allows users to interact with it. In this activity, we are using a text-based menu—a simple yet effective form of UI—to present options to the user. This approach is a great starting point because it helps you understand the fundamentals of user interaction in a program, which is a stepping stone to building more sophisticated graphical interfaces in the future.
+
+## Overview
+
+In this activity you will create a text-based menu that presents the following options:
+1. Check Temperature  
+2. Check Humidity  
+3. Check Wind Speed  
+4. Exit  
+
+The goal is to use the `print()` function to display these options and `input()` to capture the user’s selection. Later, you can extend your program so that each option triggers a different response in the code.
+
+> **Tip:** When planning your menu, consider how clear and concise text can help guide the user through your program.
+
+---
+
+### Step 1: Display the Menu
+
+Use the `print()` function to list your menu options.  
+Run the cell below to see an example of how to display a menu.
+
+```{python}
+# Displaying the weather menu options
+print("Weather Menu:")
+print("1. Check Temperature")
+print("2. Check Humidity")
+print("3. Check Wind Speed")
+print("4. Exit")
+```
+
+> **Note:** Organising your menu in a numbered list makes it easier for the user to understand their options.
+
+> **AI Prompt:** If you’re looking for more creative ways to display a menu, ask, "Can you suggest alternative layouts for a text-based weather menu using print()?" 
+
+---
+
+### Step 2: Capturing User Input
+
+After displaying the menu, you need to capture the user’s selection.  
+Use the `input()` function to prompt the user.  
+Run the cell below to see how to capture and store the user's choice.
+
+```{python}
+# Prompting the user to enter their choice
+choice = input("Enter your choice (1-4): ")
+print("You selected option:", choice)
+```
+
+> **Tip:** Using clear prompts with `input()` helps avoid confusion and ensures users know what is expected.
+
+> **AI Prompt:** If you need further explanation, ask, "How does input() work in Python to capture user input?" 
+
+---
+
+### Step 3: Discussing the Options
+
+Each option in your menu could trigger a different block of code in your program. For example:  
+
+- **Option 1: Check Temperature**  
+  This option might prompt the user for the current temperature and then display a message based on the temperature value.
+
+- **Option 2: Check Humidity**  
+  Here, the program could ask for the humidity level and provide a message like "It's quite humid today" or "The air is dry."
+
+- **Option 3: Check Wind Speed**  
+  This might involve asking for the wind speed and advising the user on the weather conditions accordingly.
+
+- **Option 4: Exit**  
+  This option will end the program.
+
+> **Note:** Think of each menu option as a separate branch of your program logic. Later you can use conditionals to determine what happens based on the user's choice.
+
+---
+
+### Step 4: Experiment and Extend
+
+Now it is your turn:  
+- Modify the menu or add additional options if you like.  
+- Try adding simple conditionals (using if-else) so that your program prints a different message for each menu option.
+
+For example, you can start by adding an if-else structure:
+
+```{python}
+# Example of a simple decision structure based on the user's choice
+if choice == "1":
+    print("You chose to check the temperature.")
+elif choice == "2":
+    print("You chose to check the humidity.")
+elif choice == "3":
+    print("You chose to check the wind speed.")
+elif choice == "4":
+    print("Exiting the program.")
+else:
+    print("Invalid choice. Please select a valid option.")
+```
+
+> **Tip:** Begin with a simple if-else structure to handle the user's input, and then expand your code gradually as you become more comfortable with conditionals.
+
+> **Tip:** In Python, after you write a colon (:) in statements like if or else, you indent the following lines. This indentation creates a "block" of code. The if-else statement then decides which block to run based on the condition, so proper indentation is essential to define what code belongs to which condition.
+
+> **AI Prompt:** If you need more ideas, ask, "Can you explain how to use if-else statements to handle user input in a Python text-based menu?" 
+
+> **Advanced Concept**: In previous activities, we've written simple programs that execute one line after another, which is known as "sequence"—a fundamental building block of programming. This week, we introduce the if-else statement, which allows the program to decide which block of code to execute based on conditions. This decision-making process is called "selection" and is another essential concept in building dynamic and interactive programs.
+---
+
+## Reflection
+
+- How does using a menu improve the user experience of a text-based program?  
+- What might be some additional options you could include in a weather application?  
+- How could each option be developed further to provide more detailed weather information?
+
+> **Note:** Reflect on these questions to identify ways to enhance your program and to solidify your understanding of user interaction in text-based applications.
+
+---
+
+## Summary
+
+In this activity, you learned to:  
+- Use `print()` to display a menu of options.  
+- Use `input()` to capture a user’s selection.  
+- Begin thinking about how each menu option could trigger different code responses.
+
+> **Tip:** This activity lays the groundwork for building interactive, user-driven applications. Continue experimenting and extending your code to develop a more robust weather menu.
+
+Enjoy exploring and extending your weather menu!

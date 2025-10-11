@@ -32,7 +32,9 @@ Thumbs.db
 *.wav
 *.mp3
 *.mp3
+*.zip
 
 # ...EXCEPT for the 'resources' folder and its contents.
 # The '!' negates the ignore rule for this specific directory.
 !resources/
+!**/self-assessment/*.html
