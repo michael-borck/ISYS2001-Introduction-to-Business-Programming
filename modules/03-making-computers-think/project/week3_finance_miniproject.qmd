@@ -1,0 +1,222 @@
+# Week 3 Mini-Project: Smart Budget Decisions
+
+## Project Overview
+
+This week, you'll build the **decision-making foundation** for your personal finance tracker. By the end, you'll have a program that makes smart budget decisions - the same logic patterns you learned with grade calculators, but applied to real financial scenarios.
+
+## Learning Objectives
+
+- Apply if/elif/else to financial decision making
+- Practice input validation with money amounts
+- Build reusable financial logic patterns
+- Start your semester-long finance tracker project
+
+---
+
+## Part 1: Warm-Up - Pattern Recognition (10 minutes)
+
+### From Grades to Money
+You've learned to classify test scores into letter grades. Let's apply the **exact same pattern** to classify expenses:
+
+**Grade Classifier** (familiar):
+```python
+if score >= 90:
+    grade = "A"
+elif score >= 80:
+    grade = "B"
+# ... etc
+```
+
+**Expense Classifier** (new domain, same logic):
+```python
+if amount >= 100:
+    category = "Major Expense"
+elif amount >= 50:
+    category = "Moderate Expense"
+elif amount >= 10:
+    category = "Minor Expense"
+else:
+    category = "Small Purchase"
+```
+
+**Your Task**: Write a complete expense classifier that:
+
+1. Asks user for an expense amount
+2. Classifies it using the ranges above
+3. Prints a helpful message for each category
+
+---
+
+## Part 2: Financial Decision Logic (15 minutes)
+
+### Budget Limit Checker
+Apply your if/else skills to real budget management:
+
+```{python}
+print("=== Budget Limit Checker ===")
+
+# Get user's budget and expense
+monthly_budget = float(input("Enter your monthly budget: $"))
+expense = float(input("Enter expense amount: $"))
+
+# Decision logic here - you write this part!
+# If expense > 50% of budget: "Major purchase - think carefully"
+# If expense > 25% of budget: "Significant expense"
+# If expense > 10% of budget: "Moderate expense"
+# Otherwise: "Minor expense - within budget"
+```
+
+### Savings Goal Progress
+Use multiple conditions to track savings progress:
+
+```{python}
+print("=== Savings Goal Tracker ===")
+
+goal_amount = float(input("Savings goal: $"))
+current_savings = float(input("Current savings: $"))
+
+# Your task: Calculate percentage and give encouraging feedback
+# 100%+: "Goal achieved! Consider a new goal."
+# 75-99%: "Almost there! You're doing great."
+# 50-74%: "Halfway there - keep it up!"
+# 25-49%: "Good progress, stay consistent"
+# Under 25%: "Just getting started - you've got this!"
+```
+
+---
+
+## Part 3: Smart Purchase Advisor (20 minutes)
+
+### The Challenge
+Build a program that helps users make smart purchase decisions by considering multiple factors.
+
+### Requirements
+
+Your purchase advisor should:
+
+1. Get purchase amount and user's available money
+2. Check if they can afford it (basic affordability)
+3. Give different advice based on purchase size
+4. Consider their financial situation
+
+### Starter Framework
+```{python}
+print("=== Smart Purchase Advisor ===")
+
+# Get financial information
+available_money = float(input("How much money do you have available? $"))
+purchase_price = float(input("How much does the item cost? $"))
+monthly_income = float(input("What's your monthly income? $"))
+
+# Calculate affordability percentage
+affordability_ratio = purchase_price / available_money
+
+# Your task: Build the decision logic
+# Consider:
+# - Can they afford it at all?
+# - Is it a large percentage of their available money?
+# - Is it reasonable compared to their income?
+# - What advice should you give?
+
+# Suggestion: Use multiple if/elif conditions to give personalised advice
+```
+
+### Sample Decision Logic to Implement
+
+- **Can't afford**: "Save up first - you need $X more"
+- **Can afford but expensive**: "You can afford it, but it's Y% of your available money. Consider waiting."
+- **Reasonable purchase**: "This seems like a reasonable purchase for your budget"
+- **Small purchase**: "This is a minor expense - go for it!"
+
+### Bonus Challenges
+
+If you finish early, add these features:
+
+1. **Emergency fund check**: Warn if purchase would drain emergency savings
+2. **Category-based advice**: Different advice for necessities vs luxuries
+3. **Payment plan calculator**: Show monthly payment options for large purchases
+
+---
+
+## Part 4: Building Your Finance Tracker Foundation (15 minutes)
+
+### Start Your Semester Project
+
+Create a new notebook called "Personal_Finance_Tracker" and build the foundation:
+
+```{python}
+print("=== Personal Finance Tracker v0.1 ===")
+print("Week 3: Smart Budget Decisions")
+print()
+
+# User setup
+name = input("Enter your name: ")
+monthly_income = float(input("Enter your monthly income: $"))
+
+print(f"\nWelcome to your finance tracker, {name}!")
+print(f"Monthly income: ${monthly_income:.2f}")
+
+# This week's feature: Expense categorisation
+print("\n--- Expense Entry ---")
+expense_amount = float(input("Enter an expense: $"))
+expense_description = input("What was this expense for? ")
+
+# Apply your decision-making skills here
+# Categorise the expense and give feedback
+# This becomes the foundation you'll build on each week!
+```
+
+### Your Mission
+
+1. Implement the expense categorisation logic
+2. Add budget percentage calculations
+3. Give helpful feedback to the user
+4. Save this notebook - you'll expand it every week!
+
+---
+
+## Reflection Questions
+
+After completing the mini-project, consider:
+
+1. **Pattern Recognition**: How were the financial decisions similar to grade calculations?
+2. **Real-World Application**: Which financial decision logic would be most useful to you personally?
+3. **Logic Complexity**: What made some decisions harder to code than others?
+4. **Future Features**: What financial decisions would you like your tracker to help with?
+
+---
+
+## Looking Ahead
+
+### Next Week Preview
+
+Week 4 will add **loops** to your finance tracker:
+
+- Track multiple expenses in one session
+- Calculate running totals
+- Process transaction histories
+- Validate input until it's correct
+
+### Final Project Connection
+
+Each week adds new capabilities:
+
+- **Week 3**: Decision making (budget limits, categorisation)
+- **Week 4**: Repetition (multiple transactions, validation loops)
+- **Week 5**: Data storage (saving/loading financial data)
+- **Final**: AI integration (smart financial advice, pattern recognition)
+
+Your mini-projects are building blocks for something you'll actually want to use!
+
+---
+
+## Success Criteria
+
+**You'll know you're successful when**:
+- ✅ Your programs make different decisions based on financial data
+- ✅ You can explain why you chose specific budget thresholds
+- ✅ Your code handles various expense amounts appropriately
+- ✅ You see the connection between programming concepts and real financial decisions
+- ✅ You're excited about what you'll add to your tracker next week
+
+**Remember**: This is unassessed practice - focus on learning and experimenting!

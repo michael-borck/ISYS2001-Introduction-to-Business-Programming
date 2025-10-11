@@ -1,0 +1,715 @@
+---
+title: "Smart Finance Assistant - Development Notebook"
+subtitle: "ISYS2001: Introduction to Business Programming"
+author: "Student Name: [Your Name Here]"
+date: "Project Started: [Today's Date]"
+jupyter: python3
+format:
+  html:
+    toc: true
+    toc-expand: 2
+    code-fold: false
+    embed-resources: true
+---
+
+# 🏦 Project Overview
+
+Welcome to your **Smart Finance Assistant** development journey! This notebook will evolve from basic CSV processing to a complete AI-powered finance application.
+
+**Final Application Components:**
+- 💬 **AI Chat Interface** - Financial advice personality
+- 📊 **Data Analysis** - CSV transaction processing  
+- 🔍 **RAG System** - Retrieval from financial documents
+- 🛠️ **Custom Tools** - Calculators and utilities
+- 🌐 **Gradio UI** - Professional web interface
+
+**Development Approach**: Build progressively from foundation to advanced features, using AI collaboration throughout.
+
+---
+
+# 🚀 Getting Started: Foundation Setup
+
+## Initial Setup
+This cell installs the necessary libraries. In a Colab environment, you would uncomment the first line.
+
+```{python}
+# Uncomment the line below when running in Google Colab
+# !pip install gradio pandas hands-on-ai
+
+# Import core libraries
+import pandas as pd
+import numpy as np
+from datetime import datetime
+import warnings
+warnings.filterwarnings('ignore')
+
+print("📦 Core libraries loaded successfully!")
+print(f"Pandas version: {pd.__version__}")
+```
+
+## Hands-on-AI Configuration
+
+Set up the hands-on-ai package for advanced features (chat, RAG, tools):
+
+```{python}
+import os
+from getpass import getpass
+
+# Configure hands-on-ai server connection
+os.environ['HANDS_ON_AI_SERVER'] = 'http://ollama.serveur.au'
+os.environ['HANDS_ON_AI_MODEL'] = 'granite3.2'
+os.environ['HANDS_ON_AI_API_KEY'] = getpass('Enter your API key: ')
+
+print("🔑 Hands-on-AI configured successfully!")
+```
+
+## Connection Test
+
+Test that everything is working correctly:
+
+```{python}
+from hands_on_ai import chat
+
+# Test the connection to the hands-on-ai server
+try:
+    response = chat.say("Hello! I'm building a Smart Finance Assistant.")
+    print("✅ Hands-on-AI connection successful!")
+    print(f"Response: {response}")
+except Exception as e:
+    print(f"❌ Connection issue: {e}")
+    print("You can still work on the data processing foundation without this.")
+```
+
+---
+
+# 🏗️ Foundation: Data Processing Skills
+
+Before building advanced features, establish solid data processing foundations. This section focuses on CSV transaction analysis - the core of your finance assistant.
+
+## Foundation Skill Checkpoint ✅
+
+**Master these basics before advancing to chat/RAG/tools:**
+- [ ] Load and clean CSV transaction data
+- [ ] Handle real-world data issues (dollar signs, missing values)
+- [ ] Calculate spending summaries by category  
+- [ ] Generate business-appropriate insights
+- [ ] Format output for professional presentation
+- [ ] Test functions with various data scenarios
+
+::: {.callout-tip}
+## 🤖 AI Collaboration Strategy
+
+For this foundation work, use AI to:
+1. **Generate initial code** with specific business context
+2. **Handle data cleaning** and validation
+3. **Create professional formatting** for outputs
+4. **Suggest business insights** from data patterns
+5. **Help with testing** edge cases and error handling
+
+**Remember**: You're directing AI like a junior developer - always review and improve their suggestions!
+:::
+
+## Sample Transaction Data Setup
+
+Create or load sample transaction data to work with:
+
+```{python}
+# 🤖 AI Collaboration Opportunity:
+# Ask AI to help you create realistic sample transaction data
+# Include Australian businesses and various spending categories
+
+# Sample data structure for testing
+sample_transactions = {
+    'Date': ['2024-08-01', '2024-08-02', '2024-08-03', '2024-08-04', '2024-08-05'],
+    'Amount': ['$45.50', '$12.00', '$89.95', '$3.50', '-$25.00'],  # Note: includes $ signs and refund
+    'Category': ['Groceries', 'Transport', 'Entertainment', 'Coffee', 'Refund'],
+    'Description': ['Woolworths', 'Opal Card', 'Concert Tickets', 'Campus Cafe', 'Returned Item']
+}
+
+# Create DataFrame from sample data
+df_sample = pd.DataFrame(sample_transactions)
+print("📋 Sample transaction data created:")
+print(df_sample)
+```
+
+---
+
+# 📊 Six-Step Development Methodology
+
+Your notebook must demonstrate the six-step methodology with clear evidence of AI collaboration at each step.
+
+## STEP 1: Understand the Problem
+
+**🎯 Define Your Finance Problem**
+
+In this section, clearly state your chosen finance problem in business terms.
+
+::: {.callout-note}
+## Problem Definition Template
+
+*Example: "I want to help people understand their spending habits by analyzing their bank transaction exports. The system should identify spending patterns, highlight potential savings opportunities, and provide actionable financial insights in easy-to-understand language."*
+
+**🤖 AI Prompt to Try:**
+```
+"Help me brainstorm specific personal finance problems that could be solved 
+with a CSV analysis tool. I'm interested in helping people with budgeting 
+and spending awareness. What are common financial challenges that data 
+analysis could address?"
+```
+:::
+
+**Your Problem Statement:**
+[Write your specific finance problem here - be clear about who you're helping and what value you're providing]
+
+## STEP 2: Identify Inputs and Outputs
+
+**📥 Define Your Data Flow**
+
+Clearly specify what data you'll work with and what insights you'll generate.
+
+::: {.callout-note}
+## Input/Output Analysis Template
+
+**Inputs:**
+- CSV file with transaction data (columns: Date, Amount, Category, Description)
+- User preferences (spending goals, categories to focus on)
+- Time period for analysis
+
+**Outputs:**
+- Total spending summary by category
+- Average spending patterns
+- Spending trend analysis
+- Actionable savings recommendations
+- Visual spending breakdown (future enhancement)
+
+**🤖 AI Prompt to Try:**
+```
+"For a personal finance assistant that analyzes CSV transaction data, 
+what are the most valuable inputs I should collect and outputs I should 
+provide? Consider both technical data processing and business value 
+for the user."
+```
+:::
+
+**Your Input/Output Definition:**
+[Define your specific inputs and outputs here]
+
+## STEP 3: Work the Problem by Hand
+
+**✋ Manual Calculation Examples**
+
+Show 2-3 worked examples to understand the logic before coding.
+
+::: {.callout-note}
+## Example Business Calculation
+
+Given this sample data:
+
+| Date | Amount | Category | Description |
+|------|--------|----------|-------------|
+| 2024-08-01 | $45.50 | Groceries | Woolworths |
+| 2024-08-02 | $12.00 | Transport | Opal Card |
+| 2024-08-03 | $89.95 | Entertainment | Concert |
+| 2024-08-04 | -$15.00 | Refund | Returned item |
+
+**Manual Calculations:**
+- Total Spending: $45.50 + $12.00 + $89.95 - $15.00 = $132.45
+- By Category: Groceries $45.50, Transport $12.00, Entertainment $89.95
+- Average Transaction: $132.45 ÷ 4 = $33.11
+- Insight: Entertainment represents 67% of positive spending
+
+**🤖 AI Prompt to Try:**
+```
+"Give me 3 realistic examples of Australian transaction data with different 
+scenarios (normal spending, refunds, large purchases). Show me how to manually 
+calculate meaningful financial insights from each scenario."
+```
+:::
+
+**Your Manual Examples:**
+[Work through your own examples here - this helps you understand the business logic]
+
+## STEP 4: Write Pseudocode
+
+**📝 Plan Your Solution Logic**
+
+Sketch the algorithm in plain English before coding.
+
+::: {.callout-note}
+## Pseudocode Template
+
+```
+FUNCTION analyze_spending_data(csv_file):
+    // Step 1: Load and validate data
+    - Read CSV file into DataFrame
+    - Check for required columns (Date, Amount, Category, Description)
+    - Handle missing or invalid data
+    
+    // Step 2: Clean financial data  
+    - Remove dollar signs from Amount column
+    - Convert to numeric values
+    - Separate positive spending from refunds
+    
+    // Step 3: Calculate business metrics
+    - Group transactions by category
+    - Calculate totals, averages, counts per category
+    - Identify spending patterns and outliers
+    
+    // Step 4: Generate insights
+    - Calculate percentages of total spending
+    - Identify top spending categories
+    - Suggest potential savings opportunities
+    
+    // Step 5: Format for presentation
+    - Create business-friendly output
+    - Include currency formatting
+    - Add explanatory text for insights
+    
+    RETURN formatted_analysis
+```
+
+**🤖 AI Prompt to Try:**
+```
+"Review my pseudocode for analyzing spending data from a CSV. Are there any 
+edge cases I'm missing? What business logic should I add to make this more 
+valuable for personal finance insights?"
+```
+:::
+
+**Your Pseudocode:**
+[Write your detailed algorithm here]
+
+## STEP 5: Convert to Python
+
+**💻 Implementation with AI Collaboration**
+
+Now implement your solution using AI assistance. Focus on creating professional, business-appropriate code.
+
+::: {.callout-tip}
+## 🤖 Implementation Strategy
+
+**Effective AI Prompts for Implementation:**
+```
+"I'm implementing a Smart Finance Assistant. Based on my pseudocode, please create 
+a Python function that [specific functionality]. The code should:
+- Handle real-world CSV data issues (dollar signs, missing values)
+- Include clear comments explaining business logic
+- Use professional variable names
+- Format output for business presentation
+- Include basic error handling"
+```
+
+**Remember to critique and improve AI responses before using them!**
+:::
+
+### Foundation Data Processing Functions
+
+```{python}
+# 🤖 AI Collaboration: Data Loading and Cleaning Function
+# Ask AI to help you create a robust data loading function
+
+def load_and_clean_transaction_data(file_path):
+    """
+    Load and clean transaction data for the Smart Finance Assistant
+    
+    🤖 AI Collaboration Prompt:
+    "Create a function to load CSV transaction data with Date, Amount, Category, 
+    Description columns. Handle dollar signs in Amount, missing values, and 
+    data validation. Include clear business-focused error messages."
+    
+    Args:
+        file_path: Path to CSV file or file object
+    Returns:
+        pandas.DataFrame: Cleaned transaction data
+    """
+    # Your AI-assisted implementation goes here
+    # Replace this placeholder with AI-generated code
+    pass
+
+# Test your function
+# clean_data = load_and_clean_transaction_data(df_sample)
+# print(clean_data)
+```
+
+```{python}
+# 🤖 AI Collaboration: Spending Analysis Function  
+# Ask AI to help you create comprehensive spending analysis
+
+def analyze_spending_patterns(df):
+    """
+    Analyze spending patterns and generate business insights
+    
+    🤖 AI Collaboration Prompt:
+    "Create a function that analyzes spending by category, calculates percentages,
+    identifies top spending areas, and generates actionable financial insights 
+    formatted for business presentation."
+    
+    Args:
+        df: Cleaned transaction DataFrame
+    Returns:
+        dict: Analysis results and insights
+    """
+    # Your AI-assisted implementation goes here
+    # Include: totals by category, percentages, business insights
+    pass
+
+# Test your function
+# analysis = analyze_spending_patterns(clean_data)
+# print(analysis)
+```
+
+```{python}
+# 🤖 AI Collaboration: Business Insights Generator
+# Ask AI to help create professional financial recommendations
+
+def generate_financial_recommendations(analysis_data):
+    """
+    Generate actionable financial recommendations based on spending analysis
+    
+    🤖 AI Collaboration Prompt:
+    "Based on spending analysis data, create professional financial 
+    recommendations. Include specific savings opportunities, spending 
+    pattern observations, and actionable advice formatted for a 
+    personal finance app user."
+    
+    Args:
+        analysis_data: Dictionary with spending analysis results
+    Returns:
+        str: Formatted recommendations report
+    """
+    # Your AI-assisted implementation goes here
+    # Focus on actionable, user-friendly advice
+    pass
+
+# Test your function
+# recommendations = generate_financial_recommendations(analysis)
+# print(recommendations)
+```
+
+---
+
+# 🌐 Advanced Features: Integrating AI Components
+
+Once your foundation data processing is solid, integrate advanced AI features using hands-on-ai.
+
+## Chat Interface Integration
+
+```{python}
+# 🤖 AI Collaboration: Financial Advice Chatbot
+# Ask AI to help you create a finance-focused chat personality
+
+from hands_on_ai import chat
+
+def create_finance_chat_personality():
+    """
+    Set up a financial advisor chat personality using hands-on-ai
+    
+    🤖 AI Collaboration Prompt:
+    "Help me create a system prompt for a friendly, professional financial 
+    advisor chatbot that can provide spending advice based on transaction 
+    analysis. The personality should be encouraging but practical."
+    """
+    # Your AI-assisted chat setup goes here
+    # Include personality traits, knowledge focus, response style
+    pass
+
+# Test your chatbot
+# response = chat.say("I spend too much on coffee, what should I do?")
+# print(response)
+```
+
+## RAG System for Financial Documents
+
+```{python}
+# 🤖 AI Collaboration: Document Retrieval Setup
+# Ask AI to help you set up RAG for financial documents
+
+from hands_on_ai import rag
+
+def setup_financial_rag():
+    """
+    Set up RAG system for financial documents and transaction data
+    
+    🤖 AI Collaboration Prompt:
+    "Help me set up a RAG system that can retrieve information from 
+    financial documents, budgeting guides, and transaction summaries 
+    to answer user questions about personal finance."
+    """
+    # Your AI-assisted RAG setup goes here
+    # Include document ingestion, query processing
+    pass
+
+# Test your RAG system
+# answer = rag.ask("What's a good budgeting strategy for someone who overspends on entertainment?")
+# print(answer)
+```
+
+## Custom Financial Tools
+
+```{python}
+# 🤖 AI Collaboration: Custom Tool Development
+# Ask AI to help you create useful financial calculators
+
+from hands_on_ai import agent
+
+def create_savings_calculator_tool():
+    """
+    Create a custom savings goal calculator as an agent tool
+    
+    🤖 AI Collaboration Prompt:
+    "Create a savings goal calculator function that takes current savings, 
+    monthly contribution, and target amount, then calculates time to reach 
+    goal. Format output for user-friendly display."
+    """
+    # Your AI-assisted tool implementation goes here
+    # Include input validation, calculations, formatted output
+    pass
+
+# Register your tool with the agent system
+# agent.register_tool("savings_calculator", create_savings_calculator_tool)
+```
+
+## Gradio UI Integration
+
+```{python}
+# 🤖 AI Collaboration: Professional UI Design
+# Ask AI to help you create a comprehensive Gradio interface
+
+import gradio as gr
+
+def create_finance_assistant_ui():
+    """
+    Create a comprehensive Gradio interface for the Smart Finance Assistant
+    
+    🤖 AI Collaboration Prompt:
+    "Help me design a Gradio interface that combines CSV upload, spending 
+    analysis, chat functionality, and custom tools in a user-friendly 
+    layout suitable for a personal finance application."
+    """
+    # Your AI-assisted UI implementation goes here
+    # Include multiple tabs, file uploads, chat interface, tool access
+    pass
+
+# Launch your complete application
+# demo = create_finance_assistant_ui()
+# demo.launch()
+```
+
+---
+
+# 🧪 STEP 6: Test with a Variety of Data
+
+**🔍 Comprehensive Testing Strategy**
+
+Create thorough tests for your Smart Finance Assistant to ensure it handles real-world scenarios.
+
+::: {.callout-tip}
+## 🤖 AI Collaboration for Testing
+
+**Effective Testing Prompts:**
+```
+"Help me create comprehensive test cases for my finance assistant. Include:
+- Normal transaction data
+- Edge cases (refunds, large amounts, missing data)
+- Invalid data scenarios (corrupted files, wrong formats)
+- Business logic validation (spending calculations, recommendations)
+Create assert statements to verify each scenario."
+```
+:::
+
+## Foundation Function Tests
+
+```{python}
+# 🤖 AI Collaboration: Comprehensive Test Suite
+# Ask AI to help you create thorough test cases
+
+def create_test_datasets():
+    """
+    Create various test datasets for comprehensive testing
+    
+    🤖 AI Collaboration Prompt:
+    "Create realistic test datasets for a finance assistant including:
+    1. Normal spending data with various categories
+    2. Edge cases: refunds (negative amounts), missing data, zero amounts
+    3. Data quality issues: invalid formats, extreme values
+    4. Business scenarios: high spending months, savings patterns
+    Include Australian business names and realistic amounts."
+    """
+    # Your AI-generated test data goes here
+    pass
+
+def test_data_loading_function():
+    """
+    Test the data loading and cleaning functionality
+    
+    🤖 AI Collaboration Prompt:
+    "Create assert statements to test my data loading function with:
+    - Valid CSV data
+    - CSV with dollar signs in amounts
+    - Missing values and invalid data
+    - Empty files and corrupted data
+    Verify that cleaning works correctly and errors are handled gracefully."
+    """
+    print("🧪 Testing data loading function...")
+    # Your AI-generated test cases go here
+    pass
+
+def test_spending_analysis():
+    """
+    Test spending analysis calculations
+    
+    🤖 AI Collaboration Prompt:
+    "Create tests for spending analysis that verify:
+    - Category totals are calculated correctly
+    - Percentages add up to 100%
+    - Refunds are handled appropriately
+    - Edge cases like single transactions or empty categories
+    Use assert statements with known expected results."
+    """
+    print("🧪 Testing spending analysis...")
+    # Your AI-generated analysis tests go here
+    pass
+
+def test_business_insights():
+    """
+    Test business recommendation generation
+    
+    🤖 AI Collaboration Prompt:
+    "Create tests that verify business insights are appropriate:
+    - High spending categories are identified correctly
+    - Savings opportunities are realistic
+    - Recommendations match spending patterns
+    - Output format is user-friendly"
+    """
+    print("🧪 Testing business insights...")
+    # Your AI-generated insight tests go here
+    pass
+
+# Run all tests
+print("🔍 COMPREHENSIVE TESTING SUITE")
+print("=" * 40)
+
+try:
+    create_test_datasets()
+    test_data_loading_function()
+    test_spending_analysis()  
+    test_business_insights()
+    print("✅ All tests passed! Your finance assistant is working correctly.")
+except AssertionError as e:
+    print(f"❌ Test failed: {e}")
+except Exception as e:
+    print(f"⚠️ Test error: {e}")
+```
+
+## Advanced Integration Tests
+
+```{python}
+# 🤖 AI Collaboration: Integration Testing
+# Ask AI to help test the complete system integration
+
+def test_full_workflow():
+    """
+    Test the complete workflow from CSV upload to final recommendations
+    
+    🤖 AI Collaboration Prompt:
+    "Create an end-to-end test that:
+    1. Loads sample CSV data
+    2. Runs complete analysis pipeline
+    3. Generates chat responses about the data
+    4. Verifies RAG system retrieval
+    5. Tests custom tool functionality
+    Ensure all components work together seamlessly."
+    """
+    print("🧪 Testing complete workflow integration...")
+    # Your AI-generated integration tests go here
+    pass
+
+def test_error_handling():
+    """
+    Test error handling and user experience
+    
+    🤖 AI Collaboration Prompt:
+    "Create tests that verify error handling for:
+    - Invalid file uploads
+    - Network connection issues
+    - Malformed data
+    - User input validation
+    Ensure error messages are user-friendly and helpful."
+    """
+    print("🧪 Testing error handling...")
+    # Your AI-generated error tests go here
+    pass
+
+# Run integration tests
+try:
+    test_full_workflow()
+    test_error_handling()
+    print("✅ Integration tests completed successfully!")
+except Exception as e:
+    print(f"⚠️ Integration test issue: {e}")
+```
+
+---
+
+# 📊 Project Completion Checklist
+
+## Foundation Skills ✅
+- [ ] **Data Processing**: CSV loading and cleaning functions work reliably
+- [ ] **Analysis Functions**: Spending summaries calculate correctly
+- [ ] **Business Insights**: Recommendations are relevant and actionable  
+- [ ] **Error Handling**: Graceful handling of data issues
+- [ ] **Testing**: Comprehensive test coverage for core functions
+- [ ] **Documentation**: Clear AI collaboration documentation in diary
+
+## Advanced Integration ✅
+- [ ] **Chat Interface**: Finance advisor personality implemented
+- [ ] **RAG System**: Document retrieval for financial guidance
+- [ ] **Custom Tools**: At least one financial calculator/utility
+- [ ] **Gradio UI**: Professional, user-friendly interface
+- [ ] **Full Integration**: All components work together seamlessly
+
+## Professional Standards ✅
+- [ ] **Code Quality**: Professional, commented, maintainable code
+- [ ] **Business Focus**: Clear connection to real finance problems
+- [ ] **User Experience**: Interface suitable for non-technical users
+- [ ] **AI Collaboration**: Extensive, well-documented AI usage
+- [ ] **Testing**: Robust validation of all features
+
+## Project Documentation ✅  
+- [ ] **Developer's Diary**: Complete AI collaboration documentation
+- [ ] **README**: Clear project description and usage instructions
+- [ ] **GitHub**: Regular commits showing development progress
+- [ ] **Reflection**: Thoughtful analysis of learning and challenges
+
+---
+
+# 🎯 Final Thoughts: Your Finance Assistant Journey
+
+Congratulations on building your Smart Finance Assistant! This project represents a significant achievement in modern business programming:
+
+**Technical Skills Developed:**
+- AI-assisted development workflows
+- Professional data processing with pandas
+- Integration of multiple AI technologies
+- User interface design with Gradio
+- Comprehensive software testing
+
+**Business Skills Developed:**  
+- Financial data analysis and insights
+- User-centered application design
+- Professional documentation practices
+- Iterative development methodology
+- Critical evaluation of AI suggestions
+
+**Professional Preparation:**
+- Experience with industry-standard AI collaboration
+- Portfolio-ready application development
+- Understanding of business problem-solving with technology
+- Documentation practices for workplace environments
+
+**Your Smart Finance Assistant demonstrates your ability to direct AI tools toward meaningful business solutions - exactly the skill set that modern BIS graduates need for career success!**
+
+---
+
+*Remember to document all AI collaborations in your Developer's Diary and maintain regular GitHub commits throughout your development process.*
+

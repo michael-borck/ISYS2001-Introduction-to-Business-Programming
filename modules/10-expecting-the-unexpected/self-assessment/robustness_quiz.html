@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robustness & Exception Handling Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.9em;
+        }
+
+        .quiz-info {
+            background: #f0f4ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        #start-screen {
+            text-align: center;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 20px;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        #quiz-screen {
+            display: none;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            height: 8px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-counter {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .question {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .option {
+            background: white;
+            border: 2px solid #e0e0e0;
+            padding: 15px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1em;
+            text-align: left;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: #e8eeff;
+        }
+
+        .option.correct {
+            border-color: #4caf50;
+            background: #e8f5e9;
+        }
+
+        .option.incorrect {
+            border-color: #f44336;
+            background: #ffebee;
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .feedback {
+            display: none;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+        }
+
+        .feedback.incorrect {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+        }
+
+        .feedback strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .next-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            display: none;
+            margin: 0 auto;
+            transition: background 0.2s;
+        }
+
+        .next-btn:hover {
+            background: #5568d3;
+        }
+
+        .next-btn.show {
+            display: block;
+        }
+
+        #results-screen {
+            display: none;
+            text-align: center;
+        }
+
+        .score-display {
+            font-size: 4em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 20px 0;
+        }
+
+        .score-message {
+            font-size: 1.3em;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .retry-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .retry-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .question {
+                font-size: 1em;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛡️ Robustness Quiz</h1>
+        <p class="subtitle">Exception Handling & Error Management</p>
+
+        <div id="start-screen">
+            <div class="quiz-info">
+                📝 This quiz contains <strong>10 randomly selected questions</strong> from a pool of 25.<br>
+                Each time you retake the quiz, you'll get different questions!<br>
+                <strong>Test your knowledge of exception handling and robust code design.</strong>
+            </div>
+            <button class="start-btn" onclick="startQuiz()">Start Quiz</button>
+        </div>
+
+        <div id="quiz-screen">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+            <div class="question-counter" id="counter"></div>
+            <div class="question" id="question"></div>
+            <div class="options" id="options"></div>
+            <div class="feedback" id="feedback"></div>
+            <button class="next-btn" id="next-btn" onclick="nextQuestion()">Next Question</button>
+        </div>
+
+        <div id="results-screen">
+            <h2>Quiz Complete! 🎉</h2>
+            <div class="score-display" id="final-score"></div>
+            <p class="score-message" id="score-message"></p>
+            <button class="retry-btn" onclick="location.reload()">Try Again with New Questions</button>
+        </div>
+    </div>
+
+    <script>
+        const questionBank = [
+            {
+                question: "What is the primary purpose of exception handling in Python?",
+                options: [
+                    "To make code run faster",
+                    "To handle errors gracefully without crashing the program",
+                    "To debug code automatically",
+                    "To reduce the number of lines of code"
+                ],
+                correct: 1,
+                explanation: "Exception handling allows programs to catch and handle errors gracefully, providing useful feedback to users instead of crashing with cryptic error messages."
+            },
+            {
+                question: "Which exception would be raised if you try to open a file that doesn't exist?",
+                options: [
+                    "ValueError",
+                    "TypeError",
+                    "FileNotFoundError",
+                    "IOError"
+                ],
+                correct: 2,
+                explanation: "FileNotFoundError is specifically raised when trying to access a file that doesn't exist at the specified path."
+            },
+            {
+                question: "What happens if no exception occurs in a try block?",
+                options: [
+                    "The except block runs anyway",
+                    "The program crashes",
+                    "The except block is skipped entirely",
+                    "A warning is displayed"
+                ],
+                correct: 2,
+                explanation: "If no exception occurs in the try block, the code executes normally and all except blocks are skipped."
+            },
+            {
+                question: "Which code structure represents the correct order?",
+                options: [
+                    "except → try → finally",
+                    "try → except → finally",
+                    "finally → try → except",
+                    "try → finally → except"
+                ],
+                correct: 1,
+                explanation: "The correct order is try (attempt code) → except (handle specific errors) → finally (cleanup code that always runs)."
+            },
+            {
+                question: "What would happen with this code if the CSV contains text in a numeric column?\n\ndf = pd.read_csv(file)\ntotal = df['quantity'].sum()",
+                options: [
+                    "It returns 0",
+                    "It raises a TypeError",
+                    "It skips the invalid rows",
+                    "It converts text to 0 automatically"
+                ],
+                correct: 1,
+                explanation: "When pandas tries to sum a column containing text values where numbers are expected, it raises a TypeError because you can't add strings to numbers."
+            },
+            {
+                question: "Why is it important to catch specific exceptions rather than using a generic 'except:' for everything?",
+                options: [
+                    "It makes the code run faster",
+                    "It helps identify and handle different problems appropriately",
+                    "Generic exceptions don't work in Python",
+                    "Specific exceptions use less memory"
+                ],
+                correct: 1,
+                explanation: "Catching specific exceptions allows you to provide targeted error messages and handle different problems differently. A generic catch-all can hide unexpected errors."
+            },
+            {
+                question: "What exception is raised when trying to access a dictionary key that doesn't exist?",
+                options: [
+                    "ValueError",
+                    "KeyError",
+                    "IndexError",
+                    "AttributeError"
+                ],
+                correct: 1,
+                explanation: "KeyError is raised when you try to access a dictionary key that doesn't exist. This is common when working with CSV columns."
+            },
+            {
+                question: "In a Gradio app, what should your except block return when an error occurs?",
+                options: [
+                    "Nothing - just let it crash",
+                    "The error object",
+                    "A user-friendly error message string",
+                    "An empty DataFrame"
+                ],
+                correct: 2,
+                explanation: "Your except block should return a clear, user-friendly error message that tells the user what went wrong and ideally how to fix it."
+            },
+            {
+                question: "What does 'robustness' mean in software development?",
+                options: [
+                    "Code that runs very fast",
+                    "Code that can handle errors and unexpected inputs gracefully",
+                    "Code with lots of features",
+                    "Code that uses advanced algorithms"
+                ],
+                correct: 1,
+                explanation: "Robustness refers to a system's ability to cope with errors during execution and handle unexpected inputs without crashing."
+            },
+            {
+                question: "Which exception would pd.read_csv() raise if given a text file instead of a CSV?",
+                options: [
+                    "FileNotFoundError",
+                    "pd.errors.ParserError",
+                    "ValueError",
+                    "SyntaxError"
+                ],
+                correct: 1,
+                explanation: "pd.errors.ParserError is raised when pandas cannot parse the file as a valid CSV format."
+            },
+            {
+                question: "What is an 'edge case' in programming?",
+                options: [
+                    "Code that runs on the edge of a network",
+                    "An unusual or extreme scenario that might break your code",
+                    "The last line of a function",
+                    "Code that handles graphics"
+                ],
+                correct: 1,
+                explanation: "Edge cases are unusual, extreme, or unexpected scenarios that your code might encounter, like empty files, negative numbers where positive are expected, or missing required data."
+            },
+            {
+                question: "Why should you check if a DataFrame is empty after loading a CSV?",
+                options: [
+                    "To save memory",
+                    "To make the code run faster",
+                    "To prevent errors when trying to process data that doesn't exist",
+                    "It's not necessary to check"
+                ],
+                correct: 2,
+                explanation: "Checking df.empty prevents errors when trying to perform operations on a DataFrame with no rows. This is a common edge case when users upload files with only headers."
+            },
+            {
+                question: "What does 'graceful degradation' mean?",
+                options: [
+                    "Code that gets slower over time",
+                    "Handling errors by providing useful feedback instead of crashing",
+                    "Gradually reducing code quality",
+                    "Deleting error logs"
+                ],
+                correct: 1,
+                explanation: "Graceful degradation means your application continues to work (or fails elegantly) when something goes wrong, providing helpful feedback rather than crashing."
+            },
+            {
+                question: "In a try-except block, where should the most general exception (like 'Exception') be placed?",
+                options: [
+                    "First, before specific exceptions",
+                    "Last, after all specific exceptions",
+                    "It doesn't matter",
+                    "You should never use general exceptions"
+                ],
+                correct: 1,
+                explanation: "General exceptions should come last. Python checks except blocks in order, so if you put 'Exception' first, it will catch everything and your specific handlers will never run."
+            },
+            {
+                question: "What should an error message in a user-facing application include?",
+                options: [
+                    "Full technical stack trace",
+                    "Python error codes",
+                    "Clear description of what went wrong and how to fix it",
+                    "Developer contact information"
+                ],
+                correct: 2,
+                explanation: "User-facing error messages should be clear, non-technical, explain what went wrong, and ideally tell the user how to fix the problem."
+            },
+            {
+                question: "Which of these is NOT a benefit of exception handling?",
+                options: [
+                    "Better user experience",
+                    "Prevents program crashes",
+                    "Makes code run 10x faster",
+                    "Provides debugging information"
+                ],
+                correct: 2,
+                explanation: "Exception handling doesn't make code run faster - it actually adds a small overhead. Its benefits are reliability, better UX, and maintainability."
+            },
+            {
+                question: "What happens if you don't handle a raised exception?",
+                options: [
+                    "Python ignores it",
+                    "The program continues with default values",
+                    "The program crashes and shows a traceback",
+                    "A warning is logged but execution continues"
+                ],
+                correct: 2,
+                explanation: "Unhandled exceptions cause the program to crash and display a traceback. This is why exception handling is important for user-facing applications."
+            },
+            {
+                question: "When should you start thinking about exception handling?",
+                options: [
+                    "Only after your code crashes",
+                    "During the planning phase, before writing code",
+                    "Only for production code, not prototypes",
+                    "Never - let Python handle it"
+                ],
+                correct: 1,
+                explanation: "Good developers anticipate potential failures during planning by asking 'what if?' questions. This is part of writing robust code from the start."
+            },
+            {
+                question: "What is the difference between a 'bug' and an 'exception'?",
+                options: [
+                    "They're the same thing",
+                    "Bugs are syntax errors, exceptions are runtime errors",
+                    "Bugs are code mistakes; exceptions can occur even in correct code due to external factors",
+                    "Exceptions are more serious than bugs"
+                ],
+                correct: 2,
+                explanation: "Bugs are errors in your logic or syntax. Exceptions can occur in perfectly written code when dealing with user input, file systems, networks, etc."
+            },
+            {
+                question: "In the context of file uploads, which is the MOST common user error to handle?",
+                options: [
+                    "File is too small",
+                    "File has the wrong extension or format",
+                    "File was created on a different operating system",
+                    "File name is too long"
+                ],
+                correct: 1,
+                explanation: "Users frequently upload files of the wrong type (e.g., uploading a .txt when a .csv is expected). This should always be handled gracefully."
+            },
+            {
+                question: "What does the 'try' keyword indicate in Python?",
+                options: [
+                    "This code might not work",
+                    "Attempt to run this code, and if it fails, handle the error",
+                    "This code is experimental",
+                    "Run this code multiple times until it works"
+                ],
+                correct: 1,
+                explanation: "The 'try' block contains code that might raise an exception. Python will attempt to execute it, and if an exception occurs, it will jump to the appropriate except block."
+            },
+            {
+                question: "Why is it important to test your error handling code?",
+                options: [
+                    "To see if the error messages look nice",
+                    "To verify that your app handles failures appropriately",
+                    "It's not important - error handling always works",
+                    "To slow down the code intentionally"
+                ],
+                correct: 1,
+                explanation: "You should deliberately test error conditions (like uploading wrong files) to ensure your except blocks catch the right errors and provide helpful messages."
+            },
+            {
+                question: "What is the relationship between exception handling and user experience (UX)?",
+                options: [
+                    "They're unrelated",
+                    "Good exception handling provides clear feedback, improving UX",
+                    "Exception handling only matters for developers",
+                    "UX is only about visual design"
+                ],
+                correct: 1,
+                explanation: "Exception handling directly impacts UX. Clear error messages help users understand and fix problems, while crashes and cryptic errors create frustration."
+            },
+            {
+                question: "If your Gradio function receives None for the file parameter, what likely happened?",
+                options: [
+                    "The file upload component is broken",
+                    "The user clicked the process button without uploading a file",
+                    "Python has a bug",
+                    "The file was automatically deleted"
+                ],
+                correct: 1,
+                explanation: "When a Gradio file upload component is empty and the function is called, it receives None. This is a very common user behavior that needs to be handled."
+            },
+            {
+                question: "Which principle should guide your error message design?",
+                options: [
+                    "Be as technical as possible",
+                    "Be brief even if unclear",
+                    "Be clear, actionable, and user-friendly",
+                    "Blame the user for the error"
+                ],
+                correct: 2,
+                explanation: "Error messages should be clear (what went wrong), actionable (how to fix it), and user-friendly (no jargon). Good error messages guide users toward success."
+            }
+        ];
+
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let selectedAnswer = null;
+
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        function startQuiz() {
+            currentQuestions = shuffleArray(questionBank).slice(0, 10);
+            currentQuestionIndex = 0;
+            score = 0;
+            
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('quiz-screen').style.display = 'block';
+            
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            selectedAnswer = null;
+            const question = currentQuestions[currentQuestionIndex];
+            
+            document.getElementById('counter').textContent = 
+                `Question ${currentQuestionIndex + 1} of ${currentQuestions.length}`;
+            
+            const progress = ((currentQuestionIndex) / currentQuestions.length) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+            
+            document.getElementById('question').textContent = question.question;
+            
+            const shuffledOptions = question.options.map((opt, idx) => ({text: opt, originalIndex: idx}));
+            const shuffled = shuffleArray(shuffledOptions);
+            
+            const optionsHtml = shuffled.map((opt, idx) => 
+                `<div class="option" onclick="selectAnswer(${idx}, ${opt.originalIndex})">${opt.text}</div>`
+            ).join('');
+            
+            document.getElementById('options').innerHTML = optionsHtml;
+            document.getElementById('feedback').classList.remove('show', 'correct', 'incorrect');
+            document.getElementById('next-btn').classList.remove('show');
+            
+            window.currentShuffledOptions = shuffled;
+        }
+
+        function selectAnswer(displayIndex, originalIndex) {
+            if (selectedAnswer !== null) return;
+            
+            selectedAnswer = originalIndex;
+            const question = currentQuestions[currentQuestionIndex];
+            const options = document.querySelectorAll('.option');
+            
+            options.forEach(opt => opt.classList.add('disabled'));
+            options[displayIndex].classList.add('selected');
+            
+            const isCorrect = originalIndex === question.correct;
+            const feedback = document.getElementById('feedback');
+            
+            if (isCorrect) {
+                score++;
+                options[displayIndex].classList.add('correct');
+                feedback.classList.add('correct');
+                feedback.innerHTML = `<strong>✓ Correct!</strong> ${question.explanation}`;
+            } else {
+                options[displayIndex].classList.add('incorrect');
+                const correctDisplayIndex = window.currentShuffledOptions.findIndex(
+                    opt => opt.originalIndex === question.correct
+                );
+                options[correctDisplayIndex].classList.add('correct');
+                feedback.classList.add('incorrect');
+                feedback.innerHTML = `<strong>✗ Incorrect.</strong> ${question.explanation}`;
+            }
+            
+            feedback.classList.add('show');
+            document.getElementById('next-btn').classList.add('show');
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex < currentQuestions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quiz-screen').style.display = 'none';
+            document.getElementById('results-screen').style.display = 'block';
+            
+            const percentage = (score / currentQuestions.length) * 100;
+            document.getElementById('final-score').textContent = 
+                `${score}/${currentQuestions.length}`;
+            
+            let message = '';
+            if (percentage === 100) {
+                message = "Perfect score! You're an exception handling expert! 🌟";
+            } else if (percentage >= 80) {
+                message = "Excellent work! You have a strong grasp of robustness principles! 🎯";
+            } else if (percentage >= 60) {
+                message = "Good job! Review the concepts and try again for mastery. 📚";
+            } else {
+                message = "Keep learning! Review the module materials and try again. 💪";
+            }
+            
+            document.getElementById('score-message').textContent = message;
+        }
+    </script>
+</body>
+</html>

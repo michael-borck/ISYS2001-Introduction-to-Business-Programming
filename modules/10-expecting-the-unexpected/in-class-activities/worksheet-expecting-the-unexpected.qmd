@@ -1,0 +1,867 @@
+---
+title: "Building a Robust CSV Processor"
+subtitle: "From Fragile Script to Professional Web App"
+author: "Michael Borck"
+format:
+  html:
+    toc: true
+    code-fold: false
+    code-tools: true
+  ipynb:
+    output-file: "robust-csv-processor.ipynb"
+---
+
+## Introduction
+
+Welcome! This week, you're going to build a real web application that processes CSV files. But more importantly, you're going to learn how to make it **robust**—able to handle the messy, unpredictable real world where users upload the wrong files, data is corrupt, and things go wrong.
+
+**What you'll build:**
+- A Gradio web app that accepts CSV uploads
+- Processes sales data to calculate revenue
+- Handles errors gracefully with helpful messages
+- Returns a downloadable processed CSV
+
+**What you'll learn:**
+- Why error handling matters (the hard way!)
+- How to use `try...except` blocks
+- How to prompt AI to build robust code
+- The complete workflow: upload → process → download
+
+**Tools you'll use:**
+- Python (pandas, Gradio)
+- AI (to generate and improve code)
+- Your brain (to identify what can go wrong)
+
+::: {.callout-note}
+## AI-First Learning Reminder
+You don't need to memorize syntax. Your job is to:
+
+1. **Think** about what could go wrong
+2. **Prompt** AI with specific requirements
+3. **Evaluate** whether AI's solution handles all cases
+4. **Test** the result with real scenarios
+:::
+
+---
+
+## Setup: Install Required Libraries
+
+First, let's make sure we have everything installed:
+
+```{python}
+#| eval: false
+
+# Run this cell first!
+!pip install gradio pandas
+```
+
+---
+
+## Part 1: The Happy Path (Build the Fragile App)
+
+### Goal
+Create a basic Gradio app that works perfectly... when everything goes right.
+
+### Background
+Let's start by building a simple CSV processor. It will:
+
+1. Accept a CSV file with `product`, `quantity`, and `price` columns
+2. Create a new `revenue` column for each row (quantity × price)
+3. Calculate and display the total revenue
+4. Display the result
+
+### Your Task
+
+Use AI to create this basic app. Here's a suggested prompt:
+
+::: {.callout-tip collapse="true"}
+## Suggested AI Prompt
+
+"Create a Gradio web app with the following features:
+- A file upload component that accepts CSV files
+- A function that uses pandas to read the CSV
+- Create a new 'revenue' column by multiplying 'quantity' and 'price' for each row
+- Calculate the total revenue by summing this new column
+- Display the total revenue as text output
+- Use gr.Interface to create the UI
+
+The CSV will have columns: product, quantity, price"
+:::
+
+### Write your code here:
+
+```{python}
+#| eval: false
+
+# Paste the AI-generated code here
+import gradio as gr
+import pandas as pd
+
+def calculate_revenue(file):
+    # Your AI-generated code goes here
+    pass
+
+# Create and launch the interface
+# Your AI-generated interface code goes here
+```
+
+### Test It!
+
+Download this sample CSV file and test your app:
+
+::: {.callout-note}
+## Sample Data: sales_clean.csv
+```
+product,quantity,price
+Widget A,10,25.50
+Widget B,5,40.00
+Widget C,15,12.75
+```
+
+Save this as `sales_clean.csv` and upload it to your app.
+:::
+
+**Expected Result:** You should see something like: `"Total Revenue: $646.25"`
+
+::: {.callout-warning}
+## What Should Happen (and What Will Happen Later)
+Right now, if you upload a bad file, your app will crash with a red error. **This is expected!** 
+We'll fix this in Part 3. For now, just make sure it works with the clean data.
+:::
+
+::: {.callout-important}
+## Checkpoint
+✅ Does your app work with the clean CSV?  
+✅ Does it display the correct total?  
+
+If yes, continue to Part 2!
+:::
+
+---
+
+## Part 2: Breaking Things (Why We Need Error Handling)
+
+### Goal
+Experience what happens when things go wrong. This is where you'll understand *why* error handling matters.
+
+### The Reality Check
+
+In the real world, users don't always upload perfect files. Let's see what happens when they don't.
+
+### Your Task: Deliberately Break Your App
+
+Try each of these problematic scenarios and record what happens:
+
+#### Test 0: No File Uploaded
+
+**What to do:**
+1. Click the "Process" button WITHOUT uploading any file
+2. Observe what happens
+
+**What happened?**
+
+| What I Saw | My Interpretation |
+|------------|-------------------|
+| (paste error message) | (what do you think went wrong?) |
+
+::: {.callout-note}
+## Why This Matters
+This is one of the most common real-world errors! Users often click buttons before completing all required steps. Your app should handle this gracefully.
+:::
+
+---
+
+#### Test 1: Wrong File Type
+
+Create a text file named `wrong_type.txt`:
+```
+This is not a CSV file!
+Just some random text.
+```
+
+**What to do:**
+1. Upload `wrong_type.txt` to your app
+2. Click the process button
+
+**What happened?**
+
+| What I Saw | My Interpretation |
+|------------|-------------------|
+| (paste error message) | (what do you think went wrong?) |
+
+---
+
+#### Test 2: Invalid CSV Format
+
+Create a file named `messy_data.csv`:
+```
+product,quantity,price
+Widget A,10,25.50
+Widget B,FIVE,40.00
+Widget C,15,twelve
+```
+
+**What to do:**
+1. Upload `messy_data.csv` to your app
+2. Click the process button
+
+**What happened?**
+
+| What I Saw | My Interpretation |
+|------------|-------------------|
+| (paste error message) | (what do you think went wrong?) |
+
+---
+
+#### Test 3: Empty File
+
+Create an empty file named `empty.csv` (just the headers):
+```
+product,quantity,price
+```
+
+**What to do:**
+1. Upload `empty.csv` to your app
+2. Click the process button
+
+**What happened?**
+
+| What I Saw | My Interpretation |
+|------------|-------------------|
+| (paste error message) | (what do you think went wrong?) |
+
+---
+
+#### Test 4: Missing Columns
+
+Create a file named `wrong_columns.csv`:
+```
+item,amount,cost
+Widget A,10,25.50
+```
+
+**What to do:**
+1. Upload `wrong_columns.csv` to your app
+2. Click the process button
+
+**What happened?**
+
+| What I Saw | My Interpretation |
+|------------|-------------------|
+| (paste error message) | (what do you think went wrong?) |
+
+---
+
+### Reflection Questions
+
+::: {.callout-warning}
+## Think About It
+
+1. **User Experience:** If you were the user, how would these error messages make you feel? Would you know what to do next?
+
+   ```
+   Your answer:
+   
+   
+   
+   ```
+
+2. **What Went Wrong:** For each test, what specific problem occurred?
+   - Test 0 (no file): 
+   - Test 1 (wrong_type.txt): 
+   - Test 2 (messy_data.csv): 
+   - Test 3 (empty.csv): 
+   - Test 4 (wrong_columns.csv): 
+
+3. **The Pattern:** What do all these errors have in common?
+
+   ```
+   Your answer:
+   
+   
+   
+   ```
+:::
+
+---
+
+## Part 3: Making It Robust (Adding Error Handling)
+
+### Goal
+Transform your fragile app into a robust, professional tool that handles errors gracefully.
+
+### The Concept: Plan A and Plan B
+
+Python's `try...except` blocks let you say:
+- **try:** "Attempt this risky operation (Plan A)"
+- **except:** "If something specific goes wrong, do this instead (Plan B)"
+
+### Strategy: Handle Each Edge Case
+
+Based on Part 2, we need to handle:
+1. **No File Uploaded** - User clicks process without uploading
+2. **Parser Errors** - Invalid CSV format or wrong file type
+3. **Key Errors** - Missing expected columns
+4. **Type Errors** - Invalid data types (text where numbers should be)
+5. **Empty Data** - No rows to process
+
+### Your Task: Add Exception Handling
+
+Use AI to improve your app. Here's a suggested approach:
+
+::: {.callout-tip collapse="true"}
+## Suggested AI Prompt (Comprehensive)
+
+"Improve my Gradio CSV processing function with comprehensive error handling. Add try-except blocks to handle these specific cases:
+
+1. If no file is uploaded (file is None or has no name attribute), return: 'Error: Please upload a file before processing.'
+
+2. If the file is not a valid CSV (ParserError), return: 'Error: Please upload a valid CSV file.'
+
+3. If the CSV is missing 'quantity' or 'price' columns (KeyError), return: 'Error: CSV must contain quantity and price columns.'
+
+4. If quantity or price columns contain non-numeric data (ValueError or TypeError), return: 'Error: Quantity and price must be numeric values.'
+
+5. If the CSV is empty (no data rows), return: 'Error: The uploaded file contains no data.'
+
+6. For any other unexpected errors, return: 'An unexpected error occurred: [error message]'
+
+Each error message should be user-friendly and tell the user what to fix. Make sure specific exception types are caught before the general Exception catch-all.
+
+Here's my current code:
+[paste your code from Part 1]"
+:::
+
+**Alternative: Step-by-Step Approach**
+
+If you prefer, you can prompt AI to add error handling one case at a time:
+
+::: {.callout-tip collapse="true"}
+## Step-by-Step Prompts
+
+**Step 1: Handle No File Upload**
+"Add a check at the start of my function. If the file parameter is None or doesn't have a name attribute, return 'Error: Please upload a file before processing.'"
+
+**Step 2: Handle Parser Errors**
+"Add a try-except block to my function that catches pd.errors.ParserError and returns 'Error: Please upload a valid CSV file.' if the file can't be parsed."
+
+**Step 3: Handle Missing Columns**
+"Now add handling for KeyError that checks if 'quantity' and 'price' columns exist. Return 'Error: CSV must contain quantity and price columns.' if they don't."
+
+**Step 4: Handle Invalid Data Types**
+"Add handling for ValueError and TypeError when calculating revenue. Return 'Error: Quantity and price must be numeric values.' if the multiplication fails."
+
+**Step 5: Handle Empty Files**
+"Add a check after loading the CSV. If the DataFrame is empty (df.empty), return 'Error: The uploaded file contains no data.'"
+:::
+
+### Write your improved code here:
+
+```{python}
+#| eval: false
+
+# Paste your improved, robust code here
+import gradio as gr
+import pandas as pd
+
+def calculate_revenue_robust(file):
+    try:
+        # Your robust AI-generated code goes here
+        pass
+    except pd.errors.ParserError:
+        pass
+    except KeyError:
+        pass
+    except (ValueError, TypeError):
+        pass
+    except Exception as e:
+        pass
+
+# Create and launch the interface
+```
+
+---
+
+### Test Your Robust App
+
+Now test your improved app with the same problematic scenarios from Part 2:
+
+| Test Scenario | Expected Message | ✓ Works? |
+|---------------|-----------------|----------|
+| No file uploaded | "Error: Please upload a file before processing." | |
+| wrong_type.txt | "Error: Please upload a valid CSV file." | |
+| messy_data.csv | "Error: Quantity and price must be numeric values." | |
+| empty.csv | "Error: The uploaded file contains no data." | |
+| wrong_columns.csv | "Error: CSV must contain quantity and price columns." | |
+| sales_clean.csv | "Total Revenue: $646.25" | |
+
+::: {.callout-note}
+## Notice the Difference
+**Before (Part 1):** Cryptic Python error, app crashes  
+**After (Part 3):** Clear message, app continues working
+
+This is the essence of robustness—graceful degradation instead of catastrophic failure.
+:::
+
+::: {.callout-important}
+## Checkpoint
+✅ Does your app now show helpful messages for each error case?  
+✅ Does it still work correctly with valid data?  
+✅ Are the error messages clear enough for a non-technical user?
+
+If you answered yes to all three, you've successfully made your app robust!
+:::
+
+---
+
+### AI Evaluation Exercise
+
+::: {.callout-warning}
+## Evaluate the AI's Solution
+
+Look at the code AI generated for you. Answer these questions:
+
+1. **Coverage:** Did AI handle all five edge cases you specified?
+   ```
+   Yes/No - Which ones did it cover?
+   
+   
+   
+   ```
+
+2. **Specificity:** Did AI use specific exception types (ParserError, KeyError, etc.) or just generic Exception?
+   ```
+   Your observation:
+   
+   
+   
+   ```
+
+3. **Order of Operations:** Look at the order of your `except` blocks. Does the AI place the general `except Exception as e:` at the end? Why is this important?
+   ```
+   Your observation:
+   
+   
+   
+   ```
+
+4. **User-Friendliness:** Are the error messages clear and actionable?
+   ```
+   Rate 1-5 and explain:
+   
+   
+   
+   ```
+
+5. **Improvements:** What would you change about AI's solution?
+   ```
+   Your suggestions:
+   
+   
+   
+   ```
+
+**This is AI-first learning:** You guide AI by understanding the concepts, then evaluate its implementation.
+:::
+
+---
+
+## Part 4: Completing the Workflow (Save and Download)
+
+### Goal
+Transform your app from just displaying results to providing a downloadable, processed CSV file.
+
+### The Full Workflow
+
+A complete data processing app should:
+1. **Accept** input (✅ you've done this)
+2. **Process** data (✅ you've done this)
+3. **Handle** errors (✅ you've done this)
+4. **Return** results (⬅️ let's add this!)
+
+### Your Task: Add CSV Download
+
+Instead of just showing the total revenue, modify your app to:
+1. Add a new `revenue` column to the DataFrame (quantity × price for each row)
+2. Return the modified DataFrame as a downloadable CSV file
+3. Still handle all the error cases from Part 3
+
+::: {.callout-important}
+## Important Change
+You're changing the **output component** from `gr.Text` to `gr.File`. This means:
+
+- Your function must now **return a file path** (string), not display text
+- You'll need to save the DataFrame to a file first, then return that filename
+- AI will handle this, but understand what's different!
+:::
+
+::: {.callout-tip collapse="true"}
+## Suggested AI Prompt
+
+"Modify my robust Gradio function to do the following:
+
+Instead of just returning the total revenue as text, I want to:
+1. Create a new column called 'revenue' in the DataFrame by multiplying 'quantity' and 'price' for each row
+2. Save this modified DataFrame as a CSV file named 'processed_sales.csv'
+3. Return the file path so Gradio can provide it as a downloadable file
+4. Keep all the error handling from before (None file check, ParserError, KeyError, ValueError, empty file)
+5. Change the Gradio output component from Text to File so users can download the result
+
+The output filename should be 'processed_sales.csv'.
+
+Here's my current robust code:
+[paste your code from Part 3]"
+:::
+
+### Write your final code here:
+
+```{python}
+#| eval: false
+
+# Paste your complete, final code here
+import gradio as gr
+import pandas as pd
+
+def process_csv_complete(file):
+    try:
+        # Your final AI-generated code goes here
+        pass
+    except pd.errors.ParserError:
+        pass
+    except KeyError:
+        pass
+    except (ValueError, TypeError):
+        pass
+    except Exception as e:
+        pass
+
+# Create and launch the interface with File output
+```
+
+---
+
+### Test the Complete App
+
+Upload `sales_clean.csv` and download the result. Open it and verify:
+
+**Expected Output CSV:**
+```
+product,quantity,price,revenue
+Widget A,10,25.50,255.00
+Widget B,5,40.00,200.00
+Widget C,15,12.75,191.25
+```
+
+::: {.callout-important}
+## Final Checkpoint
+✅ Does the app return a downloadable CSV?  
+✅ Does the CSV have a new 'revenue' column?  
+✅ Are the calculations correct?  
+✅ Do all error cases still work with helpful messages?
+
+Congratulations! You've built a complete, robust data processing web app!
+:::
+
+---
+
+### Extension Challenge (Optional)
+
+::: {.callout-note}
+## Think About More Edge Cases
+
+What other things could go wrong? Think about:
+
+1. **File Size:** What if someone uploads a 5GB CSV?
+2. **Negative Numbers:** Should quantity or price be negative?
+3. **Missing Values:** What if some cells are empty?
+4. **Multiple Files:** Could the app handle processing multiple CSVs at once?
+
+**Challenge:** Pick one of these and prompt AI to add handling for it.
+
+```python
+# Your extended code here (optional)
+
+```
+:::
+
+---
+
+## Part 5: Reflection and Synthesis
+
+### What You've Learned
+
+Take a moment to reflect on your journey:
+
+::: {.callout-warning}
+## Reflection Questions
+
+1. **Before and After:** How did your perspective on error handling change from Part 1 to Part 4?
+   ```
+   Your reflection:
+   
+   
+   
+   ```
+
+2. **The User Perspective:** Why does error handling matter for user experience?
+   ```
+   Your thoughts:
+   
+   
+   
+   ```
+
+3. **AI as a Tool:** How did understanding the concepts help you prompt AI more effectively?
+   ```
+   Your experience:
+   
+   
+   
+   ```
+
+4. **Real-World Application:** Where else might you need robust error handling? (Think about your BIS coursework or future career)
+   ```
+   Your ideas:
+   
+   
+   
+   ```
+:::
+
+---
+
+### The Bigger Picture: Robustness Principles
+
+You've learned more than just `try...except` syntax. You've learned a **mindset**:
+
+1. **Anticipate Failure** - Ask "what if?" before problems occur
+2. **Fail Gracefully** - Don't crash; guide the user
+3. **Communicate Clearly** - Error messages should help, not confuse
+4. **Test Thoroughly** - Try to break your own code
+
+These principles apply to **any** programming language, **any** application, **any** data tool you build.
+
+---
+
+### Prompting for Robustness: Key Takeaways
+
+When prompting AI to build robust applications, always:
+
+✅ **Specify the edge cases** - "Handle file not found, invalid format, empty data, and wrong file type"
+
+✅ **Request user-friendly messages** - "Return clear error messages that tell users what went wrong and how to fix it"
+
+✅ **Ask for specific exceptions** - "Use ParserError for invalid CSV, KeyError for missing columns..."
+
+✅ **Test and iterate** - "The error handling didn't catch [specific case], please add handling for..."
+
+❌ **Avoid vague prompts** - "Make this code better" or "Add error handling"
+
+---
+
+## Summary: Your Journey
+
+| Part | What You Built | What You Learned |
+|------|----------------|------------------|
+| **Part 1** | Basic Gradio CSV processor | The "happy path" - when everything works |
+| **Part 2** | Nothing (you broke it!) | Why robustness matters - the user's pain |
+| **Part 3** | Error handling with try-except | How to catch and handle specific failures |
+| **Part 4** | Complete upload → process → download | Professional data app workflow |
+
+---
+
+## Troubleshooting Common Issues
+
+::: {.callout-tip collapse="true"}
+## If Your App Won't Launch
+
+**"ModuleNotFoundError"** → Run the install cell again  
+**"File not found"** → Check files exist with the verification cell  
+**Gradio won't start** → Restart the kernel and run all cells from the top  
+**Error messages not showing** → Make sure you're returning strings from except blocks  
+**Download not working** → Verify your function returns a file path string, not the DataFrame itself
+:::
+
+---
+
+## Going Further
+
+::: {.callout-tip}
+## Next Steps
+
+Ready to apply these concepts elsewhere?
+
+1. **Add robustness to previous projects** - Go back to earlier pandas work and add error handling
+2. **Build another Gradio app** - Try processing different file types (Excel, JSON)
+3. **Explore validation libraries** - Look into `pandera` or `pydantic` for data validation
+4. **Read the docs** - Check out Python's [exception handling documentation](https://docs.python.org/3/tutorial/errors.html)
+:::
+
+---
+
+## Appendix: Test Data Files
+
+You have two options for creating the test files needed in Part 2:
+
+### Option 1: Generate with AI (Recommended for Learning)
+
+Practice your AI prompting skills by generating test data! This teaches you a valuable real-world skill.
+
+::: {.callout-tip collapse="true"}
+## AI Prompts for Each File
+
+**sales_clean.csv** - Valid data that should work
+```
+"Create a CSV with 3 rows. Columns: product (text), quantity (integer 5-15), price (decimal $10-50). Include headers. Format as plain CSV text I can save to a file."
+```
+
+**messy_data.csv** - Invalid data types
+```
+"Create a CSV with 3 rows matching this structure: product,quantity,price. Make row 1 valid, row 2 should have the word 'FIVE' instead of a number for quantity, row 3 should have 'twelve' instead of a number for price. This tests error handling."
+```
+
+**empty.csv** - Headers only, no data
+```
+"Create a CSV with only headers: product,quantity,price. No data rows. This tests empty file handling."
+```
+
+**wrong_columns.csv** - Different column names
+```
+"Create a CSV with 1 row using these columns: item,amount,cost (not product,quantity,price). Include realistic data. This tests missing expected columns."
+```
+
+**wrong_type.txt** - Not a CSV at all
+```
+"Create a plain text file with 2-3 lines of random text (not CSV format). This tests file type validation."
+```
+
+Try generating each file with AI, then save them in your working directory!
+:::
+
+---
+
+### Option 2: Quick Setup (Run This Cell)
+
+If you want to jump straight to testing, run this cell to create all files automatically:
+
+```{python}
+#| echo: true
+#| eval: false
+
+# Run this cell to create all test files automatically!
+
+# Create sales_clean.csv
+with open('sales_clean.csv', 'w') as f:
+    f.write('''product,quantity,price
+Widget A,10,25.50
+Widget B,5,40.00
+Widget C,15,12.75''')
+
+# Create messy_data.csv
+with open('messy_data.csv', 'w') as f:
+    f.write('''product,quantity,price
+Widget A,10,25.50
+Widget B,FIVE,40.00
+Widget C,15,twelve''')
+
+# Create empty.csv
+with open('empty.csv', 'w') as f:
+    f.write('product,quantity,price\n')
+
+# Create wrong_columns.csv
+with open('wrong_columns.csv', 'w') as f:
+    f.write('''item,amount,cost
+Widget A,10,25.50''')
+
+# Create wrong_type.txt
+with open('wrong_type.txt', 'w') as f:
+    f.write('''This is not a CSV file!
+Just some random text.
+Nothing to see here.''')
+
+print("✅ All test files created successfully!")
+print("\nFiles created:")
+print("  - sales_clean.csv (valid data)")
+print("  - messy_data.csv (invalid data types)")
+print("  - empty.csv (no data rows)")
+print("  - wrong_columns.csv (wrong column names)")
+print("  - wrong_type.txt (not a CSV)")
+```
+
+::: {.callout-note}
+## For Google Colab Users
+
+If using Colab, you can also use the `%%writefile` magic command for each file. **Note:** Each `%%writefile` command must be in its own cell—it creates one file per cell.
+
+```python
+%%writefile sales_clean.csv
+product,quantity,price
+Widget A,10,25.50
+Widget B,5,40.00
+Widget C,15,12.75
+```
+
+Repeat for each file (change filename in the `%%writefile` line).
+:::
+
+---
+
+### Verify Files Were Created
+
+Run this cell to check all files exist:
+
+```{python}
+#| echo: true
+#| eval: false
+
+import os
+
+required_files = [
+    'sales_clean.csv',
+    'messy_data.csv', 
+    'empty.csv',
+    'wrong_columns.csv',
+    'wrong_type.txt'
+]
+
+print("Checking for test files...\n")
+all_present = True
+
+for file in required_files:
+    if os.path.exists(file):
+        print(f"✅ {file} - Found")
+    else:
+        print(f"❌ {file} - Missing")
+        all_present = False
+
+if all_present:
+    print("\n🎉 All files ready! Proceed to Part 2.")
+else:
+    print("\n⚠️  Some files missing. Run the setup cell above or create them with AI.")
+```
+
+---
+
+### Extension: Generate Custom Test Data
+
+::: {.callout-tip}
+## Challenge Yourself
+
+Once you understand the patterns, try prompting AI to create:
+
+1. **Larger datasets:** 50-100 rows to test performance
+2. **More edge cases:** Negative numbers, zeros, special characters
+3. **Real-world messiness:** Mixed formatting, extra spaces, blank cells
+4. **Different domains:** Instead of sales data, try inventory, survey results, or sensor readings
+
+Example prompt:
+```
+"Create a CSV with 50 rows of realistic inventory data. Columns: item_id, item_name, stock_level, reorder_point. Intentionally include 3-4 rows with invalid data (text in numeric columns, negative stock). This tests robust error handling at scale."
+```
+:::
+
+---
+
+**End of Workshop**
+
+Great work! You've transformed from writing fragile scripts to building robust, professional applications. 🎉

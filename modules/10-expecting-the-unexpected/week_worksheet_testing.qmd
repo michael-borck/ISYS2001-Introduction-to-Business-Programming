@@ -1,0 +1,981 @@
+---
+title: 'Workshop: Verification Through Testing'
+subtitle: Hands-on Practice with Specification and Test Design
+format:
+  html:
+    code-fold: false
+  ipynb:
+    code-fold: false
+jupyter: python3
+---
+
+# Workshop Overview
+
+This worksheet guides you through practical exercises in test specification and verification. You'll practice the core skills from Modules 1-3: writing specifications, designing test strategies, and working with AI to verify code quality.
+
+**Learning Objectives:**
+- Write clear specifications using assertions
+- Apply systematic frameworks for test design (Given/When/Then, Equivalence Partitioning)
+- Make strategic decisions about test adequacy and risk
+- Evaluate AI-generated code and tests for simplicity and correctness
+- Practice the Specify → Generate → Verify → Refine cycle
+
+**Your Role:**
+You are the **strategic architect**. AI is your implementation assistant. You decide:
+- What needs testing (and what doesn't)
+- How comprehensive tests should be
+- Whether code is simple enough
+- When to ask AI for improvements
+
+**AI-First Approach:**
+We focus on "specify and verify" rather than manual coding. You'll learn to clearly communicate requirements to AI, then critically evaluate results.
+
+---
+
+# Part 1: Understanding Assertions (20 minutes)
+
+## Exercise 1.1: Reading Assertions
+
+Examine these assertions and answer the questions:
+
+```{python}
+def calculate_tax(amount, rate):
+    """Calculate tax on a purchase amount."""
+    return amount * rate
+
+# Assertions
+assert calculate_tax(100, 0.10) == 10.0
+assert calculate_tax(50, 0.20) == 10.0
+assert calculate_tax(0, 0.10) == 0.0
+```
+
+**Questions:**
+1. What do these assertions tell you about what the function should do?
+2. What scenarios are being tested?
+3. What scenarios are NOT tested that probably should be?
+
+**Your answers:**
+
+```{python}
+# Write your answers as comments:
+# 1. 
+# 2. 
+# 3. 
+```
+
+## Exercise 1.2: Writing Your First Assertions
+
+Write assertions for this function specification:
+
+**Specification:** A function `is_even(n)` that returns `True` if a number is even, `False` if odd.
+
+```{python}
+def is_even(n):
+    """Return True if n is even, False if odd."""
+    return n % 2 == 0
+
+# Write at least 4 assertions testing different scenarios:
+# TODO: Add your assertions here
+```
+
+**Reflection questions:**
+- What test cases did you include?
+- Did you test negative numbers? Zero? Why or why not?
+
+---
+
+# Part 2: Specification Design (30 minutes)
+
+## Exercise 2.1: From Requirements to Specifications
+
+**Requirement:** "Create a function that determines if a year is a leap year. Leap years are divisible by 4, except for years divisible by 100 (which are not leap years), unless they're also divisible by 400 (which are leap years)."
+
+### Step 1: Understand the Requirement
+
+Write in plain language what the function should do:
+
+```{python}
+"""
+Your plain language description:
+
+
+"""
+```
+
+### Step 2: Apply Systematic Test Design Framework
+
+**Framework 1: Given/When/Then Structure**
+
+This helps you think clearly about test scenarios:
+- **Given** (context): What's the starting state?
+- **When** (action): What operation happens?
+- **Then** (outcome): What should result?
+
+**Framework 2: Equivalence Partitioning**
+
+Group inputs into categories that should behave the same way:
+- What are the different "classes" of inputs?
+- What's a representative example from each class?
+
+**Apply to Leap Year:**
+
+```{python}
+"""
+Equivalence Classes for Leap Year:
+
+1. LEAP: Years divisible by 400
+   Example:
+
+2. NOT LEAP: Years divisible by 100 but not 400
+   Example:
+
+3. LEAP: Years divisible by 4 but not 100
+   Example:
+
+4. NOT LEAP: Years not divisible by 4
+   Example:
+
+"""
+```
+
+**Now write as Given/When/Then:**
+
+```{python}
+"""
+Test Case 1:
+Given: A year divisible by 400 (like 2000)
+When: I check if it's a leap year
+Then: Result should be True
+
+Test Case 2:
+Given: A year divisible by 100 but not 400 (like 1900)
+When: I check if it's a leap year
+Then: Result should be False
+
+[Continue for other equivalence classes...]
+
+"""
+```
+
+**Boundary Analysis:**
+
+```{python}
+"""
+At the "boundaries" between categories, test both sides:
+
+Boundary at 100 divisibility:
+- 1896: leap (before boundary)
+- 1900: not leap (at boundary)
+- 1904: leap (after boundary)
+
+Boundary at 400 divisibility:
+- [Your examples]
+
+"""
+```
+
+### Step 3: Evaluate Test Adequacy
+
+Before writing assertions, answer these strategic questions:
+
+```{python}
+"""
+Test Adequacy Check:
+
+1. Have I covered all equivalence classes?
+   □ Yes  □ No  □ Not sure
+
+2. Have I tested boundaries between classes?
+   □ Yes  □ No  □ Not sure
+
+3. What's the RISK if this function fails?
+   Low / Medium / High
+
+4. Based on risk, how many tests do I need?
+   - Low risk: One per equivalence class (minimum)
+   - Medium risk: Add boundary tests
+   - High risk: Add extra edge cases, stress tests
+
+   My decision:
+
+5. Am I over-testing? (Could I remove tests without losing confidence?)
+
+"""
+```
+
+### Step 4: Write Executable Specifications
+
+Now convert your scenarios to assertions:
+
+```{python}
+def is_leap_year(year):
+    """
+    Determine if a year is a leap year.
+
+    Rules:
+    - Divisible by 4: leap year
+    - Divisible by 100: NOT a leap year
+    - Divisible by 400: leap year
+    """
+    # You'll implement this with AI assistance later
+    pass
+
+# Write your assertions here (one per equivalence class minimum):
+# assert is_leap_year(2000) == True   # Class 1: divisible by 400
+# assert is_leap_year(1900) == False  # Class 2: divisible by 100 but not 400
+# [Add your remaining assertions...]
+```
+
+## Exercise 2.2: AI-Assisted Scenario Discovery
+
+**Task:** Use AI to help you think comprehensively about test scenarios.
+
+**Your prompt to AI:**
+```
+I'm testing a leap year function with these rules:
+
+- Divisible by 4: leap year
+- Divisible by 100: NOT leap year  
+- Divisible by 400: leap year
+
+What test scenarios should I consider? Include:
+- Normal cases
+- Edge cases
+- Boundary conditions
+- Any tricky scenarios I might miss
+```
+
+**Copy AI's response here:**
+
+```{python}
+"""
+AI suggested scenarios:
+
+
+"""
+```
+
+**Your evaluation:**
+
+```{python}
+"""
+Which of AI's suggestions are relevant?
+Which did you already have?
+Which are new and valuable?
+Any suggestions that don't apply?
+
+
+"""
+```
+
+---
+
+# Part 3: The Specify → Generate → Verify Cycle (40 minutes)
+
+## Exercise 3.1: Complete Implementation Workflow
+
+You'll now complete the leap year function using the full workflow.
+
+### Step 1: Your Specifications (already done above)
+
+Review your assertions from Exercise 2.1.
+
+### Step 2: Ask AI to Implement
+
+**Your prompt to AI:**
+```
+Write a Python function is_leap_year(year) that implements these rules:
+
+- Divisible by 4: leap year
+- Divisible by 100: NOT leap year
+- Divisible by 400: leap year
+
+Make these assertions pass:
+[paste your assertions here]
+
+Use only basic Python (if statements, boolean operators).
+Keep it simple and readable.
+```
+
+**Paste AI's implementation here:**
+
+```{python}
+# AI's implementation:
+```
+
+### Step 3: Verify
+
+Run the code with your assertions. Do they all pass?
+
+```{python}
+# Test the implementation
+
+
+
+
+# Report results:
+print("All tests passed!" if all_passed else "Some tests failed")
+```
+
+### Step 4: Evaluate Code Quality
+
+Answer these questions about AI's implementation:
+
+```{python}
+"""
+
+1. Is the code simple enough for a beginner to understand?
+   
+2. Does it use only basic Python features?
+   
+3. Is the logic clear and correct?
+   
+4. Would you have solved it differently? How?
+   
+"""
+```
+
+### Step 5: Request Simplification (if needed)
+
+If the code is too complex, ask AI to simplify:
+
+**Your prompt:**
+```
+This works but is too complex for a beginner.
+Can you rewrite it using only simple if statements?
+Make the logic as clear as possible.
+```
+
+**Simpler version (if needed):**
+
+```{python}
+# Simplified implementation:
+```
+
+---
+
+# Part 4: Test Design Practice (40 minutes)
+
+## Exercise 4.1: Strategic Test Design with Risk Analysis
+
+**Scenario:** You need to test a password strength validator.
+
+**Requirements:**
+- Password must be at least 8 characters
+- Must contain at least one uppercase letter
+- Must contain at least one number
+- Must contain at least one special character (!@#$%^&*)
+
+### Step 1: Risk Assessment
+
+```{python}
+"""
+Risk Analysis:
+
+1. What happens if this function fails?
+   - Security implications:
+   - User experience impact:
+   - Business impact:
+
+2. Risk level: □ Low  □ Medium  □ High
+
+3. Based on this risk, my testing strategy should be:
+   □ Minimal - basic happy path only
+   □ Standard - equivalence classes + boundaries
+   □ Comprehensive - all edge cases, stress tests
+
+"""
+```
+
+### Step 2: Equivalence Partitioning
+
+```{python}
+"""
+Identify equivalence classes (categories that behave the same):
+
+VALID class (all requirements met):
+- Example:
+
+INVALID classes (each requirement violation):
+- Too short (< 8 chars): Example:
+- Missing uppercase: Example:
+- Missing number: Example:
+- Missing special char: Example:
+- Multiple violations: Example:
+
+Do I need to test EVERY invalid combination?
+Decision: Yes / No
+Reasoning:
+
+"""
+```
+
+### Step 3: Boundary Analysis
+
+```{python}
+"""
+Key boundaries to test:
+
+Length boundary (8 characters):
+- 7 chars (just under):
+- 8 chars (exactly at):
+- 9 chars (just over):
+
+Other boundaries?
+- Empty string?
+- Very long password (100+ chars)?
+- Only special characters?
+
+"""
+```
+
+### Step 4: Test Adequacy Decision
+
+```{python}
+"""
+How many tests is enough?
+
+Minimum viable: ___ tests (one per equivalence class)
+My plan: ___ tests
+
+Why this number?
+
+
+Could I get the same confidence with fewer tests?
+
+
+What am I NOT testing, and why is that OK?
+
+
+"""
+```
+
+### Step 5: Write Specifications
+
+```{python}
+# Based on your analysis, write focused assertions:
+
+def is_strong_password(password):
+    """Validate password strength."""
+    pass  # To be implemented
+
+# Valid password (meets all requirements):
+# assert is_strong_password("Pass123!") == True
+
+# Invalid passwords (one per major equivalence class):
+# assert is_strong_password("Pass12!") == False  # too short
+# [Add remaining high-value assertions...]
+
+# Boundary tests (if risk justifies):
+# [Add if needed based on your risk assessment]
+```
+
+## Exercise 4.2: AI Implementation and Evaluation
+
+**Step 1:** Provide your specifications to AI and ask for implementation.
+
+**Your prompt:**
+
+```{python}
+"""
+Write your complete prompt to AI here:
+
+
+"""
+```
+
+**Step 2:** Get AI's implementation and paste it below:
+
+```{python}
+# AI's implementation:
+```
+
+**Step 3:** Test it with your assertions:
+
+```{python}
+# Run your assertions here
+```
+
+**Step 4:** Critical Evaluation
+
+```{python}
+"""
+Strategic Evaluation:
+
+1. Does it pass all your assertions?
+
+2. Code Simplicity:
+   - Can a beginner understand this?
+   - Does it use only basic Python constructs?
+   - Is there a simpler approach?
+
+3. Did you find any bugs or issues?
+
+4. Test Coverage:
+   - Are there scenarios you didn't test?
+   - Are they worth testing (risk vs. effort)?
+   - Decision: Add tests / Leave as-is
+
+5. Should you request simplification?
+   - Prompt to use: "Make this simpler using only basic if statements"
+
+"""
+```
+
+---
+
+# Part 5: Regression Testing & Bug Prevention (30 minutes)
+
+When bugs are discovered, the AI-first approach is:
+1. **Write a failing test** that captures the bug
+2. **Specify the fix** to AI clearly
+3. **Verify the fix** passes your test
+4. **Keep the test** to prevent regression
+
+## Exercise 5.1: Specification-First Bug Fixing
+
+You discover this buggy code in production:
+
+```{python}
+def average_positive(numbers):
+    """Calculate average of positive numbers only."""
+    total = 0
+    count = 0
+    for num in numbers:
+        if num > 0:
+            total += num
+        count += 1
+    return total / count
+```
+
+**Step 1: Write a failing test that demonstrates the bug**
+
+```{python}
+# First, understand what SHOULD happen:
+# Input: [2, -1, 4, -3]
+# Positive numbers: [2, 4]
+# Average: (2 + 4) / 2 = 3.0
+
+# Write the assertion that currently fails:
+def average_positive(numbers):
+    """Calculate average of positive numbers only."""
+    total = 0
+    count = 0
+    for num in numbers:
+        if num > 0:
+            total += num
+        count += 1
+    return total / count
+
+# TODO: Write assertion here that will fail
+# assert average_positive([2, -1, 4, -3]) == ???
+```
+
+**Step 2: Specify the bug to AI**
+
+Write a clear bug report prompt for AI:
+
+```{python}
+"""
+Your prompt to AI:
+
+The function average_positive should calculate the average of ONLY positive numbers,
+ignoring negative numbers.
+
+Current behavior:
+[describe what it does wrong]
+
+Expected behavior:
+[describe what it should do]
+
+Here are the tests that should pass:
+[paste your assertions]
+
+Please fix the function to pass these tests. Keep it simple.
+"""
+```
+
+**Step 3: Get AI's fix and verify**
+
+```{python}
+# Paste AI's corrected version here:
+
+
+# Run your test assertions to verify:
+# [Your test assertions]
+```
+
+**Step 4: Add edge case tests**
+
+Now that the basic bug is fixed, what edge cases should you add?
+
+```{python}
+"""
+Additional scenarios to test:
+
+1. All negative numbers: [-1, -2, -3]
+   Expected behavior:
+
+2. Empty list: []
+   Expected behavior:
+
+3. Mix with zero: [0, 1, 2]
+   Expected behavior:
+"""
+
+# Write assertions for these edge cases:
+```
+
+## Exercise 5.2: AI-Driven Bug Investigation
+
+You receive a bug report: "find_max returns 0 for negative numbers"
+
+```{python}
+def find_max(numbers):
+    """Find the maximum number in a list."""
+    max_num = 0
+    for num in numbers:
+        if num > max_num:
+            max_num = num
+    return max_num
+
+# Works for positive:
+print(find_max([3, 1, 4, 1, 5]))  # Returns 5 ✓
+
+# Fails for all negative:
+print(find_max([-5, -2, -8, -1]))  # Returns 0 ✗ (should return -1)
+```
+
+**Step 1: Write failing test specifications**
+
+```{python}
+"""
+Test cases that should pass but currently fail:
+
+1. All negative numbers:
+   assert find_max([-5, -2, -8, -1]) == -1
+
+2. [Add another edge case test]
+
+"""
+```
+
+**Step 2: Prompt AI to fix based on your tests**
+
+```{python}
+"""
+Your prompt to AI:
+
+This find_max function has a bug. It returns 0 for lists of all negative numbers.
+
+Make these assertions pass:
+[paste your test assertions]
+
+Explain the fix in simple terms, then provide corrected code.
+Keep the solution simple - use only basic Python.
+"""
+```
+
+**Step 3: Evaluate AI's explanation and fix**
+
+```{python}
+"""
+Paste AI's explanation:
+
+
+Paste AI's fixed code:
+
+
+"""
+```
+
+**Step 4: Verify and add to test suite**
+
+```{python}
+# Paste the fixed function here:
+
+
+# Run all your test assertions:
+# [Your assertions]
+
+# Reflection: How does the AI-first approach compare to manual debugging?
+"""
+
+"""
+```
+
+---
+
+# Part 6: Integration Exercise (45 minutes)
+
+## Exercise 6.1: Complete Feature Development
+
+**Scenario:** Build a grade calculator with full testing.
+
+**Requirements:**
+- Function calculates letter grade from numeric score
+- A: 90-100, B: 80-89, C: 70-79, D: 60-69, F: below 60
+- Should handle invalid inputs gracefully
+
+### Step 1: Apply Complete Testing Framework
+
+**A. Risk Assessment**
+
+```{python}
+"""
+Risk Analysis:
+
+1. What's the consequence if this function fails?
+
+2. Risk level: □ Low  □ Medium  □ High
+
+3. Testing approach based on risk:
+
+"""
+```
+
+**B. Equivalence Classes**
+
+```{python}
+"""
+Identify input categories:
+
+Grade A (90-100): Example score:
+Grade B (80-89):  Example score:
+Grade C (70-79):  Example score:
+Grade D (60-69):  Example score:
+Grade F (<60):    Example score:
+
+Invalid inputs:   Examples:
+
+"""
+```
+
+**C. Boundaries**
+
+```{python}
+"""
+Critical boundaries (where behavior changes):
+
+89.9 vs 90.0 (B/A boundary):
+- Test 89: expect B
+- Test 90: expect A
+- Test 91: expect A
+
+[Identify other critical boundaries...]
+
+"""
+```
+
+**D. Test Adequacy**
+
+```{python}
+"""
+Minimum tests needed: ___ (one per equivalence class)
+Boundary tests needed: ___ (based on risk)
+Total planned tests: ___
+
+Justification:
+
+
+"""
+```
+
+### Step 2: Write Specifications
+
+```{python}
+def calculate_grade(score):
+    """Convert numeric score to letter grade."""
+    pass
+
+# Your assertions:
+```
+
+### Step 3: AI Implementation
+
+**Your prompt:**
+
+```{python}
+"""
+Write your specification prompt to AI:
+
+
+"""
+```
+
+**AI's implementation:**
+
+```{python}
+# Paste AI's code:
+```
+
+### Step 4: Verify and Evaluate
+
+```{python}
+# Run all your assertions
+
+
+# Strategic Evaluation:
+"""
+
+1. Do all tests pass?
+
+2. Simplicity check:
+   - Could a beginner understand this without help?
+   - If no: What prompt would simplify it?
+
+3. Test adequacy review:
+   - Given the risk level, are my tests sufficient?
+   - Am I over-testing (wasting effort on low-value tests)?
+   - Am I under-testing (missing critical scenarios)?
+
+4. What would you improve?
+   - In the code?
+   - In the tests?
+   - In your process?
+
+"""
+```
+
+### Step 5: Add a Bug Test
+
+Add a test for a bug you discovered (or imagine discovering):
+
+```{python}
+# Test for edge case you found:
+
+
+# This test should fail initially if there was a bug
+```
+
+---
+
+# Reflection and Synthesis (15 minutes)
+
+## Final Reflection
+
+Answer these questions about your learning:
+
+```{python}
+"""
+
+1. Strategic Thinking:
+   What was most challenging about deciding WHAT to test (vs. HOW to test)?
+
+
+2. AI Collaboration:
+   How did your role as "architect" differ from traditional coding?
+   What decisions did YOU make vs. what did AI do?
+
+
+3. Test Design Frameworks:
+   Which framework was most useful (Given/When/Then, Equivalence Classes, Risk Analysis)?
+   Why?
+
+
+4. Test Adequacy:
+   How did you decide when you had "enough" tests?
+   What guided those decisions?
+
+
+5. AI-First Approach:
+   Will you use "specify and verify" in future projects?
+   What's the biggest benefit? Biggest challenge?
+
+
+"""
+```
+
+## Key Takeaways Checklist
+
+Check off what you've learned:
+
+```{python}
+"""
+Strategic Skills:
+□ I can make risk-based decisions about test coverage
+□ I can apply systematic frameworks (Given/When/Then, Equivalence Partitioning)
+□ I can evaluate test adequacy (when is "enough" enough?)
+□ I can identify what NOT to test and justify why
+
+AI Collaboration Skills:
+□ I can write clear specifications that AI can implement
+□ I can evaluate AI-generated code for simplicity and correctness
+□ I can prompt AI to simplify overly complex solutions
+□ I understand my role as architect (not just code consumer)
+
+Testing Skills:
+□ I can write assertions that clearly specify expected behavior
+□ I can design comprehensive test strategies using frameworks
+□ I can use AI to discover scenarios I might have missed
+□ I understand Specify → Generate → Verify → Refine cycle
+
+Quality Decisions:
+□ I know when to add more tests vs. when to stop
+□ I can balance test thoroughness with practical constraints
+□ I can specify bug fixes rather than manually debugging
+□ I can maintain strategic control while using AI assistance
+"""
+```
+
+---
+
+# Extension Challenges (Optional)
+
+If you finish early or want more practice:
+
+## Challenge 1: Roman Numeral Converter
+
+Design comprehensive tests for a function that converts integers (1-3999) to Roman numerals.
+
+Research the rules, design test strategy, implement with AI assistance.
+
+## Challenge 2: Email Validator
+
+Design tests for email validation. Consider:
+- What makes a valid email?
+- What edge cases exist?
+- How should errors be handled?
+
+## Challenge 3: Shopping Cart
+
+Design tests for a shopping cart that:
+- Adds items
+- Removes items
+- Calculates totals
+- Applies discounts
+
+Think about state, multiple operations, edge cases.
+
+---
+
+# Submission Checklist
+
+Before submitting, ensure:
+
+```{python}
+"""
+Technical Completion:
+□ All exercises attempted
+□ Code cells executed and tested
+□ AI prompts and responses documented
+
+Strategic Thinking Evidence:
+□ Risk assessments completed for exercises
+□ Equivalence classes identified and justified
+□ Test adequacy decisions documented with reasoning
+□ At least one example of deciding NOT to test something (with justification)
+
+AI Collaboration Evidence:
+□ Your own thinking clearly shown (not just AI output)
+□ Critical evaluations of AI code completed
+□ At least one example of requesting simplification
+□ At least one example of specifying a bug fix (not manually debugging)
+
+Reflection:
+□ Reflection questions answered thoughtfully
+□ Key takeaways checklist reviewed
+□ Understanding of strategic architect role demonstrated
+"""
+```
+

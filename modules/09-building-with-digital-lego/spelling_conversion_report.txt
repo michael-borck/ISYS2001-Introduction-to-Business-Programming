@@ -1,0 +1,27 @@
+Spelling Conversion Report
+==================================================
+
+Files processed: 5
+Total changes: 11
+
+pre-lab-modules/module1-business-objects.md:
+  • organizing → organising
+  • realize → realise
+
+pre-lab-modules/module3-system-integration.md:
+  • organize → organise
+  • Analysis → Analysis
+  • analysis → analysis
+
+pre-lab-modules/module2-transaction-class.md:
+  • organization → organisation
+
+in-class-activities/worksheet2-gradio-integration.md:
+  • organize → organise
+  • organizing → organising
+
+in-class-activities/worksheet1-ai-oop-discovery.md:
+  • organizing → organising
+  • organizing → organising
+  • analysis → analysis
+

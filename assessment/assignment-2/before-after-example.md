@@ -1,1 +1,0 @@
-../../weatherwise-template/resources/before-after-example.md

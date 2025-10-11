@@ -1,0 +1,488 @@
+---
+title: "Breaking Down a Simple Calculator"
+subtitle: "Decomposing a Programme into Manageable Parts with AI-Assisted Learning"
+format: jupyter-notebook
+jupyter: python3
+---
+
+# Introduction
+
+In this worksheet, we'll learn how to decompose a simple calculator programme into smaller, manageable parts. Instead of facing one long "wall of code," we'll break it into clear, individual steps. This approach helps your mind focus on one task at a time, making the overall problem much easier to understand.
+
+**Guided Walkthrough:**  
+This worksheet is a guided walkthrough designed to show you exactly how to break down a problem into smaller parts and implement each part as a function. You'll also learn how to collaborate effectively with AI during this process—a crucial skill for modern software development.
+
+**Learning Objectives:**
+- Decompose complex problems into smaller, manageable functions
+- Apply modular design principles for better code organization
+- Practice AI-assisted problem analysis and solution development
+- Build foundational skills for your upcoming finance app projects
+
+# The Original "Wall of Code"
+
+Below is a basic calculator programme that does everything in one go. It displays a menu, gets input from the user, performs a calculation, and then shows the result. You can run the code if you like to see that it works.
+
+```{python}
+# Define the calculator functions
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+def multiply(a, b):
+    return a * b
+
+def divide(a, b):
+    return a / b
+
+# Display the menu
+print("Simple Calculator Menu")
+print("1. Add")
+print("2. Subtract")
+print("3. Multiply")
+print("4. Divide")
+
+# Get the user's choice
+choice = input("Enter your choice (1-4): ")
+
+# Get the two numbers from the user
+num1 = float(input("Enter the first number: "))
+num2 = float(input("Enter the second number: "))
+
+# Perform the chosen operation
+if choice == "1":
+    result = add(num1, num2)
+elif choice == "2":
+    result = subtract(num1, num2)
+elif choice == "3":
+    result = multiply(num1, num2)
+elif choice == "4":
+    result = divide(num1, num2)
+else:
+    result = "Invalid choice."
+
+# Display the result
+print("Result:", result)
+```
+
+# AI-Assisted Problem Analysis
+
+Before we manually break down the calculator, let's explore how AI can help us analyze and understand this code structure.
+
+## 🤖 Your First AI Collaboration
+
+**Your Task:** Copy the "wall of code" above and use this prompt with an AI assistant:
+
+```
+"I have a calculator program that does everything in one function. Help me identify the main tasks it performs and suggest how to break it into separate, reusable functions. 
+
+Here's my code: [paste the calculator code here]
+
+Please explain:
+1. What are the main tasks this program performs?
+2. How would you organize these into separate functions?
+3. What are the benefits of this modular approach?"
+```
+
+**Try This Now:** Use the prompt above with an AI tool and compare its suggestions with our analysis below.
+
+**Reflection Questions:**
+- How did AI's analysis compare to your initial understanding?
+- What insights did AI provide that you might have missed?
+- How can AI help you understand code structure better?
+
+## Manual Problem Decomposition
+
+Whether you used AI or analyzed it yourself, the code above can be hard to understand because it does many things at once. Let's break it down into these simple steps:
+
+1. **Display the Menu:** Show the calculator options.
+2. **Get the User's Choice:** Ask which operation to perform.
+3. **Get the Numbers:** Ask the user for two numbers.
+4. **Perform the Calculation:** Use the chosen operation to compute a result.
+5. **Display the Result:** Show the computed result to the user.
+
+By splitting the problem into these steps, we make it easier to focus on each part individually.
+
+**AI Comparison:** How does our manual breakdown compare to what AI suggested? What similarities and differences do you notice?
+
+# Step-by-Step: Creating a Modular Design
+
+Now, we'll implement each step as its own function. This modular design makes the code easier to understand and maintain. We will start by creating functions for displaying the menu, obtaining numbers from the user, and performing the calculation.
+
+## Step 1: Create a Function to Display the Menu
+
+First, let's create a function that displays the calculator menu and gets the user's choice.
+
+### 🤖 AI-Assisted Function Development
+
+**Before Writing Code:** Let's practice effective AI collaboration for function development.
+
+**Effective AI Prompt:**
+```
+"Help me create a function called get_operation() that:
+- Displays a menu with 4 calculator options (Add, Subtract, Multiply, Divide)
+- Gets the user's choice
+- Returns the choice
+
+I want to understand each step, so please:
+1. Show me the function structure first
+2. Explain why we return the value instead of printing it
+3. Suggest any improvements for user experience
+
+Only use basic Python (print, input, return statements)."
+```
+
+**Try This:** Use the prompt above and compare AI's solution with our implementation below.
+
+### Manual Implementation
+
+**Pseudo-code:**
+
+```
+function get_operation():
+    Display "Simple Calculator Menu"
+    Display "1. Add"
+    Display "2. Subtract"
+    Display "3. Multiply"
+    Display "4. Divide"
+    Prompt user for choice
+    Return the user's choice
+```
+
+**Code:**
+
+```python
+def get_operation():
+    print("Simple Calculator Menu")
+    print("1. Add")
+    print("2. Subtract")
+    print("3. Multiply")
+    print("4. Divide")
+    choice = input("Enter your choice (1-4): ")
+    return choice
+```
+
+**AI Learning Check:** 
+- Did AI suggest any improvements you hadn't considered?
+- How did AI explain the importance of returning vs. printing?
+- What did you learn about function design from AI's explanation?
+
+## Step 2: Create a Function to Get a Number
+
+### 🤖 Constraint-Based AI Learning
+
+**Your Challenge:** Use AI to help implement this function, but with specific constraints to ensure learning.
+
+**Constraint-Based AI Prompt:**
+```
+"Help me write a function called get_number() that:
+- Takes a prompt message as a parameter
+- Gets a number from the user
+- Converts it to a float and returns it
+
+Constraints for learning:
+- Only use basic Python: input(), float(), return
+- Explain why we use parameters instead of hard-coding the prompt
+- Show me how to handle the case where the user enters non-numeric input
+
+I want to understand the logic, not just get working code."
+```
+
+**Learning Focus:** Pay attention to how AI explains the parameter usage and error handling concepts.
+
+### Manual Implementation
+
+**Pseudo-code:**
+
+```
+function get_number(prompt):
+    Ask the user for a number using the provided prompt
+    Convert the input to a float
+    Return the number
+```
+
+**Code:**
+
+```python
+def get_number(prompt):
+    return float(input(prompt))
+```
+
+### 🧠 Understanding Check
+
+**Test Your Learning:**
+1. Why do we pass `prompt` as a parameter instead of hard-coding the message?
+2. What happens if the user enters "abc" instead of a number?
+3. How does this function help with code reusability?
+
+**AI Verification:** Ask AI to check your answers to these questions!
+
+## Step 3: Create a Function to Perform the Calculation
+
+### 🤖 Pattern Recognition with AI
+
+**Learning Opportunity:** This function demonstrates a common programming pattern. Let's explore it with AI.
+
+**AI Pattern Analysis Prompt:**
+```
+"I need to create a function that takes an operation choice (1-4) and two numbers, then performs the correct calculation.
+
+The pattern is:
+- If choice is "1": call add(num1, num2)
+- If choice is "2": call subtract(num1, num2)
+- etc.
+
+Help me understand:
+1. What programming pattern is this? (Hint: decision structure)
+2. Why is this better than one giant function with all calculations?
+3. How does this function coordinate with the other functions we've created?
+
+Show me the code structure and explain the logic."
+```
+
+**Learning Goal:** Understand how functions work together in a system.
+
+### Manual Implementation
+
+**Pseudo-code:**
+
+```
+function perform_calculation(operation, num1, num2):
+    if operation is "1":
+        return add(num1, num2)
+    else if operation is "2":
+        return subtract(num1, num2)
+    else if operation is "3":
+        return multiply(num1, num2)
+    else if operation is "4":
+        return divide(num1, num2)
+    else:
+        return "Invalid choice."
+```
+
+**Code:**
+
+```python
+def perform_calculation(operation, num1, num2):
+    if operation == "1":
+        return add(num1, num2)
+    elif operation == "2":
+        return subtract(num1, num2)
+    elif operation == "3":
+        return multiply(num1, num2)
+    elif operation == "4":
+        return divide(num1, num2)
+    else:
+        return "Invalid choice."
+```
+
+### 🔄 System Thinking
+
+**Reflection Questions:**
+- How does this function act as a "coordinator" between user input and calculation functions?
+- What would happen if we added a new operation? What would we need to change?
+- How does this modular approach make debugging easier?
+
+**AI Discussion:** Share your thoughts with an AI and ask for feedback on your system understanding.
+
+## Step 4: Improve the Divide Function with Simple Error Checking
+
+We haven’t discussed error handling in depth yet, but we can add a simple check to the `divide()` function to prevent division by zero. This is a common error that can crash a programme. We will discuss error handling more thoroughly later in the semester; for now, we’ll add this basic check.
+
+**Pseudo-code:**
+
+```
+function divide(a, b):
+    if b equals 0:
+        return "Error: Cannot divide by zero."
+    else:
+        return a divided by b
+```
+
+**Code:**
+
+```python
+def divide(a, b):
+    if b == 0:
+        return "Error: Cannot divide by zero."
+    else:
+        return a / b
+```
+
+# The Final Modular Code
+
+Now, we’ll put all these functions together in our main script. Notice how each step is clear and simple. Note that our functions generally don’t print results, our menu function displays prompts, but not the user's choice; they just return values. This is good practice as it makes the functions more flexible and reusable. Run the code below to verify that it works.
+
+```{python}
+# Define the calculator functions
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+def multiply(a, b):
+    return a * b
+
+def divide(a, b):
+    if b == 0:
+        return "Error: Cannot divide by zero."
+    else:
+        return a / b
+
+# Function to display the menu and get the user's choice
+def get_operation():
+    print("Simple Calculator Menu")
+    print("1. Add")
+    print("2. Subtract")
+    print("3. Multiply")
+    print("4. Divide")
+    choice = input("Enter your choice (1-4): ")
+    return choice
+
+# Function to get a floating-point number from the user
+def get_number(prompt):
+    return float(input(prompt))
+
+# Function to perform the calculation based on the operation
+def perform_calculation(operation, num1, num2):
+    if operation == "1":
+        return add(num1, num2)
+    elif operation == "2":
+        return subtract(num1, num2)
+    elif operation == "3":
+        return multiply(num1, num2)
+    elif operation == "4":
+        return divide(num1, num2)
+    else:
+        return "Invalid choice."
+
+# Main script
+operation = get_operation()
+num1 = get_number("Enter the first number: ")
+num2 = get_number("Enter the second number: ")
+result = perform_calculation(operation, num1, num2)
+print("Result:", result)
+```
+
+> **Advanced Concept:**  The above process is known as refactoring. It is the process of restructuring existing computer code—changing its internal organisation—without changing its external behaviour. Refactoring improves non-functional attributes of software, including code readability and reduced complexity. This can improve maintainability and make it easier to extend your programme in the future. Although this terminology may seem advanced now, it will become useful as you progress and work with more complex code and AI responses.
+
+# AI Collaboration Best Practices
+
+## 🤖 Working Effectively with AI: Key Strategies
+
+Based on your experience in this worksheet, here are essential AI collaboration principles:
+
+### **Before You Start:**
+- **Try First:** Attempt to understand the problem yourself before asking AI
+- **Be Specific:** Use constraint-based prompts that match your skill level
+- **Seek Understanding:** Ask for explanations, not just working code
+
+### **During Development:**
+- **Step-by-Step:** Break complex requests into smaller, manageable parts
+- **Verify Learning:** Can you explain the AI-generated code to someone else?
+- **Test Understanding:** Modify the code slightly to see if you understand the logic
+
+### **After Implementation:**
+- **Compare Approaches:** How does AI's solution differ from manual implementation?
+- **Identify Patterns:** What programming patterns did AI help you recognize?
+- **Plan Extensions:** How would you modify this for different requirements?
+
+## Testing Your Understanding
+
+### 🧪 Self-Assessment Questions
+
+**Function Design Understanding:**
+1. Can you explain why each function returns a value instead of printing directly?
+2. What makes a function "reusable" and why does this matter?
+3. How do parameters make functions more flexible?
+
+**System Architecture Understanding:**
+1. How do all the functions work together to create the complete calculator?
+2. What would you need to change to add a new operation (like modulus or exponent)?
+3. Which function would you modify to improve user input validation?
+
+**AI Collaboration Reflection:**
+1. Which AI prompts gave you the most helpful explanations?
+2. When did AI help you understand concepts you might have missed?
+3. How did constraint-based prompting affect the quality of AI responses?
+
+### 🎯 Practical Challenges
+
+**Challenge 1: Extend with AI Assistance**
+Use AI to help you add a modulus operation:
+- Create a new function: `def modulus(a, b): return a % b`
+- Update the menu display
+- Modify the `perform_calculation()` function
+
+**AI Prompt for Challenge 1:**
+```
+"Help me add a modulus operation to my calculator. I need to:
+1. Create a modulus function that returns the remainder
+2. Update the menu to show option 5 for modulus
+3. Add the logic to perform_calculation()
+
+Please explain each step and why this modular approach makes adding features easier."
+```
+
+**Challenge 2: Error Handling Research**
+Ask AI about improving input validation:
+```
+"My get_number() function crashes if users enter non-numeric input. What are some ways to handle this gracefully? Show me 2-3 different approaches and explain the pros/cons of each."
+```
+
+## Looking Ahead: From Calculator to Finance Applications
+
+### 🏗️ Building Toward Your Finance App
+
+The modular design principles you've learned here are the foundation for your upcoming projects:
+
+**Week 5 Mini-Project:** You'll create modular finance functions (expense categorization, budget calculations, etc.)
+
+**Final Project:** You'll build an interactive finance dashboard using these same principles
+
+**AI Future-Thinking Prompt:**
+```
+"Based on the modular calculator I've built, how might I apply similar design principles to create a personal finance application? What functions might I need for expense tracking, budget management, and financial analysis?"
+```
+
+### 🚀 Professional Development Connection
+
+**Industry Reality:** Professional developers use AI tools daily, but they need to:
+- Understand system architecture (like you've practiced)
+- Design effective prompts (like your constraint-based approach)
+- Verify and test AI-generated solutions (like your understanding checks)
+- Break complex problems into manageable parts (like this worksheet)
+
+**Your Growing Skillset:**
+- ✅ Problem decomposition
+- ✅ Function design principles
+- ✅ AI collaboration strategies
+- ✅ Code organization and modularity
+
+# Final Reflection
+
+## 📝 Written Reflection (Submit This)
+
+Write a brief reflection (200-300 words) addressing:
+
+1. **Modular Design:** How did breaking the calculator into functions change your understanding of the problem?
+
+2. **AI Collaboration:** What did you learn about working effectively with AI tools? Which prompting strategies worked best for you?
+
+3. **Learning Process:** How did comparing AI suggestions with manual implementation enhance your understanding?
+
+4. **Future Applications:** How will you apply these modular design principles to future programming projects?
+
+## 🎯 Success Criteria
+
+You've successfully completed this worksheet if you:
+- ✅ Can explain how each function contributes to the overall system
+- ✅ Understand the benefits of modular design over monolithic code
+- ✅ Can use AI effectively while maintaining understanding of the code
+- ✅ Feel confident about applying these principles to new problems
+
+**Ready for the Next Challenge:** Your understanding of functions and AI collaboration prepares you perfectly for Activity 2, where you'll enhance your calculator with external libraries!
+
+Happy coding and effective AI collaboration!

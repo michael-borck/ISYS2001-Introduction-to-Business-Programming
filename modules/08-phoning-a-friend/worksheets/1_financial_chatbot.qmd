@@ -1,0 +1,374 @@
+---
+title: "Building a Financial Advisor Chatbot"
+subtitle: "Creating Your First AI-Powered Financial Assistant"
+jupyter: python3
+format:
+  ipynb:
+    output-file: "tutorial1_financial_chatbot.ipynb"
+---
+
+<a href="https://colab.research.google.com/github/your-repo/path/tutorial1_financial_chatbot.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
+# Building a Financial Advisor Chatbot
+**Learn to create an AI-powered financial assistant using hands-on-ai**
+
+## What You'll Build
+A simple chatbot that acts as a "Financial Sage" - giving educational financial advice and analyzing transaction data from CSV files.
+
+## Setup
+
+```{python}
+# Install required packages
+!pip install hands-on-ai pandas
+
+# Import what we need
+import pandas as pd
+from hands_on_ai import LLM
+
+# Initialize your local AI
+llm = LLM()
+print("Financial Advisor AI ready!")
+```
+
+## Step 1: Ask AI to Help Design the Chatbot
+
+Let's start by asking Colab's AI (or your local LLM) to help us think through the design.
+
+```{python}
+# Ask AI to help design our financial chatbot
+design_prompt = """
+Help me design a simple financial advisor chatbot that:
+1. Takes user questions about personal finance
+2. Gives educational advice (not professional financial advice)
+3. Can analyze transaction data from a CSV file
+4. Has a personality as a "wise financial sage"
+
+What should the basic structure look like in Python?
+"""
+
+response = llm.chat(design_prompt)
+print(response)
+```
+
+## Step 2: Create the Basic Chatbot
+
+Based on AI suggestions, let's build the core chatbot:
+
+```{python}
+class FinancialSage:
+    """A wise AI financial advisor for educational purposes"""
+    
+    def __init__(self, llm):
+        self.llm = llm
+        self.personality = """
+        You are a wise Financial Sage with years of experience in personal finance.
+        You give educational, general advice about money management, investing, and budgeting.
+        You speak in a friendly but knowledgeable tone.
+        Always remind users that this is educational content, not professional financial advice.
+        """
+        
+    def get_advice(self, question):
+        """Get financial advice for a user question"""
+        
+        full_prompt = f"""
+        {self.personality}
+        
+        User question: {question}
+        
+        Provide helpful, educational financial guidance.
+        """
+        
+        advice = self.llm.chat(full_prompt)
+        return advice
+
+# Create your financial sage
+sage = FinancialSage(llm)
+
+# Test it out
+test_question = "Should I invest in stocks or save in a bank account?"
+advice = sage.get_advice(test_question)
+print("Financial Sage says:")
+print(advice)
+```
+
+## Step 3: Add Transaction Analysis
+
+Let's create some sample transaction data and ask AI to help us analyze it:
+
+```{python}
+# Create sample transaction data
+sample_transactions = {
+    'Date': ['2024-01-01', '2024-01-02', '2024-01-03', '2024-01-05', '2024-01-07'],
+    'Description': ['Salary', 'Grocery Store', 'Coffee Shop', 'Gas Station', 'Restaurant'],
+    'Category': ['Income', 'Food', 'Food', 'Transportation', 'Food'],
+    'Amount': [3000, -85.50, -4.50, -45.00, -32.75]
+}
+
+# Create DataFrame and save as CSV
+df = pd.DataFrame(sample_transactions)
+df.to_csv('transactions.csv', index=False)
+
+print("Sample transactions created:")
+print(df)
+```
+
+Now let's ask AI to help us build transaction analysis:
+
+```{python}
+# Ask AI how to analyze transaction data
+analysis_prompt = """
+I have transaction data with columns: Date, Description, Category, Amount
+Help me write a Python function that:
+1. Loads the CSV with pandas
+2. Calculates basic financial insights (income, expenses, savings rate)
+3. Identifies spending patterns
+4. Formats this information for an AI chatbot to discuss
+
+Show me the code structure.
+"""
+
+analysis_help = llm.chat(analysis_prompt)
+print("AI suggestions for transaction analysis:")
+print(analysis_help)
+```
+
+## Step 4: Implement Transaction Analysis
+
+Based on AI suggestions, let's add transaction analysis to our sage:
+
+```{python}
+def analyze_transactions(self, csv_file):
+    """Analyze user's transaction data"""
+    
+    try:
+        # Load the data
+        df = pd.read_csv(csv_file)
+        
+        # Basic calculations
+        total_income = df[df['Amount'] > 0]['Amount'].sum()
+        total_expenses = abs(df[df['Amount'] < 0]['Amount'].sum())
+        net_savings = total_income - total_expenses
+        savings_rate = (net_savings / total_income * 100) if total_income > 0 else 0
+        
+        # Spending by category
+        expense_by_category = df[df['Amount'] < 0].groupby('Category')['Amount'].sum().abs()
+        
+        # Create summary for AI analysis
+        summary = f"""
+        Financial Summary:
+        - Total Income: ${total_income:.2f}
+        - Total Expenses: ${total_expenses:.2f}  
+        - Net Savings: ${net_savings:.2f}
+        - Savings Rate: {savings_rate:.1f}%
+        
+        Spending by Category:
+        {expense_by_category.to_string()}
+        """
+        
+        return summary
+        
+    except Exception as e:
+        return f"Error analyzing transactions: {e}"
+
+# Add method to our class
+FinancialSage.analyze_transactions = analyze_transactions
+
+# Test transaction analysis
+transaction_summary = sage.analyze_transactions('transactions.csv')
+print("Transaction Analysis:")
+print(transaction_summary)
+```
+
+## Step 5: Combine Everything - Ask Questions About Your Data
+
+Now let's ask the sage to give advice based on the transaction data:
+
+```{python}
+def get_data_advice(self, csv_file, question):
+    """Get advice based on transaction data and user question"""
+    
+    # Get transaction analysis
+    analysis = self.analyze_transactions(csv_file)
+    
+    # Combine with user question
+    full_prompt = f"""
+    {self.personality}
+    
+    Here's the user's financial data:
+    {analysis}
+    
+    User question: {question}
+    
+    Based on this financial data, provide personalized educational advice.
+    """
+    
+    advice = self.llm.chat(full_prompt)
+    return advice
+
+# Add to class
+FinancialSage.get_data_advice = get_data_advice
+
+# Test data-based advice
+data_question = "Based on my spending, how can I save more money?"
+data_advice = sage.get_data_advice('transactions.csv', data_question)
+
+print("Data-Based Financial Advice:")
+print(data_advice)
+```
+
+## Step 6: Create Interactive Chat Function
+
+Let's make it easy to chat with our financial sage:
+
+```{python}
+def chat_with_sage():
+    """Interactive chat with the financial sage"""
+    
+    print("💰 Welcome to the Financial Sage! 💰")
+    print("Ask me any financial question, or type 'analyze' to look at your transactions.")
+    print("Type 'quit' to exit.\n")
+    
+    while True:
+        user_input = input("You: ")
+        
+        if user_input.lower() == 'quit':
+            print("Sage: May your finances prosper! Goodbye!")
+            break
+        elif user_input.lower() == 'analyze':
+            # Analyze transaction data
+            try:
+                analysis = sage.analyze_transactions('transactions.csv')
+                print(f"Sage: Here's your financial analysis:\n{analysis}")
+                
+                follow_up = input("\nAny questions about your spending? ")
+                if follow_up.strip():
+                    advice = sage.get_data_advice('transactions.csv', follow_up)
+                    print(f"Sage: {advice}")
+            except:
+                print("Sage: I couldn't find your transactions.csv file. Upload one first!")
+        else:
+            # Regular financial advice
+            advice = sage.get_advice(user_input)
+            print(f"Sage: {advice}")
+        
+        print()  # Add spacing
+
+# Uncomment to run interactive chat
+# chat_with_sage()
+```
+
+## Step 7: Test with Different Questions
+
+Let's test our sage with various financial questions:
+
+```{python}
+# Test different types of questions
+test_questions = [
+    "I'm 22 and just started working. How should I begin investing?",
+    "What's the difference between stocks and bonds?", 
+    "How much should I have in an emergency fund?",
+    "Is it better to pay off debt or invest?",
+    "Based on my spending, should I be worried about anything?"
+]
+
+print("Testing Financial Sage with various questions:")
+print("=" * 50)
+
+for question in test_questions:
+    print(f"\nQuestion: {question}")
+    
+    if "based on my spending" in question.lower():
+        # Use transaction data for this question
+        answer = sage.get_data_advice('transactions.csv', question)
+    else:
+        # Regular advice
+        answer = sage.get_advice(question)
+    
+    print(f"Sage: {answer[:200]}...")  # Show first 200 characters
+    print("-" * 30)
+```
+
+## Step 8: Ask AI for Improvements
+
+Let's ask AI how to make our chatbot better:
+
+```{python}
+improvement_prompt = """
+I built a simple financial advisor chatbot that:
+- Answers financial questions with educational advice
+- Analyzes CSV transaction data
+- Combines data analysis with personalized advice
+
+How could I improve this chatbot? What features would make it more useful?
+What are potential issues I should watch out for?
+"""
+
+improvements = llm.chat(improvement_prompt)
+print("AI suggestions for improvements:")
+print(improvements)
+```
+
+## Your Turn: Extend the Chatbot
+
+Try adding one of these features with AI help:
+
+```{python}
+# Ask AI to help you add a feature
+extension_ideas = [
+    "Add budget planning capabilities",
+    "Include goal-setting and tracking",
+    "Add investment portfolio analysis",
+    "Create spending categorization rules",
+    "Add financial education tips"
+]
+
+print("Choose an extension to add:")
+for i, idea in enumerate(extension_ideas, 1):
+    print(f"{i}. {idea}")
+
+# Example: Ask AI to help with budget planning
+budget_help = llm.chat("""
+Help me add a budget planning feature to my financial chatbot.
+The user should be able to:
+1. Set budget limits for different categories
+2. Compare actual spending to budget
+3. Get alerts when approaching limits
+
+Show me the code structure for this feature.
+""")
+
+print("\nAI help for budget planning:")
+print(budget_help)
+```
+
+```{python}
+# Implement your chosen extension here
+def my_chatbot_extension():
+    """Your custom extension to the financial sage"""
+    
+    # TODO: Add your feature based on AI suggestions
+    print("Extension coming soon...")
+
+# Test your extension
+my_chatbot_extension()
+```
+
+## Key Takeaways
+
+You've built a financial advisor chatbot that:
+- Uses AI to provide educational financial advice
+- Analyzes real transaction data from CSV files
+- Combines data insights with personalized recommendations
+- Demonstrates how to use LLMs for domain-specific applications
+
+This shows how AI can be used to create helpful financial tools while maintaining appropriate disclaimers about not providing professional financial advice.
+
+## Next Steps
+
+- Upload your own transactions.csv file and test the analysis
+- Add more sophisticated financial calculations
+- Integrate with the API and scraping tutorials
+- Build a Gradio interface for better user experience
+- Explore more advanced financial analysis features
+
+Remember: This is educational content and not professional financial advice!

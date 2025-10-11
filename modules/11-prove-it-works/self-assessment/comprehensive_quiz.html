@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing & Quality Assurance Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .intro {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #764ba2;
+        }
+
+        .module-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .module1 {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .module2 {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .module3 {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 1.15em;
+            margin-bottom: 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .options {
+            margin-left: 20px;
+        }
+
+        .option {
+            margin: 12px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 10px;
+            margin-top: 4px;
+            cursor: pointer;
+        }
+
+        .option label {
+            cursor: pointer;
+            flex: 1;
+            line-height: 1.5;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: 600;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results {
+            background: #e7f3ff;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .results h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .score {
+            font-size: 2em;
+            font-weight: bold;
+            color: #764ba2;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .module-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .module-score {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .answer-review {
+            margin-top: 20px;
+        }
+
+        .review-item {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .correct {
+            border-left: 4px solid #28a745;
+        }
+
+        .incorrect {
+            border-left: 4px solid #dc3545;
+        }
+
+        .review-question {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .review-answer {
+            margin: 5px 0;
+        }
+
+        .your-answer {
+            color: #dc3545;
+        }
+
+        .correct-answer {
+            color: #28a745;
+        }
+
+        .explanation {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .progress {
+            background: #e0e0e0;
+            height: 8px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Testing & Quality Assurance Quiz</h1>
+        <div class="subtitle">Modules 1-3: Verification, Debugging & Test Design</div>
+
+        <div id="intro" class="intro">
+            <p><strong>Welcome!</strong> This comprehensive quiz covers all three modules:</p>
+            <ul style="margin-top: 10px; margin-left: 20px;">
+                <li><strong>Module 1:</strong> Verification Through Testing</li>
+                <li><strong>Module 2:</strong> Debugging as Verification</li>
+                <li><strong>Module 3:</strong> Strategic Test Design</li>
+            </ul>
+            <p style="margin-top: 15px;">You will be randomly presented with 5 questions from our question bank. After completing the quiz, you can review your answers and retake with a new random set of questions.</p>
+            <p style="margin-top: 10px;">Click "Start Quiz" when you're ready!</p>
+        </div>
+
+        <div id="progress-container" class="hidden">
+            <div class="progress">
+                <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <div id="quiz-container"></div>
+
+        <div class="button-group">
+            <button id="start-btn" onclick="startQuiz()">Start Quiz</button>
+            <button id="submit-btn" class="hidden" onclick="submitQuiz()">Submit Quiz</button>
+            <button id="review-btn" class="hidden" onclick="showReview()">Review Answers</button>
+            <button id="retake-btn" class="hidden" onclick="retakeQuiz()">Retake Quiz</button>
+        </div>
+
+        <div id="results" class="results hidden"></div>
+    </div>
+
+    <script>
+        const questionBank = [
+            // MODULE 1: Verification Through Testing
+            {
+                module: 1,
+                moduleName: "Verification",
+                question: "What is your primary role when working with AI-assisted development?",
+                options: [
+                    "Writing all code manually to ensure quality",
+                    "Specifying what code should do and verifying it works correctly",
+                    "Debugging AI-generated code line by line",
+                    "Learning to type code faster than AI"
+                ],
+                correct: 1,
+                explanation: "Your role is as a code architect: you specify what code should do, AI implements it, and you verify it works correctly. You're not competing with AI on speed - you're providing strategic direction and quality control."
+            },
+            {
+                module: 1,
+                moduleName: "Verification",
+                question: "What is an assertion in Python?",
+                options: [
+                    "A function that always returns True",
+                    "A claim that something should be true; the program stops if it's false",
+                    "A special type of variable",
+                    "A way to print debugging information"
+                ],
+                correct: 1,
+                explanation: "An assertion is a claim that something should be true. If the assertion is false, Python raises an AssertionError and stops the program. It's the simplest form of verification."
+            },
+            {
+                module: 1,
+                moduleName: "Verification",
+                question: "What is the correct AI-assisted development workflow?",
+                options: [
+                    "Write code → Hope it works → Test manually",
+                    "Ask AI to write everything → Copy without checking → Submit",
+                    "Write assertions (specification) → Ask AI to implement → Verify assertions pass → Check if code is simple enough",
+                    "Test after deployment → Fix bugs as users report them"
+                ],
+                correct: 2,
+                explanation: "The specification-first workflow is: write simple assertions defining what you want, ask AI to implement, verify assertions pass, then check if the code is simple and understandable enough."
+            },
+            {
+                module: 1,
+                moduleName: "Verification",
+                question: "What is the purpose of a docstring?",
+                options: [
+                    "To slow down code execution",
+                    "To specify behavior in plain language and provide examples",
+                    "To replace all comments in code",
+                    "To make code run faster"
+                ],
+                correct: 1,
+                explanation: "Docstrings specify behavior in plain language, often with examples. They serve as documentation, specifications for AI, and can even be run as tests using doctest."
+            },
+            {
+                module: 1,
+                moduleName: "Verification",
+                question: "When should you ask AI to simplify code?",
+                options: [
+                    "Never - AI-generated code is always optimal",
+                    "When the code uses advanced features you don't understand or has unnecessary complexity",
+                    "Only when the code doesn't work",
+                    "After submitting the assignment"
+                ],
+                correct: 1,
+                explanation: "You should request simplification when AI uses advanced features you haven't learned or when the logic is unnecessarily complex. Working code that you don't understand is not good enough - you need both correctness and clarity."
+            },
+            {
+                module: 1,
+                moduleName: "Verification",
+                question: "What's the biggest mistake beginners make when working with AI-generated code?",
+                options: [
+                    "Reading the code too carefully",
+                    "Writing too many tests",
+                    "Trusting AI code without verification",
+                    "Asking AI too many questions"
+                ],
+                correct: 2,
+                explanation: "The biggest mistake is trusting AI code without verification. AI can generate professional-looking code that doesn't actually meet your requirements. Always verify with assertions or tests."
+            },
+            {
+                module: 1,
+                moduleName: "Verification",
+                question: "What makes a good test specification?",
+                options: [
+                    "Using complex test frameworks",
+                    "Testing only one simple case",
+                    "Including typical cases, edge cases, and having clear correct expected values",
+                    "Testing everything possible regardless of relevance"
+                ],
+                correct: 2,
+                explanation: "Good tests cover typical usage (happy path), edge cases, and have clear, correct expected values. They should be simple enough to understand and test what actually matters."
+            },
+
+            // MODULE 2: Debugging as Verification
+            {
+                module: 2,
+                moduleName: "Debugging",
+                question: "What does 'debugging' fundamentally mean?",
+                options: [
+                    "Randomly changing code until it works",
+                    "Investigating why verification failed",
+                    "Removing all print statements",
+                    "Asking AI to fix everything"
+                ],
+                correct: 1,
+                explanation: "Debugging is investigating why verification failed. A bug is evidence that your tests or expectations weren't met. Debugging is the systematic process of understanding why."
+            },
+            {
+                module: 2,
+                moduleName: "Debugging",
+                question: "How should you read a Python traceback/error message?",
+                options: [
+                    "From top to bottom",
+                    "Only read the first line",
+                    "From bottom to top: what happened, where it happened, and the path to the problem",
+                    "Ignore it and ask AI immediately"
+                ],
+                correct: 2,
+                explanation: "Read tracebacks from bottom to top. The bottom tells you what went wrong, above that shows where it happened, and further up shows the chain of function calls that led there."
+            },
+            {
+                module: 2,
+                moduleName: "Debugging",
+                question: "What's the best way to use AI when you encounter an error?",
+                options: [
+                    "Paste your code and say 'fix this'",
+                    "Ask AI to explain the error in simple terms and what commonly causes it, then you decide the fix",
+                    "Ignore AI and struggle alone",
+                    "Copy AI's fix without understanding it"
+                ],
+                correct: 1,
+                explanation: "Use AI to understand the error - what it means and common causes. This empowers you to fix it yourself and recognize similar errors in the future. Don't just ask for fixes without understanding."
+            },
+            {
+                module: 2,
+                moduleName: "Debugging",
+                question: "What is the purpose of strategic print statements in debugging?",
+                options: [
+                    "To make code slower",
+                    "To show what's actually happening inside code at key points",
+                    "To replace all other debugging methods",
+                    "To annoy other developers"
+                ],
+                correct: 1,
+                explanation: "Strategic print statements give you a window into what's actually happening as code runs. They help verify assumptions and trace program flow, showing you intermediate values and execution paths."
+            },
+            {
+                module: 2,
+                moduleName: "Debugging",
+                question: "What are the five core debugging questions?",
+                options: [
+                    "Who, what, when, where, why",
+                    "What did I expect? What happened? Where do they diverge? Why? What's the simplest fix?",
+                    "Is it plugged in? Is it turned on? Did you try restarting?",
+                    "What, how, when, who, why"
+                ],
+                correct: 1,
+                explanation: "The five debugging questions structure your investigation: What did you expect? What actually happened? Where do they diverge? Why does it diverge there? What's the simplest fix?"
+            },
+            {
+                module: 2,
+                moduleName: "Debugging",
+                question: "What is hypothesis-driven debugging?",
+                options: [
+                    "Randomly trying different fixes",
+                    "Forming theories about the cause and systematically testing them",
+                    "Always blaming the compiler",
+                    "Only using advanced debugging tools"
+                ],
+                correct: 1,
+                explanation: "Hypothesis-driven debugging means forming theories about what might be wrong, designing tests for those theories, and systematically narrowing down to the root cause. It's scientific method applied to debugging."
+            },
+            {
+                module: 2,
+                moduleName: "Debugging",
+                question: "What's a common beginner bug pattern?",
+                options: [
+                    "Writing too many comments",
+                    "Off-by-one errors in loops",
+                    "Using too many functions",
+                    "Making variable names too descriptive"
+                ],
+                correct: 1,
+                explanation: "Off-by-one errors are classic beginner bugs - looping one too many or too few times, accessing indices beyond array bounds, etc. Other common patterns include typos in variable names and scope issues."
+            },
+
+            // MODULE 3: Strategic Test Design
+            {
+                module: 3,
+                moduleName: "Test Design",
+                question: "What is the primary role of a test architect?",
+                options: [
+                    "Writing test code manually",
+                    "Deciding what needs testing and defining specifications",
+                    "Running tests in production",
+                    "Debugging failed tests"
+                ],
+                correct: 1,
+                explanation: "As a test architect, your role is strategic - deciding what needs testing and why. AI assists with implementation details, but you make the strategic decisions about what matters."
+            },
+            {
+                module: 3,
+                moduleName: "Test Design",
+                question: "What are the five key categories to consider when identifying what to test?",
+                options: [
+                    "Speed, efficiency, security, usability, scalability",
+                    "Happy path, boundaries, invalid input, edge cases, error conditions",
+                    "Unit, integration, system, acceptance, regression",
+                    "Design, implementation, deployment, monitoring, maintenance"
+                ],
+                correct: 1,
+                explanation: "The framework for comprehensive test design includes: happy path (normal use), boundaries (min/max values), invalid input (what shouldn't be accepted), edge cases (unusual but valid), and error conditions (external failures)."
+            },
+            {
+                module: 3,
+                moduleName: "Test Design",
+                question: "Which represents the STRONGEST test specification?",
+                options: [
+                    "Test the login function",
+                    "Make sure login works correctly",
+                    "Test that valid credentials (username='user', password='pass123') successfully authenticate and invalid credentials return error 'Invalid credentials'",
+                    "Check if users can login"
+                ],
+                correct: 2,
+                explanation: "Strong specifications are precise with concrete examples and expected results. They define exact inputs and outputs, making it clear what 'correct' means."
+            },
+            {
+                module: 3,
+                moduleName: "Test Design",
+                question: "What does Test-Driven Development (TDD) mean?",
+                options: [
+                    "Write all tests after completing implementation",
+                    "Let AI write all tests automatically",
+                    "Write specifications/tests first, then implement code to make them pass",
+                    "Only test the most critical features"
+                ],
+                correct: 2,
+                explanation: "TDD means writing specifications/tests before implementation. You define what 'correct' looks like first, then write or generate code that meets those specifications."
+            },
+            {
+                module: 3,
+                moduleName: "Test Design",
+                question: "When testing a discount function (0-5 years = 5%, 6-10 years = 10%), which are the important boundary conditions?",
+                options: [
+                    "3 years and 8 years",
+                    "0, 5, 6, and 10 years",
+                    "1 year and 10 years",
+                    "Only 0 and 10 years"
+                ],
+                correct: 1,
+                explanation: "Boundary conditions are the edges of valid ranges. Test 0 (minimum), 5 (max of first tier), 6 (min of second tier), and 10 (maximum). Off-by-one errors occur at boundaries."
+            },
+            {
+                module: 3,
+                moduleName: "Test Design",
+                question: "What should you do when test design reveals gaps in requirements?",
+                options: [
+                    "Just skip testing that case",
+                    "Assume any implementation is acceptable",
+                    "Clarify the requirement first, then document the decision in your tests",
+                    "Let AI decide randomly"
+                ],
+                correct: 2,
+                explanation: "Test design often reveals requirement ambiguities. When you find gaps, clarify with stakeholders or research standards, make informed decisions, then document those decisions in tests."
+            },
+            {
+                module: 3,
+                moduleName: "Test Design",
+                question: "What does 'testing behavior, not implementation' mean?",
+                options: [
+                    "Don't test internal functions",
+                    "Test what the code does (outputs for inputs), not how it does it internally",
+                    "Only test user interfaces",
+                    "Avoid all testing"
+                ],
+                correct: 1,
+                explanation: "Testing behavior means verifying outputs for given inputs, regardless of internal implementation. This allows refactoring without breaking tests - as long as behavior is preserved, tests pass."
+            },
+            {
+                module: 3,
+                moduleName: "Test Design",
+                question: "What does strategic test coverage mean?",
+                options: [
+                    "Testing every single line of code equally",
+                    "Only testing the happy path",
+                    "Prioritizing tests based on criticality, risk, and user needs",
+                    "Writing as many tests as possible"
+                ],
+                correct: 2,
+                explanation: "Strategic coverage means prioritizing. Critical features need thorough testing, high-risk areas need edge cases tested, while simple utilities might need only basic tests. Not everything needs equal coverage."
+            },
+            {
+                module: 3,
+                moduleName: "Test Design",
+                question: "When AI generates complex test code with loops and conditionals, what should you do?",
+                options: [
+                    "Accept it because AI is always optimal",
+                    "Ask AI to rewrite as separate, simple test functions, each testing one specific case",
+                    "Add more complexity",
+                    "Delete all tests"
+                ],
+                correct: 1,
+                explanation: "Tests should be simple and explicit. Complex test logic is harder to understand and debug. Ask AI to rewrite as separate, simple test functions with clear purposes."
+            },
+            {
+                module: 3,
+                moduleName: "Test Design",
+                question: "What level of confidence does comprehensive testing provide?",
+                options: [
+                    "Weak confidence - tests can't prove correctness",
+                    "Only works for simple code",
+                    "Strong confidence - you can refactor knowing tests verify behavior is preserved",
+                    "No real value"
+                ],
+                correct: 2,
+                explanation: "Comprehensive tests covering normal cases, edge cases, and error conditions provide strong confidence. When thorough enough, you can refactor implementation knowing passing tests verify behavior is preserved."
+            },
+
+            // INTEGRATED QUESTIONS (Multiple Modules)
+            {
+                module: 0,
+                moduleName: "Integrated",
+                question: "How do testing (Module 1), debugging (Module 2), and test design (Module 3) work together?",
+                options: [
+                    "They are separate, unrelated skills",
+                    "Design tests strategically → Implement → Verify → Debug failures → Fix → Achieve confidence",
+                    "Only debugging matters in real development",
+                    "Testing replaces the need for debugging"
+                ],
+                correct: 1,
+                explanation: "All three modules work together: Strategic test design (Module 3) defines what to verify, verification tests (Module 1) check correctness, and debugging (Module 2) investigates when verification fails. Together they form a complete quality assurance cycle."
+            },
+            {
+                module: 0,
+                moduleName: "Integrated",
+                question: "What's the relationship between assertions and debugging?",
+                options: [
+                    "Assertions prevent the need for debugging",
+                    "Assertions help catch bugs early; when they fail, debugging investigates why",
+                    "Debugging eliminates the need for assertions",
+                    "They serve completely different purposes"
+                ],
+                correct: 1,
+                explanation: "Assertions (Module 1) verify expected behavior. When assertions fail, that's when debugging (Module 2) begins - investigating why actual behavior doesn't match expectations."
+            },
+            {
+                module: 0,
+                moduleName: "Integrated",
+                question: "Why is specification-first development important across all three modules?",
+                options: [
+                    "It makes code run faster",
+                    "It defines 'correct' before implementation, guides testing, and helps debugging by clarifying expectations",
+                    "It's only important for Module 1",
+                    "It's outdated methodology"
+                ],
+                correct: 1,
+                explanation: "Specifications define what 'correct' means (Module 1), guide strategic test design (Module 3), and clarify expectations when debugging (Module 2). Knowing what should happen is fundamental to all quality assurance."
+            },
+            {
+                module: 0,
+                moduleName: "Integrated",
+                question: "How should AI be used across all three modules?",
+                options: [
+                    "AI should do everything - testing, debugging, and design",
+                    "You make strategic decisions and specifications; AI assists with implementation and explanation",
+                    "AI should be avoided entirely",
+                    "AI only helps with Module 2"
+                ],
+                correct: 1,
+                explanation: "Across all modules, you provide strategic thinking, specifications, and decisions. AI assists with implementation, explanations, and suggestions. You're the architect; AI is the assistant."
+            },
+            {
+                module: 0,
+                moduleName: "Integrated",
+                question: "What's the complete workflow when working with AI to build quality code?",
+                options: [
+                    "Code → Test → Debug → Ship",
+                    "Understand requirement → Write specifications → Generate with AI → Verify → Debug if needed → Simplify → Add edge tests → Achieve confidence",
+                    "Ask AI → Copy → Submit",
+                    "Test → Code → Deploy"
+                ],
+                correct: 1,
+                explanation: "The complete workflow integrates all three modules: Understand requirements, write specifications, generate implementation with AI, verify with tests, debug failures, request simplification if needed, add edge case tests, and achieve confidence in quality."
+            }
+        ];
+
+        let currentQuestions = [];
+        let userAnswers = [];
+        let quizStarted = false;
+
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        function selectRandomQuestions(count = 5) {
+            const shuffled = shuffleArray(questionBank);
+            return shuffled.slice(0, Math.min(count, questionBank.length));
+        }
+
+        function startQuiz() {
+            currentQuestions = selectRandomQuestions(5);
+            userAnswers = new Array(currentQuestions.length).fill(null);
+            quizStarted = true;
+
+            document.getElementById('intro').classList.add('hidden');
+            document.getElementById('start-btn').classList.add('hidden');
+            document.getElementById('progress-container').classList.remove('hidden');
+            document.getElementById('submit-btn').classList.remove('hidden');
+
+            renderQuiz();
+            updateProgress();
+        }
+
+        function getModuleClass(moduleNum) {
+            if (moduleNum === 1) return 'module1';
+            if (moduleNum === 2) return 'module2';
+            if (moduleNum === 3) return 'module3';
+            return 'module1'; // Integrated questions
+        }
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            currentQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-container';
+
+                const moduleTag = document.createElement('span');
+                moduleTag.className = `module-tag ${getModuleClass(q.module)}`;
+                moduleTag.textContent = q.module === 0 ? 'Integrated' : `Module ${q.module}: ${q.moduleName}`;
+
+                const questionNumber = document.createElement('div');
+                questionNumber.className = 'question-number';
+                questionNumber.textContent = `Question ${index + 1} of ${currentQuestions.length}`;
+
+                const questionText = document.createElement('div');
+                questionText.className = 'question-text';
+                questionText.textContent = q.question;
+
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+
+                q.options.forEach((option, optIndex) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'option';
+
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = `question${index}`;
+                    radio.value = optIndex;
+                    radio.id = `q${index}_opt${optIndex}`;
+                    radio.onchange = () => answerQuestion(index, optIndex);
+
+                    const label = document.createElement('label');
+                    label.htmlFor = `q${index}_opt${optIndex}`;
+                    label.textContent = option;
+
+                    optionDiv.appendChild(radio);
+                    optionDiv.appendChild(label);
+                    optionsDiv.appendChild(optionDiv);
+                });
+
+                questionDiv.appendChild(moduleTag);
+                questionDiv.appendChild(questionNumber);
+                questionDiv.appendChild(questionText);
+                questionDiv.appendChild(optionsDiv);
+                container.appendChild(questionDiv);
+            });
+        }
+
+        function answerQuestion(questionIndex, answerIndex) {
+            userAnswers[questionIndex] = answerIndex;
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const answered = userAnswers.filter(a => a !== null).length;
+            const percentage = (answered / currentQuestions.length) * 100;
+            document.getElementById('progress-bar').style.width = percentage + '%';
+        }
+
+        function submitQuiz() {
+            const unanswered = userAnswers.filter(a => a === null).length;
+            if (unanswered > 0) {
+                if (!confirm(`You have ${unanswered} unanswered question(s). Submit anyway?`)) {
+                    return;
+                }
+            }
+
+            calculateResults();
+            displayResults();
+
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('submit-btn').classList.add('hidden');
+            document.getElementById('review-btn').classList.remove('hidden');
+            document.getElementById('retake-btn').classList.remove('hidden');
+        }
+
+        function calculateResults() {
+            let correct = 0;
+            let moduleScores = { 1: { correct: 0, total: 0 }, 2: { correct: 0, total: 0 }, 3: { correct: 0, total: 0 }, 0: { correct: 0, total: 0 } };
+
+            currentQuestions.forEach((q, index) => {
+                moduleScores[q.module].total++;
+                if (userAnswers[index] === q.correct) {
+                    correct++;
+                    moduleScores[q.module].correct++;
+                }
+            });
+
+            return { correct, total: currentQuestions.length, moduleScores };
+        }
+
+        function displayResults() {
+            const { correct, total, moduleScores } = calculateResults();
+            const percentage = Math.round((correct / total) * 100);
+
+            let message = '';
+            let emoji = '';
+            if (percentage >= 90) {
+                message = 'Outstanding! You have excellent understanding of testing and quality assurance.';
+                emoji = '🎉';
+            } else if (percentage >= 70) {
+                message = 'Great job! You have a solid grasp of verification, debugging, and test design.';
+                emoji = '👏';
+            } else if (percentage >= 50) {
+                message = 'Good effort! Review the material and try again to strengthen your understanding.';
+                emoji = '📚';
+            } else {
+                message = 'Keep studying! Review the module materials and retake the quiz.';
+                emoji = '💪';
+            }
+
+            let moduleBreakdown = '<div class="module-breakdown">';
+            if (moduleScores[1].total > 0) {
+                moduleBreakdown += `<div class="module-score"><strong>Module 1: Verification</strong><br>${moduleScores[1].correct}/${moduleScores[1].total}</div>`;
+            }
+            if (moduleScores[2].total > 0) {
+                moduleBreakdown += `<div class="module-score"><strong>Module 2: Debugging</strong><br>${moduleScores[2].correct}/${moduleScores[2].total}</div>`;
+            }
+            if (moduleScores[3].total > 0) {
+                moduleBreakdown += `<div class="module-score"><strong>Module 3: Test Design</strong><br>${moduleScores[3].correct}/${moduleScores[3].total}</div>`;
+            }
+            if (moduleScores[0].total > 0) {
+                moduleBreakdown += `<div class="module-score"><strong>Integrated</strong><br>${moduleScores[0].correct}/${moduleScores[0].total}</div>`;
+            }
+            moduleBreakdown += '</div>';
+
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = `
+                <h2>Quiz Results ${emoji}</h2>
+                <div class="score">${correct} / ${total} Correct (${percentage}%)</div>
+                <p>${message}</p>
+                ${moduleBreakdown}
+            `;
+            resultsDiv.classList.remove('hidden');
+        }
+
+        function showReview() {
+            const resultsDiv = document.getElementById('results');
+            const reviewHTML = '<div class="answer-review"><h3 style="margin-top: 20px; margin-bottom: 15px; color: #667eea;">Answer Review</h3>';
+
+            let reviewItems = '';
+            currentQuestions.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === q.correct;
+
+                const moduleTag = `<span class="module-tag ${getModuleClass(q.module)}" style="display: inline-block; margin-bottom: 8px;">${q.module === 0 ? 'Integrated' : `Module ${q.module}: ${q.moduleName}`}</span>`;
+
+                reviewItems += `
+                    <div class="review-item ${isCorrect ? 'correct' : 'incorrect'}">
+                        ${moduleTag}
+                        <div class="review-question">Question ${index + 1}: ${q.question}</div>
+                        ${userAnswer !== null ? `
+                            <div class="review-answer your-answer">Your answer: ${q.options[userAnswer]}</div>
+                        ` : `
+                            <div class="review-answer your-answer">Your answer: Not answered</div>
+                        `}
+                        ${!isCorrect ? `
+                            <div class="review-answer correct-answer">Correct answer: ${q.options[q.correct]}</div>
+                        ` : `
+                            <div class="review-answer correct-answer">✓ Correct!</div>
+                        `}
+                        <div class="explanation"><strong>Explanation:</strong> ${q.explanation}</div>
+                    </div>
+                `;
+            });
+
+            resultsDiv.innerHTML += reviewHTML + reviewItems + '</div>';
+            document.getElementById('review-btn').classList.add('hidden');
+        }
+
+        function retakeQuiz() {
+            document.getElementById('results').classList.add('hidden');
+            document.getElementById('results').innerHTML = '';
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('review-btn').classList.add('hidden');
+            document.getElementById('retake-btn').classList.add('hidden');
+
+            startQuiz();
+        }
+    </script>
+</body>
+</html>

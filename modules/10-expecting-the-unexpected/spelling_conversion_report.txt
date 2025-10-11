@@ -1,0 +1,15 @@
+Spelling Conversion Report
+==================================================
+
+Files processed: 3
+Total changes: 3
+
+instructor-support/instructor_guide.md:
+  • analysis → analysis
+
+old-approach/worksheet3.qmd:
+  • Analyze → Analyse
+
+old-approach/worksheet2.qmd:
+  • Analyze → Analyse
+

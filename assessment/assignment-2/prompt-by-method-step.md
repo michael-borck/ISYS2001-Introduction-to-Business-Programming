@@ -1,1 +1,0 @@
-../../weatherwise-template/resources/prompt-by-method-step.md

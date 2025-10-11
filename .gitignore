@@ -1,6 +1,9 @@
 # ----------------------------------------------------------------
 # General Quarto, Python, and R cruft to ignore
 # ----------------------------------------------------------------
+# Node.js
+**/node_modules/
+
 # Quarto specific
 _quarto/
 _freeze/

@@ -1,0 +1,427 @@
+---
+title: "Dictionary Exploration Lab"
+subtitle: "ISYS2001 Week 6 - In-Class Exercise 1"
+format:
+  html:
+    toc: true
+    toc-expand: 2
+    embed-resources: true
+  pdf:
+    toc: false
+    colorlinks: true
+jupyter: python3
+---
+
+## 🎯 Learning Objectives
+
+By completing this exercise, you will:
+- Practice safe dictionary access using `.get()` method
+- Apply dictionary methods like `.keys()`, `.values()`, and `.items()`
+- Work with nested dictionary structures
+- Debug common dictionary access errors
+
+## 📚 Library Management System
+
+Today we're working with a library management system. Libraries need to catalog, search, and organize information - perfect for practicing dictionary skills!
+
+### Starting Data Structure
+
+```{python}
+# Our library catalog - study this structure carefully
+library_catalog = {
+    'book_001': {
+        'title': 'Python Programming',
+        'author': 'John Smith', 
+        'isbn': '978-0123456789',
+        'available': True,
+        'category': 'Technology'
+    },
+    'book_002': {
+        'title': 'Business Analytics',
+        'author': 'Jane Doe',
+        'isbn': '978-0987654321', 
+        'available': False,
+        'category': 'Business'
+    },
+    'book_003': {
+        'title': 'Digital Marketing',
+        'author': 'Mike Johnson',
+        'isbn': '978-1234567890',
+        'available': True,
+        'category': 'Business'
+    }
+}
+
+print("Library catalog loaded successfully!")
+print(f"Number of books in catalog: {len(library_catalog)}")
+```
+
+## Exercise 1: Understanding Dictionary Access
+
+### 1.1 Basic Access Patterns
+
+First, let's explore different ways to access dictionary data:
+
+```{python}
+# Direct access (risky if key doesn't exist)
+print("=== Direct Access ===")
+print(f"Title of book_001: {library_catalog['book_001']['title']}")
+
+# This would cause an error if book doesn't exist:
+# print(library_catalog['book_999']['title'])  # KeyError!
+```
+
+```{python}
+# Safe access using .get() method
+print("=== Safe Access with .get() ===")
+book = library_catalog.get('book_001')
+if book:
+    print(f"Title: {book['title']}")
+    print(f"Author: {book['author']}")
+    print(f"Available: {book['available']}")
+else:
+    print("Book not found")
+```
+
+### 1.2 Your Turn: Practice Safe Access
+
+**Task:** Write code to safely check if 'book_004' exists. If it does, print all its information. If not, print "Book not found".
+
+```{python}
+# Your code here:
+book_id = 'book_004'
+
+# TODO: Use .get() to safely access the book
+# TODO: If book exists, print its details
+# TODO: If book doesn't exist, print appropriate message
+
+```
+
+**Solution (run this after trying above):**
+
+```{python}
+# Solution
+book_id = 'book_004'
+book = library_catalog.get(book_id)
+
+if book:
+    print(f"Found book: {book['title']}")
+    print(f"Author: {book['author']}")
+    print(f"ISBN: {book['isbn']}")
+    print(f"Category: {book['category']}")
+    print(f"Available: {book['available']}")
+else:
+    print(f"Book with ID '{book_id}' not found")
+```
+
+## Exercise 2: Dictionary Methods Practice
+
+### 2.1 Using .keys(), .values(), and .items()
+
+```{python}
+print("=== Dictionary Methods Demo ===")
+
+# Get all book IDs
+print("All book IDs:")
+for book_id in library_catalog.keys():
+    print(f"- {book_id}")
+
+print("\nAll book information:")
+for book_info in library_catalog.values():
+    print(f"- {book_info['title']} by {book_info['author']}")
+
+print("\nUsing .items() for key-value pairs:")
+for book_id, book_info in library_catalog.items():
+    status = "Available" if book_info['available'] else "Checked out"
+    print(f"- {book_id}: {book_info['title']} ({status})")
+```
+
+### 2.2 Your Turn: Analysis Challenges
+
+Complete these challenges using appropriate dictionary methods:
+
+```{python}
+# Challenge 1: Print all book titles
+print("=== Challenge 1: All Book Titles ===")
+# Your code here:
+
+
+```
+
+```{python}
+# Challenge 2: Count available books
+print("=== Challenge 2: Available Books Count ===")
+available_count = 0
+# Your code here:
+
+
+print(f"Available books: {available_count}")
+```
+
+```{python}
+# Challenge 3: List all unique categories
+print("=== Challenge 3: Unique Categories ===")
+categories = set()  # Use a set to store unique values
+# Your code here:
+
+
+print(f"Categories: {list(categories)}")
+```
+
+```{python}
+# Challenge 4: Find books by specific author
+print("=== Challenge 4: Books by Author ===")
+search_author = "Jane Doe"
+matching_books = []
+# Your code here:
+
+
+print(f"Books by {search_author}:")
+for book in matching_books:
+    print(f"- {book}")
+```
+
+**Solutions (run after attempting above):**
+
+```{python}
+print("=== SOLUTIONS ===")
+
+# Solution 1: All book titles
+print("1. All Book Titles:")
+for book_info in library_catalog.values():
+    print(f"- {book_info['title']}")
+
+print("\n2. Available Books Count:")
+available_count = 0
+for book_info in library_catalog.values():
+    if book_info['available']:
+        available_count += 1
+print(f"Available books: {available_count}")
+
+print("\n3. Unique Categories:")
+categories = set()
+for book_info in library_catalog.values():
+    categories.add(book_info['category'])
+print(f"Categories: {list(categories)}")
+
+print("\n4. Books by Jane Doe:")
+search_author = "Jane Doe"
+for book_info in library_catalog.values():
+    if book_info['author'] == search_author:
+        print(f"- {book_info['title']}")
+```
+
+## Exercise 3: Working with Nested Dictionaries
+
+### 3.1 Understanding the Structure
+
+Our library catalog uses nested dictionaries. Let's explore this structure:
+
+```{python}
+print("=== Understanding Nested Structure ===")
+
+# Access pattern: outer_dict[key1][key2]
+book = library_catalog['book_001']
+print(f"Book object: {book}")
+print(f"Book title: {book['title']}")
+
+# Or in one line:
+print(f"Direct nested access: {library_catalog['book_001']['title']}")
+```
+
+### 3.2 Adding New Books
+
+Let's practice adding new books to our catalog:
+
+```{python}
+def add_book(catalog, book_id, title, author, isbn, category):
+    """Add a new book to the catalog"""
+    catalog[book_id] = {
+        'title': title,
+        'author': author,
+        'isbn': isbn,
+        'available': True,  # New books are available by default
+        'category': category
+    }
+    print(f"Added: {title} by {author}")
+
+# Test the function
+add_book(library_catalog, 'book_004', 'Data Science Basics', 
+         'Amy Wilson', '978-1122334455', 'Technology')
+
+# Verify it was added
+print(f"\nCatalog now has {len(library_catalog)} books")
+```
+
+### 3.3 Your Turn: Implement Library Functions
+
+Complete these functions:
+
+```{python}
+def checkout_book(catalog, book_id):
+    """Mark a book as checked out"""
+    # TODO: Use .get() to safely access the book
+    # TODO: If book exists and is available, mark as unavailable
+    # TODO: Print appropriate success or error message
+    pass
+
+# Test your function
+checkout_book(library_catalog, 'book_001')
+checkout_book(library_catalog, 'book_999')  # Should handle gracefully
+```
+
+```{python}
+def return_book(catalog, book_id):
+    """Mark a book as returned (available)"""
+    # TODO: Implement this function
+    pass
+
+# Test your function
+return_book(library_catalog, 'book_002')
+```
+
+```{python}
+def search_books(catalog, search_term):
+    """Find books that match the search term in title or author"""
+    # TODO: Return a list of matching books
+    # TODO: Search should be case-insensitive
+    matches = []
+    
+    # Your code here
+    
+    return matches
+
+# Test your function
+results = search_books(library_catalog, 'python')
+print(f"Search results for 'python': {results}")
+```
+
+**Solutions:**
+
+```{python}
+# Complete solutions
+def checkout_book(catalog, book_id):
+    """Mark a book as checked out"""
+    book = catalog.get(book_id)
+    if book:
+        if book['available']:
+            book['available'] = False
+            print(f"Successfully checked out: {book['title']}")
+        else:
+            print(f"Book '{book['title']}' is already checked out")
+    else:
+        print(f"Book with ID '{book_id}' not found")
+
+def return_book(catalog, book_id):
+    """Mark a book as returned (available)"""
+    book = catalog.get(book_id)
+    if book:
+        if not book['available']:
+            book['available'] = True
+            print(f"Successfully returned: {book['title']}")
+        else:
+            print(f"Book '{book['title']}' was not checked out")
+    else:
+        print(f"Book with ID '{book_id}' not found")
+
+def search_books(catalog, search_term):
+    """Find books that match the search term in title or author"""
+    matches = []
+    search_lower = search_term.lower()
+    
+    for book_info in catalog.values():
+        if (search_lower in book_info['title'].lower() or 
+            search_lower in book_info['author'].lower()):
+            matches.append(book_info['title'])
+    
+    return matches
+
+# Test all functions
+print("=== Testing Complete Functions ===")
+checkout_book(library_catalog, 'book_003')
+return_book(library_catalog, 'book_002')
+results = search_books(library_catalog, 'business')
+print(f"Books matching 'business': {results}")
+```
+
+## Exercise 4: Advanced Dictionary Operations
+
+### 4.1 Generating Reports
+
+```{python}
+def generate_availability_report(catalog):
+    """Generate a report showing available vs checked out books"""
+    available = []
+    checked_out = []
+    
+    for book_id, book_info in catalog.items():
+        if book_info['available']:
+            available.append(f"{book_id}: {book_info['title']}")
+        else:
+            checked_out.append(f"{book_id}: {book_info['title']}")
+    
+    print("=== LIBRARY AVAILABILITY REPORT ===")
+    print(f"\nAVAILABLE BOOKS ({len(available)}):")
+    for book in available:
+        print(f"  ✅ {book}")
+    
+    print(f"\nCHECKED OUT BOOKS ({len(checked_out)}):")
+    for book in checked_out:
+        print(f"  📚 {book}")
+
+# Generate the report
+generate_availability_report(library_catalog)
+```
+
+### 4.2 Category Analysis
+
+```{python}
+def analyze_by_category(catalog):
+    """Analyze books by category"""
+    category_stats = {}
+    
+    for book_info in catalog.values():
+        category = book_info['category']
+        if category not in category_stats:
+            category_stats[category] = {'total': 0, 'available': 0}
+        
+        category_stats[category]['total'] += 1
+        if book_info['available']:
+            category_stats[category]['available'] += 1
+    
+    print("=== CATEGORY ANALYSIS ===")
+    for category, stats in category_stats.items():
+        print(f"\n{category}:")
+        print(f"  Total books: {stats['total']}")
+        print(f"  Available: {stats['available']}")
+        print(f"  Checked out: {stats['total'] - stats['available']}")
+
+# Run the analysis
+analyze_by_category(library_catalog)
+```
+
+## 🎯 Key Takeaways
+
+After completing this exercise, you should understand:
+
+1. **Safe Dictionary Access**: Always use `.get()` when a key might not exist
+2. **Dictionary Methods**: Use `.keys()`, `.values()`, and `.items()` for different iteration needs
+3. **Nested Dictionaries**: Access nested data with `dict[key1][key2]` pattern
+4. **Real-World Applications**: Dictionaries are perfect for structured data like catalogs, profiles, and records
+
+## 🚀 Next Steps
+
+These dictionary skills will be essential for your mini-project where you'll apply similar concepts to financial data management. You'll see how dictionaries make code more readable, maintainable, and powerful compared to parallel lists.
+
+**Remember**: 
+- Use meaningful key names
+- Always handle missing keys gracefully
+- Group related data together in nested structures
+- Choose the right dictionary method for each task
+
+## 📝 Reflection Questions
+
+1. How do dictionaries make the library system more organized than if we used lists?
+2. Why is `.get()` method safer than direct key access?
+3. When would you use `.items()` vs `.values()` vs `.keys()`?
+4. How could you extend this system to handle book reservations or due dates?

@@ -1,0 +1,271 @@
+# Notebook 1: Understanding Decisions with AI
+
+## 📝 How to Use This Notebook
+
+**Text cells like this:** Double-click to edit your thoughts, then Shift+Enter to save
+
+**Code cells:** Write your Python code and run with Ctrl+Enter  
+
+**Your notebook, your learning:** Edit anything, experiment freely!
+
+---
+
+## Learning to Think Through Problems
+
+**Time**: 45 minutes  
+**Goal**: Learn to break down decision problems clearly enough that you can solve them (with AI help when useful)
+
+---
+
+## The Core Challenge
+
+Today you'll tackle a common programming problem: **How do programs make decisions?**
+
+But here's the twist: Instead of following recipes, you'll learn to **think through the problem first**, then figure out how to express your thinking in code.
+
+---
+
+## Activity 1: Problem Analysis Before Coding (15 minutes)
+
+### The Scenario: Academic Standing System
+
+Your university needs a system to classify students based on their GPA. Before writing any code, let's think through this problem:
+
+**Step 1: Understanding the Problem**
+
+- What inputs do we need?
+- What outputs should we produce?
+- What are the decision points?
+
+**Write your analysis here (double-click this cell to edit):**
+
+Input needed: 
+
+Output needed: 
+
+Decision points: 
+
+
+**Step 2: Define the Logic**
+
+How should a university classify students? Think about this logically:
+
+- What GPA ranges make sense?
+- What should happen at boundary cases (exactly 3.0, exactly 3.5)?
+- What categories would be helpful for students?
+
+**Design your classification system:**
+
+```
+If GPA is _________, then status is _________
+If GPA is _________, then status is _________
+If GPA is _________, then status is _________
+```
+
+**Step 3: Test Your Logic**
+
+Before coding, test your thinking:
+
+- Student A has GPA 3.7 → What status?
+- Student B has GPA 2.9 → What status?  
+- Student C has GPA exactly 3.0 → What status?
+
+**Write your predictions (double-click to edit):**
+
+Student A (3.7): 
+
+Student B (2.9): 
+
+Student C (3.0): 
+
+---
+
+### AI Collaboration Checkpoint 1
+
+Now that you've thought through the problem, here's where AI can help:
+
+**Good AI Prompt**: 
+
+> "I've designed a GPA classification system with these ranges: [your ranges]. Can you help me write Python code that implements this logic using if/elif/else statements?"
+
+**Less Helpful Prompt**: 
+
+> "Write a GPA calculator"
+
+**Try it**: Use your preferred AI tool with your thoughtful prompt. Compare the AI's solution to your logic. Does it match your thinking?
+
+**Reflection**: What did the AI do differently? Was your logic clearer or was the AI's? Why?
+
+---
+
+## Activity 2: Independent Problem Solving (20 minutes)
+
+### Your Challenge: Design a Study Recommendation System
+
+A learning app wants to give students personalized study advice. Your job is to design the decision logic.
+
+**Step 1: Problem Definition** (5 minutes)
+
+Think about what factors should influence study recommendations:
+
+- How many hours has the student studied today?
+- What's their stress level?
+- When is their next exam?
+- How much sleep did they get?
+
+**Choose 2-3 factors that matter most to you and define your logic (double-click to edit):**
+
+My factors: 
+
+My decision rules: 
+
+**Step 2: Design Your Algorithm** (5 minutes)
+
+Create a flowchart or written logic for your system (double-click to edit):
+
+IF _________ THEN recommend _________
+
+ELIF _________ THEN recommend _________
+
+ELSE recommend _________
+
+**Step 3: Implement and Test** (10 minutes)
+
+Now write the Python code for your system. You can:
+
+- Try coding it yourself first
+- Use AI to help with syntax after you have your logic clear
+- Ask AI to review your approach
+
+**Code your solution here:**
+
+```{python}
+# Your study recommendation system
+
+
+```
+
+**Test cases to try:**
+- Student who studied 6 hours, stress level 8
+- Student who studied 1 hour, stress level 3  
+- Student who studied 0 hours, exam tomorrow
+
+---
+
+### AI Collaboration Checkpoint 2
+
+**Effective AI Collaboration Strategy**:
+
+1. **Problem Analysis First**: "I want to build X system that does Y. What factors should I consider?"
+
+2. **Logic Review**: "Here's my decision logic: [your logic]. Does this make sense? What am I missing?"
+
+3. **Implementation Help**: "Help me implement this logic in Python using if/elif/else"
+
+4. **Testing Guidance**: "What test cases should I use to verify this works correctly?"
+
+**Try this approach**: Pick one of these collaboration points and try it with AI. What did you learn?
+
+---
+
+## Activity 3: Debugging and Refinement (10 minutes)
+
+### The Broken Code Challenge
+
+Here's some code that doesn't work as intended. Your job: **Figure out what's wrong by thinking through the logic first**.
+
+```{python}
+student_gpa = 3.2
+
+if student_gpa >= 2.0:
+    status = "Probation"
+elif student_gpa >= 3.0:
+    status = "Good Standing"  
+elif student_gpa >= 3.5:
+    status = "Dean's List"
+else:
+    status = "Failing"
+
+print(f"Status: {status}")
+```
+
+**Step 1: Trace Through the Logic**
+
+What happens when `student_gpa = 3.2`?
+
+- Check 1: `3.2 >= 2.0`? → (double-click to write your answer)
+- If true, what happens next? → 
+
+**Step 2: Identify the Problem**
+
+What's wrong with this logic? Write your analysis (double-click to edit):
+
+The problem is: 
+
+It happens because: 
+
+**Step 3: Fix It**
+
+How would you fix this code? Write your corrected version:
+
+```{python}
+# Your fixed version here
+
+
+```
+
+**AI Collaboration Tip**: 
+
+Instead of asking AI "What's wrong with this code?", try:
+
+> "I have code that should give 'Good Standing' for GPA 3.2, but it gives 'Probation'. Can you help me understand why the logic isn't working as expected?"
+
+This shows you've thought about the problem first!
+
+---
+
+## Reflection Questions
+
+**About Problem-Solving (double-click to edit your answers):**
+
+1. Was it harder to think through the logic first, or to jump straight into coding?
+
+2. How did breaking down the problem help (or not help) your understanding?
+
+
+**About AI Collaboration:**
+
+3. When was AI most helpful - during problem analysis, coding, or debugging?
+
+4. What's the difference between asking AI to solve a problem vs. asking AI to help you solve it?
+
+
+**About Learning:**
+
+5. Do you understand **why** your code works, or just **that** it works?
+
+6. Could you explain your decision logic to someone else?
+
+---
+
+## Key Takeaways
+
+🧠 **Computational Thinking**:
+
+- Always understand the problem before coding
+- Break complex decisions into clear rules
+- Test your logic with examples before implementing
+
+🤖 **AI Partnership**:
+
+- AI works best when you have clear requirements
+- Use AI to implement your ideas, not to think for you
+- Ask AI to explain concepts you don't understand
+
+🎯 **Decision Patterns**:
+
+- if/else for two choices
+- if/elif/else for multiple categories
+- Order matters in elif chains
+
+**You're ready for more complex problems when you can design the logic first, then implement it confidently!**

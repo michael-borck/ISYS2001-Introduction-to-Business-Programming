@@ -1,0 +1,335 @@
+# Notebook 2: Complex Decision Logic with AI
+
+## 📝 How to Use This Notebook
+
+**Text cells like this:** Double-click to edit your thoughts, then Shift+Enter to save
+
+**Code cells:** Write your Python code and run with Ctrl+Enter  
+
+**Your notebook, your learning:** Edit anything, experiment freely!
+
+---
+
+## Thinking Through Multi-Factor Decisions
+
+**Time**: 45 minutes  
+**Goal**: Learn to analyse complex problems with multiple conditions and collaborate effectively with AI
+
+---
+
+## The Real-World Challenge
+
+Most interesting decisions involve multiple factors:
+
+- Should Netflix recommend this movie? (Consider: user history, ratings, genre preferences, time of day)
+- Should the bank approve this loan? (Consider: credit score, income, employment history, debt ratio)
+- Should the game unlock this achievement? (Consider: level, score, time, special actions)
+
+Today you'll learn to think through these multi-factor problems systematically.
+
+---
+
+## Activity 1: Problem Decomposition (15 minutes)
+
+### The Challenge: Design a Smart Gaming Achievement System
+
+Imagine you're designing achievements for a mobile game. Instead of giving you the rules, you need to **design them yourself**.
+
+**Step 1: Brainstorm Achievement Ideas** (5 minutes)
+
+Think of 2-3 interesting achievements that would require multiple conditions. For example:
+
+- "Speed Demon" - fast completion + high score
+- "Perfectionist" - no mistakes + bonus objectives
+- "Night Owl" - playing late + consecutive days
+
+**Write your achievement ideas (double-click to edit):**
+
+Achievement 1: 
+
+Requires: 
+
+Achievement 2: 
+
+Requires: 
+
+**Step 2: Define the Logic** (5 minutes)
+
+Pick one achievement and think through the exact conditions:
+
+- What specific numbers/thresholds make sense?
+- Should it be AND logic (all conditions) or OR logic (any condition)?
+- Are there any special cases or exceptions?
+
+**Write your detailed logic (double-click to edit):**
+
+Achievement: 
+
+Condition 1: 
+
+Condition 2: 
+
+Logic connector (AND/OR): 
+
+Special cases: 
+
+**Step 3: Test Your Design** (5 minutes)
+
+Create some test scenarios:
+
+- Player who clearly should earn it
+- Player who clearly shouldn't earn it  
+- Borderline case that's tricky to decide
+
+**Test scenarios (double-click to edit):**
+
+Should earn it: 
+
+Shouldn't earn it: 
+
+Borderline case: 
+
+---
+
+### AI Collaboration Strategy 1: Design Review
+
+**Good Approach**:
+
+> "I'm designing a gaming achievement with these requirements: [your requirements]. Does this logic make sense? What edge cases am I missing?"
+
+**Less Effective**:
+
+> "Create a gaming achievement system"
+
+**Try it**: Get AI feedback on your achievement design. What suggestions did it make?
+
+---
+
+## Activity 2: Logic Implementation Challenge (20 minutes)
+
+### Your Mission: Build a College Application Decision System
+
+Universities use complex criteria to make admission decisions. Your job is to design and implement a fair, logical system.
+
+**Step 1: Research and Design** (8 minutes)
+
+Think about what factors matter for college admissions:
+
+- Academic performance (GPA, test scores)
+- Extracurricular activities
+- Personal essays/interviews
+- Special circumstances
+
+**Design your system:**
+
+1. Choose 3-4 factors that matter most
+2. Decide how they should combine (AND/OR logic)
+3. Define specific thresholds or categories
+4. Consider edge cases and tie-breakers
+
+**Write your admission criteria (double-click to edit):**
+
+Factor 1: 
+
+Factor 2: 
+
+Factor 3: 
+
+Decision logic: 
+
+**Step 2: Implement Your Logic** (12 minutes)
+
+Now code your admissions system. You can:
+
+- Start coding yourself and ask AI for help with syntax
+- Design the logic first, then ask AI to help implement it
+- Code it yourself, then ask AI to review it
+
+**Your implementation:**
+
+```{python}
+# College Admissions Decision System
+# Your code here
+
+
+
+
+```
+
+**Step 3: Test and Refine**
+
+Test your system with different applicant profiles:
+
+- Strong academic, weak extracurriculars
+- Average academics, exceptional leadership
+- Good overall, no standout areas
+
+Does your system make decisions you agree with?
+
+---
+
+### AI Collaboration Strategy 2: Implementation Review
+
+**Effective AI Collaboration**:
+
+1. **Logic Clarification**: "I want to check multiple conditions where at least 2 out of 3 must be true. What's the best way to structure this in Python?"
+
+2. **Code Review**: "Here's my admissions logic: [code]. Does this implement what I intended? Are there any logic errors?"
+
+3. **Improvement Suggestions**: "My system works but feels too rigid. How might I make the decision logic more nuanced?"
+
+**Try one of these approaches with your code.**
+
+---
+
+## Activity 3: Debugging Complex Logic (10 minutes)
+
+### The Mystery: Why Isn't This Working?
+
+A student created this scholarship eligibility system, but it's not working as expected:
+
+```{python}
+print("=== Scholarship Eligibility Checker ===")
+
+gpa = float(input("Enter GPA (0.0-4.0): "))
+community_hours = int(input("Community service hours: "))
+financial_need = input("Have financial need? (yes/no): ").lower()
+essay_score = int(input("Essay score (1-10): "))
+
+# Should be eligible if:
+# - GPA 3.0+ AND (community hours 50+ OR financial need) AND essay 7+
+
+if gpa >= 3.0 and community_hours >= 50 or financial_need == "yes" and essay_score >= 7:
+    print("Eligible for scholarship!")
+else:
+    print("Not eligible")
+```
+
+**Your debugging process:**
+
+**Step 1: Understand the Intent**
+
+What is this code supposed to do? Write the logic in plain English (double-click to edit):
+
+Should be eligible if: 
+
+**Step 2: Trace Through the Logic**
+
+What does this condition actually check?
+
+```python
+gpa >= 3.0 and community_hours >= 50 or financial_need == "yes" and essay_score >= 7
+```
+
+Think about operator precedence. What gets evaluated first?
+
+**Step 3: Identify the Problem (double-click to edit):**
+
+The problem is: 
+
+The fix is: 
+
+**Step 4: Write the Corrected Version**
+```{python}
+# Your corrected code here
+
+
+```
+
+---
+
+### AI Collaboration Strategy 3: Debugging Partnership
+
+**Instead of**: "Fix this code"
+
+**Try**: "I have code that should check (condition A AND (condition B OR condition C) AND condition D), but it's not working correctly. Can you help me understand what's wrong with the logic?"
+
+**Follow up**: "Can you explain how operator precedence affects this condition?"
+
+---
+
+## Advanced Challenge: Design Your Own System (Optional)
+
+Choose a real-world decision system that interests you:
+
+- Music recommendation algorithm
+- Job application screening
+- Restaurant recommendation
+- Course enrollment priority
+- Dating app matching
+
+**Your challenge:**
+
+1. Define the problem clearly
+2. Identify the key factors
+3. Design the decision logic
+4. Implement in Python
+5. Test with realistic scenarios
+6. Use AI as a thinking partner, not a code generator
+
+---
+
+## Reflection Questions
+
+**About Problem-Solving (double-click to edit your answers):**
+
+1. How did breaking complex problems into factors help your thinking?
+
+
+2. What was harder - defining the logic or implementing it in code?
+
+
+3. How do you decide when to use AND vs OR vs more complex combinations?
+
+
+**About AI Collaboration:**
+
+4. When was AI most helpful in your problem-solving process?
+
+
+5. What's the difference between asking AI to solve a problem vs. asking AI to help you think through a problem?
+
+
+6. How do you verify that AI's suggestions match your intent?
+
+
+**About Real-World Applications:**
+
+7. Can you think of a decision system you use daily that probably involves complex logic?
+
+
+8. What makes a decision system fair and transparent?
+
+---
+
+## Key Takeaways
+
+🧠 **Complex Problem-Solving**:
+
+- Break multi-factor decisions into clear components
+- Define logic relationships before coding
+- Test with realistic and edge-case scenarios
+- Use parentheses to make complex logic clear
+
+🤖 **Advanced AI Partnership**:
+
+- Use AI to review your logic design, not create it
+- Ask AI to explain concepts you don't understand
+- Collaborate on implementation after you understand the problem
+- Use AI to help test and debug your solutions
+
+⚡ **Professional Skills**:
+
+- Document your decision logic clearly
+- Consider edge cases and fairness
+- Test systematically with multiple scenarios
+- Make complex logic readable and maintainable
+
+**You're ready to tackle real-world decision problems when you can:**
+
+- Analyse multi-factor problems systematically
+- Design fair and logical decision systems
+- Implement complex logic clearly in code
+- Partner with AI effectively throughout the process
+
+**Next**: Apply these problem-solving patterns to completely different domains - like personal finance! 💰

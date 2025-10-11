@@ -1,0 +1,472 @@
+---
+title: "Getting Stock Data with APIs"
+subtitle: "Fetch and Visualize Stock Prices with Python"
+jupyter: python3
+format:
+  ipynb:
+    output-file: "tutorial2_stock_api.ipynb"
+---
+
+<a href="https://colab.research.google.com/github/your-repo/path/tutorial2_stock_api.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
+# Getting Stock Data with APIs
+**Learn to fetch real stock prices and create simple visualizations**
+
+## What You'll Build
+A simple tool that gets stock price data from a free API and creates a basic chart using pandas plotting.
+
+## Setup
+
+```{python}
+# Install what we need
+!pip install pandas requests matplotlib
+
+# Import libraries
+import pandas as pd
+import requests
+import matplotlib.pyplot as plt
+from datetime import datetime
+```
+
+## Step 1: Ask AI to Help Choose a Stock API
+
+Let's start by asking Colab's AI about free stock APIs:
+
+```{python}
+# In Colab, you can ask the AI directly in a cell like this:
+# But for this tutorial, we'll simulate the conversation
+
+print("Ask Colab AI: 'What are some free stock APIs I can use for learning? I want to get basic stock price data.'")
+print()
+print("AI Response would suggest options like:")
+print("- Alpha Vantage (free tier)")
+print("- Yahoo Finance (via yfinance)")
+print("- IEX Cloud (free tier)")
+print("- Finnhub (free tier)")
+print()
+print("For this tutorial, we'll use Alpha Vantage since it's beginner-friendly.")
+```
+
+## Step 2: Ask AI to Help Build the API Call
+
+Let's ask AI to help us structure the API request:
+
+```{python}
+print("Ask AI: 'Show me how to get stock price data from Alpha Vantage API in Python'")
+print()
+print("Based on AI suggestions, here's the basic structure:")
+
+def get_stock_data(symbol, api_key="demo"):
+    """
+    Get stock data from Alpha Vantage
+    Using 'demo' key for testing (limited data)
+    """
+    
+    base_url = "https://www.alphavantage.co/query"
+    
+    # Parameters for the API call
+    params = {
+        'function': 'TIME_SERIES_DAILY',
+        'symbol': symbol,
+        'apikey': api_key,
+        'outputsize': 'compact'  # Last 100 days
+    }
+    
+    try:
+        response = requests.get(base_url, params=params)
+        data = response.json()
+        return data
+    except Exception as e:
+        return {"error": str(e)}
+
+# Test with demo data (IBM stock)
+stock_data = get_stock_data("IBM")
+print("Got data keys:", list(stock_data.keys()))
+```
+
+## Step 3: Ask AI to Help Parse the Data
+
+The API returns JSON. Let's ask AI how to convert it to a pandas DataFrame:
+
+```{python}
+print("Ask AI: 'How do I convert Alpha Vantage JSON stock data into a pandas DataFrame?'")
+print()
+
+def parse_stock_data(stock_data, symbol):
+    """Convert API response to pandas DataFrame"""
+    
+    # Check if we got valid data
+    if "Time Series (Daily)" not in stock_data:
+        print("Error: No stock data found")
+        print("Available keys:", list(stock_data.keys()))
+        return None
+    
+    # Extract the time series data
+    time_series = stock_data["Time Series (Daily)"]
+    
+    # Convert to DataFrame
+    df = pd.DataFrame.from_dict(time_series, orient='index')
+    
+    # Clean up column names
+    df.columns = ['Open', 'High', 'Low', 'Close', 'Volume']
+    
+    # Convert to numeric
+    df = df.astype(float)
+    
+    # Convert index to datetime
+    df.index = pd.to_datetime(df.index)
+    
+    # Sort by date
+    df = df.sort_index()
+    
+    # Add symbol column
+    df['Symbol'] = symbol
+    
+    return df
+
+# Parse the stock data
+df = parse_stock_data(stock_data, "IBM")
+
+if df is not None:
+    print("Stock data sample:")
+    print(df.head())
+    print(f"\nData shape: {df.shape}")
+else:
+    print("Could not parse stock data")
+```
+
+## Step 4: Ask AI to Help Create a Simple Chart
+
+Now let's visualize the data:
+
+```{python}
+print("Ask AI: 'How do I create a simple line chart of stock prices using pandas and matplotlib?'")
+print()
+
+def plot_stock_price(df, symbol):
+    """Create a simple stock price chart"""
+    
+    if df is None or df.empty:
+        print("No data to plot")
+        return
+    
+    # Create the plot
+    plt.figure(figsize=(10, 6))
+    
+    # Plot closing price
+    plt.plot(df.index, df['Close'], label=f'{symbol} Close Price', linewidth=2)
+    
+    # Customize the chart
+    plt.title(f'{symbol} Stock Price')
+    plt.xlabel('Date')
+    plt.ylabel('Price ($)')
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    
+    # Format x-axis
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    
+    # Show the plot
+    plt.show()
+    
+    # Print some basic stats
+    latest_price = df['Close'].iloc[-1]
+    highest_price = df['Close'].max()
+    lowest_price = df['Close'].min()
+    
+    print(f"\n{symbol} Statistics:")
+    print(f"Latest Price: ${latest_price:.2f}")
+    print(f"Highest Price: ${highest_price:.2f}")
+    print(f"Lowest Price: ${lowest_price:.2f}")
+
+# Create the chart
+if df is not None:
+    plot_stock_price(df, "IBM")
+```
+
+## Step 5: Ask AI to Help Create a Multi-Stock Function
+
+Let's expand to compare multiple stocks:
+
+```{python}
+print("Ask AI: 'How can I modify this to get data for multiple stocks and compare them?'")
+print()
+
+def get_multiple_stocks(symbols, api_key="demo"):
+    """Get data for multiple stock symbols"""
+    
+    all_data = {}
+    
+    for symbol in symbols:
+        print(f"Getting data for {symbol}...")
+        
+        stock_data = get_stock_data(symbol, api_key)
+        df = parse_stock_data(stock_data, symbol)
+        
+        if df is not None:
+            all_data[symbol] = df
+        else:
+            print(f"Failed to get data for {symbol}")
+        
+        # Be nice to the API
+        import time
+        time.sleep(1)
+    
+    return all_data
+
+def plot_multiple_stocks(stock_data_dict):
+    """Plot multiple stocks on one chart"""
+    
+    if not stock_data_dict:
+        print("No stock data to plot")
+        return
+    
+    plt.figure(figsize=(12, 8))
+    
+    # Plot each stock
+    for symbol, df in stock_data_dict.items():
+        if df is not None and not df.empty:
+            plt.plot(df.index, df['Close'], label=f'{symbol}', linewidth=2)
+    
+    plt.title('Stock Price Comparison')
+    plt.xlabel('Date')
+    plt.ylabel('Price ($)')
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.show()
+
+# Test with multiple stocks (demo data)
+symbols = ["IBM", "AAPL", "MSFT"]
+multi_stock_data = get_multiple_stocks(symbols)
+
+if multi_stock_data:
+    plot_multiple_stocks(multi_stock_data)
+```
+
+## Step 6: Ask AI About Getting Real API Key
+
+```{python}
+print("Ask AI: 'How do I get a real Alpha Vantage API key and use it safely in my code?'")
+print()
+print("AI would explain:")
+print("1. Go to https://www.alphavantage.co/support/#api-key")
+print("2. Sign up for free account")
+print("3. Copy your API key")
+print("4. Store it safely using environment variables")
+print()
+print("Safe usage example:")
+print("""
+import os
+
+# Set your API key (do this once per session)
+os.environ['ALPHA_VANTAGE_KEY'] = 'your_real_key_here'
+
+# Use it in your code
+api_key = os.getenv('ALPHA_VANTAGE_KEY', 'demo')
+stock_data = get_stock_data('AAPL', api_key)
+""")
+```
+
+## Step 7: Ask AI to Help Build a Simple Analysis Function
+
+Let's add some basic financial analysis:
+
+```{python}
+print("Ask AI: 'How can I add simple financial analysis like moving averages and daily returns?'")
+print()
+
+def analyze_stock(df, symbol):
+    """Add basic financial analysis to stock data"""
+    
+    if df is None or df.empty:
+        return None
+    
+    # Make a copy to avoid modifying original
+    analysis_df = df.copy()
+    
+    # Calculate daily returns (percentage change)
+    analysis_df['Daily_Return'] = analysis_df['Close'].pct_change() * 100
+    
+    # Calculate moving averages
+    analysis_df['MA_10'] = analysis_df['Close'].rolling(window=10).mean()
+    analysis_df['MA_30'] = analysis_df['Close'].rolling(window=30).mean()
+    
+    # Calculate volatility (rolling standard deviation)
+    analysis_df['Volatility'] = analysis_df['Daily_Return'].rolling(window=10).std()
+    
+    return analysis_df
+
+def plot_stock_analysis(df, symbol):
+    """Plot stock with moving averages"""
+    
+    if df is None or df.empty:
+        return
+    
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10))
+    
+    # Price chart with moving averages
+    ax1.plot(df.index, df['Close'], label=f'{symbol} Close', linewidth=2)
+    ax1.plot(df.index, df['MA_10'], label='10-day MA', alpha=0.7)
+    ax1.plot(df.index, df['MA_30'], label='30-day MA', alpha=0.7)
+    ax1.set_title(f'{symbol} Price with Moving Averages')
+    ax1.set_ylabel('Price ($)')
+    ax1.legend()
+    ax1.grid(True, alpha=0.3)
+    
+    # Daily returns
+    ax2.plot(df.index, df['Daily_Return'], label='Daily Returns', alpha=0.7)
+    ax2.axhline(y=0, color='black', linestyle='-', alpha=0.3)
+    ax2.set_title(f'{symbol} Daily Returns (%)')
+    ax2.set_xlabel('Date')
+    ax2.set_ylabel('Return (%)')
+    ax2.legend()
+    ax2.grid(True, alpha=0.3)
+    
+    plt.tight_layout()
+    plt.show()
+    
+    # Print summary stats
+    avg_return = df['Daily_Return'].mean()
+    volatility = df['Daily_Return'].std()
+    latest_price = df['Close'].iloc[-1]
+    ma10_latest = df['MA_10'].iloc[-1]
+    
+    print(f"\n{symbol} Analysis Summary:")
+    print(f"Latest Price: ${latest_price:.2f}")
+    print(f"10-day MA: ${ma10_latest:.2f}")
+    print(f"Average Daily Return: {avg_return:.3f}%")
+    print(f"Volatility (10-day): {volatility:.3f}%")
+
+# Test the analysis
+if df is not None:
+    analyzed_df = analyze_stock(df, "IBM")
+    if analyzed_df is not None:
+        plot_stock_analysis(analyzed_df, "IBM")
+```
+
+## Step 8: Create a Complete Stock Analysis Tool
+
+Let's put everything together:
+
+```{python}
+class SimpleStockAnalyzer:
+    """A simple tool for getting and analyzing stock data"""
+    
+    def __init__(self, api_key="demo"):
+        self.api_key = api_key
+    
+    def get_and_analyze_stock(self, symbol):
+        """Get stock data and perform basic analysis"""
+        
+        print(f"Analyzing {symbol}...")
+        
+        # Get the data
+        raw_data = get_stock_data(symbol, self.api_key)
+        df = parse_stock_data(raw_data, symbol)
+        
+        if df is None:
+            print(f"Could not get data for {symbol}")
+            return None
+        
+        # Add analysis
+        analyzed_df = analyze_stock(df, symbol)
+        
+        # Create visualizations
+        plot_stock_analysis(analyzed_df, symbol)
+        
+        return analyzed_df
+    
+    def compare_stocks(self, symbols):
+        """Compare multiple stocks"""
+        
+        stock_data = {}
+        
+        for symbol in symbols:
+            data = self.get_and_analyze_stock(symbol)
+            if data is not None:
+                stock_data[symbol] = data
+        
+        # Create comparison chart
+        if stock_data:
+            plot_multiple_stocks(stock_data)
+        
+        return stock_data
+
+# Create analyzer and test it
+analyzer = SimpleStockAnalyzer()
+
+# Analyze a single stock
+single_result = analyzer.get_and_analyze_stock("IBM")
+
+# Compare multiple stocks
+compare_symbols = ["IBM", "AAPL"] 
+comparison_result = analyzer.compare_stocks(compare_symbols)
+```
+
+## Step 9: Ask AI About Next Steps
+
+```{python}
+print("Ask AI: 'I built a basic stock analysis tool. What features should I add next?'")
+print()
+print("AI might suggest:")
+print("- Real-time price updates")
+print("- More technical indicators (RSI, MACD)")
+print("- Portfolio tracking")
+print("- Price alerts")
+print("- Integration with a web interface")
+print("- Fundamental data (P/E ratios, etc.)")
+print("- News sentiment analysis")
+```
+
+## Your Turn: Add a Feature
+
+Try adding one feature with AI help:
+
+```{python}
+# Ask AI to help you add a specific feature
+# Example: "Help me add a function to calculate the RSI (Relative Strength Index)"
+
+def calculate_rsi(df, window=14):
+    """Calculate RSI based on AI suggestions"""
+    
+    # This is where you'd implement based on AI help
+    print("RSI calculation - ask AI for implementation details")
+    return None
+
+# Or ask for help with alerts
+def price_alert_system(symbol, target_price, current_price):
+    """Simple price alert system"""
+    
+    print("Price alert system - ask AI for implementation")
+    return None
+
+print("Choose a feature to add and ask Colab AI for help implementing it!")
+```
+
+## Key Takeaways
+
+You've built a stock analysis tool that:
+- Fetches real stock data from an API
+- Converts JSON to pandas DataFrames
+- Creates visualizations of stock prices
+- Calculates basic financial metrics
+- Compares multiple stocks
+
+This demonstrates core skills for financial applications:
+- API integration
+- Data processing with pandas
+- Basic financial analysis
+- Data visualization
+
+## Next Steps
+
+- Get a real Alpha Vantage API key for more data
+- Add more technical indicators
+- Combine with the chatbot tutorial
+- Build a Gradio interface for user interaction
+- Integrate with portfolio tracking
+
+The foundation you've built here can be extended into sophisticated financial analysis tools!

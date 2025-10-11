@@ -1,0 +1,91 @@
+---
+title: "Mastering Dictionaries: Unlocking Insights from Business Data"
+subtitle: "Analyse, Evaluate, and Justify Your Decisions with Dictionaries"
+format: jupyter-notebook
+jupyter: python3
+---
+
+## Learning Objectives
+
+By the end of this activity, you will be able to:
+
+- **Analyse** the suitability of dictionaries for representing and manipulating business data in various scenarios.
+- **Evaluate** the effectiveness of different dictionary operations and methods for extracting insights from complex data structures.
+- **Justify** the choices you make when using dictionaries to solve business data analysis problems.
+
+## Introduction
+
+Dictionaries are powerful data structures that allow you to store and manipulate data in a flexible, efficient, and meaningful way. In the context of business data analysis, dictionaries can be invaluable for organizing, processing, and deriving insights from complex datasets. By mastering the use of dictionaries, you'll develop essential skills for tackling real-world business problems and making data-driven decisions.
+
+## Using AI Tools Ethically & Effectively
+
+AI tools can be incredibly helpful for tasks like brainstorming, generating explanations, and verifying your work. However, it's crucial to use them responsibly and critically. When using AI in this worksheet:
+
+- **Be transparent:** Clearly indicate when you're using AI to assist with a task, and reflect on how it influenced your process and learning.
+- **Critically evaluate:** Don't blindly accept AI-generated outputs. Carefully examine the relevance, accuracy, and completeness of the information it provides.
+- **Use AI as a learning partner:** Leverage AI to deepen your understanding, but don't rely on it to do the thinking for you. Use prompts that encourage critical analysis and justification of your choices.
+
+For example, you could ask an AI tool: "What are the potential limitations of using dictionaries to represent and analyse complex business data structures? How would I need to critically evaluate the AI's response before applying it?"
+
+## Key Concepts
+
+- **Dictionaries:** A data structure that stores key-value pairs, allowing for efficient data retrieval and manipulation.
+- **Dictionary Operations:** Common operations like adding, modifying, and accessing elements in a dictionary.
+- **Dictionary Methods:** Useful built-in methods for working with dictionaries, such as `get()`, `keys()`, `values()`, and `items()`.
+- **Data Representation:** Choosing appropriate data structures (like dictionaries) to effectively model and represent business data.
+- **Data Analysis:** Techniques for extracting insights, identifying patterns, and drawing conclusions from business data stored in dictionaries.
+
+## Activity 1: Conceptual Application & Analysis
+
+You've been tasked with analysing sales data for a small retail business. The data is stored in a dictionary, where the keys represent product IDs and the values are dictionaries containing information about each product, such as its name, price, and quantity sold.
+
+```{python}
+sales_data = {
+    "P001": {"name": "Widget A", "price": 9.99, "qty_sold": 120},
+    "P002": {"name": "Widget B", "price": 14.50, "qty_sold": 85},
+    "P003": {"name": "Widget C", "price": 7.25, "qty_sold": 200},
+    "P004": {"name": "Widget D", "price": 12.75, "qty_sold": 75}
+}
+```
+
+1. Explain how you would use dictionary operations and methods to calculate the total revenue generated from the sales data. Describe the step-by-step process, including any potential challenges or considerations.
+
+💡 AI Tip: Ask an AI to suggest alternative approaches to calculating the total revenue using dictionaries. Compare the AI's suggestions to your own process and identify any additional factors you should consider.
+
+2. The business owner wants to identify the best-selling product. Describe how you would use dictionary operations and methods to determine the product with the highest quantity sold, and explain your reasoning.
+
+## Activity 2: Evaluation, Comparison, and Justification
+
+The business owner now wants to expand their product line and is considering adding a new product. They've provided you with the following information about two potential new products:
+
+Product A:
+- Price: $19.99
+- Estimated monthly sales: 50 units
+
+Product B:
+- Price: $14.75
+- Estimated monthly sales: 80 units
+
+Using the sales data dictionary from the previous activity, evaluate which of the two new products would be a better addition to the business. Justify your recommendation by comparing the potential revenue and profitability of each new product.
+
+💡 AI Tip: Ask an AI to identify potential factors you should consider when evaluating the suitability of the new products, beyond just revenue and profitability. Critically assess the AI's suggestions and incorporate them into your justification.
+
+## Extension: Combining Concepts
+
+The business owner is now interested in understanding the overall sales performance of their product line. They've asked you to create a summary report that provides the following insights:
+
+1. The total revenue generated from all products.
+2. The product with the highest total revenue.
+3. The average price of all products.
+
+Using the sales data dictionary, write code to calculate these metrics and provide a brief explanation of your approach, including any relevant dictionary operations or methods you used.
+
+💡 AI Tip: If you used AI to help generate the code or explanations for this task, describe how you verified the accuracy of the AI's output and adapted it to fit the specific requirements of the report.
+
+## Reflection
+
+1. How might the analytical and evaluative skills you practiced with dictionaries apply elsewhere in your studies or future work?
+
+2. Describe how you used (or decided not to use) AI tools for the analysis, evaluation, or justification tasks in this worksheet. How did it influence your process and learning?
+
+3. Reflect on the process of critically evaluating information or justifying your choices during this activity. What was challenging or insightful?

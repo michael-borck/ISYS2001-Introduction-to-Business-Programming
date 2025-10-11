@@ -1,1 +1,0 @@
-../../weatherwise-template/ai-conversations/how-to-log-ai-conversations.txt

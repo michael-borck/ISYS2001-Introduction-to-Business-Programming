@@ -1,0 +1,744 @@
+---
+title: "Staff Answer Keys - Week 6 Dictionary Exercises"
+subtitle: "Complete Solutions for In-Class Activities"
+format:
+  html:
+    toc: true
+    toc-expand: 3
+    embed-resources: true
+  pdf:
+    toc: true
+    colorlinks: true
+jupyter: python3
+---
+
+## 📋 Overview
+
+This document provides complete solutions for all Week 6 in-class dictionary exercises. Use these to:
+- Prepare for facilitating the workshop
+- Provide hints when students are stuck
+- Verify student solutions during activities
+- Support struggling students with step-by-step guidance
+
+---
+
+# Warm-up & Recap Exercise Solutions
+
+## Safe Nested Access Solutions
+
+```{python}
+# Enhanced student record for reference
+enhanced_student = {
+    'personal_info': {
+        'name': 'Alice Johnson',
+        'age': 19,
+        'email': 'alice.johnson@university.edu'
+    },
+    'academic_info': {
+        'major': 'Business Information Systems',
+        'gpa': 3.7,
+        'year': 'Second Year',
+        'credits_completed': 48
+    },
+    'current_courses': {
+        'ISYS2001': {
+            'name': 'Introduction to Business Programming',
+            'credits': 6,
+            'grade': 'In Progress'
+        },
+        'MATH1001': {
+            'name': 'Mathematics for Business',
+            'credits': 6,
+            'grade': 'A-'
+        },
+        'ECON1001': {
+            'name': 'Economics Principles',
+            'credits': 6,
+            'grade': 'B+'
+        }
+    }
+}
+```
+
+### Exercise Solutions
+
+```{python}
+print("=== Warm-up Exercise Solutions ===")
+
+# Exercise 1: Safely get phone number (doesn't exist)
+phone = enhanced_student.get('personal_info', {}).get('phone', 'Not provided')
+print(f"Phone: {phone}")
+
+# Exercise 2: Safely get PHIL1001 grade (doesn't exist)
+phil_grade = enhanced_student.get('current_courses', {}).get('PHIL1001', {}).get('grade', 'Not enrolled')
+print(f"Philosophy grade: {phil_grade}")
+
+# Exercise 3: Get all course names
+print("Current courses:")
+courses = enhanced_student.get('current_courses', {})
+for course_code, course_info in courses.items():
+    course_name = course_info.get('name', 'Unknown')
+    print(f"  {course_code}: {course_name}")
+```
+
+## Challenge Solutions
+
+```{python}
+print("\n=== Challenge Solutions ===")
+
+# Challenge 1: Calculate Total Credits
+total_credits = 0
+for course_info in enhanced_student['current_courses'].values():
+    total_credits += course_info.get('credits', 0)
+print(f"Total credits this semester: {total_credits}")
+
+# Alternative solution using sum()
+total_credits_alt = sum(course['credits'] for course in enhanced_student['current_courses'].values())
+print(f"Total credits (alternative): {total_credits_alt}")
+
+# Challenge 2: Find completed courses
+grade_points = {
+    'A+': 4.0, 'A': 4.0, 'A-': 3.7,
+    'B+': 3.3, 'B': 3.0, 'B-': 2.7,
+    'C+': 2.3, 'C': 2.0, 'C-': 1.7,
+    'D': 1.0, 'F': 0.0, 'In Progress': None
+}
+
+completed_courses = []
+for course_code, course_info in enhanced_student['current_courses'].items():
+    grade = course_info.get('grade')
+    if grade and grade != 'In Progress':
+        completed_courses.append(course_code)
+
+print("Completed courses:")
+for course in completed_courses:
+    print(f"  - {course}")
+
+# Challenge 3: Student Summary Function
+def print_student_summary(student_data):
+    name = student_data['personal_info']['name']
+    major = student_data['academic_info']['major']
+    gpa = student_data['academic_info']['gpa']
+    
+    courses = student_data['current_courses']
+    num_courses = len(courses)
+    
+    total_credits = sum(course['credits'] for course in courses.values())
+    
+    print(f"\n📊 STUDENT SUMMARY")
+    print(f"Name: {name}")
+    print(f"Major: {major}")
+    print(f"Current GPA: {gpa}")
+    print(f"Courses this semester: {num_courses}")
+    print(f"Total credits: {total_credits}")
+
+print_student_summary(enhanced_student)
+```
+
+---
+
+# Exercise 1: Dictionary Exploration Solutions
+
+## Library Catalog Setup
+
+```{python}
+# Library catalog for Exercise 1
+library_catalog = {
+    'book_001': {
+        'title': 'Python Programming',
+        'author': 'John Smith', 
+        'isbn': '978-0123456789',
+        'available': True,
+        'category': 'Technology'
+    },
+    'book_002': {
+        'title': 'Business Analytics',
+        'author': 'Jane Doe',
+        'isbn': '978-0987654321', 
+        'available': False,
+        'category': 'Business'
+    },
+    'book_003': {
+        'title': 'Digital Marketing',
+        'author': 'Mike Johnson',
+        'isbn': '978-1234567890',
+        'available': True,
+        'category': 'Business'
+    }
+}
+
+print("Library catalog loaded for Exercise 1 solutions")
+```
+
+## Safe Access Practice Solutions
+
+```{python}
+print("=== Exercise 1.2 Solution: Safe Access Practice ===")
+
+book_id = 'book_004'
+book = library_catalog.get(book_id)
+
+if book:
+    print(f"Found book: {book['title']}")
+    print(f"Author: {book['author']}")
+    print(f"ISBN: {book['isbn']}")
+    print(f"Category: {book['category']}")
+    print(f"Available: {book['available']}")
+else:
+    print(f"Book with ID '{book_id}' not found")
+```
+
+## Dictionary Methods Challenge Solutions
+
+```{python}
+print("\n=== Exercise 2.2 Challenge Solutions ===")
+
+# Challenge 1: Print all book titles
+print("Challenge 1: All Book Titles")
+for book_info in library_catalog.values():
+    print(f"- {book_info['title']}")
+
+# Challenge 2: Count available books
+print("\nChallenge 2: Available Books Count")
+available_count = 0
+for book_info in library_catalog.values():
+    if book_info['available']:
+        available_count += 1
+print(f"Available books: {available_count}")
+
+# Alternative solution using list comprehension
+available_count_alt = sum(1 for book in library_catalog.values() if book['available'])
+print(f"Available books (alternative): {available_count_alt}")
+
+# Challenge 3: List all unique categories
+print("\nChallenge 3: Unique Categories")
+categories = set()
+for book_info in library_catalog.values():
+    categories.add(book_info['category'])
+print(f"Categories: {list(categories)}")
+
+# Alternative solution using set comprehension
+categories_alt = {book['category'] for book in library_catalog.values()}
+print(f"Categories (alternative): {list(categories_alt)}")
+
+# Challenge 4: Find books by specific author
+print("\nChallenge 4: Books by Author")
+search_author = "Jane Doe"
+matching_books = []
+for book_info in library_catalog.values():
+    if book_info['author'] == search_author:
+        matching_books.append(book_info['title'])
+
+print(f"Books by {search_author}:")
+for book in matching_books:
+    print(f"- {book}")
+```
+
+## Library Functions Implementation
+
+```{python}
+print("\n=== Exercise 3.3 Library Functions Solutions ===")
+
+def checkout_book(catalog, book_id):
+    """Mark a book as checked out"""
+    book = catalog.get(book_id)
+    if book:
+        if book['available']:
+            book['available'] = False
+            print(f"Successfully checked out: {book['title']}")
+            return True
+        else:
+            print(f"Book '{book['title']}' is already checked out")
+            return False
+    else:
+        print(f"Book with ID '{book_id}' not found")
+        return False
+
+def return_book(catalog, book_id):
+    """Mark a book as returned (available)"""
+    book = catalog.get(book_id)
+    if book:
+        if not book['available']:
+            book['available'] = True
+            print(f"Successfully returned: {book['title']}")
+            return True
+        else:
+            print(f"Book '{book['title']}' was not checked out")
+            return False
+    else:
+        print(f"Book with ID '{book_id}' not found")
+        return False
+
+def search_books(catalog, search_term):
+    """Find books that match the search term in title or author"""
+    matches = []
+    search_lower = search_term.lower()
+    
+    for book_info in catalog.values():
+        if (search_lower in book_info['title'].lower() or 
+            search_lower in book_info['author'].lower()):
+            matches.append(book_info['title'])
+    
+    return matches
+
+# Test the functions
+print("Testing library functions:")
+checkout_book(library_catalog, 'book_001')
+return_book(library_catalog, 'book_002')
+results = search_books(library_catalog, 'business')
+print(f"Books matching 'business': {results}")
+```
+
+---
+
+# Exercise 2: Library Management Workshop Solutions
+
+## Enhanced Library Catalog
+
+```{python}
+# Enhanced library catalog for Exercise 2
+library_catalog_enhanced = {
+    'book_001': {
+        'title': 'Python Programming',
+        'author': 'John Smith', 
+        'isbn': '978-0123456789',
+        'available': True,
+        'category': 'Technology',
+        'year': 2023
+    },
+    'book_002': {
+        'title': 'Business Analytics',
+        'author': 'Jane Doe',
+        'isbn': '978-0987654321', 
+        'available': False,
+        'category': 'Business',
+        'year': 2022
+    },
+    'book_003': {
+        'title': 'Digital Marketing Strategy',
+        'author': 'Mike Johnson',
+        'isbn': '978-1234567890',
+        'available': True,
+        'category': 'Business',
+        'year': 2024
+    },
+    'book_004': {
+        'title': 'Web Development Fundamentals',
+        'author': 'Sarah Wilson',
+        'isbn': '978-2345678901',
+        'available': True,
+        'category': 'Technology',
+        'year': 2023
+    },
+    'book_005': {
+        'title': 'Financial Management',
+        'author': 'David Brown',
+        'isbn': '978-3456789012',
+        'available': False,
+        'category': 'Finance',
+        'year': 2022
+    }
+}
+
+print("Enhanced library catalog loaded for Exercise 2 solutions")
+```
+
+## Phase 1: Book Management Solutions
+
+```{python}
+print("=== Phase 1 Solutions: Book Management ===")
+
+def add_book(catalog, book_id, title, author, isbn, category, year=2024):
+    """Add a new book to the catalog"""
+    if book_id in catalog:
+        print(f"Error: Book ID '{book_id}' already exists!")
+        return False
+    
+    catalog[book_id] = {
+        'title': title,
+        'author': author,
+        'isbn': isbn,
+        'available': True,
+        'category': category,
+        'year': year
+    }
+    
+    print(f"✅ Successfully added: '{title}' by {author}")
+    return True
+
+def remove_book(catalog, book_id):
+    """Remove a book from the catalog"""
+    book = catalog.get(book_id)
+    if book:
+        title = book['title']
+        del catalog[book_id]
+        print(f"✅ Successfully removed: '{title}'")
+        return True
+    else:
+        print(f"❌ Error: Book ID '{book_id}' not found!")
+        return False
+
+# Test functions
+add_book(library_catalog_enhanced, 'book_006', 'Data Science with Python', 
+         'Alice Cooper', '978-4567890123', 'Technology', 2024)
+remove_book(library_catalog_enhanced, 'book_006')
+```
+
+## Phase 2: Checkout/Return System Solutions
+
+```{python}
+print("\n=== Phase 2 Solutions: Checkout/Return System ===")
+
+def checkout_book_enhanced(catalog, book_id, borrower_name):
+    """Check out a book to a borrower"""
+    book = catalog.get(book_id)
+    
+    if not book:
+        print(f"❌ Book ID '{book_id}' not found!")
+        return False
+    
+    if not book['available']:
+        print(f"❌ '{book['title']}' is already checked out!")
+        return False
+    
+    # Update book status
+    book['available'] = False
+    book['borrower'] = borrower_name
+    
+    print(f"✅ '{book['title']}' checked out to {borrower_name}")
+    return True
+
+def return_book_enhanced(catalog, book_id):
+    """Return a checked-out book"""
+    book = catalog.get(book_id)
+    
+    if not book:
+        print(f"❌ Book ID '{book_id}' not found!")
+        return False
+    
+    if book['available']:
+        print(f"❌ '{book['title']}' was not checked out!")
+        return False
+    
+    # Return the book
+    borrower = book.get('borrower', 'Unknown')
+    book['available'] = True
+    if 'borrower' in book:
+        del book['borrower']
+    
+    print(f"✅ '{book['title']}' returned by {borrower}")
+    return True
+
+# Test enhanced functions
+checkout_book_enhanced(library_catalog_enhanced, 'book_001', 'Alice Student')
+return_book_enhanced(library_catalog_enhanced, 'book_001')
+```
+
+## Phase 3: Search and Analysis Solutions
+
+```{python}
+print("\n=== Phase 3 Solutions: Search and Analysis ===")
+
+def search_books_advanced(catalog, search_term, search_fields=['title', 'author']):
+    """Search for books by multiple criteria"""
+    matches = []
+    search_lower = search_term.lower()
+    
+    for book_id, book_info in catalog.items():
+        # Check each specified field
+        for field in search_fields:
+            if field in book_info and search_lower in str(book_info[field]).lower():
+                match_info = {
+                    'id': book_id,
+                    'title': book_info['title'],
+                    'author': book_info['author'],
+                    'category': book_info['category'],
+                    'available': book_info['available']
+                }
+                matches.append(match_info)
+                break  # Don't add the same book multiple times
+    
+    return matches
+
+def books_by_category(catalog):
+    """Group books by category"""
+    categories = {}
+    
+    for book_info in catalog.values():
+        category = book_info['category']
+        if category not in categories:
+            categories[category] = []
+        categories[category].append(book_info['title'])
+    
+    return categories
+
+# Test search and analysis functions
+print("Search Results:")
+results = search_books_advanced(library_catalog_enhanced, 'python')
+for book in results:
+    status = "✅ Available" if book['available'] else "❌ Checked out"
+    print(f"- {book['title']} by {book['author']} ({status})")
+
+print("\nBooks by Category:")
+categories = books_by_category(library_catalog_enhanced)
+for category, books in categories.items():
+    print(f"\n{category} ({len(books)} books):")
+    for book in books:
+        print(f"  - {book}")
+```
+
+## Phase 4: Comprehensive Reports Solutions
+
+```{python}
+print("\n=== Phase 4 Solutions: Comprehensive Reports ===")
+
+def generate_availability_report(catalog):
+    """Generate detailed availability report"""
+    available_books = []
+    checked_out_books = []
+    
+    for book_id, book_info in catalog.items():
+        book_summary = {
+            'id': book_id,
+            'title': book_info['title'],
+            'author': book_info['author'],
+            'category': book_info['category']
+        }
+        
+        if book_info['available']:
+            available_books.append(book_summary)
+        else:
+            book_summary['borrower'] = book_info.get('borrower', 'Unknown')
+            checked_out_books.append(book_summary)
+    
+    print("=" * 50)
+    print("LIBRARY AVAILABILITY REPORT")
+    print("=" * 50)
+    
+    print(f"\n📚 AVAILABLE BOOKS ({len(available_books)}):")
+    for book in available_books:
+        print(f"  ✅ [{book['id']}] {book['title']} - {book['author']} ({book['category']})")
+    
+    print(f"\n🔒 CHECKED OUT BOOKS ({len(checked_out_books)}):")
+    for book in checked_out_books:
+        borrower = book.get('borrower', 'Unknown')
+        print(f"  ❌ [{book['id']}] {book['title']} - {book['author']} → {borrower}")
+    
+    print(f"\n📊 SUMMARY:")
+    total = len(catalog)
+    print(f"  Total books: {total}")
+    print(f"  Available: {len(available_books)} ({len(available_books)/total*100:.1f}%)")
+    print(f"  Checked out: {len(checked_out_books)} ({len(checked_out_books)/total*100:.1f}%)")
+
+def category_statistics(catalog):
+    """Generate statistics by category"""
+    stats = {}
+    
+    for book_info in catalog.values():
+        category = book_info['category']
+        if category not in stats:
+            stats[category] = {
+                'total': 0,
+                'available': 0,
+                'checked_out': 0,
+                'newest_year': 0
+            }
+        
+        stats[category]['total'] += 1
+        if book_info['available']:
+            stats[category]['available'] += 1
+        else:
+            stats[category]['checked_out'] += 1
+        
+        # Track newest publication year
+        year = book_info.get('year', 0)
+        if year > stats[category]['newest_year']:
+            stats[category]['newest_year'] = year
+    
+    print("=" * 50)
+    print("CATEGORY STATISTICS REPORT")
+    print("=" * 50)
+    
+    for category, data in stats.items():
+        availability_rate = (data['available'] / data['total']) * 100
+        print(f"\n📖 {category.upper()}")
+        print(f"  Total books: {data['total']}")
+        print(f"  Available: {data['available']} ({availability_rate:.1f}%)")
+        print(f"  Checked out: {data['checked_out']}")
+        print(f"  Newest publication: {data['newest_year']}")
+
+# Generate reports
+generate_availability_report(library_catalog_enhanced)
+category_statistics(library_catalog_enhanced)
+```
+
+## Phase 5: Integration Test Solution
+
+```{python}
+print("\n=== Phase 5 Solution: Integration Test ===")
+
+print("=== INTEGRATION TEST ===")
+
+# Test 1: Add a new book
+print("\n1. Adding new book...")
+add_book(library_catalog_enhanced, 'book_007', 'Machine Learning Basics', 
+         'Dr. Smith', '978-7890123456', 'Technology', 2024)
+
+# Test 2: Search for the new book
+print("\n2. Searching for machine learning books...")
+results = search_books_advanced(library_catalog_enhanced, 'machine learning')
+for book in results:
+    print(f"Found: {book['title']} by {book['author']}")
+
+# Test 3: Check out the book
+print("\n3. Checking out book...")
+checkout_book_enhanced(library_catalog_enhanced, 'book_007', 'Test Student')
+
+# Test 4: Generate availability report
+print("\n4. Current availability:")
+generate_availability_report(library_catalog_enhanced)
+
+# Test 5: Return the book
+print("\n5. Returning book...")
+return_book_enhanced(library_catalog_enhanced, 'book_007')
+
+print("\n✅ Integration test completed successfully!")
+```
+
+---
+
+# Teaching Notes and Common Issues
+
+## Student Difficulties and Solutions
+
+### Common Issue 1: KeyError Exceptions
+**Problem**: Students use `dict[key]` instead of `dict.get(key)`
+**Solution**: Always demonstrate safe access first
+```python
+# ❌ Risky
+print(library_catalog['book_999']['title'])  # KeyError!
+
+# ✅ Safe
+book = library_catalog.get('book_999')
+if book:
+    print(book['title'])
+else:
+    print("Book not found")
+```
+
+### Common Issue 2: Nested Dictionary Access
+**Problem**: Students struggle with multiple `.get()` calls
+**Solution**: Show step-by-step breakdown
+```python
+# ❌ Risky nested access
+student['courses']['ISYS2001']['grade']  # Multiple potential KeyErrors
+
+# ✅ Safe nested access
+courses = student.get('courses', {})
+isys_course = courses.get('ISYS2001', {})
+grade = isys_course.get('grade', 'Not found')
+
+# ✅ One-liner safe access
+grade = student.get('courses', {}).get('ISYS2001', {}).get('grade', 'Not found')
+```
+
+### Common Issue 3: Dictionary Method Confusion
+**Problem**: Students don't know when to use `.keys()`, `.values()`, or `.items()`
+**Solution**: Clear use case examples
+```python
+# Use .keys() when you only need the keys
+for book_id in library_catalog.keys():
+    print(f"Book ID: {book_id}")
+
+# Use .values() when you only need the values
+for book_info in library_catalog.values():
+    print(f"Title: {book_info['title']}")
+
+# Use .items() when you need both keys and values
+for book_id, book_info in library_catalog.items():
+    print(f"{book_id}: {book_info['title']}")
+```
+
+## Extension Activities for Fast Finishers
+
+### Extension 1: Advanced Search with Multiple Criteria
+```python
+def advanced_search(catalog, **criteria):
+    """Search with multiple criteria (title, author, category, year, available)"""
+    matches = []
+    for book_id, book_info in catalog.items():
+        match = True
+        for field, value in criteria.items():
+            if field not in book_info or str(book_info[field]).lower() != str(value).lower():
+                match = False
+                break
+        if match:
+            matches.append((book_id, book_info))
+    return matches
+
+# Usage: advanced_search(catalog, category='Technology', available=True)
+```
+
+### Extension 2: Book Reservation System
+```python
+def reserve_book(catalog, book_id, reserver_name):
+    """Reserve a book that's currently checked out"""
+    book = catalog.get(book_id)
+    if book and not book['available']:
+        if 'reservations' not in book:
+            book['reservations'] = []
+        book['reservations'].append(reserver_name)
+        print(f"✅ Reserved '{book['title']}' for {reserver_name}")
+        return True
+    return False
+```
+
+### Extension 3: Due Date Management
+```python
+from datetime import datetime, timedelta
+
+def checkout_with_due_date(catalog, book_id, borrower_name, loan_days=14):
+    """Check out book with due date tracking"""
+    if checkout_book_enhanced(catalog, book_id, borrower_name):
+        book = catalog[book_id]
+        book['checkout_date'] = datetime.now().isoformat()
+        book['due_date'] = (datetime.now() + timedelta(days=loan_days)).isoformat()
+        return True
+    return False
+```
+
+## Assessment Checkpoints
+
+### Checkpoint 1: Basic Operations (After Exercise 1)
+- Can students safely access dictionary values using `.get()`?
+- Do they understand when to use different dictionary methods?
+- Can they work with nested dictionary structures?
+
+### Checkpoint 2: Function Implementation (After Exercise 2 Phase 1-2)
+- Can students implement functions that modify dictionaries?
+- Do they handle edge cases (missing books, already checked out, etc.)?
+- Are they using appropriate error messages and return values?
+
+### Checkpoint 3: Complex Operations (After Exercise 2 Phase 3-4)  
+- Can students implement search and filtering operations?
+- Do they understand how to aggregate data from dictionaries?
+- Can they generate meaningful reports from dictionary data?
+
+## Preparation Checklist for Instructors
+
+### Before Class:
+- [ ] Review all exercise solutions
+- [ ] Test code examples in Jupyter environment
+- [ ] Prepare extension activities for fast finishers
+- [ ] Identify likely problem areas for your specific student group
+
+### During Class:
+- [ ] Circulate during "Your Turn" exercises
+- [ ] Watch for students using unsafe access patterns
+- [ ] Help with debugging but encourage problem-solving
+- [ ] Use student solutions as teaching examples when good
+
+### After Class:
+- [ ] Note which concepts need reinforcement
+- [ ] Update materials based on student feedback
+- [ ] Prepare additional practice problems if needed

@@ -1,1 +1,0 @@
-../../weatherwise-template/ASSIGNMENT.md

@@ -1,0 +1,51 @@
+Spelling Conversion Report
+==================================================
+
+Files processed: 8
+Total changes: 29
+
+pre-lab modules/module02_debugging_rewrite.md:
+  • behavior → behaviour
+  • behavior → behaviour
+  • behavior → behaviour
+  • behavior → behaviour
+  • behavior → behaviour
+  • behavior → behaviour
+  • behavior → behaviour
+  • behavior → behaviour
+  • behavior → behaviour
+
+pre-lab modules/module01_testing_rewrite.md:
+  • behavior → behaviour
+
+pre-lab modules/module03_testdesign_rewrite.md:
+  • analysis → analysis
+  • analysis → analysis
+  • behavior → behaviour
+  • behavior → behaviour
+  • behavior → behaviour
+
+11 Testing and Debugging copy/worksheets/activity-01-introduction-to-testing.qmd:
+  • analysis → analysis
+
+11 Testing and Debugging copy/worksheets/activity-02-introduction-to-debugging.qmd:
+  • analyzing → analysing
+
+11 Testing and Debugging copy/slides/module-02-introduction-to-debugging.md:
+  • analysis → analysis
+  • Analysis → Analysis
+  • analysis → analysis
+  • Analysis → Analysis
+  • Analysis → Analysis
+  • behavior → behaviour
+  • center → centre
+
+11 Testing and Debugging copy/slides/module-03-design-test-cases.md:
+  • behavior → behaviour
+  • behavior → behaviour
+  • behavior → behaviour
+
+11 Testing and Debugging copy/slides/isys2001-python-course-summary.md:
+  • Organization → Organisation
+  • Utilizing → Utilising
+

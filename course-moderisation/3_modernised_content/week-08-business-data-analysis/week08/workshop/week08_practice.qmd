@@ -1,0 +1,365 @@
+---
+title: "Week 8: Additional Practice - Building AI Collaboration Skills"
+subtitle: "ISYS2001 Introduction to Business Programming"
+author: "Your Name"
+date: "September 2024"
+format: 
+  html:
+    toc: true
+    toc-expand: 2
+    code-fold: false
+    embed-resources: true
+---
+
+# 🎯 Building Confidence with AI-Assisted Data Analysis
+
+This notebook provides additional practice exercises to strengthen your AI collaboration skills and build confidence with business data processing. Use these exercises to deepen your understanding before or after the main workshop.
+
+**Remember**: The goal isn't to memorize pandas syntax - it's to become effective at directing AI to solve business problems.
+
+---
+
+# Exercise Set 1: Sales Data Analysis 📊
+
+## Business Context
+
+You're working as a Business Analyst for an office supply company. Your manager has given you sales data and asked for insights to help plan next quarter's inventory and sales strategy.
+
+## Data Overview
+
+We'll use the `sales_data.csv` file with columns:
+- **Date**: Sale date
+- **Product**: Product name
+- **Quantity**: Units sold
+- **Unit_Price**: Price per unit (with $ signs)
+- **Total_Sale**: Total transaction value
+- **Sales_Rep**: Employee who made the sale
+- **Region**: Geographic region
+
+```{python}
+import pandas as pd
+
+# Load the sales data
+sales_df = pd.read_csv('../data/sales_data.csv')
+
+# Display first few rows
+print("📋 Sales Data Sample:")
+print("=" * 40)
+print(sales_df.head())
+print(f"\nDataset: {len(sales_df)} transactions across {sales_df['Region'].nunique()} regions")
+```
+
+## Practice Exercise 1.1: Sales Performance by Region
+
+::: {.callout-tip}
+## Your AI Collaboration Challenge
+
+**Business Question**: "Which region is performing best, and what's the average sale size by region?"
+
+**Your Task**: Practice prompting AI with this business context. Try creating a prompt that asks for:
+1. Total sales by region
+2. Average sale amount by region  
+3. Number of transactions by region
+4. Results formatted for a manager presentation
+
+**Write your prompt below, then see what AI generates:**
+:::
+
+**Your Prompt:**
+```
+[Write your AI prompt here]
+```
+
+**AI Response:**
+```{python}
+# Paste AI-generated code here and run it
+# Remember to critique and improve if needed!
+
+```
+
+**Your Critique:**
+- What did AI do well?
+- What would you ask AI to improve?
+- Does the output help answer the business question?
+
+---
+
+## Practice Exercise 1.2: Top Performing Products
+
+::: {.callout-tip}
+## Business Scenario
+
+Your inventory manager needs to know which products to stock more of next quarter.
+
+**Challenge**: Ask AI to identify the top 5 products by:
+- Total revenue generated
+- Total units sold
+- Which products have the highest profit margins (hint: compare unit price trends)
+
+**Practice better prompting**: Be specific about formatting and business context.
+:::
+
+**Your Prompt:**
+```
+[Your AI prompt here]
+```
+
+**AI Response:**
+```{python}
+# AI-generated code goes here
+
+```
+
+**Business Insight Questions:**
+- Which products should the company stock more of?
+- Are high-price items selling well, or is volume more important?
+- What would you recommend to the inventory manager?
+
+---
+
+## Practice Exercise 1.3: Sales Rep Performance
+
+::: {.callout-tip}
+## Management Challenge
+
+Your sales manager wants to recognize top performers and identify who might need additional training.
+
+**Your Task**: Create prompts that help analyze:
+1. Which sales reps are generating the most revenue?
+2. Who has the highest average sale amounts?
+3. Are there regional patterns in rep performance?
+4. Format results suitable for a performance review meeting
+:::
+
+**Your Approach:**
+```{python}
+# Try different AI prompts and compare results
+# Document which prompts work best
+
+```
+
+---
+
+# Exercise Set 2: Financial Transaction Patterns 💳
+
+## Advanced Analysis Practice
+
+Using the original transactions data, practice more sophisticated AI collaboration.
+
+```{python}
+# Reload transaction data for advanced practice
+transactions_df = pd.read_csv('../data/transactions.csv')
+print("Transaction data loaded for advanced practice")
+```
+
+## Practice Exercise 2.1: Spending Trend Analysis
+
+::: {.callout-tip}
+## Business Context
+
+You're helping a friend understand their spending habits over time.
+
+**Challenge**: Ask AI to help you:
+1. Convert dates to datetime format
+2. Analyze spending trends by day of week
+3. Identify if spending has increased over time
+4. Spot any unusual spending patterns
+
+**Focus**: Practice asking AI to explain any complex date handling code it provides.
+:::
+
+**Your Analysis:**
+```{python}
+# Your AI collaboration for time-based analysis
+
+```
+
+## Practice Exercise 2.2: Budget Category Analysis
+
+::: {.callout-tip}
+## Personal Finance Scenario
+
+Someone wants to set a realistic monthly budget based on their spending history.
+
+**Challenge**: Use AI to help:
+1. Calculate average monthly spending by category
+2. Identify categories with high variation (inconsistent spending)
+3. Suggest realistic budget amounts for each category
+4. Find categories where spending might be reduced
+
+**Advanced**: Ask AI to explain the statistical concepts it uses.
+:::
+
+**Your Budget Analysis:**
+```{python}
+# AI-assisted budget recommendation code
+
+```
+
+---
+
+# Exercise Set 3: AI Critique Practice 🤔
+
+## Common AI Code Issues
+
+Below are examples of AI-generated code with issues. Practice your critique skills!
+
+### Critique Exercise 1: Overly Complex Code
+
+```python
+# AI generated this code - what's wrong with it?
+import pandas as pd
+import numpy as np
+from datetime import datetime
+
+def complex_analysis(data):
+    result = data.groupby([pd.Grouper(key='Date', freq='M'), 'Category']).agg({
+        'Amount': [lambda x: pd.to_numeric(x.str.replace('$', ''), errors='coerce').sum(),
+                   lambda x: pd.to_numeric(x.str.replace('$', ''), errors='coerce').mean(),
+                   lambda x: pd.to_numeric(x.str.replace('$', ''), errors='coerce').std()]
+    }).reset_index()
+    
+    result.columns = ['_'.join(col).strip() for col in result.columns.values]
+    return result.fillna(0).round(2)
+
+# Complex usage
+df['Date'] = pd.to_datetime(df['Date'])
+complex_result = complex_analysis(transactions_df)
+print(complex_result.head())
+```
+
+**Your Critique:**
+
+::: {.callout-warning}
+## Issues to Identify
+
+1. What makes this code hard to understand?
+2. What would you ask AI to simplify?
+3. How would you request a clearer version?
+
+**Write your critique prompt:**
+:::
+
+```
+[Your critique prompt to AI]
+```
+
+### Critique Exercise 2: Poor Business Context
+
+```python
+# AI code that works but lacks business insight
+df_grouped = df.groupby('cat')['amt'].sum().sort_values()
+print(df_grouped)
+```
+
+**Problems:**
+- Unclear column references
+- No business explanation
+- Poor formatting
+- No context for results
+
+**Your Improvement Prompt:**
+```
+[How would you ask AI to make this more business-appropriate?]
+```
+
+---
+
+# Exercise Set 4: Real-World Business Scenarios 🏢
+
+## Scenario 1: Retail Store Analysis
+
+::: {.callout-note}
+## Business Context
+
+You're analyzing sales data for a small retail chain. They want to know:
+- Which stores need more inventory
+- What products to discontinue
+- When to schedule promotional campaigns
+- How to allocate sales staff
+
+**Data**: Use the sales_data.csv but imagine it represents different store locations instead of regions.
+:::
+
+**Your Business Analysis:**
+```{python}
+# Practice comprehensive business analysis with AI assistance
+# Focus on actionable insights, not just data summaries
+
+```
+
+## Scenario 2: Personal Finance Coaching
+
+::: {.callout-note}
+## Business Context
+
+You're building a personal finance app feature that provides spending advice.
+
+**Challenge**: Use AI to create code that:
+1. Identifies spending categories that are above typical percentages
+2. Suggests specific areas for potential savings
+3. Provides encouraging feedback for good spending habits
+4. Formats advice in a user-friendly way
+:::
+
+**Your Coaching Algorithm:**
+```{python}
+# AI-assisted personal finance advice generation
+
+```
+
+---
+
+# Self-Assessment Checklist ✅
+
+After completing these exercises, evaluate your AI collaboration skills:
+
+## AI Prompting Skills
+- ☐ I can write prompts that include business context
+- ☐ I specify desired output format and structure  
+- ☐ I ask follow-up questions to improve AI responses
+- ☐ I can request explanations of complex code
+
+## Code Critique Skills
+- ☐ I can identify when AI code is too complex
+- ☐ I recognize when variable names need improvement
+- ☐ I spot when business context is missing
+- ☐ I ask for clearer, more maintainable solutions
+
+## Business Application Skills  
+- ☐ I connect data analysis to real business decisions
+- ☐ I can explain technical results in business terms
+- ☐ I consider edge cases and data quality issues
+- ☐ I format results for business presentation
+
+## Learning Documentation
+- ☐ I document what I learned from each AI interaction
+- ☐ I record effective prompts for future use
+- ☐ I note when AI explanations helped my understanding
+- ☐ I reflect on how to improve my collaboration
+
+---
+
+# Reflection Questions 🤔
+
+Before finishing your practice session, consider:
+
+1. **Which AI interactions were most helpful for your learning?**
+2. **What types of prompts got you the best code explanations?**
+3. **When did you successfully critique and improve AI responses?**
+4. **How has your confidence with business data analysis changed?**
+5. **What AI collaboration strategies will you use in your assignment?**
+
+---
+
+# Next Steps 🚀
+
+**For Your Assignment:**
+- Apply these prompting techniques to your Smart Finance Assistant
+- Use the critique skills to ensure your code is business-appropriate
+- Document successful AI interactions in your Developer's Diary
+- Build on the confidence you've gained with these practice exercises
+
+**Remember**: You're not trying to become a pandas expert overnight. You're becoming skilled at directing AI to solve business problems efficiently and effectively.
+
+**Great practice work! These skills will serve you well throughout your Smart Finance Assistant project and in your future career! 🎉**

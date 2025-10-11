@@ -1,0 +1,449 @@
+---
+title: 'Week 4 Mini-Project: Loop-Powered Finance Tracker'
+jupyter: python3
+---
+
+## Adding Repetition to Your Financial Decision System
+
+**Duration:** 45-60 minutes  
+**Goal:** Apply this week's loop patterns to enhance your Week 2 finance tracker
+
+### Project Overview
+
+Take your Week 2 single-decision finance tracker and add **loop power**:
+- 🔄 Handle multiple expense entries in one session
+- ✅ Validate all user input properly
+- 📊 Calculate running totals and basic statistics
+- 🎯 Track multiple savings goals
+- 🎮 Create a simple menu system
+
+This builds the **data collection foundation** for your semester-long finance tracker project.
+
+### Learning Objectives
+
+- Apply while loops for input validation
+- Use for loops for known repetition
+- Implement sentinel value patterns
+- Practice list storage and basic processing
+- Build user-controlled program flow
+
+---
+
+
+## Part 1: Enhanced Expense Entry (15 minutes)
+
+### 🔄 From One to Many
+
+Transform your Week 2 single-expense tracker to handle multiple expenses with proper validation:
+
+```{python}
+print("=== Enhanced Finance Tracker v0.3 ===")
+print("Week 3: Loop-Powered Edition")
+print()
+
+# User setup (enhanced from Week 2)
+name = input("Enter your name: ")
+
+# Add budget validation using while loop
+monthly_budget = 0
+while monthly_budget < 100 or monthly_budget > 10000:
+    try:
+        budget_input = input("Enter monthly budget ($100-$10,000): $")
+        monthly_budget = float(budget_input)
+        
+        if monthly_budget < 100:
+            print("Budget too low! Minimum $100")
+        elif monthly_budget > 10000:
+            print("Budget seems high! Maximum $10,000")
+    except ValueError:
+        print("Please enter a valid number!")
+
+print(f"\nWelcome {name}! Monthly budget: ${monthly_budget:.2f}")
+
+# ========== MULTI-EXPENSE ENTRY ==========
+expenses = []  # Store all expense amounts
+descriptions = []  # Store what each expense was for
+total_spent = 0
+
+print("\n--- Enter Your Expenses ---")
+print("Type 'done' when finished entering expenses")
+
+# Your task: Complete the multi-expense entry system
+# Use sentinel value pattern to collect multiple expenses
+# Validate each expense amount (positive numbers only)
+# Store both amount and description
+# Show running total and budget percentage after each entry
+
+while True:
+    expense_input = input("\nExpense amount (or 'done'): $")
+    
+    if expense_input.lower() == 'done':
+        break
+    
+    # Your validation and storage code here
+    
+    
+print(f"\n📊 Expense entry complete: {len(expenses)} expenses, ${total_spent:.2f} total")
+```
+
+---
+
+## Part 2: Basic Expense Analysis (15 minutes)
+
+### 📈 Processing Your Transaction Data
+
+Use loops to analyze the expenses you collected:
+
+```{python}
+# Expense Analysis Section
+if len(expenses) > 0:
+    print("\n📊 Expense Analysis:")
+    
+    # Basic statistics using loop patterns from workshops
+    print(f"Total expenses: {len(expenses)}")
+    print(f"Total spent: ${total_spent:.2f}")
+    print(f"Average expense: ${total_spent/len(expenses):.2f}")
+    print(f"Budget used: {(total_spent/monthly_budget)*100:.1f}%")
+    print(f"Remaining budget: ${monthly_budget - total_spent:.2f}")
+    
+    # Your task: Find highest and lowest expenses
+    # Use the min/max pattern from workshops
+    highest_expense = 0
+    lowest_expense = 0
+    
+    # Your min/max finding code here
+    
+    
+    print(f"\n💰 Expense Range:")
+    print(f"Highest expense: ${highest_expense:.2f}")
+    print(f"Lowest expense: ${lowest_expense:.2f}")
+    
+    # Your task: Categorize expenses by size
+    # Count how many expenses fall into each category:
+    # Large (>20% of budget), Medium (5-20%), Small (<5%)
+    
+    large_count = 0    # > 20% of budget
+    medium_count = 0   # 5-20% of budget
+    small_count = 0    # < 5% of budget
+    
+    # Your categorization loop here
+    
+    
+    print(f"\n📊 Expense Categories:")
+    print(f"Large expenses (>20% budget): {large_count}")
+    print(f"Medium expenses (5-20% budget): {medium_count}")
+    print(f"Small expenses (<5% budget): {small_count}")
+    
+    # Your task: Provide smart feedback based on the analysis
+    # Give different advice based on spending patterns
+    print("\n💡 Smart Feedback:")
+    
+    # Your feedback logic here
+    # Consider: budget percentage used, number of large expenses, etc.
+    
+    
+else:
+    print("\n📝 No expenses entered - try adding some transactions!")
+```
+
+---
+
+## Part 3: Multiple Savings Goals Tracker (15 minutes)
+
+### 🎯 Goal Management with Loops
+
+Extend your tracker to handle multiple savings goals:
+
+```{python}
+print("\n=== Savings Goals Tracker ===")
+
+# Goal collection
+goal_names = []
+goal_targets = []
+goal_current = []
+
+# Ask how many goals they want to track
+num_goals = 0
+while num_goals < 1 or num_goals > 5:  # Reasonable limits
+    try:
+        num_goals = int(input("How many savings goals? (1-5): "))
+        if num_goals < 1:
+            print("Must have at least 1 goal!")
+        elif num_goals > 5:
+            print("Maximum 5 goals for this tracker!")
+    except ValueError:
+        print("Please enter a valid number!")
+
+# Your task: Collect goal information using for loop
+# For each goal (1 to num_goals):
+#   - Get goal name
+#   - Get target amount (with validation)
+#   - Get current amount (with validation)
+#   - Store in the three lists
+
+print(f"\nEntering {num_goals} savings goals:")
+
+for i in range(num_goals):
+    print(f"\n--- Goal {i+1} ---")
+    
+    # Your goal collection code here
+    
+    
+print(f"\n✅ Saved {len(goal_names)} goals!")
+```
+
+```{python}
+# Goal Analysis and Progress Tracking
+if len(goal_names) > 0:
+    print("\n📊 Goals Progress Analysis:")
+    
+    # Your task: Analyze each goal
+    # For each goal, calculate:
+    #   - Progress percentage
+    #   - Amount remaining
+    #   - Months to completion (if saving $100/month)
+    
+    total_target = 0
+    total_current = 0
+    
+    for i in range(len(goal_names)):
+        # Your progress calculation here
+        
+        total_target += goal_targets[i]
+        total_current += goal_current[i]
+    
+    # Overall progress summary
+    overall_progress = (total_current / total_target) * 100 if total_target > 0 else 0
+    total_remaining = total_target - total_current
+    
+    print(f"\n🎯 Overall Goals Summary:")
+    print(f"Total target: ${total_target:.2f}")
+    print(f"Total saved: ${total_current:.2f}")
+    print(f"Overall progress: {overall_progress:.1f}%")
+    print(f"Total remaining: ${total_remaining:.2f}")
+    
+    # Your task: Find which goal needs most attention
+    # Find the goal with lowest progress percentage
+    # Provide encouragement and specific advice
+    
+    
+else:
+    print("No goals to analyze!")
+```
+
+---
+
+## Part 4: Simple Menu System (10 minutes)
+
+### 🎮 Interactive Program Flow
+
+Create a basic menu that lets users choose what to do:
+
+```{python}
+print("\n=== Interactive Finance Menu ===")
+
+# Simple menu system
+running = True
+
+while running:
+    print("\n" + "-"*30)
+    print(f"💰 {name}'s Finance Tracker")
+    if len(expenses) > 0:
+        print(f"📊 Current: {len(expenses)} expenses, ${sum(expenses):.2f} spent")
+    print("-"*30)
+    print("1. View expense summary")
+    print("2. View goals progress")
+    print("3. Add new expense")
+    print("4. Budget check")
+    print("5. Exit")
+    
+    choice = input("\nChoose option (1-5): ")
+    
+    if choice == "1":
+        # Display expense summary
+        print("\n--- Expense Summary ---")
+        
+        # Your task: Show all expenses with numbers
+        # Format: "1. $23.50 - Coffee"
+        # Include total at the end
+        
+        
+    elif choice == "2":
+        # Display goals progress
+        print("\n--- Goals Progress ---")
+        
+        # Your task: Show each goal with progress percentage
+        # Format: "Goal Name: $current/$target (XX% complete)"
+        
+        
+    elif choice == "3":
+        # Add single new expense
+        print("\n--- Add New Expense ---")
+        
+        # Your task: Add one more expense to existing lists
+        # Use validation pattern, update totals, give feedback
+        
+        
+    elif choice == "4":
+        # Budget status check
+        print("\n--- Budget Check ---")
+        
+        # Your task: Calculate and display budget status
+        # Show percentage used, remaining amount, daily budget left
+        # Give advice based on budget usage
+        
+        
+    elif choice == "5":
+        # Exit with summary
+        running = False
+        print(f"\nGoodbye {name}!")
+        print(f"Final summary: {len(expenses)} expenses, ${sum(expenses) if expenses else 0:.2f} total")
+        print("🚀 Your finance tracker is growing stronger each week!")
+        
+    else:
+        print("Invalid choice! Please choose 1-5.")
+
+print("\n=== Finance Tracker Session Complete ===")
+```
+
+---
+
+## Part 5: Testing Your Enhanced Tracker (10 minutes)
+
+### 🧪 Complete System Test
+
+Test your loop-powered finance tracker with realistic data:
+
+```{python}
+# Test your tracker with this scenario:
+test_instructions = """
+🧪 TEST SCENARIO:
+
+Setup:
+- Name: Your name
+- Budget: $2000
+
+Goals (try 2 goals):
+- "Emergency Fund": target $1000, current $250
+- "Vacation": target $500, current $50
+
+Expenses to enter:
+- $450 for "Rent payment"
+- $67.50 for "Weekly groceries"
+- $89.00 for "Gas for car"
+- done
+
+Then test each menu option:
+1. View expense summary (should show 3 expenses)
+2. View goals progress (should show percentages)
+3. Add expense: $25 for "Coffee"
+4. Budget check (should show updated totals)
+5. Exit
+
+Expected final result:
+- 4 expenses totaling $631.50
+- 31.6% of budget used
+- Emergency fund 25% complete
+- Vacation fund 10% complete
+"""
+
+print(test_instructions)
+print("\n⬆️ Run your enhanced tracker above with this test data!")
+print("Check that all numbers match the expected results.")
+```
+
+---
+
+## Part 6: Reflection and Planning (10 minutes)
+
+### 🤔 What You've Accomplished
+
+Reflect on your computational thinking growth this week:
+
+```{python}
+# Week 3 Reflection Questions (answer as comments)
+
+# LOOP PATTERN MASTERY:
+# Which loop patterns did you use in your finance tracker?
+# When did you choose while vs for?
+#
+
+# PROBLEM SOLVING:
+# How did you break down the "multiple expenses" problem?
+# What was most challenging about validation loops?
+#
+
+# DATA PROCESSING:
+# How does storing expenses in lists change what your tracker can do?
+# What analysis became possible that wasn't before?
+#
+
+# AI PARTNERSHIP:
+# How did you use AI to help with loop problems this week?
+# What questions led to the best learning?
+#
+
+# FUTURE FEATURES:
+# What financial features would you want to add next?
+# How might AI enhance your tracker in future weeks?
+#
+
+print("🎯 Week 3 reflection complete!")
+print("Ready for Week 4: String processing and smart categorization!")
+```
+
+---
+
+## 🏆 Mini-Project Complete!
+
+### **What You've Built:**
+Enhanced your finance tracker with **loop-powered capabilities**:
+
+✅ **Multi-Transaction Entry**: Handle multiple expenses in one session  
+✅ **Smart Validation**: Robust input checking with helpful error messages  
+✅ **Data Storage**: Transaction history saved in lists for analysis  
+✅ **Basic Analysis**: Statistics, categorization, and insights  
+✅ **Goal Tracking**: Multiple savings goals with progress monitoring  
+✅ **Interactive Menus**: User-controlled program flow  
+
+### **Programming Skills Mastered:**
+- **While loops** for input validation and unknown repetition
+- **For loops** for known counts and collection processing
+- **Sentinel values** for user-controlled data entry
+- **List operations** for data storage and retrieval
+- **Menu systems** for interactive programs
+
+### **Computational Thinking Growth:**
+- **Pattern Recognition**: Identifying when repetition is needed
+- **Decomposition**: Breaking complex features into loop patterns
+- **Abstraction**: Reusable validation and analysis patterns
+- **Algorithm Design**: Planning loop logic before implementation
+
+### **Finance Tracker Evolution:**
+- **Week 1**: Basic calculations
+- **Week 2**: Smart decisions with if/elif/else
+- **Week 3**: **Loop-powered data collection and analysis**
+- **Week 4 Preview**: String processing for automatic categorization
+
+### **🚀 Next Week Preview:**
+Week 4 will add **string manipulation** to your tracker:
+- Automatically categorize expenses by description
+- Parse and clean transaction text
+- Smart search through transaction descriptions
+- Prepare for natural language processing
+
+### **🎯 Success Check:**
+You're successful if:
+- Your tracker handles multiple transactions smoothly
+- You understand when to use each loop type
+- Your validation prevents crashes from bad input
+- You can explain your loop choices to others
+- You're excited about adding string processing next week
+
+### **💾 Save Your Work!**
+Your loop-powered tracker is the foundation for Week 4's string processing features. Keep building this same project each week!
+
+---
+
+**🌟 Excellent work! You've transformed your finance tracker from a simple calculator into a data-driven analysis tool. Next week we'll make it even smarter with text processing! 💰🔄**
+

@@ -1,0 +1,420 @@
+---
+title: "Week 3 Instructor Guide: Repetition & Patterns"
+subtitle: "Teaching Loops and Lists Effectively"
+format: 
+  pdf:
+      toc: false
+      colorlinks: true
+  docx:
+      toc: false
+      highlight-style: github
+  html:
+      toc: true
+      toc-expand: 2
+      embed-resources: true
+---
+# Week 3 Overview
+
+This week introduces the power of repetition through loops and collections. Students often find loops conceptually challenging, so we emphasise visualisation and pattern recognition over syntax memorisation.
+
+## Key Learning Goals
+1. Recognise when repetition is needed
+2. Choose appropriate loop types
+3. Work with collections (lists)
+4. Debug common loop errors
+5. Build their first data-driven program
+
+---
+
+# Lecture Delivery Guide
+
+## Opening Hook: The Playlist Problem (10 minutes)
+
+### Setup
+Show students an AI-generated "music player" with excessive complexity:
+- Classes and inheritance
+- Database connections
+- Recommendation algorithms
+- API integrations
+
+### Key Discussion Points
+1. "Can you understand this code?"
+2. "Could you modify it?"
+3. "What does a playlist REALLY need?"
+4. Core answer: Store songs, play in order, maybe skip
+
+### Transition
+"Let's learn to build this ourselves, simply and understandably."
+
+## Conceptual Foundation (20 minutes)
+
+### Real-World Repetition
+
+Draw parallels students understand:
+
+**ATM Example** (draw flowchart):
+```
+Start → Enter PIN → Wrong? → Try again → Too many? → Keep card
+                       ↓
+                    Correct → Continue
+```
+
+**Key Insight**: "The ATM doesn't have 3 separate PIN-checking sections. It has ONE that REPEATS."
+
+### Three Patterns Introduction
+
+Use physical demonstrations:
+
+1. **Counted Repetition**
+   - "Do 10 jumping jacks"
+   - "Deal 5 cards"
+   - Clear endpoint known
+
+2. **Conditional Repetition**
+   - "Keep stirring until thick"
+   - "Stay in line until called"
+   - Endpoint depends on condition
+
+3. **Collection Processing**
+   - "Grade each test in the stack"
+   - "Wash each dish in the sink"
+   - Process group of items
+
+### Why Collections Matter
+
+**Bad Approach** (write on board):
+```python
+score1 = 85
+score2 = 90
+score3 = 78
+# ... score30?
+```
+
+**Better Approach**:
+```python
+scores = [85, 90, 78, ...]  # Can handle any number!
+```
+
+## Live Coding Section (20 minutes)
+
+### While Loop Demo
+
+Start with infinite loop (intentionally!):
+```python
+# WARNING: This will run forever!
+count = 1
+while count > 0:
+    print(count)
+    count = count + 1  # Gets bigger!
+```
+
+**Teaching Moment**:
+- Show how to stop (Ctrl+C or Runtime → Interrupt)
+- "Loops MUST have a way to end!"
+
+Fix it together:
+```python
+count = 5
+while count > 0:
+    print(count)
+    count = count - 1  # Now it ends!
+```
+
+### For Loop Introduction
+
+Build understanding progressively:
+
+```python
+# First: see what range gives us
+print(list(range(5)))        # [0, 1, 2, 3, 4]
+print(list(range(1, 6)))     # [1, 2, 3, 4, 5]
+print(list(range(0, 10, 2))) # [0, 2, 4, 6, 8]
+
+# Then use in loop
+for number in range(5):
+    print(f"Number is: {number}")
+```
+
+### Lists and Indexing
+
+**Critical Teaching Point**: Indices start at 0!
+
+Draw on board:
+```
+scores = [85, 90, 78]
+index:    0   1   2
+```
+
+Common confusion:
+```python
+scores = [85, 90, 78]
+print(scores[1])  # Students expect 85, get 90!
+```
+
+## Common Student Confusions
+
+### Issue 1: While vs For Choice
+
+**Student Question**: "When do I use which?"
+
+**Answer Framework**:
+- Know how many times? → for with range()
+- Have a collection? → for with list
+- Everything else? → while
+
+**Examples**:
+```python
+# Print 10 stars → for (known count)
+for i in range(10):
+    print("⭐")
+
+# Get valid input → while (unknown count)
+age = -1
+while age < 0 or age > 120:
+    age = int(input("Enter valid age: "))
+
+# Process all students → for (collection)
+for student in student_list:
+    print(student)
+```
+
+### Issue 2: Off-by-One Errors
+
+**Common Mistake**:
+```python
+# Student wants 1-5, writes:
+for i in range(5):
+    print(i)  # Gets 0-4!
+```
+
+**Teaching Strategy**:
+- Always show range output first
+- Use descriptive variable names
+- Comment the expected values
+
+### Issue 3: Index Confusion
+
+Draw this chart repeatedly:
+```
+List: ["a", "b", "c"]
+Len:  3
+Indices: 0, 1, 2
+First: list[0]
+Last:  list[2] or list[-1]
+```
+
+---
+
+# Lab Management
+
+## Hour 1 Structure
+
+### Flowcharting (20 min)
+- Provide templates
+- Work in pairs
+- Check understanding before coding
+
+### Basic Patterns (20 min)
+- Start with working examples
+- Let students modify
+- Build confidence gradually
+
+### List Practice (20 min)
+- Emphasise bounds checking
+- Show error messages
+- Practice safe access patterns
+
+## Hour 2 Structure
+
+### Integration Exercises (20 min)
+- Combine concepts gradually
+- Provide scaffolded code
+- Focus on one new concept at a time
+
+### Common Patterns (20 min)
+- Menu systems are engaging
+- Search patterns are practical
+- Statistics connect to math
+
+### Project Start (20 min)
+- Get everyone started
+- Core functionality only
+- Save enhancements for homework
+
+## Lab Tips
+
+1. **Circulate Constantly** - Loop errors compound quickly
+2. **Check Early** - Catch infinite loops before frustration
+3. **Trace Together** - Model debugging thinking
+4. **Celebrate Success** - First working loop is big milestone!
+
+---
+
+# Common Teaching Challenges
+
+## Challenge 1: Infinite Loops Create Fear
+
+**Solution**:
+- Demo how to stop them first
+- Show it's normal/fixable
+- Make it less scary
+
+## Challenge 2: Syntax Overwhelms Concepts
+
+**Solution**:
+- Patterns first, syntax second
+- Provide templates
+- Focus on problem-solving
+
+## Challenge 3: Index Arithmetic
+
+**Solution**:
+- Always draw pictures
+- Use physical props (numbered cards)
+- Practice extensively
+
+## Challenge 4: Debugging Loop Logic
+
+**Solution**:
+- Teach print() debugging
+- Trace tables on board
+- Think aloud while debugging
+
+---
+
+# Assessment Strategies
+
+## Quick Formative Checks
+
+During lecture, ask:
+- "How many times will this loop run?"
+- "What's the third element's index?"
+- "Will this loop ever end?"
+
+## Lab Observation Points
+
+Watch for:
+- Choosing wrong loop type
+- Forgetting to update loop variable
+- Index boundary errors
+- Empty list handling
+
+## Project Evaluation Focus
+
+Priority order:
+1. Basic functionality works
+2. Handles edge cases
+3. User-friendly interface
+4. Code organisation
+5. Enhancements
+
+---
+
+# Differentiation Strategies
+
+## For Struggling Students
+
+1. **More Visualisation**
+   - Trace every loop
+   - Draw every list
+   - Step through slowly
+
+2. **Simpler Examples**
+   - Count to 3, not 10
+   - Lists of 2-3 items
+   - One concept at a time
+
+3. **Pair Programming**
+   - Match with patient partner
+   - Switch roles regularly
+   - Encourage questions
+
+## For Advanced Students
+
+1. **Pattern Challenges**
+   - Nested patterns (preview)
+   - Efficiency questions
+   - Multiple solutions
+
+2. **Enhanced Features**
+   - Sort the shopping list
+   - Prevent duplicates
+   - Category organisation
+
+3. **Algorithm Thinking**
+   - Different search methods
+   - Optimisation ideas
+   - Edge case handling
+
+---
+
+# Time Management
+
+## Lecture Timeline
+- 0:00-0:10 - Hook with playlist problem
+- 0:10-0:20 - Conceptual foundation
+- 0:20-0:30 - While loops and safety
+- 0:30-0:40 - For loops and lists
+- 0:40-0:50 - Integration examples
+- 0:50-0:57 - AI partnership demo
+- 0:57-1:00 - Lab preview
+
+## Pacing Warnings
+- Don't rush loops - foundation for everything
+- Lists + loops together is cognitive load
+- Leave time for questions
+- Safety (infinite loops) before exploration
+
+---
+
+# Materials and Resources
+
+## Required for Lecture
+- Whiteboard for drawings
+- Projector for live coding
+- Backup slides for concepts
+- Printed trace tables
+
+## Required for Lab
+- Loop pattern handout
+- Trace table templates
+- Debugging checklist
+- Project rubric
+
+## Supplementary Resources
+- Python Tutor visualiser
+- Loop animation videos
+- Practice problem bank
+- Solution code (after lab)
+
+---
+
+# Week 3 Specific Reminders
+
+1. **Loops Enable Everything** - This is where programming becomes powerful
+2. **Patience is Critical** - Conceptual leap is large
+3. **Errors are Learning** - Normalise debugging
+4. **Patterns Over Syntax** - Recognition before writing
+5. **Success Builds Success** - Celebrate working loops!
+
+## Most Important
+Students who struggle with loops often struggle rest of course. Invest time here to ensure solid foundation. Better to go slowly and build confidence than rush and create confusion.
+
+---
+
+# After-Class Support
+
+## Office Hours Focus
+- Loop tracing practice
+- Debug student code together
+- Clarify while vs for
+- Index arithmetic practice
+
+## Online Support
+- Post traced examples
+- Share debugging videos
+- Answer questions quickly
+- Celebrate successes publicly
+
+## Looking Ahead
+Next week builds on loops with string/list manipulation. Ensure students are comfortable with basic loops before moving forward!

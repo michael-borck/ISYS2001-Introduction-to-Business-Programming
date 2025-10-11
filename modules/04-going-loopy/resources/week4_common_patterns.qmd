@@ -1,0 +1,476 @@
+---
+title: "Week 4: Common Loop Patterns Reference"
+subtitle: "Essential Patterns Every Programmer Needs"
+format: 
+  pdf:
+      toc: false
+      colorlinks: true
+  docx:
+      toc: false
+      highlight-style: github
+  html:
+      toc: true
+      toc-expand: 2
+      embed-resources: true
+---
+# Common Loop Patterns
+
+This reference shows the most common loop patterns you'll use repeatedly in programming. Master these patterns to solve most iteration problems.
+
+---
+
+## Pattern 1: Input Validation
+
+**Purpose**: Keep asking until you get valid input
+
+### Basic Validation
+```python
+# Keep asking until valid
+age = -1  # Start with invalid value
+while age < 0 or age > 120:
+    age_string = input("Enter age (0-120): ")
+    age = int(age_string)
+    if age < 0 or age > 120:
+        print("Invalid age! Try again.")
+        
+print(f"Valid age: {age}")
+```
+
+### Yes/No Validation
+```python
+# Get yes/no answer
+answer = ""
+while answer not in ["y", "n"]:
+    answer = input("Continue? (y/n): ").lower()
+    if answer not in ["y", "n"]:
+        print("Please enter 'y' or 'n'")
+        
+if answer == "y":
+    print("Continuing...")
+else:
+    print("Stopping...")
+```
+
+### Menu Choice Validation
+```python
+# Valid menu choices only
+choice = ""
+valid_choices = ["1", "2", "3", "4"]
+
+while choice not in valid_choices:
+    print("\n1. Add")
+    print("2. Remove")
+    print("3. View")
+    print("4. Exit")
+    choice = input("\nChoice: ")
+    
+    if choice not in valid_choices:
+        print("Please choose 1-4")
+```
+
+---
+
+## Pattern 2: Sentinel Values
+
+**Purpose**: Keep going until user signals to stop
+
+### Basic Sentinel (-1 to stop)
+```python
+# Sum numbers until -1
+total = 0
+number = 0  # Initialise
+
+while number != -1:
+    number = int(input("Enter number (-1 to stop): "))
+    if number != -1:  # Don't include sentinel
+        total = total + number
+        
+print(f"Total: {total}")
+```
+
+### String Sentinel ("quit" to stop)
+```python
+# Collect words until "quit"
+words = []
+word = ""
+
+while word.lower() != "quit":
+    word = input("Enter word ('quit' to stop): ")
+    if word.lower() != "quit":
+        words.append(word)
+        
+print(f"You entered {len(words)} words")
+```
+
+### Empty String Sentinel
+```python
+# Names until empty string
+names = []
+
+while True:
+    name = input("Enter name (blank to stop): ")
+    if name == "":
+        break  # Exit loop
+    names.append(name)
+    
+print(f"Names collected: {names}")
+```
+
+---
+
+## Pattern 3: Search Patterns
+
+**Purpose**: Find an item in a collection
+
+### Basic Search (found/not found)
+```python
+# Search for item
+items = ["apple", "banana", "orange", "grape"]
+search = input("Search for: ")
+
+found = False
+for item in items:
+    if item == search:
+        found = True
+        break  # Stop once found
+        
+if found:
+    print(f"{search} was found!")
+else:
+    print(f"{search} not found.")
+```
+
+### Search with Position
+```python
+# Find position of item
+items = ["apple", "banana", "orange", "grape"]
+search = input("Search for: ")
+
+position = -1  # -1 means not found
+for i in range(len(items)):
+    if items[i] == search:
+        position = i
+        break
+        
+if position != -1:
+    print(f"{search} found at position {position}")
+else:
+    print(f"{search} not found")
+```
+
+### Case-Insensitive Search
+```python
+# Search ignoring case
+items = ["Apple", "Banana", "Orange", "Grape"]
+search = input("Search for: ").lower()
+
+found = False
+for item in items:
+    if item.lower() == search:
+        found = True
+        print(f"Found: {item}")
+        break
+```
+
+---
+
+## Pattern 4: Accumulation Patterns
+
+**Purpose**: Build up a result through iteration
+
+### Sum Accumulation
+```python
+# Sum all numbers
+numbers = [10, 20, 30, 40, 50]
+total = 0  # Accumulator starts at 0
+
+for num in numbers:
+    total = total + num
+    
+print(f"Sum: {total}")
+```
+
+### Count Accumulation
+```python
+# Count items meeting condition
+scores = [85, 67, 92, 73, 88, 95, 61]
+passing_count = 0  # Counter starts at 0
+
+for score in scores:
+    if score >= 70:
+        passing_count = passing_count + 1
+        
+print(f"Passing scores: {passing_count}")
+```
+
+### String Building
+```python
+# Build a string
+words = ["Hello", "world", "from", "Python"]
+sentence = ""  # Start empty
+
+for word in words:
+    sentence = sentence + word + " "
+    
+sentence = sentence.strip()  # Remove trailing space
+print(sentence)
+```
+
+### List Building
+```python
+# Build new list from old
+numbers = [1, 2, 3, 4, 5]
+doubles = []  # Start empty
+
+for num in numbers:
+    doubles.append(num * 2)
+    
+print(f"Doubles: {doubles}")
+```
+
+---
+
+## Pattern 5: Menu-Driven Programs
+
+**Purpose**: Keep showing menu until user exits
+
+### Basic Menu Loop
+```python
+# Simple menu system
+running = True
+
+while running:
+    print("\n--- MENU ---")
+    print("1. Option One")
+    print("2. Option Two")
+    print("3. Exit")
+    
+    choice = input("\nChoice: ")
+    
+    if choice == "1":
+        print("You chose option one")
+    elif choice == "2":
+        print("You chose option two")
+    elif choice == "3":
+        running = False
+        print("Goodbye!")
+    else:
+        print("Invalid choice!")
+```
+
+### Menu with Data
+```python
+# Menu operating on list
+items = []
+running = True
+
+while running:
+    print(f"\n--- Items: {len(items)} ---")
+    print("1. Add item")
+    print("2. View items")
+    print("3. Clear all")
+    print("4. Exit")
+    
+    choice = input("\nChoice: ")
+    
+    if choice == "1":
+        item = input("Enter item: ")
+        items.append(item)
+        print(f"Added '{item}'")
+    elif choice == "2":
+        if len(items) == 0:
+            print("No items yet")
+        else:
+            for i in range(len(items)):
+                print(f"{i+1}. {items[i]}")
+    elif choice == "3":
+        items = []
+        print("Cleared all items")
+    elif choice == "4":
+        running = False
+    else:
+        print("Invalid choice!")
+```
+
+---
+
+## Pattern 6: Finding Min/Max
+
+**Purpose**: Find extremes in a collection
+
+### Finding Maximum
+```python
+# Find highest score
+scores = [78, 92, 85, 67, 93, 88]
+
+if len(scores) > 0:
+    highest = scores[0]  # Start with first
+    
+    for score in scores:
+        if score > highest:
+            highest = score
+            
+    print(f"Highest score: {highest}")
+else:
+    print("No scores to check")
+```
+
+### Finding Minimum
+```python
+# Find lowest temperature
+temps = [72, 68, 75, 71, 69]
+
+if len(temps) > 0:
+    lowest = temps[0]  # Start with first
+    
+    for temp in temps:
+        if temp < lowest:
+            lowest = temp
+            
+    print(f"Lowest temperature: {lowest}")
+```
+
+### Finding Both
+```python
+# Find range of values
+values = [45, 23, 67, 89, 12, 56, 34]
+
+if len(values) > 0:
+    minimum = values[0]
+    maximum = values[0]
+    
+    for value in values:
+        if value < minimum:
+            minimum = value
+        if value > maximum:
+            maximum = value
+            
+    print(f"Range: {minimum} to {maximum}")
+```
+
+---
+
+## Pattern 7: Processing in Batches
+
+**Purpose**: Handle items in groups
+
+### Fixed Batch Size
+```python
+# Process 3 at a time
+items = ["a", "b", "c", "d", "e", "f", "g"]
+batch_size = 3
+
+for i in range(0, len(items), batch_size):
+    print(f"\nBatch starting at {i}:")
+    for j in range(i, min(i + batch_size, len(items))):
+        print(f"  - {items[j]}")
+```
+
+### User-Defined Batches
+```python
+# Get N items from user
+batch_size = int(input("How many items? "))
+items = []
+
+for i in range(batch_size):
+    item = input(f"Enter item {i+1}: ")
+    items.append(item)
+    
+print(f"\nYou entered: {items}")
+```
+
+---
+
+## Pattern Combinations
+
+Often you'll combine patterns:
+
+### Search + Accumulation
+```python
+# Count occurrences
+items = ["apple", "banana", "apple", "orange", "apple"]
+search = "apple"
+count = 0
+
+for item in items:
+    if item == search:
+        count = count + 1
+        
+print(f"'{search}' appears {count} times")
+```
+
+### Validation + Menu
+```python
+# Menu with validated choices
+running = True
+valid_choices = ["1", "2", "3"]
+
+while running:
+    print("\n1. Start")
+    print("2. Stop")
+    print("3. Exit")
+    
+    choice = ""
+    while choice not in valid_choices:
+        choice = input("Choice (1-3): ")
+        if choice not in valid_choices:
+            print("Invalid! Try again.")
+    
+    # Now choice is guaranteed valid
+    if choice == "1":
+        print("Starting...")
+    elif choice == "2":
+        print("Stopping...")
+    else:
+        running = False
+```
+
+### Sentinel + Accumulation
+```python
+# Average of entered numbers
+total = 0
+count = 0
+number = 0
+
+print("Enter numbers (-1 to stop):")
+while number != -1:
+    number = int(input("> "))
+    if number != -1:
+        total = total + number
+        count = count + 1
+        
+if count > 0:
+    average = total / count
+    print(f"Average: {average}")
+else:
+    print("No numbers entered")
+```
+
+---
+
+## Tips for Using Patterns
+
+1. **Initialise Properly**
+   - Accumulators start at identity (0 for sum, "" for string)
+   - Counters start at 0
+   - Search flags start False
+   - Min/max start with first element
+
+2. **Check Edge Cases**
+   - Empty collections
+   - Single item
+   - All items same
+   - Not found scenarios
+
+3. **Clear Variable Names**
+   - `total` for sums
+   - `count` for counting
+   - `found` for search flags
+   - `running` for main loops
+
+4. **Test Incrementally**
+   - Get basic pattern working
+   - Add features one at a time
+   - Test after each addition
+
+Remember: These patterns solve 90% of loop problems. Master these before trying complex variations!
