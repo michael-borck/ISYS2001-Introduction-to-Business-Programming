@@ -1,8 +1,21 @@
 # ----------------------------------------------------------------
-# General Quarto, Python, and R cruft to ignore
+# General build, OS, and tool cruft to ignore
 # ----------------------------------------------------------------
 # Node.js
 **/node_modules/
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.toc
+*.lof
+*.lot
+*.bbl
+*.blg
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
 
 # Quarto specific
 _quarto/
@@ -34,10 +47,11 @@ Thumbs.db
 *.html
 *.wav
 *.mp3
-*.mp3
+*.mp4
 *.zip
 
-# ...EXCEPT for the 'resources' folder and its contents.
-# The '!' negates the ignore rule for this specific directory.
+
+# ...with the following exceptions:
 !resources/
+!other-rersources/
 !**/self-assessment/*.html
