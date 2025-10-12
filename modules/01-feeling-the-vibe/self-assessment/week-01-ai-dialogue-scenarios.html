@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Dialogue Scenarios - Week 1</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+        .scenario-selector {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .scenario-btn {
+            padding: 12px 24px;
+            border: 2px solid #e1e4e8;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        .scenario-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .scenario-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        .dialogue-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: none;
+        }
+        .dialogue-container.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .scenario-title {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .persona-tag {
+            font-size: 14px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: normal;
+        }
+        .persona-tag.bad {
+            background: #fee;
+            color: #c00;
+        }
+        .persona-tag.good {
+            background: #efe;
+            color: #080;
+        }
+        .dialogue-step {
+            margin: 20px 0;
+            opacity: 0;
+            animation: slideIn 0.5s forwards;
+        }
+        .dialogue-step.visible {
+            opacity: 1;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .message {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            align-items: flex-start;
+        }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .avatar.student {
+            background: #e3f2fd;
+        }
+        .avatar.ai {
+            background: #f3e5f5;
+        }
+        .message-content {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            position: relative;
+        }
+        .message.student .message-content {
+            background: #e3f2fd;
+        }
+        .message.ai .message-content {
+            background: #f3e5f5;
+        }
+        .message-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .code-response {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 14px;
+            margin-top: 10px;
+            overflow-x: auto;
+        }
+        .reflection-box {
+            background: #fff8dc;
+            border: 2px solid #ffd700;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .reflection-box h3 {
+            margin-top: 0;
+            color: #d4a017;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .analysis-section {
+            background: #f0f8ff;
+            border-left: 4px solid #4169e1;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .analysis-section h3 {
+            margin-top: 0;
+            color: #4169e1;
+        }
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .pros, .cons {
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .pros {
+            background: #e8f5e9;
+            border: 1px solid #4caf50;
+        }
+        .cons {
+            background: #ffebee;
+            border: 1px solid #f44336;
+        }
+        .pros h4, .cons h4 {
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .pros h4 { color: #2e7d32; }
+        .cons h4 { color: #c62828; }
+        .next-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            float: right;
+            margin-top: 20px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .next-btn:hover {
+            background: #5a67d8;
+        }
+        .next-btn:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+        }
+        .better-approach {
+            background: #e8f5e9;
+            border: 2px dashed #4caf50;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .better-approach h3 {
+            margin-top: 0;
+            color: #2e7d32;
+        }
+        .key-learning {
+            background: #fffbeb;
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #92400e;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎭 AI Dialogue Scenarios</h1>
+    <p class="subtitle">Watch different students interact with AI and learn from their approaches!</p>
+    
+    <div class="scenario-selector">
+        <button class="scenario-btn active" onclick="showScenario(1)">📋 The Copy-Paste Student</button>
+        <button class="scenario-btn" onclick="showScenario(2)">🎯 The Strategic Learner</button>
+        <button class="scenario-btn" onclick="showScenario(3)">❓ The Confused Beginner</button>
+        <button class="scenario-btn" onclick="showScenario(4)">🏃 The Rushed Student</button>
+    </div>
+
+    <!-- Scenario 1: The Copy-Paste Student -->
+    <div class="dialogue-container active" id="scenario1">
+        <h2 class="scenario-title">
+            The Copy-Paste Student
+            <span class="persona-tag bad">Poor Approach</span>
+        </h2>
+        <p style="color: #666; margin-bottom: 30px;">Watch what happens when a student just wants the answer...</p>
+        
+        <div class="dialogue-step" data-step="1">
+            <div class="message student">
+                <div class="avatar student">👨‍🎓</div>
+                <div class="message-content">
+                    <div class="message-label">Student asks:</div>
+                    "Write me a temperature converter program"
+                </div>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="2" style="display: none;">
+            <div class="message ai">
+                <div class="avatar ai">🤖</div>
+                <div class="message-content">
+                    <div class="message-label">AI responds:</div>
+                    "Here's a complete temperature converter program:"
+                    <div class="code-response">def temperature_converter():
+    """Advanced temperature converter with error handling"""
+    while True:
+        try:
+            print("\n--- Temperature Converter ---")
+            print("1. Celsius to Fahrenheit")
+            print("2. Fahrenheit to Celsius")
+            print("3. Exit")
+            
+            choice = input("Select option (1-3): ")
+            
+            if choice == '3':
+                print("Goodbye!")
+                break
+                
+            temp = float(input("Enter temperature: "))
+            
+            if choice == '1':
+                result = (temp * 9/5) + 32
+                print(f"{temp}°C = {result:.2f}°F")
+            elif choice == '2':
+                result = (temp - 32) * 5/9
+                print(f"{temp}°F = {result:.2f}°C")
+            else:
+                print("Invalid option!")
+                
+        except ValueError:
+            print("Please enter a valid number!")
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
+if __name__ == "__main__":
+    temperature_converter()</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="3" style="display: none;">
+            <div class="message student">
+                <div class="avatar student">😕</div>
+                <div class="message-content">
+                    <div class="message-label">Student thinks:</div>
+                    "Perfect! I'll just copy this and submit it. Assignment done!"
+                </div>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="4" style="display: none;">
+            <div class="reflection-box">
+                <h3>🤔 Reflection Time</h3>
+                <p><strong>What went wrong here?</strong></p>
+                <ul>
+                    <li>Student doesn't understand functions, loops, or exception handling</li>
+                    <li>Can't modify the code if requirements change</li>
+                    <li>Will fail when asked to explain the code</li>
+                    <li>Missed the learning opportunity entirely</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="5" style="display: none;">
+            <div class="analysis-section">
+                <h3>📊 Approach Analysis</h3>
+                <div class="pros-cons">
+                    <div class="cons">
+                        <h4>❌ Problems</h4>
+                        <ul>
+                            <li>No learning occurred</li>
+                            <li>Code is too complex for Week 1</li>
+                            <li>Can't debug or modify</li>
+                            <li>Academic integrity issues</li>
+                        </ul>
+                    </div>
+                    <div class="pros">
+                        <h4>✅ Better If...</h4>
+                        <ul>
+                            <li>Asked for explanation</li>
+                            <li>Requested simpler version</li>
+                            <li>Built it step by step</li>
+                            <li>Focused on understanding</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="6" style="display: none;">
+            <div class="better-approach">
+                <h3>💡 A Better First Prompt</h3>
+                <p><strong>Instead of:</strong> "Write me a temperature converter"</p>
+                <p><strong>Try:</strong> "I'm learning Python basics. Can you explain how temperature conversion works and help me build a simple converter using only input(), print(), and basic math?"</p>
+            </div>
+        </div>
+
+        <button class="next-btn" onclick="nextStep(1)">Next Step →</button>
+    </div>
+
+    <!-- Scenario 2: The Strategic Learner -->
+    <div class="dialogue-container" id="scenario2">
+        <h2 class="scenario-title">
+            The Strategic Learner
+            <span class="persona-tag good">Good Approach</span>
+        </h2>
+        <p style="color: #666; margin-bottom: 30px;">Watch how this student uses AI to actually learn...</p>
+        
+        <div class="dialogue-step" data-step="1">
+            <div class="message student">
+                <div class="avatar student">👩‍🎓</div>
+                <div class="message-content">
+                    <div class="message-label">Student asks:</div>
+                    "I need to understand how the input() function works in Python. Can you explain it with a simple example?"
+                </div>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="2" style="display: none;">
+            <div class="message ai">
+                <div class="avatar ai">🤖</div>
+                <div class="message-content">
+                    <div class="message-label">AI explains:</div>
+                    "The input() function pauses your program and waits for the user to type something. Here's the key insight: it ALWAYS returns a string (text), even if the user types numbers!"
+                    <div class="code-response">name = input("What's your name? ")
+print("Hello, " + name)
+
+# Even with numbers:
+age = input("How old are you? ")  # age is a STRING here!
+print(type(age))  # Shows: <class 'str'></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="3" style="display: none;">
+            <div class="message student">
+                <div class="avatar student">👩‍🎓</div>
+                <div class="message-content">
+                    <div class="message-label">Student follows up:</div>
+                    "So if I want to do math with the age, I need to convert it first?"
+                </div>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="4" style="display: none;">
+            <div class="message ai">
+                <div class="avatar ai">🤖</div>
+                <div class="message-content">
+                    <div class="message-label">AI confirms:</div>
+                    "Exactly! You'll need to convert the string to a number using int() or float():"
+                    <div class="code-response">age = input("How old are you? ")  # "25" (string)
+age = int(age)                     # 25 (integer)
+next_year = age + 1                # Now we can do math!
+print(f"Next year you'll be {next_year}")</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="5" style="display: none;">
+            <div class="message student">
+                <div class="avatar student">💡</div>
+                <div class="message-content">
+                    <div class="message-label">Student realizes:</div>
+                    "Ah! So that's why my code was concatenating instead of adding. Let me try building a temperature converter now with this understanding..."
+                </div>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="6" style="display: none;">
+            <div class="key-learning">
+                🌟 Key Learning: The student built understanding first, then applied it!
+            </div>
+        </div>
+
+        <button class="next-btn" onclick="nextStep(2)">Next Step →</button>
+    </div>
+
+    <!-- Scenario 3: The Confused Beginner -->
+    <div class="dialogue-container" id="scenario3">
+        <h2 class="scenario-title">
+            The Confused Beginner
+            <span class="persona-tag bad">Common Struggle</span>
+        </h2>
+        <p style="color: #666; margin-bottom: 30px;">Many of us start here - not even knowing what to ask...</p>
+        
+        <div class="dialogue-step" data-step="1">
+            <div class="message student">
+                <div class="avatar student">😰</div>
+                <div class="message-content">
+                    <div class="message-label">Student asks:</div>
+                    "help with python homework temperature thing"
+                </div>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="2" style="display: none;">
+            <div class="message ai">
+                <div class="avatar ai">🤖</div>
+                <div class="message-content">
+                    <div class="message-label">AI responds vaguely:</div>
+                    "I'd be happy to help with Python temperature conversions! What specific aspect are you working on? Are you converting between Celsius and Fahrenheit? Do you need help with the formula, the code structure, or debugging an error?"
+                </div>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="3" style="display: none;">
+            <div class="message student">
+                <div class="avatar student">😵‍💫</div>
+                <div class="message-content">
+                    <div class="message-label">Student panics:</div>
+                    "idk just need it to work. here's my code it's broken"
+                    <div class="code-response">temp = input("temp: )
+temp = int(temp)
+f = temp * 9/5 + 32
+print(temp "is" f)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="4" style="display: none;">
+            <div class="reflection-box">
+                <h3>😔 We've All Been Here</h3>
+                <p><strong>Why this happens:</strong></p>
+                <ul>
+                    <li>Feeling overwhelmed and not knowing where to start</li>
+                    <li>Not understanding what information AI needs</li>
+                    <li>Panic leading to vague, rushed questions</li>
+                    <li>Missing basic syntax knowledge makes everything confusing</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="5" style="display: none;">
+            <div class="better-approach">
+                <h3>🤗 A Supportive Approach</h3>
+                <p><strong>When you're confused, try this template:</strong></p>
+                <div style="background: #f0f8ff; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                    <p>"I'm new to Python and working on [assignment topic]. I'm getting an error that says [error message]. Here's my code: [paste code]. Can you help me understand what this error means?"</p>
+                </div>
+                <p style="margin-top: 15px;"><strong>Or even simpler:</strong></p>
+                <div style="background: #f0f8ff; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                    <p>"I'm a complete beginner. Can you explain [concept] using very simple terms?"</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="6" style="display: none;">
+            <div class="key-learning">
+                💝 Remember: Everyone starts confused. It's okay to say "I don't understand" - that's the first step to learning!
+            </div>
+        </div>
+
+        <button class="next-btn" onclick="nextStep(3)">Next Step →</button>
+    </div>
+
+    <!-- Scenario 4: The Rushed Student -->
+    <div class="dialogue-container" id="scenario4">
+        <h2 class="scenario-title">
+            The Rushed Student
+            <span class="persona-tag bad">Deadline Pressure</span>
+        </h2>
+        <p style="color: #666; margin-bottom: 30px;">When time pressure makes us forget our learning goals...</p>
+        
+        <div class="dialogue-step" data-step="1">
+            <div class="message student">
+                <div class="avatar student">⏰</div>
+                <div class="message-content">
+                    <div class="message-label">Student frantically types:</div>
+                    "URGENT!!! Need temperature converter due in 30 mins. Must handle C to F and F to C with error checking. GO GO GO!"
+                </div>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="2" style="display: none;">
+            <div class="message ai">
+                <div class="avatar ai">🤖</div>
+                <div class="message-content">
+                    <div class="message-label">AI provides quick solution:</div>
+                    <div class="code-response">def convert_temperature():
+    try:
+        temp = float(input("Enter temperature: "))
+        unit = input("Enter unit (C/F): ").upper()
+        
+        if unit == 'C':
+            fahrenheit = (temp * 9/5) + 32
+            print(f"{temp}°C = {fahrenheit}°F")
+        elif unit == 'F':
+            celsius = (temp - 32) * 5/9
+            print(f"{temp}°F = {celsius}°C")
+        else:
+            print("Invalid unit! Use C or F")
+    except ValueError:
+        print("Invalid temperature! Enter a number")
+
+convert_temperature()</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="3" style="display: none;">
+            <div class="message student">
+                <div class="avatar student">😅</div>
+                <div class="message-content">
+                    <div class="message-label">Student relieves:</div>
+                    "THANK YOU! Submitting now! 🏃‍♂️"
+                </div>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="4" style="display: none;">
+            <div class="message student">
+                <div class="avatar student">😭</div>
+                <div class="message-content">
+                    <div class="message-label">Next day in class:</div>
+                    "Professor asked me to explain my code... I couldn't answer anything about try/except or .upper() 😭"
+                </div>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="5" style="display: none;">
+            <div class="analysis-section">
+                <h3>⏰ The Time Pressure Trap</h3>
+                <div class="pros-cons">
+                    <div class="cons">
+                        <h4>❌ What Went Wrong</h4>
+                        <ul>
+                            <li>No understanding gained</li>
+                            <li>Used concepts not yet learned</li>
+                            <li>Can't explain or modify code</li>
+                            <li>Stress replaced learning</li>
+                        </ul>
+                    </div>
+                    <div class="pros">
+                        <h4>✅ Better Strategy</h4>
+                        <ul>
+                            <li>Start assignments early</li>
+                            <li>Build incrementally</li>
+                            <li>Ask for simpler versions</li>
+                            <li>Understanding > Perfection</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dialogue-step" data-step="6" style="display: none;">
+            <div class="better-approach">
+                <h3>🎯 Even When Rushed...</h3>
+                <p><strong>A better emergency prompt:</strong></p>
+                <div style="background: #fffbeb; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                    <p>"I need a temperature converter but I'm just learning. Can you help me build the simplest version using ONLY input(), print(), float(), and if/else? I need to understand it to explain it later."</p>
+                </div>
+                <p style="margin-top: 15px;"><em>Remember: A simple program you understand is better than a complex one you can't explain!</em></p>
+            </div>
+        </div>
+
+        <button class="next-btn" onclick="nextStep(4)">Next Step →</button>
+    </div>
+
+    <!-- Reflection Section -->
+    <div style="background: white; border-radius: 12px; padding: 30px; margin-top: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        <h2 style="color: #2c3e50; text-align: center;">🪞 Mirror, Mirror...</h2>
+        <div style="max-width: 700px; margin: 0 auto;">
+            <p style="font-size: 18px; text-align: center; color: #666; margin-bottom: 30px;">
+                Do you recognize yourself in any of these students?
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px;">
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 40px; margin-bottom: 10px;">📋</div>
+                    <h4 style="color: #2c3e50; margin: 10px 0;">The Copy-Paster</h4>
+                    <p style="color: #666; font-size: 14px;">"I just need it done"</p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 40px; margin-bottom: 10px;">🎯</div>
+                    <h4 style="color: #2c3e50; margin: 10px 0;">The Strategic Learner</h4>
+                    <p style="color: #666; font-size: 14px;">"I want to understand"</p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 40px; margin-bottom: 10px;">😰</div>
+                    <h4 style="color: #2c3e50; margin: 10px 0;">The Confused Beginner</h4>
+                    <p style="color: #666; font-size: 14px;">"I don't even know what to ask"</p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 40px; margin-bottom: 10px;">⏰</div>
+                    <h4 style="color: #2c3e50; margin: 10px 0;">The Rushed Student</h4>
+                    <p style="color: #666; font-size: 14px;">"Due in 30 minutes!"</p>
+                </div>
+            </div>
+            
+            <div style="background: #e3f2fd; padding: 25px; border-radius: 10px; margin-top: 30px; text-align: center;">
+                <h3 style="color: #1976d2; margin-top: 0;">💭 Be Honest With Yourself</h3>
+                <p style="color: #555; margin: 15px 0;">
+                    We all embody different personas at different times. The key is recognizing when we're slipping into unproductive patterns.
+                </p>
+                <p style="font-weight: 600; color: #1976d2; margin-bottom: 0;">
+                    Which persona do you default to under stress?<br>
+                    Which one do you want to become?
+                </p>
+            </div>
+            
+            <div style="background: #fff8dc; padding: 20px; border-radius: 10px; margin-top: 20px; border: 2px solid #ffd700;">
+                <p style="text-align: center; margin: 0; font-size: 16px;">
+                    <strong>Remember:</strong> The goal isn't to judge yourself, but to recognize patterns and choose better approaches. Every expert was once a confused beginner!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSteps = {1: 0, 2: 0, 3: 0, 4: 0};
+        const maxSteps = {1: 6, 2: 6, 3: 6, 4: 6};
+
+        function showScenario(num) {
+            // Hide all scenarios
+            document.querySelectorAll('.dialogue-container').forEach(container => {
+                container.classList.remove('active');
+            });
+            
+            // Update button states
+            document.querySelectorAll('.scenario-btn').forEach((btn, index) => {
+                btn.classList.toggle('active', index === num - 1);
+            });
+            
+            // Show selected scenario
+            document.getElementById(`scenario${num}`).classList.add('active');
+            
+            // Reset if starting fresh
+            if (currentSteps[num] === 0) {
+                nextStep(num);
+            }
+        }
+
+        function nextStep(scenarioNum) {
+            currentSteps[scenarioNum]++;
+            const step = currentSteps[scenarioNum];
+            
+            // Show current step
+            const stepElement = document.querySelector(`#scenario${scenarioNum} .dialogue-step[data-step="${step}"]`);
+            if (stepElement) {
+                stepElement.style.display = 'block';
+                setTimeout(() => {
+                    stepElement.classList.add('visible');
+                }, 50);
+            }
+            
+            // Update button state
+            const btn = document.querySelector(`#scenario${scenarioNum} .next-btn`);
+            if (step >= maxSteps[scenarioNum]) {
+                btn.textContent = 'Start Over';
+                btn.onclick = () => resetScenario(scenarioNum);
+            } else {
+                btn.textContent = 'Next Step →';
+                btn.onclick = () => nextStep(scenarioNum);
+            }
+        }
+
+        function resetScenario(scenarioNum) {
+            currentSteps[scenarioNum] = 0;
+            document.querySelectorAll(`#scenario${scenarioNum} .dialogue-step`).forEach(step => {
+                step.style.display = 'none';
+                step.classList.remove('visible');
+            });
+            nextStep(scenarioNum);
+        }
+
+        // Auto-advance first step on load
+        window.onload = () => {
+            nextStep(1);
+        };
+    </script>
+</body>
+</html>

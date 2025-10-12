@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Ethics Dilemmas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f4f8;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .dilemma-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            min-height: 200px;
+        }
+        .dilemma-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+        .card-number {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: #3498db;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .scenario {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        .choices {
+            display: none;
+            margin-top: 15px;
+        }
+        .choice {
+            padding: 10px;
+            margin: 8px 0;
+            background: #ecf0f1;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .choice:hover {
+            background: #d5dbdb;
+        }
+        .feedback {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .feedback.good {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .feedback.bad {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .feedback.neutral {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .reveal-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+        .reveal-btn:hover {
+            background: #2980b9;
+        }
+        .discussion-points {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            font-size: 14px;
+            display: none;
+        }
+        .discussion-points h4 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .discussion-points ul {
+            margin: 5px 0;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Programming Ethics: Real Dilemmas</h1>
+    <p style="text-align: center; color: #7f8c8d;">Click each card to explore ethical scenarios you might face</p>
+    
+    <div class="cards-container">
+        <div class="dilemma-card" id="card1">
+            <div class="card-number">1</div>
+            <div class="scenario">
+                <strong>The Deadline Dilemma</strong><br><br>
+                Your temperature converter is due in 2 hours. You understand the concepts but keep getting syntax errors. Your friend offers their working code.
+            </div>
+            <button class="reveal-btn" onclick="revealChoices(1)">What would you do?</button>
+            <div class="choices" id="choices1">
+                <div class="choice" onclick="showFeedback(1, 'a')">
+                    Copy the code and submit it
+                </div>
+                <div class="choice" onclick="showFeedback(1, 'b')">
+                    Use AI to fix your syntax errors
+                </div>
+                <div class="choice" onclick="showFeedback(1, 'c')">
+                    Look at friend's code for patterns, then fix yours
+                </div>
+            </div>
+            <div class="feedback" id="feedback1"></div>
+            <div class="discussion-points" id="discussion1">
+                <h4>Discussion Points:</h4>
+                <ul>
+                    <li>What's the difference between copying and learning from examples?</li>
+                    <li>How can deadlines affect ethical decisions?</li>
+                    <li>What are the long-term consequences of each choice?</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dilemma-card" id="card2">
+            <div class="card-number">2</div>
+            <div class="scenario">
+                <strong>The AI Temptation</strong><br><br>
+                You're struggling with the concept of type conversion. AI could explain it perfectly, or it could just write the whole program for you.
+            </div>
+            <button class="reveal-btn" onclick="revealChoices(2)">What would you do?</button>
+            <div class="choices" id="choices2">
+                <div class="choice" onclick="showFeedback(2, 'a')">
+                    Ask AI to write the complete program
+                </div>
+                <div class="choice" onclick="showFeedback(2, 'b')">
+                    Ask AI to explain type conversion with examples
+                </div>
+                <div class="choice" onclick="showFeedback(2, 'c')">
+                    Use AI to check if your understanding is correct
+                </div>
+            </div>
+            <div class="feedback" id="feedback2"></div>
+            <div class="discussion-points" id="discussion2">
+                <h4>Discussion Points:</h4>
+                <ul>
+                    <li>What's the purpose of assignments - getting code or learning?</li>
+                    <li>How can AI enhance vs. replace learning?</li>
+                    <li>What skills are you building with each approach?</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dilemma-card" id="card3">
+            <div class="card-number">3</div>
+            <div class="scenario">
+                <strong>The Group Project</strong><br><br>
+                Your team is building a calculator. One member used AI to generate advanced code none of you understand, but it works perfectly.
+            </div>
+            <button class="reveal-btn" onclick="revealChoices(3)">What would you do?</button>
+            <div class="choices" id="choices3">
+                <div class="choice" onclick="showFeedback(3, 'a')">
+                    Submit it - it works, that's what matters
+                </div>
+                <div class="choice" onclick="showFeedback(3, 'b')">
+                    Ask the team to simplify it together
+                </div>
+                <div class="choice" onclick="showFeedback(3, 'c')">
+                    Rewrite it using only concepts everyone understands
+                </div>
+            </div>
+            <div class="feedback" id="feedback3"></div>
+            <div class="discussion-points" id="discussion3">
+                <h4>Discussion Points:</h4>
+                <ul>
+                    <li>What's more important - working code or understood code?</li>
+                    <li>How does this impact the team's learning?</li>
+                    <li>What happens in the real world with unmaintainable code?</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dilemma-card" id="card4">
+            <div class="card-number">4</div>
+            <div class="scenario">
+                <strong>The Tutorial Trap</strong><br><br>
+                You found a perfect YouTube tutorial that builds exactly what you need. You could follow along and submit, or use it to understand concepts.
+            </div>
+            <button class="reveal-btn" onclick="revealChoices(4)">What would you do?</button>
+            <div class="choices" id="choices4">
+                <div class="choice" onclick="showFeedback(4, 'a')">
+                    Copy the tutorial code exactly
+                </div>
+                <div class="choice" onclick="showFeedback(4, 'b')">
+                    Watch to understand, then build your own version
+                </div>
+                <div class="choice" onclick="showFeedback(4, 'c')">
+                    Use tutorial concepts but different example
+                </div>
+            </div>
+            <div class="feedback" id="feedback4"></div>
+            <div class="discussion-points" id="discussion4">
+                <h4>Discussion Points:</h4>
+                <ul>
+                    <li>When does learning from resources become copying?</li>
+                    <li>How can you make tutorial knowledge your own?</li>
+                    <li>What's the value of struggling vs. following along?</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dilemma-card" id="card5">
+            <div class="card-number">5</div>
+            <div class="scenario">
+                <strong>The Understanding Test</strong><br><br>
+                Your code works but you're not sure why. The assignment requires explaining your code. You could ask AI to explain it for you.
+            </div>
+            <button class="reveal-btn" onclick="revealChoices(5)">What would you do?</button>
+            <div class="choices" id="choices5">
+                <div class="choice" onclick="showFeedback(5, 'a')">
+                    Submit AI's explanation as your own
+                </div>
+                <div class="choice" onclick="showFeedback(5, 'b')">
+                    Use AI to help you understand, then write your own
+                </div>
+                <div class="choice" onclick="showFeedback(5, 'c')">
+                    Trace through code manually until you understand
+                </div>
+            </div>
+            <div class="feedback" id="feedback5"></div>
+            <div class="discussion-points" id="discussion5">
+                <h4>Discussion Points:</h4>
+                <ul>
+                    <li>What's the difference between AI's words and your understanding?</li>
+                    <li>How can you verify you truly understand something?</li>
+                    <li>Why might instructors ask for explanations?</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dilemma-card" id="card6">
+            <div class="card-number">6</div>
+            <div class="scenario">
+                <strong>The Peer Pressure</strong><br><br>
+                Everyone in class is using AI to complete assignments quickly. You're taking longer because you're trying to understand. You feel left behind.
+            </div>
+            <button class="reveal-btn" onclick="revealChoices(6)">What would you do?</button>
+            <div class="choices" id="choices6">
+                <div class="choice" onclick="showFeedback(6, 'a')">
+                    Start using AI like everyone else
+                </div>
+                <div class="choice" onclick="showFeedback(6, 'b')">
+                    Continue your approach but feel stressed
+                </div>
+                <div class="choice" onclick="showFeedback(6, 'c')">
+                    Find a balance - use AI to accelerate learning
+                </div>
+            </div>
+            <div class="feedback" id="feedback6"></div>
+            <div class="discussion-points" id="discussion6">
+                <h4>Discussion Points:</h4>
+                <ul>
+                    <li>Is faster always better in learning?</li>
+                    <li>What are you optimizing for - grades or knowledge?</li>
+                    <li>How can you use AI without compromising learning?</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const feedbackData = {
+            1: {
+                a: { type: 'bad', text: 'Copying code means you miss learning opportunities and violate academic integrity. You also won\'t be able to modify or debug it later.' },
+                b: { type: 'good', text: 'Using AI to fix syntax while understanding the logic is a great balance. You\'re using it as a tool, not a replacement for thinking.' },
+                c: { type: 'good', text: 'Learning from patterns while writing your own code builds understanding. This is how professionals learn from each other.' }
+            },
+            2: {
+                a: { type: 'bad', text: 'Having AI write everything means you learn nothing. What happens in the exam or job interview?' },
+                b: { type: 'good', text: 'Perfect! Using AI as a teacher helps you understand concepts you can then apply yourself.' },
+                c: { type: 'good', text: 'Excellent strategy! Verifying your understanding with AI builds confidence and corrects misconceptions.' }
+            },
+            3: {
+                a: { type: 'bad', text: 'Submitting code no one understands is dangerous. What if it has bugs? What if you need to modify it?' },
+                b: { type: 'neutral', text: 'Good intention, but make sure the simplification happens before submission, not after.' },
+                c: { type: 'good', text: 'This ensures everyone learns and can contribute. Simple code that works is better than complex code you don\'t understand.' }
+            },
+            4: {
+                a: { type: 'bad', text: 'Direct copying doesn\'t build your skills. You\'re also likely violating both academic integrity and copyright.' },
+                b: { type: 'good', text: 'This is how tutorials should be used! Understanding concepts and building your own version creates real learning.' },
+                c: { type: 'good', text: 'Applying concepts to different problems proves you understand them. This is excellent practice!' }
+            },
+            5: {
+                a: { type: 'bad', text: 'This is plagiarism and shows you don\'t understand your own work. It will become obvious in discussions or exams.' },
+                b: { type: 'good', text: 'Using AI to build understanding, then expressing it in your own words, shows real learning.' },
+                c: { type: 'good', text: 'Manual tracing is excellent for building deep understanding, though AI can help verify your analysis.' }
+            },
+            6: {
+                a: { type: 'bad', text: 'Following the crowd at the expense of learning hurts your long-term growth. You\'re here to learn, not just pass.' },
+                b: { type: 'neutral', text: 'Sticking to your principles is admirable, but finding efficient learning strategies is also important.' },
+                c: { type: 'good', text: 'Balance is key! AI can accelerate learning when used strategically, not as a shortcut.' }
+            }
+        };
+
+        function revealChoices(cardNum) {
+            const choices = document.getElementById(`choices${cardNum}`);
+            const button = event.target;
+            choices.style.display = 'block';
+            button.style.display = 'none';
+        }
+
+        function showFeedback(cardNum, choice) {
+            const feedback = document.getElementById(`feedback${cardNum}`);
+            const discussion = document.getElementById(`discussion${cardNum}`);
+            const data = feedbackData[cardNum][choice];
+            
+            feedback.className = `feedback ${data.type}`;
+            feedback.textContent = data.text;
+            feedback.style.display = 'block';
+            discussion.style.display = 'block';
+            
+            // Disable other choices
+            const choices = document.getElementById(`choices${cardNum}`).querySelectorAll('.choice');
+            choices.forEach(c => c.style.pointerEvents = 'none');
+        }
+    </script>
+</body>
+</html>
