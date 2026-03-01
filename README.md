@@ -1,5 +1,9 @@
 # ISYS2001-Introduction-to-Business-Programming
 
+<!-- BADGES:START -->
+[![curriculum](https://img.shields.io/badge/-curriculum-blue?style=flat-square)](https://github.com/topics/curriculum) [![curtin](https://img.shields.io/badge/-curtin-f57c00?style=flat-square)](https://github.com/topics/curtin) [![business-programming](https://img.shields.io/badge/-business--programming-blue?style=flat-square)](https://github.com/topics/business-programming) [![edtech](https://img.shields.io/badge/-edtech-4caf50?style=flat-square)](https://github.com/topics/edtech) [![education](https://img.shields.io/badge/-education-blue?style=flat-square)](https://github.com/topics/education) [![jupyter-notebook](https://img.shields.io/badge/-jupyter--notebook-blue?style=flat-square)](https://github.com/topics/jupyter-notebook) [![matplotlib](https://img.shields.io/badge/-matplotlib-blue?style=flat-square)](https://github.com/topics/matplotlib) [![pandas](https://img.shields.io/badge/-pandas-blue?style=flat-square)](https://github.com/topics/pandas) [![programming-exercises](https://img.shields.io/badge/-programming--exercises-blue?style=flat-square)](https://github.com/topics/programming-exercises) [![python](https://img.shields.io/badge/-python-3776ab?style=flat-square)](https://github.com/topics/python)
+<!-- BADGES:END -->
+
 This repository contains curriculum materials, programming exercises, and resources for the ISYS2001 Introduction to Business Programming course at Curtin University. The course provides foundational programming skills specifically tailored for business applications and contexts.
 
 ## Overview
