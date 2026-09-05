@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISYS2001 Final Review Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .intro {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .topic-selection {
+            margin-bottom: 30px;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .topic-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .topic-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .topic-btn:active {
+            transform: translateY(0);
+        }
+
+        .settings {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .settings label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .settings select {
+            padding: 8px 15px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .start-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            transition: background 0.3s;
+        }
+
+        .start-btn:hover {
+            background: #218838;
+        }
+
+        .quiz-container {
+            display: none;
+        }
+
+        .question-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: #e8eeff;
+        }
+
+        .option.correct {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+
+        .option.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+        }
+
+        .feedback.incorrect {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+        }
+
+        .feedback-icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        .explanation {
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .nav-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #5568d3;
+        }
+
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .results {
+            display: none;
+        }
+
+        .score-display {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .score-number {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .score-feedback {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .review-section {
+            margin-top: 30px;
+        }
+
+        .review-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #dc3545;
+        }
+
+        .review-question {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .review-answers {
+            margin-top: 10px;
+            line-height: 1.8;
+        }
+
+        .review-answers div {
+            margin: 5px 0;
+        }
+
+        .your-answer {
+            color: #dc3545;
+        }
+
+        .correct-answer {
+            color: #28a745;
+        }
+
+        .restart-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+        }
+
+        .restart-btn:hover {
+            background: #5568d3;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ISYS2001 Final Review Quiz</h1>
+            <div class="subtitle">Self-Assessment Tool</div>
+        </header>
+
+        <!-- Welcome Screen -->
+        <div id="welcome-screen">
+            <div class="intro">
+                Welcome! This interactive quiz will help you assess your understanding
+                of the course material. You can retake it multiple times - each time
+                you'll get a different random selection of questions.
+            </div>
+
+            <div class="topic-selection">
+                <h2 style="text-align: center; margin-bottom: 20px; color: #333;">Select a Topic Area:</h2>
+                <div class="topic-grid">
+                    <button class="topic-btn" data-topic="fundamentals">
+                        Fundamentals<br>
+                        <small style="font-weight: normal;">Variables, Logic, Loops</small>
+                    </button>
+                    <button class="topic-btn" data-topic="structure_data">
+                        Structure & Data<br>
+                        <small style="font-weight: normal;">Functions, Dictionaries, Pandas</small>
+                    </button>
+                    <button class="topic-btn" data-topic="robust_apps">
+                        Robust Apps<br>
+                        <small style="font-weight: normal;">Errors, APIs, OOP, Testing</small>
+                    </button>
+                    <button class="topic-btn" data-topic="ai_first">
+                        AI-First<br>
+                        <small style="font-weight: normal;">Strategy, Collaboration</small>
+                    </button>
+                    <button class="topic-btn" data-topic="mixed" style="grid-column: span 2;">
+                        Mixed Review<br>
+                        <small style="font-weight: normal;">Random questions from all topics</small>
+                    </button>
+                </div>
+
+                <div class="settings">
+                    <label for="num-questions">Number of Questions:</label>
+                    <select id="num-questions">
+                        <option value="3">3 Questions</option>
+                        <option value="5" selected>5 Questions</option>
+                        <option value="7">7 Questions</option>
+                        <option value="10">10 Questions</option>
+                    </select>
+                </div>
+
+                <button class="start-btn" id="start-quiz" disabled>Select a topic to start</button>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="quiz-container">
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number" id="question-number">Question 1 of 5</span>
+                </div>
+                <div class="question-text" id="question-text"></div>
+                <div class="options" id="options"></div>
+                <div class="feedback" id="feedback"></div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="nav-btn" id="prev-btn" disabled>Previous</button>
+                <button class="nav-btn" id="next-btn" disabled>Next Question</button>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="results">
+            <div class="score-display">
+                <h2>Quiz Complete!</h2>
+                <div class="score-number" id="final-score"></div>
+                <div class="score-feedback" id="score-feedback"></div>
+            </div>
+
+            <div id="review-section" class="review-section"></div>
+
+            <button class="restart-btn" id="restart-btn">Take Another Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        // Question Bank
+        const questionBank = {
+            fundamentals: [
+                {
+                    question: "What data type would you use to store a user's age?",
+                    options: ["str (string)", "int (integer)", "float", "bool (boolean)"],
+                    answer: 1,
+                    explanation: "Age is a whole number, so int (integer) is the appropriate data type."
+                },
+                {
+                    question: "What is the purpose of the 'elif' statement in Python?",
+                    options: [
+                        "To check a new condition if all previous conditions were false",
+                        "To repeat code multiple times",
+                        "To define a function",
+                        "To handle errors"
+                    ],
+                    answer: 0,
+                    explanation: "elif allows you to check a new condition only if the previous if/elif conditions were false."
+                },
+                {
+                    question: "Which loop would you use when you don't know how many times to repeat?",
+                    options: ["for loop", "while loop", "if loop", "repeat loop"],
+                    answer: 1,
+                    explanation: "A while loop is used when the number of repetitions is unknown and depends on a condition."
+                },
+                {
+                    question: "What does the 'range(5)' function generate?",
+                    options: ["Numbers 1 to 5", "Numbers 0 to 4", "Numbers 0 to 5", "Numbers 1 to 4"],
+                    answer: 1,
+                    explanation: "range(5) generates numbers from 0 up to (but not including) 5: 0, 1, 2, 3, 4."
+                },
+                {
+                    question: "What operator would you use to check if BOTH conditions are true?",
+                    options: ["or", "and", "not", "xor"],
+                    answer: 1,
+                    explanation: "The 'and' operator requires all conditions to be true for the overall condition to be true."
+                },
+                {
+                    question: "What is the correct way to store multiple expenses in Python?",
+                    options: ["As separate variables", "In a list", "In a string", "In a boolean"],
+                    answer: 1,
+                    explanation: "A list is the appropriate data structure for storing multiple related items like expenses."
+                },
+                {
+                    question: "In a grade calculator, why must you check from highest to lowest score?",
+                    options: [
+                        "It runs faster",
+                        "To ensure the correct grade is assigned",
+                        "Python requires it",
+                        "It doesn't matter"
+                    ],
+                    answer: 1,
+                    explanation: "Checking from highest to lowest ensures the first matching condition gives the correct grade."
+                },
+                {
+                    question: "What does 'len(expenses)' return?",
+                    options: [
+                        "The sum of all expenses",
+                        "The largest expense",
+                        "The number of items in the list",
+                        "The average expense"
+                    ],
+                    answer: 2,
+                    explanation: "len() returns the count of items in a collection like a list."
+                },
+                {
+                    question: "What is the purpose of the 'try' block in error handling?",
+                    options: [
+                        "To try running risky code that might fail",
+                        "To repeat code multiple times",
+                        "To define a function",
+                        "To create a loop"
+                    ],
+                    answer: 0,
+                    explanation: "The try block contains code that might raise an exception, allowing you to handle errors gracefully."
+                },
+                {
+                    question: "What type of value can a boolean variable store?",
+                    options: ["Text only", "Numbers only", "True or False only", "Any value"],
+                    answer: 2,
+                    explanation: "Boolean variables can only store True or False values."
+                }
+            ],
+            structure_data: [
+                {
+                    question: "What is the main advantage of using functions in your code?",
+                    options: [
+                        "They make code run faster",
+                        "They allow code reuse and better organization",
+                        "They reduce file size",
+                        "They prevent all errors"
+                    ],
+                    answer: 1,
+                    explanation: "Functions enable code reuse and modular organization, making programs easier to maintain."
+                },
+                {
+                    question: "What is the difference between 'return' and 'print' in a function?",
+                    options: [
+                        "They do the same thing",
+                        "return sends a value back to be used; print displays to screen",
+                        "print is faster",
+                        "return is only for numbers"
+                    ],
+                    answer: 1,
+                    explanation: "return provides a usable value that other code can work with, while print just displays information."
+                },
+                {
+                    question: "What are parameters in a function?",
+                    options: [
+                        "Errors in the code",
+                        "Data passed into the function to make it flexible",
+                        "The function's output",
+                        "Comments in the code"
+                    ],
+                    answer: 1,
+                    explanation: "Parameters are inputs that allow functions to work with different data each time they're called."
+                },
+                {
+                    question: "What is the purpose of importing modules like 'datetime'?",
+                    options: [
+                        "To make code run slower",
+                        "To access pre-built functionality",
+                        "To create errors",
+                        "To define variables"
+                    ],
+                    answer: 1,
+                    explanation: "Modules provide pre-built tools and functions so you don't have to build everything from scratch."
+                },
+                {
+                    question: "How do you access a value in a dictionary?",
+                    options: [
+                        "By position number",
+                        "By key name",
+                        "By random selection",
+                        "You can't access individual values"
+                    ],
+                    answer: 1,
+                    explanation: "Dictionaries use keys to access their associated values, like transaction['amount']."
+                },
+                {
+                    question: "What does 'pd.read_csv()' do?",
+                    options: [
+                        "Creates a new CSV file",
+                        "Deletes a CSV file",
+                        "Loads a CSV file into a pandas DataFrame",
+                        "Prints the CSV to screen"
+                    ],
+                    answer: 2,
+                    explanation: "pd.read_csv() reads a CSV file and loads it into a pandas DataFrame for data analysis."
+                },
+                {
+                    question: "What structure is best for storing a single transaction with multiple details?",
+                    options: ["A list", "A dictionary", "A string", "A boolean"],
+                    answer: 1,
+                    explanation: "A dictionary with key-value pairs is perfect for structured data like a transaction record."
+                },
+                {
+                    question: "What does 'df.groupby('Category')['Amount'].sum()' do?",
+                    options: [
+                        "Deletes categories",
+                        "Calculates total amounts for each category",
+                        "Sorts by category",
+                        "Creates new categories"
+                    ],
+                    answer: 1,
+                    explanation: "This pandas operation groups data by category and calculates the sum of amounts in each group."
+                },
+                {
+                    question: "Why is returning values from functions important?",
+                    options: [
+                        "It's not important",
+                        "So functions can work together and pass data",
+                        "To make code slower",
+                        "To create errors"
+                    ],
+                    answer: 1,
+                    explanation: "Returning values allows functions to collaborate - one function's output becomes another's input."
+                },
+                {
+                    question: "What is a key-value pair in a dictionary?",
+                    options: [
+                        "Two separate lists",
+                        "A name (key) associated with a value",
+                        "Two functions",
+                        "A type of loop"
+                    ],
+                    answer: 1,
+                    explanation: "A key-value pair stores data as a label (key) linked to its associated information (value)."
+                }
+            ],
+            robust_apps: [
+                {
+                    question: "What is the purpose of the 'except' block?",
+                    options: [
+                        "To run when the try block succeeds",
+                        "To run when an error occurs in the try block",
+                        "To define variables",
+                        "To create loops"
+                    ],
+                    answer: 1,
+                    explanation: "The except block provides a Plan B that executes when an error occurs in the try block."
+                },
+                {
+                    question: "What does API stand for?",
+                    options: [
+                        "Application Programming Interface",
+                        "Automated Python Integration",
+                        "Advanced Programming Instructions",
+                        "Application Process Indicator"
+                    ],
+                    answer: 0,
+                    explanation: "API stands for Application Programming Interface - a way for programs to communicate with external services."
+                },
+                {
+                    question: "What library do you use to make API requests in Python?",
+                    options: ["pandas", "datetime", "requests", "json"],
+                    answer: 2,
+                    explanation: "The requests library is used to make HTTP requests to APIs and fetch data."
+                },
+                {
+                    question: "What format do APIs commonly use to send data?",
+                    options: ["CSV", "JSON", "TXT", "PDF"],
+                    answer: 1,
+                    explanation: "JSON (JavaScript Object Notation) is the standard format for API data exchange."
+                },
+                {
+                    question: "In OOP, what is a class?",
+                    options: [
+                        "A type of loop",
+                        "A blueprint for creating objects",
+                        "An error handling tool",
+                        "A database"
+                    ],
+                    answer: 1,
+                    explanation: "A class is a template that defines the structure and behavior for creating objects."
+                },
+                {
+                    question: "What is an instance in OOP?",
+                    options: [
+                        "A type of error",
+                        "A specific object created from a class blueprint",
+                        "A database query",
+                        "A loop counter"
+                    ],
+                    answer: 1,
+                    explanation: "An instance is an individual object created from a class, like a specific transaction."
+                },
+                {
+                    question: "What does the __init__ method do in a class?",
+                    options: [
+                        "Deletes the object",
+                        "Initializes a new object with starting values",
+                        "Prints the object",
+                        "Loops through the object"
+                    ],
+                    answer: 1,
+                    explanation: "__init__ is the constructor that sets up a new object with its initial properties."
+                },
+                {
+                    question: "What is the purpose of an assertion in testing?",
+                    options: [
+                        "To slow down code",
+                        "To declare what must be true and verify it",
+                        "To create errors",
+                        "To format output"
+                    ],
+                    answer: 1,
+                    explanation: "Assertions state expected conditions and stop the program if those conditions aren't met."
+                },
+                {
+                    question: "What does 'response.json()' do when working with APIs?",
+                    options: [
+                        "Deletes the response",
+                        "Converts JSON text to a Python dictionary",
+                        "Sends data to the API",
+                        "Creates an error"
+                    ],
+                    answer: 1,
+                    explanation: "response.json() parses JSON data and converts it into Python objects (dictionaries/lists)."
+                },
+                {
+                    question: "Why is error handling important in applications?",
+                    options: [
+                        "It makes code longer",
+                        "It prevents crashes and provides user-friendly error messages",
+                        "It's not important",
+                        "It makes code run faster"
+                    ],
+                    answer: 1,
+                    explanation: "Error handling creates robust applications that gracefully handle unexpected situations."
+                }
+            ],
+            ai_first: [
+                {
+                    question: "What is 'vibe programming'?",
+                    options: [
+                        "Writing code very fast",
+                        "Describing desired outcomes to AI in natural language",
+                        "Playing music while coding",
+                        "Memorizing syntax"
+                    ],
+                    answer: 1,
+                    explanation: "Vibe programming is about being a 'code director' who describes goals rather than typing every line."
+                },
+                {
+                    question: "What is the most important skill when working with AI-generated code?",
+                    options: [
+                        "Typing speed",
+                        "The ability to critique and evaluate the code",
+                        "Memorizing Python syntax",
+                        "Using complex algorithms"
+                    ],
+                    answer: 1,
+                    explanation: "Critical evaluation of AI output ensures quality and correctness - never blindly trust AI code."
+                },
+                {
+                    question: "What makes an effective AI prompt?",
+                    options: [
+                        "Being as brief as possible",
+                        "Providing context, specifics, and format preferences",
+                        "Using technical jargon",
+                        "Asking multiple questions at once"
+                    ],
+                    answer: 1,
+                    explanation: "Good prompts include context about your data, specific task requirements, and desired output format."
+                },
+                {
+                    question: "What is the first step in the Six-Step Methodology?",
+                    options: [
+                        "Write Python code",
+                        "Understand the problem",
+                        "Test the solution",
+                        "Use AI to generate code"
+                    ],
+                    answer: 1,
+                    explanation: "Understanding the problem by restating it in your own words is the crucial first step."
+                },
+                {
+                    question: "What is the purpose of the Developer's Diary?",
+                    options: [
+                        "To store passwords",
+                        "To document learning and AI collaboration process",
+                        "To write personal thoughts",
+                        "To plan vacations"
+                    ],
+                    answer: 1,
+                    explanation: "The Developer's Diary demonstrates learning through documented AI interactions and reflections."
+                },
+                {
+                    question: "What should an AI Evidence Package include?",
+                    options: [
+                        "Only the final code",
+                        "Artifact, context, and reflection",
+                        "Just a screenshot",
+                        "Only errors encountered"
+                    ],
+                    answer: 1,
+                    explanation: "Each package needs the artifact (screenshot), context (what you were doing), and reflection (what you learned)."
+                },
+                {
+                    question: "Why is version control with GitHub important?",
+                    options: [
+                        "It's just for professional developers",
+                        "It provides history, safety, and demonstrates progress",
+                        "It makes code run faster",
+                        "It's not important for students"
+                    ],
+                    answer: 1,
+                    explanation: "Version control tracks changes, provides backup, and shows consistent effort over time."
+                },
+                {
+                    question: "What is pseudocode?",
+                    options: [
+                        "Fake code that doesn't work",
+                        "A human-readable blueprint of logic before coding",
+                        "Code with syntax errors",
+                        "Comments in Python"
+                    ],
+                    answer: 1,
+                    explanation: "Pseudocode is a plain-language outline of your solution's logic, written before actual coding."
+                },
+                {
+                    question: "In the AI-First mindset, what is your primary role?",
+                    options: [
+                        "Typing code as fast as possible",
+                        "Strategic thinking and quality control",
+                        "Memorizing algorithms",
+                        "Avoiding AI tools"
+                    ],
+                    answer: 1,
+                    explanation: "Your value comes from problem-solving strategy and ensuring quality, not typing speed."
+                },
+                {
+                    question: "What should you ask when critiquing AI-generated code?",
+                    options: [
+                        "Is it the longest solution possible?",
+                        "Is it too complex? Do I understand it? Does it handle real data?",
+                        "Does it use advanced features?",
+                        "Is it exactly like the example?"
+                    ],
+                    answer: 1,
+                    explanation: "Critique should focus on simplicity, understanding, robustness, and business relevance."
+                }
+            ]
+        };
+
+        // Application State
+        let currentTopic = null;
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        let score = 0;
+
+        // Elements
+        const welcomeScreen = document.getElementById('welcome-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const resultsScreen = document.getElementById('results-screen');
+        const topicButtons = document.querySelectorAll('.topic-btn');
+        const startBtn = document.getElementById('start-quiz');
+        const numQuestionsSelect = document.getElementById('num-questions');
+        const questionNumber = document.getElementById('question-number');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options');
+        const feedback = document.getElementById('feedback');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const finalScore = document.getElementById('final-score');
+        const scoreFeedback = document.getElementById('score-feedback');
+        const reviewSection = document.getElementById('review-section');
+        const restartBtn = document.getElementById('restart-btn');
+
+        // Event Listeners
+        topicButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                topicButtons.forEach(b => b.style.opacity = '0.6');
+                btn.style.opacity = '1';
+                currentTopic = btn.dataset.topic;
+                startBtn.disabled = false;
+                startBtn.textContent = 'Start Quiz';
+            });
+        });
+
+        startBtn.addEventListener('click', startQuiz);
+        prevBtn.addEventListener('click', previousQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        restartBtn.addEventListener('click', restart);
+
+        function startQuiz() {
+            const numQuestions = parseInt(numQuestionsSelect.value);
+
+            // Get questions based on topic
+            if (currentTopic === 'mixed') {
+                const allQuestions = Object.values(questionBank).flat();
+                currentQuestions = getRandomQuestions(allQuestions, numQuestions);
+            } else {
+                currentQuestions = getRandomQuestions(questionBank[currentTopic], numQuestions);
+            }
+
+            // Reset state
+            currentQuestionIndex = 0;
+            userAnswers = new Array(currentQuestions.length).fill(null);
+            score = 0;
+
+            // Show quiz screen
+            welcomeScreen.style.display = 'none';
+            quizScreen.style.display = 'block';
+
+            displayQuestion();
+        }
+
+        function getRandomQuestions(pool, count) {
+            const shuffled = [...pool].sort(() => Math.random() - 0.5);
+            return shuffled.slice(0, Math.min(count, pool.length));
+        }
+
+        function displayQuestion() {
+            const question = currentQuestions[currentQuestionIndex];
+
+            // Update question number
+            questionNumber.textContent = `Question ${currentQuestionIndex + 1} of ${currentQuestions.length}`;
+
+            // Update question text
+            questionText.textContent = question.question;
+
+            // Clear and populate options
+            optionsContainer.innerHTML = '';
+            feedback.style.display = 'none';
+            feedback.className = 'feedback';
+
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.textContent = option;
+                optionDiv.dataset.index = index;
+
+                // Restore previous selection if exists
+                if (userAnswers[currentQuestionIndex] !== null) {
+                    optionDiv.classList.add('disabled');
+                    if (userAnswers[currentQuestionIndex] === index) {
+                        optionDiv.classList.add('selected');
+                        if (index === question.answer) {
+                            optionDiv.classList.add('correct');
+                        } else {
+                            optionDiv.classList.add('incorrect');
+                        }
+                    }
+                    if (index === question.answer) {
+                        optionDiv.classList.add('correct');
+                    }
+                    showFeedback(userAnswers[currentQuestionIndex] === question.answer, question.explanation);
+                } else {
+                    optionDiv.addEventListener('click', () => selectAnswer(index));
+                }
+
+                optionsContainer.appendChild(optionDiv);
+            });
+
+            // Update navigation buttons
+            prevBtn.disabled = currentQuestionIndex === 0;
+            updateNextButton();
+        }
+
+        function selectAnswer(selectedIndex) {
+            const question = currentQuestions[currentQuestionIndex];
+            userAnswers[currentQuestionIndex] = selectedIndex;
+
+            // Disable all options
+            const options = optionsContainer.querySelectorAll('.option');
+            options.forEach(opt => {
+                opt.classList.add('disabled');
+                opt.style.cursor = 'not-allowed';
+
+                const index = parseInt(opt.dataset.index);
+                if (index === selectedIndex) {
+                    opt.classList.add('selected');
+                    if (index === question.answer) {
+                        opt.classList.add('correct');
+                    } else {
+                        opt.classList.add('incorrect');
+                    }
+                }
+                if (index === question.answer) {
+                    opt.classList.add('correct');
+                }
+            });
+
+            // Show feedback
+            const isCorrect = selectedIndex === question.answer;
+            if (isCorrect) score++;
+            showFeedback(isCorrect, question.explanation);
+
+            // Enable next button
+            updateNextButton();
+        }
+
+        function showFeedback(isCorrect, explanation) {
+            feedback.style.display = 'block';
+            feedback.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
+
+            const icon = isCorrect ? '✓' : '✗';
+            const message = isCorrect ? 'Correct!' : 'Incorrect';
+
+            feedback.innerHTML = `
+                <div><span class="feedback-icon">${icon}</span><strong>${message}</strong></div>
+                <div class="explanation">${explanation}</div>
+            `;
+        }
+
+        function updateNextButton() {
+            if (userAnswers[currentQuestionIndex] !== null) {
+                nextBtn.disabled = false;
+                if (currentQuestionIndex === currentQuestions.length - 1) {
+                    nextBtn.textContent = 'View Results';
+                } else {
+                    nextBtn.textContent = 'Next Question';
+                }
+            } else {
+                nextBtn.disabled = true;
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < currentQuestions.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            quizScreen.style.display = 'none';
+            resultsScreen.style.display = 'block';
+
+            const percentage = (score / currentQuestions.length) * 100;
+            finalScore.textContent = `${score} / ${currentQuestions.length} (${percentage.toFixed(1)}%)`;
+
+            // Performance feedback
+            let feedbackText = '';
+            if (percentage >= 90) {
+                feedbackText = 'Excellent work! You have a strong grasp of this material.';
+            } else if (percentage >= 70) {
+                feedbackText = 'Good job! You understand most concepts. Review the areas you missed.';
+            } else if (percentage >= 50) {
+                feedbackText = 'Fair effort. Consider reviewing the material and retaking the quiz.';
+            } else {
+                feedbackText = 'You may need more practice. Review the course materials carefully.';
+            }
+            scoreFeedback.textContent = feedbackText;
+
+            // Show review of incorrect answers
+            const incorrectAnswers = currentQuestions.filter((q, i) => userAnswers[i] !== q.answer);
+
+            if (incorrectAnswers.length > 0) {
+                reviewSection.innerHTML = `<h3 style="color: #333; margin-bottom: 20px;">Questions to Review (${incorrectAnswers.length})</h3>`;
+
+                incorrectAnswers.forEach((q, idx) => {
+                    const questionIndex = currentQuestions.indexOf(q);
+                    const reviewItem = document.createElement('div');
+                    reviewItem.className = 'review-item';
+                    reviewItem.innerHTML = `
+                        <div class="review-question">${idx + 1}. ${q.question}</div>
+                        <div class="review-answers">
+                            <div class="your-answer"><strong>Your answer:</strong> ${q.options[userAnswers[questionIndex]]}</div>
+                            <div class="correct-answer"><strong>Correct answer:</strong> ${q.options[q.answer]}</div>
+                            <div style="margin-top: 10px; font-style: italic; color: #555;">${q.explanation}</div>
+                        </div>
+                    `;
+                    reviewSection.appendChild(reviewItem);
+                });
+            } else {
+                reviewSection.innerHTML = '<h3 style="color: #28a745; text-align: center;">Perfect score! No questions to review.</h3>';
+            }
+        }
+
+        function restart() {
+            resultsScreen.style.display = 'none';
+            welcomeScreen.style.display = 'block';
+            topicButtons.forEach(b => b.style.opacity = '1');
+            currentTopic = null;
+            startBtn.disabled = true;
+            startBtn.textContent = 'Select a topic to start';
+        }
+    </script>
+</body>
+</html>
